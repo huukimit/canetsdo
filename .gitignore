@@ -1,0 +1,21 @@
+/bootstrap/compiled.php
+/composer.phar
+/composer.lock
+/storage
+/vendor
+/node_modules
+/.env
+/Library/token-autocomplete/build
+/Library/camera/build
+/Library/blur-behind/build
+# Created by .ignore support plugin (hsz.mobi)
+/local.properties
+/chimera_android.iml
+/build
+/.idea
+/.gradle
+/Library/hss-android/build
+/Library/hss-android/hss-android.iml
+/Library/Library.iml
+/Library/datetimepicker-library/build
+/Library/datetimepicker-library/datetimepicker-library.iml
