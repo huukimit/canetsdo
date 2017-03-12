@@ -1,0 +1,3 @@
+[2017-03-11 16:42:10] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'if' (T_IF), expecting function (T_FUNCTION)' in C:\xampp\htdocs\canets\app\Http\Controllers\CustomersController.php:60
+Stack trace:
+#0 {main}  

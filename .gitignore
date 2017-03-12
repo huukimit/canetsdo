@@ -3,6 +3,7 @@
 /composer.lock
 /storage
 /.env
+/storage
 /Library/token-autocomplete/build
 /Library/camera/build
 /Library/blur-behind/build
