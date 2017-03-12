@@ -1,0 +1,9 @@
+[2017-02-25 20:42:16] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected '=>' (T_DOUBLE_ARROW)' in C:\xampp\htdocs\canets\app\Controllers\Service\MobileController.php:159
+Stack trace:
+#0 {main}  
+[2017-02-25 20:43:42] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected '=>' (T_DOUBLE_ARROW)' in C:\xampp\htdocs\canets\app\Controllers\Service\MobileController.php:159
+Stack trace:
+#0 {main}  
+[2017-02-25 21:23:24] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to undefined function App\Controllers\Service\pr()' in C:\xampp\htdocs\canets\app\Controllers\Service\MobileController.php:170
+Stack trace:
+#0 {main}  
