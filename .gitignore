@@ -2,8 +2,6 @@
 /composer.phar
 /composer.lock
 /storage
-/vendor
-/node_modules
 /.env
 /Library/token-autocomplete/build
 /Library/camera/build
