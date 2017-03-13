@@ -17,7 +17,7 @@ class CustomersController extends Controller {
     public function laborers()
     {
         $laborers = Customer::where('type_customer', 1)->whereIn('status', [0, 1])->orderBy('updated_at', 'desc')->paginate(15);
-        print_r($laborers);die;
+        
         return view('admin.laborers', ['main_data' => $laborers]);
     }
     public function customers()
