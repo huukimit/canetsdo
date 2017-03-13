@@ -11,7 +11,7 @@
 }
 a{
     text-decoration: none;
-    
+
 }
 .clear{
     clear: both;
@@ -61,7 +61,7 @@ ol.breadcrumb a:hover{
 
 
 .my_container{
-    max-width: 1170px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 .arrow_box {
@@ -141,7 +141,7 @@ header {
     padding: 20px;
     font-size: 13px;
     overflow: auto;
-    
+
 }
 #categories ul li{
     border-bottom: 1px solid #5F5656;
@@ -562,7 +562,7 @@ select.locale-dropdown {
 }
 .steps {
     width: 30%;
-    margin-top: -40px; 
+    margin-top: -40px;
 }
 .section_two_item_img:hover{
     opacity: .6;

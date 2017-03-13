@@ -15,6 +15,7 @@ use App\Booking;
 use App\Setting;
 use App\CustomerRate;
 use App\Bid;
+use App\Feedback;
 use App\Lichsugiaodich;
 use App\Requires;
 use App\Notify_missed_booking;
@@ -39,6 +40,86 @@ class MobileController extends ServiceController {
         $dv ='91cda425ea5c8a1fd3544fe0507cf6568660000903d1c6dc98e22bef0cc414ff';
         $res = Notify::Push2Ios($dv, "aaaaaaaaaaaaaaaaaa" , [1,2,3]);
         dd($res);
+    }
+
+    public function getContract(){
+        $this->checkNullData(Input::get('email', null));
+        $this->checkNullData(Input::get('customer_id', null));
+        $postData = Input::all();
+        $check = Customer::getById(Input::get('customer_id'));
+        if ($check /*&& $check->email == Input::get('email')*/) {
+            // Send mail
+            $this->sendContract('Contract' , 'emails.contract', $postData);
+            $this->status = 200;
+            $this->message = 'We sent a contract to your email';
+        } else {
+            $this->status = 401;
+            $this->message = 'Not found user by customer_id and email, please check again';
+        }
+
+    }
+
+    public function feedBack(){
+        $this->checkNullData(Input::get('customer_id', null));
+        $this->checkNullData(Input::get('feedback', null));
+        $check = Customer::getById(Input::get('customer_id'));
+        if ($check) {
+            Feedback::SaveData(Input::all());
+            $this->status = 200;
+            $this->message = 'Thank for your feedback';
+        } else {
+            $this->status = 401;
+            $this->message = 'Not found user by customer_id and email, please check again';
+        }
+
+    }
+
+    public function getNotify() {
+        $customerId = Input::get('customer_id', null);
+        $this->checkNullData($customerId);
+        $notifies = Notify_missed_booking::getNotifyByCustomerId($customerId);
+        $result = array();
+        foreach ($notifies as $key => $value) {
+            $result[] = array(
+                'id' => $value->id,
+                'booking_id' => $value->booking_id,
+                'is_read' => $value->is_read,
+                'status' => $value->status,
+                'explain' => 'status = 1 push success, 0 push fail',
+                'push_data' => json_decode($value->push_data, true),
+            );
+        }
+        $this->data = $result;
+        $this->status = 200;
+        $this->message = 'Success';
+    }
+
+    public function readNotify() {
+        $notifyId = Input::get('notify_id', null);
+        $notify = Notify_missed_booking::getById($notifyId);
+        if ($notify) {
+            Notify_missed_booking::SaveData(['id' => $notifyId, 'is_read' => 1]);
+            $this->status = 200;
+            $this->message = 'Success';
+        } else {
+            $this->status = 401;
+            $this->message = 'Update status success';
+        }
+    }
+
+
+    public function deleteNotify() {
+        $notifyId = Input::get('notify_id', null);
+        $this->checkNullData($notifyId);
+        $notify = Notify_missed_booking::find($notifyId);
+        if ($notify) {
+            $notify->delete();
+            $this->status = 200;
+            $this->message = 'Success';
+        } else {
+            $this->status = 401;
+            $this->message = 'Can not found notify by notify_id';
+        }
     }
 
     public function napthe() {
@@ -589,6 +670,9 @@ class MobileController extends ServiceController {
         $result = [
             'thoigiancholienlac' => json_decode($config->thoigiancholienlac, true),
             'solanhuytoida' => json_decode($config->solanhuytoida, true),
+            'policy_worker' => $config->policy_worker,
+            'policy_customer' => $config->policy_customer,
+            'phone_admin' => $config->phone_admin,
             'yeucau' => Requires::getRequires(),
             'thuonggvmotlan' => json_decode($config->thuonggvmotlan, true),
             'thuonggvthuongxuyen' => json_decode($config->thuonggvthuongxuyen, true),
@@ -601,8 +685,15 @@ class MobileController extends ServiceController {
     }
 
     function sendMail($subject, $template, $data) {
-        $status = Mail::send(5, $template, $data, function($message) use ($subject, $data) {
+        $status = Mail::send($template, $data, function($message) use ($subject, $data) {
             $message->to($data['email'], 'CANETS')->subject($subject);
+        });
+    }
+
+    private function sendContract($subject, $template, $data){
+        $status = Mail::send($template, $data, function($message) use ($subject, $data) {
+            $message->to($data['email'], 'CANETS')->subject($subject);
+            $message->attach(public_path() . '/files/samplecontract.pdf');
         });
     }
 
@@ -930,9 +1021,9 @@ class MobileController extends ServiceController {
     }
 
     function getbookingmissednotify() {
-        $laodongId = Input::get('laodong_id');
+        $customerId = Input::get('customer_id');
         $this->checkNullData($laodongId);
-        $misseds = Notify_missed_booking::getMissedNotifyBookings($laodongId);
+        $misseds = Notify_missed_booking::getMissedNotifyBookings($customerId);
         $this->data = $misseds;
         $this->status = 200;
         $this->message = 'Success';

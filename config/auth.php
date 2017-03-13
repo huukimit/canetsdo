@@ -98,5 +98,11 @@ return [
         'service/mobile/getDetailHistoryJob',
         'service/mobile/getDetailBooking',
         'service/mobile/khachhangnhanlaodong',
+        'service/mobile/getContract',
+        'service/mobile/feedBack',
+        'service/mobile/getNotify',
+        'service/mobile/feedBack',
+        'service/mobile/deleteNotify',
+        'service/mobile/readNotify',
     ],
 ];
