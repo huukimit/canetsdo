@@ -19,6 +19,7 @@ use App\Feedback;
 use App\Lichsugiaodich;
 use App\Requires;
 use App\Notify_missed_booking;
+use App\Thongbao;
 use DB, URL;
 use Mail;
 use Illuminate\Support\Facades\Log;
@@ -77,28 +78,17 @@ class MobileController extends ServiceController {
     public function getNotify() {
         $customerId = Input::get('customer_id', null);
         $this->checkNullData($customerId);
-        $notifies = Notify_missed_booking::getNotifyByCustomerId($customerId);
-        $result = array();
-        foreach ($notifies as $key => $value) {
-            $result[] = array(
-                'id' => $value->id,
-                'booking_id' => $value->booking_id,
-                'is_read' => $value->is_read,
-                'status' => $value->status,
-                'explain' => 'status = 1 push success, 0 push fail',
-                'push_data' => json_decode($value->push_data, true),
-            );
-        }
-        $this->data = $result;
+        $notifies = Thongbao::getnewsbyCustomerId($customerId);
+        $this->data = $notifies;
         $this->status = 200;
         $this->message = 'Success';
     }
 
     public function readNotify() {
         $notifyId = Input::get('notify_id', null);
-        $notify = Notify_missed_booking::getById($notifyId);
+        $notify = Thongbao::getById($notifyId);
         if ($notify) {
-            Notify_missed_booking::SaveData(['id' => $notifyId, 'is_read' => 1]);
+            Thongbao::SaveData(['id' => $notifyId, 'is_read' => 1]);
             $this->status = 200;
             $this->message = 'Success';
         } else {
@@ -111,7 +101,7 @@ class MobileController extends ServiceController {
     public function deleteNotify() {
         $notifyId = Input::get('notify_id', null);
         $this->checkNullData($notifyId);
-        $notify = Notify_missed_booking::find($notifyId);
+        $notify = Thongbao::find($notifyId);
         if ($notify) {
             $notify->delete();
             $this->status = 200;

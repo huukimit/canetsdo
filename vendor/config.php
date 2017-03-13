@@ -19,94 +19,6 @@
       'editplayer_successfull' => 'プレイヤー情報の編集ができました。',
     ),
   ),
-  'filesystems' => 
-  array (
-    'default' => 'local',
-    'cloud' => 's3',
-    'disks' => 
-    array (
-      'local' => 
-      array (
-        'driver' => 'local',
-        'root' => '/var/www/html/canets/storage/app',
-      ),
-      's3' => 
-      array (
-        'driver' => 's3',
-        'key' => 'your-key',
-        'secret' => 'your-secret',
-        'region' => 'your-region',
-        'bucket' => 'your-bucket',
-      ),
-      'rackspace' => 
-      array (
-        'driver' => 'rackspace',
-        'username' => 'your-username',
-        'key' => 'your-key',
-        'container' => 'your-container',
-        'endpoint' => 'https://identity.api.rackspacecloud.com/v2.0/',
-        'region' => 'IAD',
-        'url_type' => 'publicURL',
-      ),
-    ),
-  ),
-  'database' => 
-  array (
-    'fetch' => 8,
-    'default' => 'mysql',
-    'connections' => 
-    array (
-      'sqlite' => 
-      array (
-        'driver' => 'sqlite',
-        'database' => '/var/www/html/canets/storage/database.sqlite',
-        'prefix' => '',
-      ),
-      'mysql' => 
-      array (
-        'driver' => 'mysql',
-        'host' => '127.0.0.1',
-        'database' => 'db_cannets',
-        'username' => 'root',
-        'password' => 'vanthanh',
-        'charset' => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix' => '',
-        'strict' => false,
-      ),
-      'pgsql' => 
-      array (
-        'driver' => 'pgsql',
-        'host' => '127.0.0.1',
-        'database' => 'db_cannets',
-        'username' => 'root',
-        'password' => 'vanthanh',
-        'charset' => 'utf8',
-        'prefix' => '',
-        'schema' => 'public',
-      ),
-      'sqlsrv' => 
-      array (
-        'driver' => 'sqlsrv',
-        'host' => '127.0.0.1',
-        'database' => 'db_cannets',
-        'username' => 'root',
-        'password' => 'vanthanh',
-        'prefix' => '',
-      ),
-    ),
-    'migrations' => 'migrations',
-    'redis' => 
-    array (
-      'cluster' => false,
-      'default' => 
-      array (
-        'host' => '127.0.0.1',
-        'port' => 6379,
-        'database' => 0,
-      ),
-    ),
-  ),
   'app' => 
   array (
     'debug' => true,
@@ -114,7 +26,7 @@
     'timezone' => 'Asia/Ho_Chi_Minh',
     'locale' => 'ja',
     'fallback_locale' => 'en',
-    'key' => 'xPGMgwXki6m0hZ8LZlTsDOIb1wATptCW',
+    'key' => 'RiVJAU2IxSKaJNxrsGhnNv9K28p96Hu4',
     'cipher' => 'rijndael-128',
     'log' => 'daily',
     'providers' => 
@@ -197,13 +109,258 @@
       'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
-  'view' => 
+  'auth' => 
   array (
-    'paths' => 
+    'driver' => 'eloquent',
+    'model' => 'App\\User',
+    'table' => 'users',
+    'password' => 
     array (
-      0 => '/var/www/html/canets/resources/views',
+      'email' => 'emails.password',
+      'table' => 'password_resets',
+      'expire' => 60,
     ),
-    'compiled' => '/var/www/html/canets/storage/framework/views',
+    'no_csrf' => 
+    array (
+      0 => 'service/mobile/login',
+      1 => 'service/mobile/registercustomer',
+      2 => 'service/mobile/registerlaborer',
+      3 => 'service/mobile/sendmail',
+      4 => 'service/mobile/forgotpassword',
+      5 => 'service/mobile/sendmailactive',
+      6 => 'service/mobile/checkmakhuyenmai',
+      7 => 'service/mobile/giupviecmotlan',
+      8 => 'service/mobile/giupviecthuongxuyen',
+      9 => 'service/mobile/updatelatlong',
+      10 => 'service/mobile/changepassword',
+      11 => 'service/mobile/testpushnotify',
+      12 => 'service/mobile/screentopcustomer',
+      13 => 'service/mobile/screentopnguoilaodong',
+      14 => 'service/mobile/cancelbooking',
+      15 => 'service/mobile/nhanviec',
+      16 => 'service/mobile/dangkytaikhoanlaodong',
+      17 => 'service/mobile/getlistbided',
+      18 => 'service/mobile/getthongtinlaodong',
+      19 => 'service/mobile/rate',
+      20 => 'service/mobile/nhanlaodong',
+      21 => 'service/mobile/onoffservice',
+      22 => 'service/mobile/getdetailjob',
+      23 => 'service/mobile/sinhvienganday',
+      24 => 'service/mobile/naptien',
+      25 => 'service/mobile/napthe',
+      26 => 'service/mobile/lichsugiaodich',
+      27 => 'service/mobile/getbookingmissednotify',
+      28 => 'service/mobile/getCustomerbyLatLong',
+      29 => 'service/mobile/getThongtinBookingAndLaodong',
+      30 => 'service/mobile/baoDaLamXong',
+      31 => 'service/mobile/checkParamsRequested',
+      32 => 'service/mobile/test',
+      33 => 'service/mobile/upAnh',
+      34 => 'service/mobile/thongbaoSvhuy',
+      35 => 'service/mobile/historybooking',
+      36 => 'service/mobile/svCancel',
+      37 => 'service/mobile/getDetailHistoryJob',
+      38 => 'service/mobile/getDetailBooking',
+      39 => 'service/mobile/khachhangnhanlaodong',
+      40 => 'service/mobile/getContract',
+      41 => 'service/mobile/feedBack',
+      42 => 'service/mobile/getNotify',
+      43 => 'service/mobile/feedBack',
+      44 => 'service/mobile/deleteNotify',
+      45 => 'service/mobile/readNotify',
+    ),
+  ),
+  'cache' => 
+  array (
+    'default' => 'file',
+    'stores' => 
+    array (
+      'apc' => 
+      array (
+        'driver' => 'apc',
+      ),
+      'array' => 
+      array (
+        'driver' => 'array',
+      ),
+      'database' => 
+      array (
+        'driver' => 'database',
+        'table' => 'cache',
+        'connection' => NULL,
+      ),
+      'file' => 
+      array (
+        'driver' => 'file',
+        'path' => 'C:\\xampp\\htdocs\\canets\\storage/framework/cache',
+      ),
+      'memcached' => 
+      array (
+        'driver' => 'memcached',
+        'servers' => 
+        array (
+          0 => 
+          array (
+            'host' => '127.0.0.1',
+            'port' => 11211,
+            'weight' => 100,
+          ),
+        ),
+      ),
+      'redis' => 
+      array (
+        'driver' => 'redis',
+        'connection' => 'default',
+      ),
+    ),
+    'prefix' => 'laravel',
+  ),
+  'compile' => 
+  array (
+    'files' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\canets\\app\\Providers\\AppServiceProvider.php',
+      1 => 'C:\\xampp\\htdocs\\canets\\app\\Providers\\BusServiceProvider.php',
+      2 => 'C:\\xampp\\htdocs\\canets\\app\\Providers\\ConfigServiceProvider.php',
+      3 => 'C:\\xampp\\htdocs\\canets\\app\\Providers\\EventServiceProvider.php',
+      4 => 'C:\\xampp\\htdocs\\canets\\app\\Providers\\RouteServiceProvider.php',
+    ),
+    'providers' => 
+    array (
+    ),
+  ),
+  'database' => 
+  array (
+    'fetch' => 8,
+    'default' => 'mysql',
+    'connections' => 
+    array (
+      'sqlite' => 
+      array (
+        'driver' => 'sqlite',
+        'database' => 'C:\\xampp\\htdocs\\canets\\storage/database.sqlite',
+        'prefix' => '',
+      ),
+      'mysql' => 
+      array (
+        'driver' => 'mysql',
+        'host' => 'localhost',
+        'database' => 'db_canets',
+        'username' => 'root',
+        'password' => '',
+        'charset' => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix' => '',
+        'strict' => false,
+      ),
+      'pgsql' => 
+      array (
+        'driver' => 'pgsql',
+        'host' => 'localhost',
+        'database' => 'db_canets',
+        'username' => 'root',
+        'password' => '',
+        'charset' => 'utf8',
+        'prefix' => '',
+        'schema' => 'public',
+      ),
+      'sqlsrv' => 
+      array (
+        'driver' => 'sqlsrv',
+        'host' => 'localhost',
+        'database' => 'db_canets',
+        'username' => 'root',
+        'password' => '',
+        'prefix' => '',
+      ),
+    ),
+    'migrations' => 'migrations',
+    'redis' => 
+    array (
+      'cluster' => false,
+      'default' => 
+      array (
+        'host' => '127.0.0.1',
+        'port' => 6379,
+        'database' => 0,
+      ),
+    ),
+  ),
+  'debugbar' => 
+  array (
+    'enabled' => NULL,
+    'storage' => 
+    array (
+      'enabled' => true,
+      'driver' => 'file',
+      'path' => 'C:\\xampp\\htdocs\\canets\\storage/debugbar',
+      'connection' => NULL,
+    ),
+    'include_vendors' => true,
+    'capture_ajax' => true,
+    'clockwork' => false,
+    'collectors' => 
+    array (
+      'phpinfo' => true,
+      'messages' => true,
+      'time' => true,
+      'memory' => true,
+      'exceptions' => true,
+      'log' => true,
+      'db' => true,
+      'views' => true,
+      'route' => true,
+      'laravel' => false,
+      'events' => false,
+      'default_request' => false,
+      'symfony_request' => true,
+      'mail' => true,
+      'logs' => true,
+      'files' => true,
+      'config' => true,
+      'auth' => true,
+      'session' => true,
+    ),
+    'options' => 
+    array (
+      'auth' => 
+      array (
+        'show_name' => false,
+      ),
+      'db' => 
+      array (
+        'with_params' => true,
+        'timeline' => false,
+        'backtrace' => false,
+        'explain' => 
+        array (
+          'enabled' => false,
+          'types' => 
+          array (
+            0 => 'SELECT',
+          ),
+        ),
+        'hints' => true,
+      ),
+      'mail' => 
+      array (
+        'full_log' => false,
+      ),
+      'views' => 
+      array (
+        'data' => false,
+      ),
+      'route' => 
+      array (
+        'label' => true,
+      ),
+      'logs' => 
+      array (
+        'file' => NULL,
+      ),
+    ),
+    'inject' => true,
+    'route_prefix' => '_debugbar',
   ),
   'excel' => 
   array (
@@ -221,7 +378,7 @@
         'host' => 'localhost',
         'port' => 11211,
       ),
-      'dir' => '/var/www/html/canets/storage/cache',
+      'dir' => 'C:\\xampp\\htdocs\\canets\\storage/cache',
     ),
     'properties' => 
     array (
@@ -286,7 +443,7 @@
       ),
       'store' => 
       array (
-        'path' => '/var/www/html/canets/storage/exports',
+        'path' => 'C:\\xampp\\htdocs\\canets\\storage/exports',
         'returnInfo' => false,
       ),
       'pdf' => 
@@ -296,15 +453,15 @@
         array (
           'DomPDF' => 
           array (
-            'path' => '/var/www/html/canets/vendor/dompdf/dompdf/',
+            'path' => 'C:\\xampp\\htdocs\\canets/vendor/dompdf/dompdf/',
           ),
           'tcPDF' => 
           array (
-            'path' => '/var/www/html/canets/vendor/tecnick.com/tcpdf/',
+            'path' => 'C:\\xampp\\htdocs\\canets/vendor/tecnick.com/tcpdf/',
           ),
           'mPDF' => 
           array (
-            'path' => '/var/www/html/canets/vendor/mpdf/mpdf/',
+            'path' => 'C:\\xampp\\htdocs\\canets/vendor/mpdf/mpdf/',
           ),
         ),
       ),
@@ -462,203 +619,100 @@
       ),
     ),
   ),
-  'debugbar' => 
+  'filesystems' => 
   array (
-    'enabled' => NULL,
-    'storage' => 
+    'default' => 'local',
+    'cloud' => 's3',
+    'disks' => 
     array (
-      'enabled' => true,
-      'driver' => 'file',
-      'path' => '/var/www/html/canets/storage/debugbar',
-      'connection' => NULL,
-    ),
-    'include_vendors' => true,
-    'capture_ajax' => true,
-    'clockwork' => false,
-    'collectors' => 
-    array (
-      'phpinfo' => true,
-      'messages' => true,
-      'time' => true,
-      'memory' => true,
-      'exceptions' => true,
-      'log' => true,
-      'db' => true,
-      'views' => true,
-      'route' => true,
-      'laravel' => false,
-      'events' => false,
-      'default_request' => false,
-      'symfony_request' => true,
-      'mail' => true,
-      'logs' => true,
-      'files' => true,
-      'config' => true,
-      'auth' => true,
-      'session' => true,
-    ),
-    'options' => 
-    array (
-      'auth' => 
+      'local' => 
       array (
-        'show_name' => false,
+        'driver' => 'local',
+        'root' => 'C:\\xampp\\htdocs\\canets\\storage/app',
       ),
-      'db' => 
+      's3' => 
       array (
-        'with_params' => true,
-        'timeline' => false,
-        'backtrace' => false,
-        'explain' => 
-        array (
-          'enabled' => false,
-          'types' => 
-          array (
-            0 => 'SELECT',
-          ),
-        ),
-        'hints' => true,
+        'driver' => 's3',
+        'key' => 'your-key',
+        'secret' => 'your-secret',
+        'region' => 'your-region',
+        'bucket' => 'your-bucket',
       ),
-      'mail' => 
+      'rackspace' => 
       array (
-        'full_log' => false,
-      ),
-      'views' => 
-      array (
-        'data' => false,
-      ),
-      'route' => 
-      array (
-        'label' => true,
-      ),
-      'logs' => 
-      array (
-        'file' => NULL,
+        'driver' => 'rackspace',
+        'username' => 'your-username',
+        'key' => 'your-key',
+        'container' => 'your-container',
+        'endpoint' => 'https://identity.api.rackspacecloud.com/v2.0/',
+        'region' => 'IAD',
+        'url_type' => 'publicURL',
       ),
     ),
-    'inject' => true,
-    'route_prefix' => '_debugbar',
+  ),
+  'image' => 
+  array (
+    'driver' => 'gd',
+    'photo' => 
+    array (
+      'watermask' => 'uploads/default/watermask.png',
+    ),
   ),
   'mail' => 
   array (
-    'driver' => 'smtp',
-    'host' => 'mailtrap.io',
-    'port' => '2525',
+    'driver' => 'sendmail',
+    'host' => 'localhost',
+    'port' => '587',
     'from' => 
     array (
-      'address' => NULL,
+      'address' => 'haitrach1992@gmail.com',
       'name' => NULL,
     ),
     'encryption' => 'tls',
-    'username' => NULL,
-    'password' => NULL,
+    'username' => 'haitrach1992@gmail.com',
+    'password' => 'namgiang',
     'sendmail' => '/usr/sbin/sendmail -bs',
     'pretend' => false,
   ),
-  'cache' => 
+  'manager' => 
   array (
-    'default' => 'file',
-    'stores' => 
+    'version' => 
     array (
-      'apc' => 
-      array (
-        'driver' => 'apc',
-      ),
-      'array' => 
-      array (
-        'driver' => 'array',
-      ),
-      'database' => 
-      array (
-        'driver' => 'database',
-        'table' => 'cache',
-        'connection' => NULL,
-      ),
-      'file' => 
-      array (
-        'driver' => 'file',
-        'path' => '/var/www/html/canets/storage/framework/cache',
-      ),
-      'memcached' => 
-      array (
-        'driver' => 'memcached',
-        'servers' => 
-        array (
-          0 => 
-          array (
-            'host' => '127.0.0.1',
-            'port' => 11211,
-            'weight' => 100,
-          ),
-        ),
-      ),
-      'redis' => 
-      array (
-        'driver' => 'redis',
-        'connection' => 'default',
-      ),
+      'code' => '1.1',
+      'css' => '1.1',
+      'js' => '1.1',
     ),
-    'prefix' => 'laravel',
-  ),
-  'auth' => 
-  array (
-    'driver' => 'eloquent',
-    'model' => 'App\\User',
-    'table' => 'users',
-    'password' => 
+    'siteconfig' => 
     array (
-      'email' => 'emails.password',
-      'table' => 'password_resets',
-      'expire' => 60,
+      'sitemanager' => 'sitemanager',
+      'menu' => 'menu',
     ),
-    'no_csrf' => 
+    'filemanager' => 
     array (
-      0 => 'service/mobile/login',
-      1 => 'service/mobile/registercustomer',
-      2 => 'service/mobile/registerlaborer',
-      3 => 'service/mobile/sendmail',
-      4 => 'service/mobile/forgotpassword',
-      5 => 'service/mobile/sendmailactive',
-      6 => 'service/mobile/checkmakhuyenmai',
-      7 => 'service/mobile/giupviecmotlan',
-      8 => 'service/mobile/giupviecthuongxuyen',
-      9 => 'service/mobile/updatelatlong',
-      10 => 'service/mobile/changepassword',
-      11 => 'service/mobile/testpushnotify',
-      12 => 'service/mobile/screentopcustomer',
-      13 => 'service/mobile/screentopnguoilaodong',
-      14 => 'service/mobile/cancelbooking',
-      15 => 'service/mobile/nhanviec',
-      16 => 'service/mobile/dangkytaikhoanlaodong',
-      17 => 'service/mobile/getlistbided',
-      18 => 'service/mobile/getthongtinlaodong',
-      19 => 'service/mobile/rate',
-      20 => 'service/mobile/nhanlaodong',
-      21 => 'service/mobile/onoffservice',
-      22 => 'service/mobile/getdetailjob',
-      23 => 'service/mobile/sinhvienganday',
-      24 => 'service/mobile/naptien',
-      25 => 'service/mobile/napthe',
-      26 => 'service/mobile/lichsugiaodich',
-      27 => 'service/mobile/getbookingmissednotify',
-      28 => 'service/mobile/getCustomerbyLatLong',
-      29 => 'service/mobile/getThongtinBookingAndLaodong',
-      30 => 'service/mobile/baoDaLamXong',
-      31 => 'service/mobile/checkParamsRequested',
-      32 => 'service/mobile/test',
-      33 => 'service/mobile/upAnh',
-      34 => 'service/mobile/thongbaoSvhuy',
-      35 => 'service/mobile/historybooking',
-      36 => 'service/mobile/svCancel',
-      37 => 'service/mobile/getDetailHistoryJob',
-      38 => 'service/mobile/getDetailBooking',
-      39 => 'service/mobile/khachhangnhanlaodong',
-      40 => 'service/mobile/getContract',
-      41 => 'service/mobile/feedBack',
+      'key' => '686d68b1b20d600fcdd0581eafbf81b0',
+      'url' => 'public/packages/filemanager',
+    ),
+    'uploads' => 
+    array (
+      'driver' => 'picasa',
+      'username' => 'kgh003@gmail.com',
+      'password' => '123456a@',
+      'user_agent' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0',
+      'account_id' => '117446852389532044151',
+      'album_id' => 
+      array (
+        0 => '6146733046875183857',
+        1 => '6146733300085209841',
+        2 => '6146734513630558001',
+        3 => '6146734403121712081',
+        4 => '6146734298099145617',
+        5 => '6146734052773526417',
+      ),
     ),
   ),
   'queue' => 
   array (
-    'default' => 'sync',
+    'default' => 'database',
     'connections' => 
     array (
       'sync' => 
@@ -709,25 +763,6 @@
       'table' => 'failed_jobs',
     ),
   ),
-  'session' => 
-  array (
-    'driver' => 'file',
-    'lifetime' => 1440,
-    'expire_on_close' => false,
-    'encrypt' => false,
-    'files' => '/var/www/html/canets/storage/framework/sessions',
-    'connection' => NULL,
-    'table' => 'sessions',
-    'lottery' => 
-    array (
-      0 => 2,
-      1 => 100,
-    ),
-    'cookie' => 'laravel_session',
-    'path' => '/',
-    'domain' => NULL,
-    'secure' => false,
-  ),
   'services' => 
   array (
     'role_user' => 3,
@@ -772,7 +807,7 @@
       ),
       'ios' => 
       array (
-        'pem_file_dir' => '/var/www/html/canets/storage/notify/ios.pem',
+        'pem_file_dir' => 'C:\\xampp\\htdocs\\canets\\storage/notify/ios.pem',
         'pem_pass' => '123',
         'ios_server' => 'ssl://gateway.sandbox.push.apple.com:2195',
       ),
@@ -810,63 +845,32 @@
     ),
     'query_limit' => 15,
   ),
-  'compile' => 
+  'session' => 
   array (
-    'files' => 
+    'driver' => 'file',
+    'lifetime' => 1440,
+    'expire_on_close' => false,
+    'encrypt' => false,
+    'files' => 'C:\\xampp\\htdocs\\canets\\storage/framework/sessions',
+    'connection' => NULL,
+    'table' => 'sessions',
+    'lottery' => 
     array (
-      0 => '/var/www/html/canets/app/Providers/AppServiceProvider.php',
-      1 => '/var/www/html/canets/app/Providers/BusServiceProvider.php',
-      2 => '/var/www/html/canets/app/Providers/ConfigServiceProvider.php',
-      3 => '/var/www/html/canets/app/Providers/EventServiceProvider.php',
-      4 => '/var/www/html/canets/app/Providers/RouteServiceProvider.php',
+      0 => 2,
+      1 => 100,
     ),
-    'providers' => 
-    array (
-    ),
+    'cookie' => 'laravel_session',
+    'path' => '/',
+    'domain' => NULL,
+    'secure' => false,
   ),
-  'image' => 
+  'view' => 
   array (
-    'driver' => 'gd',
-    'photo' => 
+    'paths' => 
     array (
-      'watermask' => 'uploads/default/watermask.png',
+      0 => 'C:\\xampp\\htdocs\\canets\\resources\\views',
     ),
-  ),
-  'manager' => 
-  array (
-    'version' => 
-    array (
-      'code' => '1.1',
-      'css' => '1.1',
-      'js' => '1.1',
-    ),
-    'siteconfig' => 
-    array (
-      'sitemanager' => 'sitemanager',
-      'menu' => 'menu',
-    ),
-    'filemanager' => 
-    array (
-      'key' => '686d68b1b20d600fcdd0581eafbf81b0',
-      'url' => 'public/packages/filemanager',
-    ),
-    'uploads' => 
-    array (
-      'driver' => 'picasa',
-      'username' => 'kgh003@gmail.com',
-      'password' => '123456a@',
-      'user_agent' => 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:37.0) Gecko/20100101 Firefox/37.0',
-      'account_id' => '117446852389532044151',
-      'album_id' => 
-      array (
-        0 => '6146733046875183857',
-        1 => '6146733300085209841',
-        2 => '6146734513630558001',
-        3 => '6146734403121712081',
-        4 => '6146734298099145617',
-        5 => '6146734052773526417',
-      ),
-    ),
+    'compiled' => 'C:\\xampp\\htdocs\\canets\\storage\\framework\\views',
   ),
   'laravel-tcpdf' => 
   array (
