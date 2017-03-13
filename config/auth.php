@@ -104,5 +104,6 @@ return [
         'service/mobile/feedBack',
         'service/mobile/deleteNotify',
         'service/mobile/readNotify',
+        'service/mobile/testios',
     ],
 ];

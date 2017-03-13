@@ -38,9 +38,12 @@ class MobileController extends ServiceController {
     }
 
     function testios(){
-        $dv ='91cda425ea5c8a1fd3544fe0507cf6568660000903d1c6dc98e22bef0cc414ff';
-        $res = Notify::Push2Ios($dv, "aaaaaaaaaaaaaaaaaa" , [1,2,3]);
-        dd($res);
+        $this->checkNullData(Input::get('device_token', null));
+        $res = Notify::Push2Ios(Input::get('device_token'), "Test push notify" , ['Khai','Thanh*2']);
+        if ($res['success'] == 1) {
+            $this->status = 200;
+            $this->message = 'Push to IOS success!';
+        }
     }
 
     public function getContract(){
