@@ -32,7 +32,7 @@ class PushNotifyToDevices extends Command implements SelfHandling {
 		$customers = $this->devices;
 		$message = $this->message;
 		$pushData = $this->pushData;
-        
+
         $missed['push_data'] = $pushData;
         $missed ['booking_id'] = $this->bookingId;
 		foreach($customers as $customer)
@@ -50,7 +50,7 @@ class PushNotifyToDevices extends Command implements SelfHandling {
 			}
 
             $missed['note'] = 'Missed push notify ' . $customer->device_token;
-            $missed['laodong_id'] = $customer->id;
+            $missed['customer_id'] = $customer->id;
 
             if ($result['success'] != 1) {
                 $missed ['status'] = 0;

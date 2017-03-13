@@ -4,6 +4,7 @@
 /storage
 /.env
 /storage
+/vendor
 /Library/token-autocomplete/build
 /Library/camera/build
 /Library/blur-behind/build

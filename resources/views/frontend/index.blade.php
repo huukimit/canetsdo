@@ -11,6 +11,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/css/responsive.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>
+      new WOW().init();
+    </script>
 </head>
 <body>
     <header>
@@ -103,25 +107,25 @@
             <div class="section_two">
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="{{ asset('public/frontend/img/furture_1.png') }}" class="img img-responsive" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_1.png') }}" class="img img-responsive wow rollIn" alt=""></a>
                     </div>
                 </div>
 
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="{{ asset('public/frontend/img/furture_2.png') }}" class="img img-responsive" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_2.png') }}" class="img img-responsive wow pulse" alt=""></a>
                     </div>
                 </div>
 
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="{{ asset('public/frontend/img/furture_3.png') }}" class="img img-responsive" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_3.png') }}" class="img img-responsive wow shake" alt=""></a>
                     </div>
                 </div>
 
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="{{ asset('public/frontend/img/furture_4.png') }}" class="img img-responsive" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_4.png') }}" class="img img-responsive wow lightSpeedIn" alt=""></a>
                     </div>
                 </div>
 
@@ -141,12 +145,12 @@
             <div class="title">
                 <h3>Canets helps you get your home in order</h3>
             </div>
-            <div class="stt_one" id="step_1" hidden="">
+            <div class="stt_one" id="step_1">
                 <div class="stt_one_left">
-                    <img src="{{ asset('public/frontend/img/step1.png') }}" class="img img-responsive steps" alt="">
+                    <img src="{{ asset('public/frontend/img/step1.png') }}" class="img img-responsive steps wow rollIn center" alt="">
                 </div>
                 <div class="stt_one_right">
-                    <div class="number">1</div>
+                    <div class="number wow bounce">1</div>
                     <div class="description">
                         <p>Cài đặt ứng dụng Canets</p>
                     </div>
@@ -154,12 +158,12 @@
                 <div class="clear"></div>
             </div>
 
-            <div class="stt_one" id="step_2" hidden="">
+            <div class="stt_one" id="step_2">
                 <div class="stt_one_left">
-                    <img src="{{ asset('public/frontend/img/step2.png') }}" class="img img-responsive steps" alt="">
+                    <img src="{{ asset('public/frontend/img/step2.png') }}" class="img img-responsive steps wow rollIn left" alt="">
                 </div>
                 <div class="stt_one_right">
-                    <div class="number">2</div>
+                    <div class="number wow bounceInRight center">2</div>
                     <div class="description">
                         <p>Nhập địa chỉ, thời gian, yêu cầu,....</p>
                     </div>
@@ -167,12 +171,12 @@
                 <div class="clear"></div>
             </div>
 
-            <div class="stt_one" id="step_3" hidden="">
+            <div class="stt_one" id="step_3">
                 <div class="stt_one_left">
-                    <img src="{{ asset('public/frontend/img/step3.png') }}" class="img img-responsive steps" alt="">
+                    <img src="{{ asset('public/frontend/img/step3.png') }}" class="img img-responsive steps wow rollIn center" alt="">
                 </div>
                 <div class="stt_one_right">
-                    <div class="number">3</div>
+                    <div class="number wow shake">3</div>
                     <div class="description">
                         <p>Lựa chọn ứng viên phù hợp</p>
                     </div>
@@ -180,12 +184,12 @@
                 <div class="clear"></div>
             </div>
 
-            <div class="stt_one" id="step_4" hidden="">
+            <div class="stt_one" id="step_4">
                 <div class="stt_one_left">
-                    <img src="{{ asset('public/frontend/img/step4.png') }}" class="img img-responsive steps" alt="">
+                    <img src="{{ asset('public/frontend/img/step4.png') }}" class="img img-responsive steps wow bounceInDown center" alt="">
                 </div>
                 <div class="stt_one_right">
-                    <div class="number">4</div>
+                    <div class="number wow lightSpeedIn center">4</div>
                     <div class="description">
                         <p>Liên hệ và xác nhận </p>
                     </div>
@@ -197,7 +201,7 @@
 
 
     <section id="stt_five">
-        <div class="number">5</div>
+        <div class="number wow flip">5</div>
         <h2>Let your home shine.</h2>
     </section>
 
@@ -288,6 +292,6 @@
     <script type="text/javascript" src="{{ asset('public/frontend/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/frontend/js/owl.carousel.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/frontend/js/myscript.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/frontend/js/my.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ asset('public/frontend/js/my.js') }}"></script> -->
 </body>
 </html>
