@@ -444,6 +444,9 @@ class MobileController extends ServiceController {
             $data['anhcmtnd_sau'] = $upImage['url'];
         }
         $status = DB::transaction(function () use($data) {
+            if (isset($data['birthday'])) {
+                $data['birthday'] = date('Y-m-d', strtotime($data['birthday']));
+            }
             $id = Customer::SaveData($data);
             $deviceId = Device::SaveData($data);
             $data['customer_id'] = $id;
