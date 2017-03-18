@@ -42,7 +42,7 @@ class Booking extends BaseModel {
     }
 
     static function getBookingExpiry() {
-        $timeExpiry = date('Y-m-d H:i:s', strtotime('- 15 minutes'));
+        $timeExpiry = date('Y-m-d H:i:s', strtotime('- 50 minutes'));
         return self::where('status', 0)
             ->where('updated_at', '<', $timeExpiry)
             ->select('id')->get();

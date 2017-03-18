@@ -1,8 +1,12 @@
 /bootstrap/compiled.php
 /composer.phar
 /composer.lock
-/.env
+/public/uploads/media/anhsv
+/public/uploads/media/avatar
+/public/uploads/media/cmtnd
+/public/uploads/media/anhcanho
 /storage
+/.env
 /vendor
 /Library/token-autocomplete/build
 /Library/camera/build
