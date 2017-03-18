@@ -407,6 +407,7 @@ class MobileController extends ServiceController {
     public function dangkytaikhoanlaodong() {
         Log::info(json_encode($_FILES));
         $data = Input::all();
+        Log::info($data);
         $this->checkNullDataInArray($data);
         $data['type_customer'] = 1;
         $data['password'] = sha1($data['password']);
