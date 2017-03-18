@@ -405,6 +405,7 @@ class MobileController extends ServiceController {
     }
 
     public function dangkytaikhoanlaodong() {
+        Log::info(json_encode($_FILES));
         $data = Input::all();
         $this->checkNullDataInArray($data);
         $data['type_customer'] = 1;
@@ -444,6 +445,9 @@ class MobileController extends ServiceController {
             $data['anhcmtnd_sau'] = $upImage['url'];
         }
         $status = DB::transaction(function () use($data) {
+            if (isset($data['birthday'])) {
+                $data['birthday'] = date('Y-m-d', strtotime($data['birthday']));
+            }
             $id = Customer::SaveData($data);
             $deviceId = Device::SaveData($data);
             $data['customer_id'] = $id;
