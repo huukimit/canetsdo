@@ -42,7 +42,7 @@ class Booking extends BaseModel {
     }
 
     static function getBookingExpiry() {
-        $timeExpiry = date('Y-m-d H:i:s', strtotime('- 15 minutes'));
+        $timeExpiry = date('Y-m-d H:i:s', strtotime('- 500 minutes'));
         return self::where('status', 0)
             ->where('updated_at', '<', $timeExpiry)
             ->select('id')->get();
@@ -50,6 +50,14 @@ class Booking extends BaseModel {
 
     static function getBookingFinding() {
         return self::where('status', 0)->get();
+    }
+
+    static function getNumberNhanByTypeAndStatus($customerId, $bookingType, $bidStatus) {
+        $result = self::join('bids', 'bids.booking_id', '=', 'bookings.id')
+        ->where('bids.laodong_id', $customerId)
+        ->where('bookings.type', $bookingType)
+        ->whereIn('bids.status', $bidStatus)->count();
+        return $result;
     }
 
 }
