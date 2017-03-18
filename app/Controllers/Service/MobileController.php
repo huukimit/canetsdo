@@ -405,6 +405,7 @@ class MobileController extends ServiceController {
     }
 
     public function dangkytaikhoanlaodong() {
+        Log::info(json_encode($_FILES));
         $data = Input::all();
         $this->checkNullDataInArray($data);
         $data['type_customer'] = 1;
