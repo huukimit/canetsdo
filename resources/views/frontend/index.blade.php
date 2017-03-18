@@ -109,6 +109,15 @@
                     <div class="section_two_item_img">
                         <a href="#"><img src="{{ asset('public/frontend/img/furture_1.png') }}" class="img img-responsive wow rollIn" alt=""></a>
                     </div>
+                    <div class="section_two_item_des">
+                        <p>
+                            AAAAAAAAAAAAAAAAAA
+                            AAAAAAAAAAAAAAAAAA
+                            AAAAAAAAAAAAAAAAAA
+                            AAAAAAAAAAAAAAAAAA
+                            AAAAAAAAAAAAAAAAAA
+                        </p>
+                    </div>
                 </div>
 
                 <div class="section_two_item">

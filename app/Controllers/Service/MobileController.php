@@ -778,6 +778,10 @@ class MobileController extends ServiceController {
             $customer['congvieccothelam'] = ($customer['cando'] != '') ? explode(',', $customer['cando']) : [];
             $customer['thoigian_cothelam'] = (!empty($bid)) ? $bid->thoigian_cothelam : 0;
             $customer['avatar'] = ($customer['avatar'] != '') ? URL::to('/') . '/' . $customer['avatar'] : '';
+            $customer['cv1lan_da_nhan'] = Booking::getNumberNhanByTypeAndStatus($customer['id'], 1, [0,1]);
+            $customer['cv1lan_duoc_nhan'] = Booking::getNumberNhanByTypeAndStatus($customer['id'], 1, [1]);
+            $customer['cvthuongxuyen_da_nhan'] = Booking::getNumberNhanByTypeAndStatus($customer['id'], 2, [0,1]);
+            $customer['cvthuongxuyen_duoc_nhan'] = Booking::getNumberNhanByTypeAndStatus($customer['id'], 2, [1]);
             $dangnhan = Bid::congviecdangnhan($customerId);
             $customer['dangnhan'] = $dangnhan;
         }

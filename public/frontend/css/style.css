@@ -326,7 +326,8 @@ ul.cat_furniture_1 {
     padding: 40px 0;
 }
 .section_two{
-    width: 100%;
+    width: 85%;
+    margin:0 auto;
 }
 .section_two_item{
     width: 25%;
@@ -338,7 +339,7 @@ ul.cat_furniture_1 {
     display: inline-block;
 }
 .section_two_item_name{
-    padding: 10px 0;
+    padding: 20px 0;
 }
 .section_two_item_name a{
     font-size: 18px;
@@ -350,6 +351,7 @@ ul.cat_furniture_1 {
 .section_two_item_des p{
     font-size: 18px;
     color: #434343;
+    padding-top:10px;
 }
 
 #section_three{
@@ -409,13 +411,13 @@ ul.cat_furniture_1 {
     color: #999;
 }
 .number {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     display: inline-block;
     background-color: #fff;
     border-radius: 50%;
     font-size: 35px;
-    padding-top: 18px;
+    padding-top: 13px;
     color: #00cded;
 
 }
@@ -561,7 +563,7 @@ select.locale-dropdown {
     color: #888;
 }
 .steps {
-    width: 30%;
+    width: 25%;
     margin-top: -40px;
 }
 .section_two_item_img:hover{
