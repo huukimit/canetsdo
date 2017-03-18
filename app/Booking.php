@@ -52,4 +52,12 @@ class Booking extends BaseModel {
         return self::where('status', 0)->get();
     }
 
+    static function getNumberNhanByTypeAndStatus($customerId, $bookingType, $bidStatus) {
+        $result = self::join('bids', 'bids.booking_id', '=', 'bookings.id')
+        ->where('bids.laodong_id', $customerId)
+        ->where('bookings.type', $bookingType)
+        ->whereIn('bids.status', $bidStatus)->count();
+        return $result;
+    }
+
 }
