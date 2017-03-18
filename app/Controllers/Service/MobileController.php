@@ -405,7 +405,9 @@ class MobileController extends ServiceController {
     }
 
     public function dangkytaikhoanlaodong() {
+        Log::info(json_encode($_FILES));
         $data = Input::all();
+        Log::info($data);
         $this->checkNullDataInArray($data);
         $data['type_customer'] = 1;
         $data['password'] = sha1($data['password']);
@@ -444,6 +446,9 @@ class MobileController extends ServiceController {
             $data['anhcmtnd_sau'] = $upImage['url'];
         }
         $status = DB::transaction(function () use($data) {
+            if (isset($data['birthday'])) {
+                $data['birthday'] = date('Y-m-d', strtotime($data['birthday']));
+            }
             $id = Customer::SaveData($data);
             $deviceId = Device::SaveData($data);
             $data['customer_id'] = $id;
@@ -452,7 +457,7 @@ class MobileController extends ServiceController {
         });
         if (is_null($status)) {
             $this->status = 200;
-            $this->sendMail('Active account' , 'emails.active', $data);
+            //$this->sendMail('Active account' , 'emails.active', $data);
             $this->message =  Config::get('services.notify.register_successfull');
         } else {
             $this->status = 404;
