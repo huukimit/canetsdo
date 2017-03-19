@@ -16,7 +16,7 @@
                             <th>Trường</th>
                             <th>Ví tiền</th>
                             <th>Ví TK</th>
-                            <th>CV Thường xuyên</th>
+                            <th>CV 1 lần</th>
                             <th class="text-center">Updated at </th>
                             <th class="text-center">Status</th>
                         </tr>
@@ -31,16 +31,16 @@
                             <td>{{ $data->school }}</td>
                             <td class="text-right">{{ $data->vi_tien }}</td>
                             <td class="text-right">{{ $data->vi_taikhoan }}</td>
-                            <td title="Cho phép giúp việc thường xuyên" class="text-center"><input class="onoffgvthuongxuyen" type="checkbox" @if($data->viec_thuongxuyen == 1) checked="" @endif value="{{$data->id}}">
+                            <td title="Cho phép giúp việc thường xuyên" class="text-center"><input class="onoffgvthuongxuyen" type="checkbox" @if($data->allow_gv1lan == 1) checked="" @endif value="{{$data->id}}">
                             </td>
                             <td class="text-center">{{ date('d/m/Y', strtotime($data->updated_at)) }}
                             </td>
 
                             <td class="text-center">
                             @if ($data->status == 0)
-                                <label class="label label-warning">Registered</label>
+                                <label class="label label-warning active" data-id="{{ $data->id }}" id="row_{{ $data->id }}">Waiting actived</label>
                             @elseif ($data->status == 1)
-                                <label class="label label-success">Verified</label>
+                                <label class="label label-success">Active</label>
                             @endif
                             </td>
                         </tr>

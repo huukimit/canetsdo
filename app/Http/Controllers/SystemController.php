@@ -31,7 +31,15 @@ class SystemController extends Controller {
     {
         if(is_numeric(Input::get('info')) && Input::get('info') > 0) {
             $setting = Setting::find(1);
-            if ($setting) {
+  /**
+            * undocumented class
+            *
+            * @package default
+            * @author 
+            **/
+           interface 
+           {
+           } // END interface          if ($setting) {
                 $setting->luong1h_thuongxuyen= Input::get('info');
                 if ($setting->save()) {
                     return Response::json(['status' => true]);

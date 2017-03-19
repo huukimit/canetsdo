@@ -16,7 +16,9 @@ class CustomersController extends Controller {
      */
     public function laborers()
     {
-        $laborers = Customer::where('type_customer', 1)->whereIn('status', [0, 1])->orderBy('updated_at', 'desc')->paginate(15);
+        $laborers = Customer::where('type_customer', 1)->whereIn('status', [0, 1])
+        ->orderBy('status')->orderBy('updated_at', 'desc')
+        ->paginate(15);
         
         return view('admin.laborers', ['main_data' => $laborers]);
     }
@@ -43,20 +45,20 @@ class CustomersController extends Controller {
     
     public function onOffGvThuongxuyen()
     {
-        $message = 'Đã cho phép lao động nhận giúp việc thường xuyên';
+        $message = 'Đã cho phép lao động nhận giúp việc một lần';
         $customer = Customer::find(Input::get('customer_id'));
-        if ($customer->viec_thuongxuyen == 0) {
-            $customer->viec_thuongxuyen = 1;
+        if ($customer->allow_gv1lan == 0) {
+            $customer->allow_gv1lan = 1;
         } else {
-            $customer->viec_thuongxuyen = 0;
-            $message = 'Đã tắt chức năng nhận công việc thường xuyên của lao động';
+            $customer->allow_gv1lan = 0;
+            $message = 'Đã tắt chức năng nhận công việc một lần của lao động';
         }
+
         if ($customer->save()) {
             return Response::json(['status' => true, 'message' => $message]);
         }
 
         return Response::json(['status' => false]);
-
     }
 
 }

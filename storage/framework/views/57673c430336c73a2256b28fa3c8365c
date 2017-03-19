@@ -15,7 +15,7 @@
                             <th>Trường</th>
                             <th>Ví tiền</th>
                             <th>Ví TK</th>
-                            <th>CV Thường xuyên</th>
+                            <th>CV 1 lần</th>
                             <th class="text-center">Updated at </th>
                             <th class="text-center">Status</th>
                         </tr>
@@ -30,7 +30,7 @@
                             <td><?php echo e($data->school); ?></td>
                             <td class="text-right"><?php echo e($data->vi_tien); ?></td>
                             <td class="text-right"><?php echo e($data->vi_taikhoan); ?></td>
-                            <td title="Cho phép giúp việc thường xuyên" class="text-center"><input class="onoffgvthuongxuyen" type="checkbox" <?php if($data->viec_thuongxuyen == 1): ?> checked="" <?php endif; ?> value="<?php echo e($data->id); ?>">
+                            <td title="Cho phép giúp việc thường xuyên" class="text-center"><input class="onoffgvthuongxuyen" type="checkbox" <?php if($data->allow_gv1lan == 1): ?> checked="" <?php endif; ?> value="<?php echo e($data->id); ?>">
                             </td>
                             <td class="text-center"><?php echo e(date('d/m/Y', strtotime($data->updated_at))); ?>
 
@@ -38,9 +38,9 @@
 
                             <td class="text-center">
                             <?php if($data->status == 0): ?>
-                                <label class="label label-warning">Registered</label>
+                                <label class="label label-warning active" data-id="<?php echo e($data->id); ?>" id="row_<?php echo e($data->id); ?>">Waiting actived</label>
                             <?php elseif($data->status == 1): ?>
-                                <label class="label label-success">Verified</label>
+                                <label class="label label-success">Active</label>
                             <?php endif; ?>
                             </td>
                         </tr>

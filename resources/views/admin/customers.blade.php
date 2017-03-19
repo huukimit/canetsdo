@@ -14,7 +14,6 @@
                             <th>Full name</th>
                             <th>Phone number</th>
                             <th>School</th>
-                            <th>Vi tien</th>
                             <th>Vi tai khoan</th>
                             <th class="text-center">Updated at </th>
                             <th class="text-center">Status</th>
@@ -26,9 +25,8 @@
                             <td class="text-right">{{ $data->id }}</td>
                             <td>{{ $data->manv_kh }}</td>
                             <td>{{ $data->fullname }}</td>
-                            <td class="text-center">{{ $data->phone_number }}</td>
+                            <td>{{ $data->phone_number }}</td>
                             <td>{{ $data->school }}</td>
-                            <td class="text-right">{{ $data->vi_tien }}</td>
                             <td class="text-right">{{ $data->vi_taikhoan }}</td>
                             <td class="text-center">{{ date('H:i d/m/Y', strtotime($data->updated_at)) }}</td>
                             <td class="text-center">

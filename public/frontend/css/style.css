@@ -337,6 +337,7 @@ ul.cat_furniture_1 {
 }
 .section_two_item_img img {
     display: inline-block;
+    height:200px!important;
 }
 .section_two_item_name{
     padding: 20px 0;
@@ -348,10 +349,10 @@ ul.cat_furniture_1 {
     color: #434343;
     font-weight: bold;
 }
-.section_two_item_des p{
-    font-size: 18px;
+.section_two_item_des {
+    font-size: 16px;
     color: #434343;
-    padding-top:10px;
+    padding-top:15px;
 }
 
 #section_three{

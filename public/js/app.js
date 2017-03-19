@@ -7,7 +7,7 @@ $(document).ready(function(){
 
     $('input.onoffgvthuongxuyen').click(function(){
         var customer_id = $(this).val();
-        console.log(customer_id);
+        processBlock();
         $.ajax({
             type: 'POST',
             url: URL + '/secret/onoffgvthuongxuyen',
@@ -43,6 +43,27 @@ $(document).ready(function(){
             }
         });
     });
+    /* Active */
+    $('.active').click(function(){
+        var active = $(this).data('id');
+        processBlock();
+        $.ajax({
+            type: 'POST',
+            url: URL + '/secret/active',
+            data: {'active': active},
+            success: function(data) {
+                $('#row_' + active).removeClass('active').removeClass('label-warning').addClass('label-success').text('Active');
+                $.unblockUI();
+                if (data['status']) {
+                    $.notify('Good job, Active success', 'success');
+                }
+            },
+            error: function() {
+                console.log('Ajax Fail');
+            }
+        });
+    });
+
     /*Update phi giup viec 1 lan */
     $(document).on('click', '#edit_gv1lan', function() {
         $(this).remove();

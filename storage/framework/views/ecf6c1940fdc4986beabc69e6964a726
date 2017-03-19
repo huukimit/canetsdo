@@ -13,7 +13,6 @@
                             <th>Full name</th>
                             <th>Phone number</th>
                             <th>School</th>
-                            <th>Vi tien</th>
                             <th>Vi tai khoan</th>
                             <th class="text-center">Updated at </th>
                             <th class="text-center">Status</th>
@@ -25,9 +24,8 @@
                             <td class="text-right"><?php echo e($data->id); ?></td>
                             <td><?php echo e($data->manv_kh); ?></td>
                             <td><?php echo e($data->fullname); ?></td>
-                            <td class="text-center"><?php echo e($data->phone_number); ?></td>
+                            <td><?php echo e($data->phone_number); ?></td>
                             <td><?php echo e($data->school); ?></td>
-                            <td class="text-right"><?php echo e($data->vi_tien); ?></td>
                             <td class="text-right"><?php echo e($data->vi_taikhoan); ?></td>
                             <td class="text-center"><?php echo e(date('H:i d/m/Y', strtotime($data->updated_at))); ?></td>
                             <td class="text-center">
