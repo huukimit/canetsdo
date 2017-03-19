@@ -111,11 +111,7 @@
                     </div>
                     <div class="section_two_item_des">
                         <p>
-                            AAAAAAAAAAAAAAAAAA
-                            AAAAAAAAAAAAAAAAAA
-                            AAAAAAAAAAAAAAAAAA
-                            AAAAAAAAAAAAAAAAAA
-                            AAAAAAAAAAAAAAAAAA
+                           <big> Sinh viên đã được kiểm duyệt </big>
                         </p>
                     </div>
                 </div>
