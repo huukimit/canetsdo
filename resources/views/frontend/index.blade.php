@@ -78,11 +78,11 @@
                         <h1>Ứng dụng tìm sinh viên giúp việc, gia sư đầu tiên</h1>
                         <p>Sinh viên trong mạng lưới Canets được đảm bảo</p>
                     </div>
-                    <div class="video_play">
+                   {{--  <div class="video_play">
                         <div class="bor_play">
                             <i class="fa fa-play" style="margin-left: 7px" aria-hidden="true"></i>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
