@@ -20,6 +20,6 @@ class CustomerRate extends BaseModel {
         return DB::select($sql);
     }
     static function listRateBy($laodongId) {
-        return self::where('laodong_id', $laodongId)->orderBy('created_at')->get();
+        return self::join('customers', 'customers.id' , '=', 'customer_rates.customer_id')->where('laodong_id', $laodongId)->orderBy('created_at', 'DESC')->select('customer_rates.*', 'customers.fullname')->limit(30)->get();
     }
 }
