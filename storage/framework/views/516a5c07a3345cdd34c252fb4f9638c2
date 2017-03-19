@@ -75,9 +75,8 @@
             <div class="video">
                 <div class="v_video">
                     <div class="video_text">
-                        <h1>Đăng ký công việc tại chỗ, lựa chọn ứng viên phù hợp</h1>
-                        <p>Canets sự lựa chọn tốt nhất của bạn!</p>
-                        <p>Hãy thử và tự cảm nhận...</p>
+                        <h1>Ứng dụng tìm sinh viên giúp việc, gia sư đầu tiên</h1>
+                        <p>Sinh viên trong mạng lưới Canets được đảm bảo</p>
                     </div>
                     <div class="video_play">
                         <div class="bor_play">
@@ -110,8 +109,8 @@
                         <a href="#"><img src="<?php echo e(asset('public/frontend/img/furture_1.png')); ?>" class="img img-responsive wow rollIn" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
-                        <b>Sinh viên đã được <br>
-                        kiểm duyệt<br/></b>
+                        <b><big>Sinh viên đã được <br/>
+                        kiểm duyệt<br/></big></b><br/>
                        Toàn bộ sinh viên trên hệ thống đã được <b>Canets</b> xác nhận thông tin, có kinh nghiệm làm việc và độ tin tưởng cao
                         
                     </div>
@@ -122,8 +121,8 @@
                         <a href="#"><img src="<?php echo e(asset('public/frontend/img/furture_2.png')); ?>" class="img img-responsive wow pulse" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
-                        <b>Thời gian tìm người <br>
-                        Nhanh chóng<br/></b>
+                        <b><big>Thời gian tìm người <br/>
+                        Nhanh chóng<br/></big></b><br/>
                        Thời gian tìm người chỉ từ 10 phút<br/>
                        nhanh như pha 1 tách cà phê
                         
@@ -135,8 +134,8 @@
                         <a href="#"><img src="<?php echo e(asset('public/frontend/img/furture_3.png')); ?>" class="img img-responsive wow shake" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
-                        <b>Lựa chọn ứng viên <br>
-                        phù hợp<br/></b>
+                        <b><big> Lựa chọn ứng viên <br/>
+                        phù hợp<br/></big></b><br/>
                        Dự trên thông tin của sinh viên ứng tuyển, bạn có thể lựa chọn cho gia đình sinh viên phù hợp nhất theo nhiều tiêu chí
                         
                     </div>
@@ -147,8 +146,8 @@
                         <a href="#"><img src="<?php echo e(asset('public/frontend/img/furture_4.png')); ?>" class="img img-responsive wow lightSpeedIn" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
-                        <b>Chi phí tiết kiệm <br>
-                       Chỉ từ  20.000 Đ/ 1h<br/>
+                        <b><big>Chi phí tiết kiệm <br>
+                       Chỉ từ  25.000 Đ/1h</big><br/></b><br/>
                        Bạn có thể tìm ngay cho gia đình sinh viên phụ giúp công việc gia đình hiệu quả
                     </div>
                 </div>
