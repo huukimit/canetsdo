@@ -309,11 +309,12 @@ class MobileController extends ServiceController {
                 $response['info_laodong'] = array(
                     "manv_kh" => $labor->manv_kh,
                     "fullname" => $labor->fullname,
+                    "phone_number" => $labor->phone_number,
                     "birthday" => $labor->birthday,
                     "quequan" => $labor->quequan,
                     "school" => $labor->school,
                     "cando" => $labor->cando,
-                    "year_exp" => $labor->year_exp,
+                    "month_exp" => $labor->month_exp,
                     "thoigian_cothelam" => $bidDone->thoigian_cothelam,
                     'avatar' =>  ($labor->avatar != '') ? URL::to('/') . '/' . $labor->avatar : '',
                 );
@@ -938,7 +939,7 @@ class MobileController extends ServiceController {
             $bid = Bid::getBidByBookAndLaodongId(Input::get('booking_id'), Input::get('laodong_id'));
             $customer['number_rated'] = (int)$rates->number_rate;
             $customer['list_rated'] = CustomerRate::listRateBy(Input::get('laodong_id'));
-            $customer['stars'] = (int)$rates->stars;
+            $customer['stars'] = (float)$rates->stars;
             $customer['congvieccothelam'] = ($customer['cando'] != '') ? explode(',', $customer['cando']) : [];
             $customer['thoigian_cothelam'] = (!empty($bid)) ? $bid->thoigian_cothelam : 0;
             $customer['avatar'] = ($customer['avatar'] != '') ? URL::to('/') . '/' . $customer['avatar'] : '';
