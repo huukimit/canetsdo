@@ -112,6 +112,7 @@
                     <div class="section_two_item_des">
                         <p>
                            <big> Sinh viên đã được kiểm duyệt </big>
+                           Toàn bộ sinh viên trên hệ thống đã được Canets xác nhận thông tin
                         </p>
                     </div>
                 </div>
