@@ -64,6 +64,21 @@ return [
             'ios_server' => 'ssl://gateway.sandbox.push.apple.com:2195', // Developer Mode
             //'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
         ),
+        'ios_laodong' => array(
+            /**
+             * Create file pem from p12 file and password
+             * openssl pkcs12 -clcerts -nokeys -out aps-dev-cert.pem -in key-ios.p12
+             * openssl pkcs12 -nocerts -out aps-dev-key.pem -in key-ios.p12
+             * openssl rsa -in aps-dev-key.pem -out aps-dev-key.unencrypted.pem
+             * cat aps-dev-cert.pem aps-dev-key.unencrypted.pem > key-ios.pem
+             *
+             * Save file to folder notify in storage path of laravel
+             */
+            'pem_file_dir' => storage_path('notify/ios_sv.pem'),
+            'pem_pass' => 'canets',
+            'ios_server' => 'ssl://gateway.sandbox.push.apple.com:2195', // Developer Mode
+            //'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
+        ),
     ),
     'notify' => [
         'no_param' => 'No param',

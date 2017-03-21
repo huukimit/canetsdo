@@ -234,10 +234,10 @@
             <div class="footer">
                 <div class="footer_item">
                     <ul class="menu">
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Hỗ trợ</a></li>
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                        <li><a href="#">Hợp đồng</a></li>
                         <li><a href="#">Be a Professional</a></li>
                         <li><a href="#">Blog</a></li>
                         <li><a href="#">Money-Back Guarantee</a></li>
@@ -256,40 +256,25 @@
                 </div>
 
                 <div class="footer_item">
-                    <h4>LOCATIONS</h4>
-                    <ul class="footer_item_23">
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li>
-                            <form action="" method="post">
-                                <select class="locale-dropdown" id="locale" name="locale" onchange="this.form.submit()">
-                                    <option value="en-US" selected="selected">United States</option>
-                                    <option value="en-CA">Canada</option>
-                                    <option value="en-GB">United Kingdom</option>
-                                </select>
-                            </form>
-                        </li>
-                    </ul>
+                    <h4>Video giới thiệu</h4>
+                    <iframe width="90%" height="300px" src="https://www.youtube.com/embed/wf3BDt5X7FM" frameborder="0" allowfullscreen>
+                    </iframe>
                 </div>
 
                 <div class="footer_item">
-                    <h4>LOCATIONS</h4>
-                    <ul class="footer_item_23">
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                        <li><a href="#">Lorem ipsum dolor sit</a></li>
-                    </ul>
+                    <h4>Fanpage</h4>
+                    <div id="fb-root"></div>
+                    <script>
+                        (function(d, s, id) {
+                          var js, fjs = d.getElementsByTagName(s)[0];
+                          if (d.getElementById(id)) return;
+                          js = d.createElement(s); js.id = id;
+                          js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=230148524091917";
+                          fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));
+                    </script>
+                    <div class="fb-page" data-href="https://www.facebook.com/hakusjj/" data-tabs="timeline" data-width="350px" data-height="300px" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/hakusjj/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/hakusjj/">SJJ Trị Nám Trắng Da</a></blockquote>
+                    </div>
                 </div>
                 <div class="clear"></div>
             </div>

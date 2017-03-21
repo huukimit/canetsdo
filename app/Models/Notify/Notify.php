@@ -42,7 +42,8 @@ class Notify extends BaseModel {
      * @param type $sound
      * @return Push notify for ios
      */
-    static function Push2Ios($deviceToken = "", $message = "", $push_data = array(), $badge = -1, $sound = 'default') {
+    static function Push2Ios($deviceToken = "", $message = "", $push_data = array(), $badge = -1, $sound = 'default', $app = 'laodong') {
+        
         if (!$deviceToken || !$message) {
             return array("status" => -1, "message" => "No data", "data" => array());
         }
@@ -64,12 +65,22 @@ class Notify extends BaseModel {
             $msg = '';
         }
         $ctx = stream_context_create();
-        stream_context_set_option($ctx, 'ssl', 'local_cert', Config::get('services.device.ios.pem_file_dir'));
-        stream_context_set_option($ctx, 'ssl', 'passphrase', Config::get('services.device.ios.pem_pass'));
+        $ios_server = Config::get('services.device.ios.ios_server');
+
+        if ($app == 'laodong') {
+            $filePem = Config::get('services.device.ios_laodong.pem_file_dir');
+            $passwordPem = Config::get('services.device.ios_laodong.pem_pass');
+        } else {
+            $filePem = Config::get('services.device.ios.pem_file_dir');
+            $passwordPem = Config::get('services.device.ios.pem_pass');
+        }
+
+        stream_context_set_option($ctx, 'ssl', 'local_cert', $filePem);
+        stream_context_set_option($ctx, 'ssl', 'passphrase', $passwordPem);
         $err = "";
         $errstr = "";
+        $fp = stream_socket_client($ios_server, $err, $errstr, 600, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
 
-        $fp = stream_socket_client(Config::get('services.device.ios.ios_server'), $err, $errstr, 600, STREAM_CLIENT_CONNECT | STREAM_CLIENT_PERSISTENT, $ctx);
         if (!$fp) {
             return array("status" => -2, "message" => "Failed to connect: $err $errstr" . PHP_EOL, "data" => array());
         }
