@@ -5,7 +5,9 @@
 /public/uploads/media/avatar
 /public/uploads/media/cmtnd
 /public/uploads/media/anhcanho
-/storage
+/storage/logs
+/storage/framework
+/storage/debugbar
 /.env
 /vendor
 /Library/token-autocomplete/build
