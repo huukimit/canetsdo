@@ -42,7 +42,7 @@ class Notify extends BaseModel {
      * @param type $sound
      * @return Push notify for ios
      */
-    static function Push2Ios($deviceToken = "", $message = "", $push_data = array(), $badge = -1, $sound = 'default', $app = 'customer') {
+    static function Push2Ios($deviceToken = "", $message = "", $push_data = array(), $badge = -1, $sound = 'default', $app = 'laodong') {
         if (!$deviceToken || !$message) {
             return array("status" => -1, "message" => "No data", "data" => array());
         }
