@@ -72,15 +72,10 @@ return [
              * openssl rsa -in aps-dev-key.pem -out aps-dev-key.unencrypted.pem
              * cat aps-dev-cert.pem aps-dev-key.unencrypted.pem > key-ios.pem
              *
-             * Save file to folder notify in storage path of laravel
-             */
-<<<<<<< HEAD
-            'pem_file_dir' => storage_path('notify/laodong.pem'),
-            'pem_pass' => '',
-=======
+           */
+
             'pem_file_dir' => storage_path('notify/ios_sv.pem'),
             'pem_pass' => 'canets',
->>>>>>> 694c89505aac39376bc783523d9510f46cceee8e
             'ios_server' => 'ssl://gateway.sandbox.push.apple.com:2195', // Developer Mode
             //'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
         ),
