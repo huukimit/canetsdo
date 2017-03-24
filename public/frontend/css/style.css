@@ -340,7 +340,7 @@ ul.cat_furniture_1 {
     border-radius: 15px 15px 15px 15px;
     -moz-border-radius: 15px 15px 15px 15px;
     -webkit-border-radius: 15px 15px 15px 15px;
-    border: 2px solid #ffdb0f;
+    border: 1px solid #ffdb0f;
     min-height: 500px;
 }
 .section_two_item_img img {
