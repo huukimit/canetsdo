@@ -1133,5 +1133,13 @@ class MobileController extends ServiceController {
 		$this->message = 'Success';
 	}
 
+	function ignoreJob() {
+		$this->checkNullData(Input::get('customer_id', null));
+		$this->checkNullData(Input::get('booking_id', null));
+		Notify_missed_booking::deleteNotifyOfCustomerId(Input::get('customer_id'), Input::get('booking_id'));
+		$this->status = 200;
+		$this->message = 'Ignoge Success';
+	}
+
 
 }

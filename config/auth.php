@@ -108,5 +108,6 @@ return [
         'service/mobile/logout',
         'service/mobile/getJobsByLaodongId',
         'service/mobile/getInfoCustomerById',
+        'service/mobile/ignoreJob',
     ],
 ];
