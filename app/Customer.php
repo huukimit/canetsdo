@@ -3,7 +3,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\BaseModel;
-use DB;
+use DB, URL;
 
 class Customer extends BaseModel {
     function __construct() {

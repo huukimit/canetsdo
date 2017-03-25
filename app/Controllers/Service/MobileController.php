@@ -804,13 +804,13 @@ class MobileController extends ServiceController {
 	function getdetailjob() {
 		$this->checkNullData(Input::get('booking_id'));
 		$booking = json_decode(json_encode(Booking::getById(Input::get('booking_id'))), true);
-		$list_bided = Bid::getAllLdByBookingId(Input::get('booking_id'));
-		foreach ($list_bided as $value) {
-			if ($value->avatar != '') {
-				$value->avatar = URL::to('/') . '/' . $value->avatar;
-			}
-		}
-		$booking['list_user_bided'] = $list_bided;
+		// $list_bided = Bid::getAllLdByBookingId(Input::get('booking_id'));
+		// foreach ($list_bided as $value) {
+		// 	if ($value->avatar != '') {
+		// 		$value->avatar = URL::to('/') . '/' . $value->avatar;
+		// 	}
+		// }
+		// $booking['list_user_bided'] = $list_bided;
 		$this->status = 200;
 		$this->message = "Success";
 		$this->data = $booking;
