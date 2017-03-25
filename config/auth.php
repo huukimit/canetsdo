@@ -105,5 +105,7 @@ return [
         'service/mobile/deleteNotify',
         'service/mobile/readNotify',
         'service/mobile/testios',
+        'service/mobile/logout',
+        'service/mobile/getJobsByLaodongId',
     ],
 ];

@@ -18,7 +18,7 @@
 </head>
 <body>
     <header>
-        <div class="my_container">
+        <div class="my_container_header">
             <div class="header">
                 <div class="header_logo">
                     <div class="header_logo_img">
@@ -29,10 +29,9 @@
                 </div>
                 <div class="header_menu">
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">News</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">About</a></li>
+                        <li><a href="#" id="dangkydilam">Đăng ký đi làm</a></li>
+                        <li><a href="#gioi-thieu-ve-canets">Về chúng tôi</a></li>
+                        <li><a href="#">Trợ giúp</a></li>
                     </ul>
                     <div class="menu_xs_sm">
                         <i class="fa fa-bars" aria-hidden="true"></i>
@@ -53,15 +52,6 @@
             <li class="has_sub"><a href="#">Giới thiệu</a></li>
             <li>
                 <a href="#">News</a>
-                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                <ul class="cat_furniture">
-                    <li><a href="#">Catalogue</a></li>
-                    <li><a href="#">Catalogue</a></li>
-                    <li><a href="#">Catalogue</a></li>
-                    <li><a href="#">Catalogue</a></li>
-                    <li><a href="#">Catalogue</a></li>
-                    <li><a href="#">Catalogue</a></li>
-                </ul>
             </li>
             <li><a href="#">Contact</a></li>
             <li><a href="#">About</a></li>
@@ -106,7 +96,7 @@
             <div class="section_two">
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="{{ asset('public/frontend/img/furture_1.png') }}" class="img img-responsive wow rollIn" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_1.png') }}" class="img img-responsive" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
                         <b><big>Sinh viên đã được <br/>
@@ -118,7 +108,7 @@
 
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="{{ asset('public/frontend/img/furture_2.png') }}" class="img img-responsive wow pulse" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_2.png') }}" class="img img-responsive" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
                         <b><big>Thời gian tìm người <br/>
@@ -131,7 +121,7 @@
 
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="{{ asset('public/frontend/img/furture_3.png') }}" class="img img-responsive wow shake" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_3.png') }}" class="img img-responsive" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
                         <b><big> Lựa chọn ứng viên <br/>
@@ -143,7 +133,7 @@
 
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="{{ asset('public/frontend/img/furture_4.png') }}" class="img img-responsive wow lightSpeedIn" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_4.png') }}" class="img img-responsive" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
                         <b><big>Chi phí tiết kiệm <br>
@@ -166,16 +156,16 @@
         </div>
         <div class="my_container">
             <div class="title">
-                <h3>Canets helps you get your home in order</h3>
+                <h3></h3>
             </div>
             <div class="stt_one" id="step_1">
                 <div class="stt_one_left">
-                    <img src="{{ asset('public/frontend/img/step1.png') }}" class="img img-responsive steps wow rollIn center" alt="">
+                    <img src="{{ asset('public/frontend/img/step1.png') }}" class="img img-responsive steps wow bounceInLeft center" alt="">
                 </div>
                 <div class="stt_one_right">
                     <div class="number wow bounce">1</div>
                     <div class="description">
-                        <p>Cài đặt ứng dụng Canets</p>
+                        <p>Tìm ứng dụng Canets trên Appstore hay Google và tải xuống miễn phí</p>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -183,12 +173,13 @@
 
             <div class="stt_one" id="step_2">
                 <div class="stt_one_left">
-                    <img src="{{ asset('public/frontend/img/step2.png') }}" class="img img-responsive steps wow rollIn left" alt="">
+                    <img src="{{ asset('public/frontend/img/step2.png') }}" class="img img-responsive steps wow bounceInRight left" alt="">
                 </div>
                 <div class="stt_one_right">
-                    <div class="number wow bounceInRight center">2</div>
+                    <div class="number wow bounce center">2</div>
                     <div class="description">
-                        <p>Nhập địa chỉ, thời gian, yêu cầu,....</p>
+                        <p><b>Nhập thông tin yêu cầu <br/></b>
+                        Thời gian, địa điểm làm việc, yêu cầu đặc biệt,.... Thông tin càng chi tiết thì càng dễ tìm một bạn sinh viên phù hợp</p>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -196,12 +187,13 @@
 
             <div class="stt_one" id="step_3">
                 <div class="stt_one_left">
-                    <img src="{{ asset('public/frontend/img/step3.png') }}" class="img img-responsive steps wow rollIn center" alt="">
+                    <img src="{{ asset('public/frontend/img/step3.png') }}" class="img img-responsive steps wow bounceInLeft center" alt="">
                 </div>
                 <div class="stt_one_right">
-                    <div class="number wow shake">3</div>
+                    <div class="number wow bounce">3</div>
                     <div class="description">
-                        <p>Lựa chọn ứng viên phù hợp</p>
+                        <p><b> Lựa chọn ứng viên<br/></b>
+                        Dựa trên hình ảnh, thông tin chung hay đánh giá từ những gia đình khác. Hãy lựa chọn 1 ứng viên phù hợp nhất !</p>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -209,12 +201,12 @@
 
             <div class="stt_one" id="step_4">
                 <div class="stt_one_left">
-                    <img src="{{ asset('public/frontend/img/step4.png') }}" class="img img-responsive steps wow bounceInDown center" alt="">
+                    <img src="{{ asset('public/frontend/img/step4.png') }}" class="img img-responsive steps wow bounceInRight center" alt="">
                 </div>
                 <div class="stt_one_right">
-                    <div class="number wow lightSpeedIn center">4</div>
+                    <div class="number wow bounce center">4</div>
                     <div class="description">
-                        <p>Liên hệ và xác nhận </p>
+                        <p><b>Liên hệ và xác nhận<br/></b> Xác nhận và sắp xếp lịch làm với sinh viên qua số điện thoại được cung cấp... </p>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -224,24 +216,29 @@
 
 
     <section id="stt_five">
-        <div class="number wow flip">5</div>
+        <div class="number wow bounce">5</div>
         <h2>Let your home shine.</h2>
     </section>
 
 
     <footer>
-        <div class="my_container">
+        <div class="my_container_footer">
             <div class="footer">
                 <div class="footer_item">
                     <ul class="menu">
-                        <li><a href="#">Hỗ trợ</a></li>
-                        <li><a href="#">Về chúng tôi</a></li>
-                        <li><a href="#">Tuyển dụng</a></li>
-                        <li><a href="#">Hợp đồng</a></li>
-                        <li><a href="#">Be a Professional</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Money-Back Guarantee</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        
+                        <li><span class="fa fa-users fa-lg"></span>&nbsp;&nbsp;<a href="#">Về chúng tôi</a></li>
+                        <div class="mota" id="gioi-thieu-ve-canets">
+                            <p>
+                            Canets được coi là mô hình dẫn đầu trong việc kết nối sinh viên và gia đình. Chúng tôi đã có hơn 3 năm kinh nghiệm trong mô hình truyền thống với hơn bảy nghìn công việc được tạo.<br/>
+                            </p>
+                            <p>    
+                            Bên cạnh đó với đội ngũ sáng lập trẻ và nhiệt huyết, chúng tôi luôn mong muốn tạo ra giá trị tốt đẹp nhất cho cộng đồng.
+                            </p>
+                        </div>
+                        <li><a href="#linkcanetsdo"><span class="fa fa-money fa-lg"></span>&nbsp;&nbsp;Đăng ký đi làm</a></li>
+                        <li><a href="javascript:void(0)"><span class="fa fa-phone fa-lg"></span>&nbsp;&nbsp;0943. 123. 369</a></li>
+                        <li><a href="canets2016@gmail.com" mailto><span class="fa fa-envelope fa-lg"></span>&nbsp;&nbsp;canets2016@gmail.com</a></li>
                     </ul>
                     <div class="columns">
                         <a href="http://r.Canets.com/iosbadge"><img alt="App-store-badge" src="https://files.handy.com/assets/miscellaneous/app-store-badge-231469be108d5b87c206dd3ad4c43028.svg"></a>
@@ -257,24 +254,22 @@
 
                 <div class="footer_item">
                     <h4>Video giới thiệu</h4>
-                    <iframe width="90%" height="300px" src="https://www.youtube.com/embed/wf3BDt5X7FM" frameborder="0" allowfullscreen>
+                    <iframe width="98%" height="300px" src="https://www.youtube.com/embed/wf3BDt5X7FM" frameborder="0" allowfullscreen>
                     </iframe>
                 </div>
 
                 <div class="footer_item">
                     <h4>Fanpage</h4>
                     <div id="fb-root"></div>
-                    <script>
-                        (function(d, s, id) {
-                          var js, fjs = d.getElementsByTagName(s)[0];
-                          if (d.getElementById(id)) return;
-                          js = d.createElement(s); js.id = id;
-                          js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=230148524091917";
-                          fjs.parentNode.insertBefore(js, fjs);
-                        }(document, 'script', 'facebook-jssdk'));
+                    <script>(function(d, s, id) {
+                      var js, fjs = d.getElementsByTagName(s)[0];
+                      if (d.getElementById(id)) return;
+                      js = d.createElement(s); js.id = id;
+                      js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8";
+                      fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
                     </script>
-                    <div class="fb-page" data-href="https://www.facebook.com/hakusjj/" data-tabs="timeline" data-width="350px" data-height="300px" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/hakusjj/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/hakusjj/">SJJ Trị Nám Trắng Da</a></blockquote>
-                    </div>
+                    <div class="fb-page" data-href="https://www.facebook.com/canetsgiupviec/" data-tabs="timeline" data-width="450" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/canetsgiupviec/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/canetsgiupviec/">Canets - Sinh Viên Giúp Việc</a></blockquote></div>
                 </div>
                 <div class="clear"></div>
             </div>

@@ -791,6 +791,16 @@ class MobileController extends ServiceController {
         $this->data = $customer;
     }
 
+    function getJobsByLaodongId() { // use in top screen
+        $customerId = Input::get('laodong_id', null);
+        $this->checkNullData($customerId);
+        $result['list_gvmotlan'] = Booking::getJobsWaitingReceivedFromNotify(1, $customerId); 
+        $result['list_gvthuongxuyen'] = Booking::getJobsWaitingReceivedFromNotify(2, $customerId); 
+        $this->status = 200;
+        $this->message = "Success";
+        $this->data = $result;
+    }
+
     function getdetailjob() {
         $this->checkNullData(Input::get('booking_id'));
         $booking = json_decode(json_encode(Booking::getById(Input::get('booking_id'))), true);
@@ -834,6 +844,21 @@ class MobileController extends ServiceController {
         $this->data = $finding;
         $this->status = 200;
         $this->message = 'Success';
+    }
+
+    function logout() {
+        $this->checkNullData(Input::get('device_token', null));
+        $this->checkNullData(Input::get('customer_id', null));
+        $device = Device::checkTokenDevice(Input::get('device_token'));
+        if ($device) {
+           $exist = CustomerDevice::getCustomerDeviceByCustomerIdDeviceId(Input::get('customer_id'), $device->id);
+           if ($exist) {
+                CustomerDevice::deleteBy($exist->id);
+                Device::deleteBy($device->id);
+           }
+        }
+        $this->status = 200;
+        $this->message = 'Logout success';
     }
 
 

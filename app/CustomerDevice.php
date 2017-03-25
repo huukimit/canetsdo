@@ -8,4 +8,9 @@ class CustomerDevice extends BaseModel {
         parent::__construct();
         $this->table = 'customer_devices';
     }
+
+    public static function getCustomerDeviceByCustomerIdDeviceId($customerId, $deviceId)
+    {
+    	return self::where('customer_id', $customerId)->where('device_id', $deviceId)->first();
+    }
 }

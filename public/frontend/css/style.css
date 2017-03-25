@@ -65,6 +65,21 @@ ol.breadcrumb a:hover{
     max-width: 1400px;
     margin: 0 auto;
 }
+.my_container_footer{
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.my_container_header{
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+div.mota {
+    padding: 10px;
+    color: #adadad;
+    text-align: justify;
+    text-indent: 10px;
+}
 .arrow_box {
     position: relative;
     background: #515151;
@@ -89,7 +104,7 @@ ol.breadcrumb a:hover{
 /*=============================================== H E A D E R ================================================*/
 header {
     height: 70px;
-    line-height: 70px;
+    line-height: 40px;
 }
 .header{
     width: 100%;
@@ -102,6 +117,7 @@ header {
     display: inline-block;
     height: 50px;
     margin-left:50px;
+    margin-top: 10px;
 }
 .header_menu{
     width: 70%;
@@ -112,7 +128,7 @@ header {
 }
 .header_menu ul li{
     float: left;
-    padding: 0 15px;
+    padding: 15px 15px;
 }
 .header_menu ul li:last-child{
     padding-right: 0;
@@ -341,12 +357,14 @@ ul.cat_furniture_1 {
     -moz-border-radius: 15px 15px 15px 15px;
     -webkit-border-radius: 15px 15px 15px 15px;
     border: 1px solid #ffdb0f;
-    min-height: 500px;
+    min-height: 550px;
 }
+
 .section_two_item_img img {
     display: inline-block;
     height:200px!important;
 }
+
 .section_two_item_name{
     padding: 20px 0;
 }
@@ -379,6 +397,7 @@ ul.cat_furniture_1 {
     background-color: #f4f4f4;
 
 }
+
 .section_three_borright{
     width: 50%;
     float: left;
@@ -425,8 +444,8 @@ ul.cat_furniture_1 {
     display: inline-block;
     background-color: #fff;
     border-radius: 50%;
-    font-size: 35px;
-    padding-top: 13px;
+    font-size: 34px;
+    padding-top: 11px;
     color: #00cded;
 
 }
@@ -571,10 +590,27 @@ select.locale-dropdown {
     font-size: 16px;
     color: #888;
 }
+
 .steps {
     width: 25%;
     margin-top: -40px;
 }
+
 .section_two_item_img:hover{
     opacity: .6;
+}
+
+.fa {
+    color:#06c2e0;
+}
+
+#dangkydilam {
+    display: block;
+    font-size: 18px;
+    border: 1px solid #06c2e0;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    color:#06c2e0 !important;
+    padding:0 15px;
 }
