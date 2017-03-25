@@ -165,7 +165,9 @@
                 <div class="stt_one_right">
                     <div class="number wow bounce">1</div>
                     <div class="description">
-                        <p>Tìm ứng dụng Canets trên Appstore hay Google và tải xuống miễn phí</p>
+                        <p>
+                        <b>Cài đặt ứng dụng<br/></b>
+                        Tìm ứng dụng Canets trên Appstore hay Google và tải xuống miễn phí</p>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -217,7 +219,7 @@
 
     <section id="stt_five">
         <div class="number wow bounce">5</div>
-        <h2>Let your home shine.</h2>
+        <h2></h2>
     </section>
 
 
@@ -237,7 +239,7 @@
                             </p>
                         </div>
                         <li><a href="#linkcanetsdo"><span class="fa fa-money fa-lg"></span>&nbsp;&nbsp;Đăng ký đi làm</a></li>
-                        <li><a href="javascript:void(0)"><span class="fa fa-phone fa-lg"></span>&nbsp;&nbsp;0943. 123. 369</a></li>
+                        <li><a href="javascript:void(0)"><span class="fa fa-phone fa-lg"></span>&nbsp;&nbsp;0943. 123. 365</a></li>
                         <li><a href="canets2016@gmail.com" mailto><span class="fa fa-envelope fa-lg"></span>&nbsp;&nbsp;canets2016@gmail.com</a></li>
                     </ul>
                     <div class="columns">

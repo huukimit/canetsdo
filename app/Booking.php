@@ -33,7 +33,7 @@ class Booking extends BaseModel {
         return self::whereIn('status', [-2, 0, 1])->where('customer_id', $data['customer_id'])
             ->where('id', $data['booking_id'])->first();
     }
-    static function useChonnguoi($bookingId) {
+    static function useChonnguoi($data) {
         return self::where('chonnguoi', 1)->where('id', $data['booking_id'])->first();
     }
 

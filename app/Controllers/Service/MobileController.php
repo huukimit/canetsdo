@@ -569,7 +569,7 @@ class MobileController extends ServiceController {
 		$this->data = ['booking_id' => $booking_id];
 		$this->status = 200;
 		$this->message = "Success";
-		$this->notifyToLaborer($postData['lat'], $postData['long'], $booking_id, 1000, 'Giúp việc một lần');
+		$this->notifyToLaborer($postData['lat'], $postData['long'], $booking_id, 1000, 'GV 1 lần: ' . $postData['address']);
 
 	}
 
@@ -609,11 +609,7 @@ class MobileController extends ServiceController {
 		$this->status = 200;
 		$this->data = ['booking_id' => $booking_id];
 		$this->message = "Success";
-		$this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 1000, 'Giúp việc thường xuyên');
-	}
-	function debugs(){
-		$a = Customer::getFullInfoCustomerById(22);
-		print_r($a);die;
+		$this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 1000, 'GV thường xuyên: ' . $postData['address']);
 	}
 
 	function notifyToLaborer($lat, $long, $booking_id, $distance, $loaidichvu = 'test') {
@@ -877,6 +873,7 @@ class MobileController extends ServiceController {
 					$postData['status'] = 1;
 				}
 			}
+
 			if (Bid::SaveData($postData)) {
 				$this->status = 200;
 				$this->message = 'Success';
@@ -884,7 +881,7 @@ class MobileController extends ServiceController {
 				$push_data = Customer::getById($postData['laodong_id']);
 				$customers = Customer::getFullInfoCustomerByIdToNotify($postData['customer_id']);
 				foreach($customers as $customer) {
-					Notify::cloudMessaseAndroid($customer->device_token, 'nhanviec', $push_data);
+					Notify::cloudMessaseAndroid($customer->device_token, $push_data->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data);
 				}
 			}
 		} else {
