@@ -75,8 +75,13 @@ class Customer extends BaseModel {
         return $data;
     }
 
-    static function getCustomerById($id) {
+    static function getById($id) {
         $exist = self::where('id', $id)->first();
+        $exist->avatar =  (($exist->avatar != '') ? URL::to('/') . '/' . $exist->avatar : '');
+        $exist->anhsv_truoc =  (($exist->anhsv_truoc != '') ? URL::to('/') . '/' . $exist->anhsv_truoc : '');
+        $exist->anhsv_sau =  (($exist->anhsv_sau != '') ? URL::to('/') . '/' . $exist->anhsv_sau : '');
+        $exist->anhcmtnd_truoc =  (($exist->anhcmtnd_truoc != '') ? URL::to('/') . '/' . $exist->anhcmtnd_truoc : '');
+        $exist->anhcmtnd_sau =  (($exist->anhcmtnd_sau != '') ? URL::to('/') . '/' . $exist->anhcmtnd_sau : '');
         return $exist;
     }
 

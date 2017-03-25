@@ -45,8 +45,8 @@ class Bid extends BaseModel {
     static function congviecdangnhan($ldId) {
         $danglam = self::join('bookings', 'bids.booking_id', '=', 'bookings.id')
         ->join('customers', 'customers.id', '=', 'bookings.customer_id')
-        ->whereIn('bids.status', [0, 1])->where('laodong_id', $ldId)->where('bookings.status', 0)
-        ->select('bids.id as bid_id', 'address', 'bids.status', 'customers.phone_number')
+        ->whereIn('bids.status', [0, 1])->where('laodong_id', $ldId)->where('bookings.status', 1)
+        ->select('bids.id as bid_id', 'address', 'bids.status', 'customers.phone_number', 'bid.booking_id')
         ->get();
         return $danglam;
     }

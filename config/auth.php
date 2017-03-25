@@ -107,5 +107,6 @@ return [
         'service/mobile/testios',
         'service/mobile/logout',
         'service/mobile/getJobsByLaodongId',
+        'service/mobile/getInfoCustomerById',
     ],
 ];
