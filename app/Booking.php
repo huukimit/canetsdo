@@ -66,6 +66,8 @@ class Booking extends BaseModel {
         ->where('bookings.type', $typeJob)
         ->where('notify_missed_bookings.customer_id', $customerId)
         ->select('bookings.id', 'address', 'bookings.created_at')
+        ->groupBy('bookings.id')
+        ->orderBy('bookings.created_at', 'DESC')
         ->get();
     }
 
