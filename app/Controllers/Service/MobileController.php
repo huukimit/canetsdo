@@ -635,6 +635,7 @@ class MobileController extends ServiceController {
 		// $dataPushed = json_encode($push_data);
 
 		$pushData = ['key' => $loaidichvu, 'booking_id' => $booking_id];
+		$pushData = json_encode($pushData);
 		Queue::later(5, new PushNotifyToDevices($customers, $loaidichvu, $pushData, $booking_id));
 
 	}
@@ -936,6 +937,7 @@ class MobileController extends ServiceController {
 			$laodong = Customer::getById($bid->laodong_id);
 			$customers = Customer::getFullInfoCustomerByIdToNotify($bid->laodong_id);
 			$push_data = [
+				'key' => 'Nhận lao động',
 				'message' => 'Chúng tôi đã khấu trừ % từ tài khoản của bạn',
 				'bid_id' => Input::get('bid_id'),
 				'message' => Input::get('booking_id'),

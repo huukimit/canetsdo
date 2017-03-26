@@ -38,7 +38,7 @@ class PushNotifyToDevices extends Command implements SelfHandling {
 		foreach($customers as $customer)
 		{
 			if ($customer->type_device == 2) { /* Push IOS */
-				$typeUser = ($customer->device_token == 1) ? 'laodong' : 'customer';
+				$typeUser = ($customer->type_customer == 1) ? 'laodong' : 'customer';
 				$result = Notify::Push2Ios($customer->device_token, $message, $pushData, $typeUser);
 			} else { /* Push Android */
 
