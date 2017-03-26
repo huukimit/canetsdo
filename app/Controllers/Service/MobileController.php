@@ -889,6 +889,7 @@ class MobileController extends ServiceController {
 				$this->message = 'Success';
 				Booking::SaveData(['id' => $postData['booking_id'], 'status' => 1]);
 				$push_data = [
+					'key' => 'Nhận việc',
 					'laodong_id' => $postData['laodong_id'],
 					'booking_id' => $postData['booking_id'],
 				];
