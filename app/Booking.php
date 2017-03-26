@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use App\BaseModel;
 use Illuminate\Support\Facades\Log;
+use URL;
 
 class Booking extends BaseModel {
     function __construct() {
