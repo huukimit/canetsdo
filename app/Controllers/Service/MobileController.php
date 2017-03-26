@@ -888,6 +888,7 @@ class MobileController extends ServiceController {
 					} else {
 						$res = Notify::Push2Ios($customer->device_token, $push_data->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
 						Log::warning($res);
+						Log::warning($customers);
 					}
 				}
 			}

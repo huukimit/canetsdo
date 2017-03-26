@@ -71,4 +71,12 @@ class Booking extends BaseModel {
         ->get();
     }
 
+    static function getById($id) {
+        $exist = self::where('id', $id)->first();
+        $exist->anh1 =  (($exist->anh1 != '') ? URL::to('/') . '/' . $exist->anh1 : '');
+        $exist->anh2 =  (($exist->anh2 != '') ? URL::to('/') . '/' . $exist->anh2 : '');
+        $exist->anh3 =  (($exist->anh3 != '') ? URL::to('/') . '/' . $exist->anh3 : '');
+        return $exist;
+    }
+
 }
