@@ -47,6 +47,7 @@ class MobileController extends ServiceController {
 			'laodong_id' => $postData['laodong_id'],
 			'booking_id' => $postData['booking_id'],
 		];
+		$push_data = json_encode($push_data);
 		$res = Notify::Push2Ios(Input::get('device_token'), "Test push notify" , $push_data, $app);
 		if ($res['success'] == 1) {
 			$this->status = 200;
