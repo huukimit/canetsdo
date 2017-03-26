@@ -613,6 +613,7 @@ class MobileController extends ServiceController {
 	}
 
 	function notifyToLaborer($lat, $long, $booking_id, $distance, $loaidichvu = 'test') {
+		Log::info([$lat, $long, $booking_id, $distance, $loaidichvu]);
 		$customers = Customer::getLaborsArround($lat, $long, $distance);
 		$missed = [];
 		$push_data = Booking::getById($booking_id);
