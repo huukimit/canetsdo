@@ -43,7 +43,11 @@ class MobileController extends ServiceController {
 		if ($app == null) {
 			$app = 'laodong';
 		}
-		$res = Notify::Push2Ios(Input::get('device_token'), "Test push notify" , ['Khai','Thanh*2'], $app);
+		$push_data = [
+			'laodong_id' => $postData['laodong_id'],
+			'booking_id' => $postData['booking_id'],
+		];
+		$res = Notify::Push2Ios(Input::get('device_token'), "Test push notify" , $push_data, $app);
 		if ($res['success'] == 1) {
 			$this->status = 200;
 			$this->message = 'Push to IOS success!';
@@ -620,16 +624,18 @@ class MobileController extends ServiceController {
 		Log::info([$lat, $long, $booking_id, $distance, $loaidichvu]);
 		$customers = Customer::getLaborsArround($lat, $long, $distance);
 		$missed = [];
-		$push_data = Booking::getById($booking_id);
+		// $push_data = Booking::getById($booking_id);
 
-		if ($push_data) {
-		   $push_data = json_decode(json_encode($push_data), true);
-		   $infoCustomer = Customer::getFullInfoCustomerById($push_data['customer_id']);
-		   $push_data['customer_info'] = $infoCustomer;
-		}
+		// if ($push_data) {
+		//    $push_data = json_decode(json_encode($push_data), true);
+		//    $infoCustomer = Customer::getFullInfoCustomerById($push_data['customer_id']);
+		//    $push_data['customer_info'] = $infoCustomer;
+		// }
 
-		$dataPushed = json_encode($push_data);
-		Queue::later(5, new PushNotifyToDevices($customers, $loaidichvu, $dataPushed, $booking_id));
+		// $dataPushed = json_encode($push_data);
+
+		$pushData = ['key' => $loaidichvu, 'booking_id' => $booking_id];
+		Queue::later(5, new PushNotifyToDevices($customers, $loaidichvu, $pushData, $booking_id));
 
 	}
 
@@ -882,7 +888,10 @@ class MobileController extends ServiceController {
 				$this->status = 200;
 				$this->message = 'Success';
 				Booking::SaveData(['id' => $postData['booking_id'], 'status' => 1]);
-				$push_data = Customer::getById($postData['laodong_id']);
+				$push_data = [
+					'laodong_id' => $postData['laodong_id'],
+					'booking_id' => $postData['booking_id'],
+				];
 				$customers = Customer::getFullInfoCustomerByIdToNotify($postData['customer_id']);
 				foreach($customers as $customer) {
 					if ($customer->type_device == 1) {
