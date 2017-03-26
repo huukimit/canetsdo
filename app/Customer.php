@@ -89,7 +89,7 @@ class Customer extends BaseModel {
 
     static function getLaborsArround($lat, $long, $distance)
     {
-        $sql = "SELECT shp.id, fullname, quequan, lat, shp.long,type_device, device_token, (3956 * 2 * ASIN(SQRT(POWER(SIN(($lat -abs(shp.lat)) * pi()/180 / 2),2)
+        $sql = "SELECT shp.id, fullname, type_customer, quequan, lat, shp.long,type_device, device_token, (3956 * 2 * ASIN(SQRT(POWER(SIN(($lat -abs(shp.lat)) * pi()/180 / 2),2)
             + COS($lat * pi()/180 ) * COS(abs(shp.long) *  pi()/180) * POWER(SIN(($long - abs(shp.long))
             *  pi()/180 / 2), 2)))) *1.6 as distance
             FROM customers as shp JOIN customer_devices as cs_dv
