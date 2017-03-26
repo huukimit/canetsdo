@@ -609,7 +609,7 @@ class MobileController extends ServiceController {
 		$this->status = 200;
 		$this->data = ['booking_id' => $booking_id];
 		$this->message = "Success";
-		$this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 1000, 'GV thường xuyên: ' . $postData['address']);
+		$this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 1000, 'GV thường xuyên: ' . $data['address']);
 	}
 
 	function notifyToLaborer($lat, $long, $booking_id, $distance, $loaidichvu = 'test') {
