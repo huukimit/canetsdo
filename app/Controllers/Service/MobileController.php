@@ -1034,9 +1034,23 @@ class MobileController extends ServiceController {
 			$this->status = 200;
 			$this->message = 'Success';
 			$customers = Customer::getFullInfoCustomerByIdToNotify($bid->khachhang_id);
-			$laodong = Customer::getById(Input::get('laodong_id'));
+			// $laodong = Customer::getById(Input::get('laodong_id'));
 			foreach($customers as $customer) {
-				$data_push = $laodong;
+				$data_push = [
+					'key' => 'Báo đã làm xong việc',
+					'laodong_id' => Input::get('laodong_id'),
+				];
+
+				if ($customer->type_device == 1) {
+					$res = Notify::cloudMessaseAndroid($customer->device_token, "NV " . (!empty($laodong)) ? $laodong->fullname : Input::get('laodong_id') . " Báo đã làm xong công việc của bạn", $data_push);
+					Log::warning($res);
+				} else {
+					$res = Notify::Push2Ios($customer->device_token, "NV " . (!empty($laodong)) ? $laodong->fullname : Input::get('laodong_id') . " Báo đã làm xong công việc của bạn", $data_push, 'customer');
+					Log::warning($res);
+					Log::warning($customers);
+				}
+
+
 				Notify::cloudMessaseAndroid($customer->device_token, "NV " . (!empty($laodong)) ? $laodong->fullname : Input::get('laodong_id') . " bao da lam xong cong viec cua ban", $data_push);
 			}
 		} else {
