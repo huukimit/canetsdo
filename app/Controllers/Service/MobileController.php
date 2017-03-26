@@ -882,7 +882,11 @@ class MobileController extends ServiceController {
 				$push_data = Customer::getById($postData['laodong_id']);
 				$customers = Customer::getFullInfoCustomerByIdToNotify($postData['customer_id']);
 				foreach($customers as $customer) {
-					Notify::cloudMessaseAndroid($customer->device_token, $push_data->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data);
+					if ($customer->type_device == 1) {
+						Notify::cloudMessaseAndroid($customer->device_token, $push_data->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data);
+					} else {
+						Notify::Push2Ios($customer->device_token, $push_data->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
+					}
 				}
 			}
 		} else {
@@ -915,12 +919,19 @@ class MobileController extends ServiceController {
 			$bid = Bid::getById(Input::get('bid_id'));
 			$laodong = Customer::getById($bid->laodong_id);
 			$customers = Customer::getFullInfoCustomerByIdToNotify($bid->laodong_id);
-			$dataPush = [
+			$push_data = [
 				'message' => 'Chúng tôi đã khấu trừ % từ tài khoản của bạn',
+				'bid_id' => Input::get('bid_id'),
+				'message' => Input::get('booking_id'),
 			];
 			$this->checkTrutien($request['bid_id']);
 			foreach($customers as $customer) {
-				Notify::cloudMessaseAndroid($customer->device_token, 'Bạn đã được khách hàng lựa chọn', []);
+				Notify::cloudMessaseAndroid($customer->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', []);
+				if ($customer->type_device == 1) {
+					Notify::cloudMessaseAndroid($customer->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
+				} else {
+					Notify::Push2Ios($customer->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
+				}
 			}
 		} else {
 			$this->status = 300;
