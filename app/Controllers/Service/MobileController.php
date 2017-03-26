@@ -39,7 +39,11 @@ class MobileController extends ServiceController {
 
 	function testios(){
 		$this->checkNullData(Input::get('device_token', null));
-		$res = Notify::Push2Ios(Input::get('device_token'), "Test push notify" , ['Khai','Thanh*2']);
+		$app = Input::get('app', null);
+		if ($app == null) {
+			$app = 'laodong';
+		}
+		$res = Notify::Push2Ios(Input::get('device_token'), "Test push notify" , ['Khai','Thanh*2'], $app);
 		if ($res['success'] == 1) {
 			$this->status = 200;
 			$this->message = 'Push to IOS success!';
@@ -801,7 +805,6 @@ class MobileController extends ServiceController {
 	function getdetailjob() {
 		$this->checkNullData(Input::get('booking_id'));
 		$booking = json_decode(json_encode(Booking::getById(Input::get('booking_id'))), true);
-		// $list_bided = Bid::getAllLdByBookingId(Input::get('booking_id'));
 		// foreach ($list_bided as $value) {
 		// 	if ($value->avatar != '') {
 		// 		$value->avatar = URL::to('/') . '/' . $value->avatar;
