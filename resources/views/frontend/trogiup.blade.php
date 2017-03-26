@@ -1,7 +1,9 @@
-<?php $__env->startSection('title', 'Canets - Sinh viên giúp việc theo giờ'); ?>
+@extends('layouts.frontend')
 
-<?php $__env->startSection('content'); ?>
-    <section id="video">
+@section('title', 'Canets - Hỏi đáp - Trợ giúp')
+
+@section('content')
+   {{--  <section id="video">
         <div class="my_container">
             <div class="video">
                 <div class="v_video">
@@ -19,7 +21,7 @@
             <div class="section_two">
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="<?php echo e(asset('public/frontend/img/furture_1.png')); ?>" class="img img-responsive" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_1.png') }}" class="img img-responsive" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
                         <b><big>Sinh viên đã được <br/>
@@ -31,7 +33,7 @@
 
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="<?php echo e(asset('public/frontend/img/furture_2.png')); ?>" class="img img-responsive" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_2.png') }}" class="img img-responsive" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
                         <b><big>Thời gian tìm người <br/>
@@ -44,7 +46,7 @@
 
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="<?php echo e(asset('public/frontend/img/furture_3.png')); ?>" class="img img-responsive" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_3.png') }}" class="img img-responsive" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
                         <b><big> Lựa chọn ứng viên <br/>
@@ -56,7 +58,7 @@
 
                 <div class="section_two_item">
                     <div class="section_two_item_img">
-                        <a href="#"><img src="<?php echo e(asset('public/frontend/img/furture_4.png')); ?>" class="img img-responsive" alt=""></a>
+                        <a href="#"><img src="{{ asset('public/frontend/img/furture_4.png') }}" class="img img-responsive" alt=""></a>
                     </div>
                     <div class="section_two_item_des">
                         <b><big>Chi phí tiết kiệm <br>
@@ -81,7 +83,7 @@
             </div>
             <div class="stt_one" id="step_1">
                 <div class="stt_one_left">
-                    <img src="<?php echo e(asset('public/frontend/img/step1.png')); ?>" class="img img-responsive steps wow bounceInLeft center" alt="">
+                    <img src="{{ asset('public/frontend/img/step1.png') }}" class="img img-responsive steps wow bounceInLeft center" alt="">
                 </div>
                 <div class="stt_one_right">
                     <div class="number wow bounce">1</div>
@@ -96,7 +98,7 @@
 
             <div class="stt_one" id="step_2">
                 <div class="stt_one_left">
-                    <img src="<?php echo e(asset('public/frontend/img/step2.png')); ?>" class="img img-responsive steps wow bounceInRight left" alt="">
+                    <img src="{{ asset('public/frontend/img/step2.png') }}" class="img img-responsive steps wow bounceInRight left" alt="">
                 </div>
                 <div class="stt_one_right">
                     <div class="number wow bounce center">2</div>
@@ -110,7 +112,7 @@
 
             <div class="stt_one" id="step_3">
                 <div class="stt_one_left">
-                    <img src="<?php echo e(asset('public/frontend/img/step3.png')); ?>" class="img img-responsive steps wow bounceInLeft center" alt="">
+                    <img src="{{ asset('public/frontend/img/step3.png') }}" class="img img-responsive steps wow bounceInLeft center" alt="">
                 </div>
                 <div class="stt_one_right">
                     <div class="number wow bounce">3</div>
@@ -124,7 +126,7 @@
 
             <div class="stt_one" id="step_4">
                 <div class="stt_one_left">
-                    <img src="<?php echo e(asset('public/frontend/img/step4.png')); ?>" class="img img-responsive steps wow bounceInRight center" alt="">
+                    <img src="{{ asset('public/frontend/img/step4.png') }}" class="img img-responsive steps wow bounceInRight center" alt="">
                 </div>
                 <div class="stt_one_right">
                     <div class="number wow bounce center">4</div>
@@ -141,6 +143,5 @@
     <section id="stt_five">
         <div class="number wow bounce">5</div>
         <h2></h2>
-    </section>
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.frontend', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    </section> --}}
+@stop
