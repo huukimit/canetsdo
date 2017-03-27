@@ -614,3 +614,17 @@ select.locale-dropdown {
     color:#06c2e0 !important;
     padding:0 15px;
 }
+
+.question-anwser{
+    padding: 20px;
+    text-align:justify;
+    background-color:#f7f7f7;
+}
+.question {
+    font-weight:bold;
+    font-size: 22px;
+}
+.anwser{
+    font-size: 20px;
+    margin-left: 50px;
+}

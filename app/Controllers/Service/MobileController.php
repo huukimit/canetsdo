@@ -578,7 +578,7 @@ class MobileController extends ServiceController {
 		$this->data = ['booking_id' => $booking_id];
 		$this->status = 200;
 		$this->message = "Success";
-		$this->notifyToLaborer($postData['lat'], $postData['long'], $booking_id, 1000, 'GV 1 lần: ' . $postData['address']);
+		$this->notifyToLaborer($postData['lat'], $postData['long'], $booking_id, 1000, 'GV1L: ' . $postData['address']);
 
 	}
 
@@ -618,7 +618,7 @@ class MobileController extends ServiceController {
 		$this->status = 200;
 		$this->data = ['booking_id' => $booking_id];
 		$this->message = "Success";
-		$this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 1000, 'GV thường xuyên: ' . $data['address']);
+		$this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 1000, 'GVTX: ' . $data['address']);
 	}
 
 	function notifyToLaborer($lat, $long, $booking_id, $distance, $loaidichvu = 'test') {
@@ -892,7 +892,7 @@ class MobileController extends ServiceController {
 				Booking::SaveData(['id' => $postData['booking_id'], 'status' => 1]);
 				$laodong = Customer::getById($postData['laodong_id']);
 				$push_data = [
-					'key' => 'Nhận việc',
+					'key' => 'NHANVIEC',
 					'laodong_id' => $postData['laodong_id'],
 					'booking_id' => $postData['booking_id'],
 				];
@@ -939,7 +939,7 @@ class MobileController extends ServiceController {
 			$laodong = Customer::getById($bid->laodong_id);
 			$customers = Customer::getFullInfoCustomerByIdToNotify($bid->laodong_id);
 			$push_data = [
-				'key' => 'Nhận lao động',
+				'key' => 'NHAN_SINH_VIEN',
 				'message' => 'Chúng tôi đã khấu trừ % từ tài khoản của bạn',
 				'bid_id' => Input::get('bid_id'),
 				'message' => Input::get('booking_id'),
