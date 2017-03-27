@@ -29,9 +29,9 @@
                 </div>
                 <div class="header_menu">
                     <ul>
-                        <li><a href="#" id="dangkydilam">Đăng ký đi làm</a></li>
+                        <li><a href="/dang-ky-di-lam" id="dangkydilam">Đăng ký đi làm</a></li>
                         <li><a href="#gioi-thieu-ve-canets">Về chúng tôi</a></li>
-                        <li><a href="#">Trợ giúp</a></li>
+                        <li><a href="/tro-giup">Trợ giúp</a></li>
                     </ul>
                     <div class="menu_xs_sm">
                         <i class="fa fa-bars" aria-hidden="true"></i>

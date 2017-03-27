@@ -30,7 +30,8 @@ class FrontendController extends Controller {
 
 	public function dangkydilam()
 	{
-		
+		$data = [
+		];
 		return view('frontend.dangkydilam', $data);
 	}
 
