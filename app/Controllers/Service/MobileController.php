@@ -890,6 +890,7 @@ class MobileController extends ServiceController {
 				$this->status = 200;
 				$this->message = 'Success';
 				Booking::SaveData(['id' => $postData['booking_id'], 'status' => 1]);
+				$laodong = Customer::getById($postData['laodong_id']);
 				$push_data = [
 					'key' => 'Nhận việc',
 					'laodong_id' => $postData['laodong_id'],
@@ -898,10 +899,10 @@ class MobileController extends ServiceController {
 				$customers = Customer::getFullInfoCustomerByIdToNotify($postData['customer_id']);
 				foreach($customers as $customer) {
 					if ($customer->type_device == 1) {
-						$res = Notify::cloudMessaseAndroid($customer->device_token, $push_data->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data);
+						$res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data);
 						Log::warning($res);
 					} else {
-						$res = Notify::Push2Ios($customer->device_token, $push_data->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
+						$res = Notify::Push2Ios($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
 						Log::warning($res);
 						Log::warning($customers);
 					}
