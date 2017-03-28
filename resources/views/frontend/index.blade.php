@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('title', 'Canets - Sinh viên giúp việc theo giờ')
+@section('title', 'Canets - Sinh Viên Giúp Việc, Gia  Sư nhé')
 
 @section('content')
     <section id="video">

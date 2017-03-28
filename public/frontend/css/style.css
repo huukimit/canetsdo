@@ -628,3 +628,71 @@ select.locale-dropdown {
     font-size: 20px;
     margin-left: 50px;
 }
+
+#trogiup{
+    background: url(../img/questionandanswer.jpg);
+    height: 300px; 
+    background-size: cover;
+    // background-position: center;
+    // position: relative;
+    // text-align: center;
+}
+
+#dangkythanhvien {
+    background: url(../img/dangkydilam.jpg);
+    height: 500px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    text-align: center;
+}
+
+
+#benefit{
+    padding: 40px 50px;
+}
+.benefit{
+    width: 85%;
+    margin:0 auto;
+}
+.benefit_item{
+    width: 32%;
+    float: left;
+    margin-left: 0.5%;
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    border: 1px solid #ffdb0f;
+    min-height: 550px;
+}
+
+.benefit_item_img img {
+    display: inline-block;
+    height:200px!important;
+}
+
+.benefit_item_name{
+    padding: 20px 0;
+}
+.benefit_item_name a{
+    font-size: 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #434343;
+    font-weight: bold;
+}
+.benefit_item_des {
+    font-size: 18px;
+    color: #434343;
+    padding-top:15px;
+}
+ol#requires {
+    font-size:18px;
+    padding: 20px;
+}
+ol#requires li{
+    list-style:number;
+}

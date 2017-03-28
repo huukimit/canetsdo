@@ -22,7 +22,7 @@
             <div class="header">
                 <div class="header_logo">
                     <div class="header_logo_img">
-                        <a href="#">
+                        <a href="/">
                             <img src="{{ asset('public/frontend/img/logo.png') }}" alt="" class="img img-responsive">
                         </a>
                     </div>
