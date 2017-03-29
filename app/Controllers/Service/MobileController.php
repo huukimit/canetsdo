@@ -636,7 +636,6 @@ class MobileController extends ServiceController {
 		// $dataPushed = json_encode($push_data);
 
 		$pushData = ['key' => $loaidichvu, 'booking_id' => $booking_id];
-		$pushData = json_encode($pushData);
 		Queue::later(5, new PushNotifyToDevices($customers, $loaidichvu, $pushData, $booking_id));
 
 	}
@@ -879,10 +878,12 @@ class MobileController extends ServiceController {
 		if (empty($bided)) {
 			if (Booking::isGiupviec1lan($postData)) {
 				$postData['status'] = 1;
+				$keyPushNotify = 'NVGV1L';
 			} else{
 				$checkNhanviec = Booking::useChonnguoi($postData);
 				if (empty($checkNhanviec)) {
 					$postData['status'] = 1;
+					$keyPushNotify = 'NVGVTX';
 				}
 			}
 
@@ -892,7 +893,7 @@ class MobileController extends ServiceController {
 				Booking::SaveData(['id' => $postData['booking_id'], 'status' => 1]);
 				$laodong = Customer::getById($postData['laodong_id']);
 				$push_data = [
-					'key' => 'NHANVIEC',
+					'key' => $keyPushNotify,
 					'laodong_id' => $postData['laodong_id'],
 					'booking_id' => $postData['booking_id'],
 				];

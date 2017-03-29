@@ -33,7 +33,7 @@ class PushNotifyToDevices extends Command implements SelfHandling {
 		$message = $this->message;
 		$pushData = $this->pushData;
 
-        $missed['push_data'] = $pushData;
+        $missed['push_data'] = json_encode($pushData);
         $missed ['booking_id'] = $this->bookingId;
 		foreach($customers as $customer)
 		{
