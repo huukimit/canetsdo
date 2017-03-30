@@ -10,6 +10,6 @@ class Lichsugiaodich extends BaseModel {
     }
 
     public static function getLichSuGiaoDich($customerId) {
-    	return self::where('customer_id', $customerId)->get();
+    	return self::where('customer_id', $customerId)->orderBy('created_at', 'desc')->get();
     }
 }

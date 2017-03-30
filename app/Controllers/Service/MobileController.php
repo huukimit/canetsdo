@@ -19,6 +19,7 @@ use App\Feedback;
 use App\Lichsugiaodich;
 use App\Requires;
 use App\Notify_missed_booking;
+use App\HistoryWalletMoney;
 use App\Thongbao;
 use DB, URL;
 use Mail;
@@ -194,7 +195,7 @@ class MobileController extends ServiceController {
 					'vi_taikhoan' => ($customer->vi_taikhoan + $return['DRemainAmount']),
 					'number_transfail' => 0
 				];
-
+				$transaction['sodu'] = $updateCustomer['vi_taikhoan'];
 				Customer::SaveData($updateCustomer);
 				Lichsugiaodich::SaveData($transaction);
 				$this->data = ['amount' => (int) $return['DRemainAmount']];
@@ -854,9 +855,10 @@ class MobileController extends ServiceController {
 	}
 
 	function logout() {
+		$postData = Input::all();
 		$this->checkNullData(Input::get('device_token', null));
 		$this->checkNullData(Input::get('customer_id', null));
-		$device = Device::checkTokenDevice(Input::get('device_token'));
+		$device = Device::checkTokenDevice($postData);
 		if ($device) {
 		   $exist = CustomerDevice::getCustomerDeviceByCustomerIdDeviceId(Input::get('customer_id'), $device->id);
 		   if ($exist) {
@@ -1156,10 +1158,16 @@ class MobileController extends ServiceController {
 	function lichsugiaodich() {
 		$this->checkNullData(Input::get('customer_id'));
 		$checkCustomer = Customer::getById(Input::get('customer_id'));
-		$lichsudd = Lichsugiaodich::getLichSuGiaoDich(Input::get('customer_id'));
-		$this->status = 200;
-		$this->message = 'Success';
-		$this->data = ['lichsugiaodich' => $lichsudd, 'sodu' => $checkCustomer['vi_taikhoan']];
+		if ($checkCustomer) {
+			$lichsudd = Lichsugiaodich::getLichSuGiaoDich(Input::get('customer_id'));
+			$this->status = 200;
+			$this->message = 'Success';
+			$this->data = ['lichsugiaodich' => $lichsudd, 'sodu' => $checkCustomer['vi_taikhoan']];
+		} else {
+			$this->status = 402;
+			$this->message = 'Customer not exist';
+		}
+		
 	}
 
 	function getCustomerByLatLong() {
@@ -1183,6 +1191,36 @@ class MobileController extends ServiceController {
 		Notify_missed_booking::deleteNotifyOfCustomerId(Input::get('customer_id'), Input::get('booking_id'));
 		$this->status = 200;
 		$this->message = 'Ignoge Success';
+	}
+
+	function lichsucongviec()
+	{
+		$this->checkNullData(Input::get('laodong_id', null));
+		$exist = Customer::getById(Input::get('laodong_id'));
+		if ($exist) {
+			$this->data = Bid::getHistoryWorkedOfCustomer(Input::get('laodong_id'));
+			$this->status = 200;
+			$this->message = 'Success';
+		} else {
+			$this->status = 402;
+			$this->message = 'Customer not exist';
+		}
+	}
+
+	function lichsuvitien()
+	{
+		$this->checkNullData(Input::get('laodong_id', null));
+		$exist = Customer::getById(Input::get('laodong_id'));
+
+		if ($exist) {
+			$this->data = HistoryWalletMoney::getHistoryViTien(Input::get('laodong_id'));
+			$this->status = 200;
+			$this->message = 'Success';
+		} else {
+			$this->status = 402;
+			$this->message = 'Customer not exist';
+		}
+
 	}
 
 

@@ -109,5 +109,7 @@ return [
         'service/mobile/getJobsByLaodongId',
         'service/mobile/getInfoCustomerById',
         'service/mobile/ignoreJob',
+        'service/mobile/lichsucongviec',
+        'service/mobile/lichsuvitien',
     ],
 ];
