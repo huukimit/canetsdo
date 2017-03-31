@@ -635,8 +635,8 @@ class MobileController extends ServiceController {
 		// }
 
 		// $dataPushed = json_encode($push_data);
-
-		$pushData = ['key' => $loaidichvu, 'booking_id' => $booking_id];
+		$key = explode(':', $loaidichvu);
+		$pushData = ['key' => $key[0], 'booking_id' => $booking_id];
 		Queue::later(5, new PushNotifyToDevices($customers, $loaidichvu, $pushData, $booking_id));
 
 	}
