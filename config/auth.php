@@ -111,5 +111,6 @@ return [
         'service/mobile/ignoreJob',
         'service/mobile/lichsucongviec',
         'service/mobile/lichsuvitien',
+        'service/mobile/chitietLichsucongviec',
     ],
 ];

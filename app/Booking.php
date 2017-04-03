@@ -80,4 +80,17 @@ class Booking extends BaseModel {
         return $exist;
     }
 
+    static function getDetailLichsucongviec($bookingId)
+    {
+        $res =  self::join('bids', 'bids.booking_id', '=', 'bookings.id')
+        ->join('customers', 'customers.id', '=', 'bookings.customer_id')
+        ->leftJoin('khuyenmais', 'bookings.makhuyenmai', '=', 'khuyenmais.id')
+        ->where('bookings.id', $bookingId)
+        ->whereIn('bids.status', [1])
+        ->select('fullname', 'manv_kh', 'address', 'time_start', 'time_end', 'ngaylamtrongtuan', 'viecphailam', 'has_phuongtien', 'has_ancunggd', 'thoigianlam', 'phantram', 'thuong', 'tongchiphi', 'is_sv_canceled', 'bookings.status', 'note')
+        ->first()->toArray();
+        $res['phantram'] = (float)$res['phantram'];
+        return $res;
+    }
+
 }

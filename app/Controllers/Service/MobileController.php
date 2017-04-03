@@ -812,7 +812,7 @@ class MobileController extends ServiceController {
 
 	function getdetailjob() {
 		$this->checkNullData(Input::get('booking_id'));
-		$booking = json_decode(json_encode(Booking::getById(Input::get('booking_id'))), true);
+		$booking = Booking::getById(Input::get('booking_id'));
 		// foreach ($list_bided as $value) {
 		// 	if ($value->avatar != '') {
 		// 		$value->avatar = URL::to('/') . '/' . $value->avatar;
@@ -1221,6 +1221,13 @@ class MobileController extends ServiceController {
 			$this->message = 'Customer not exist';
 		}
 
+	}
+
+	function chitietLichsucongviec() {
+		$this->checkNullData(Input::get('booking_id', null));
+		$this->data = Booking::getDetailLichsucongviec(Input::get('booking_id'));
+		$this->status = 200;
+		$this->message = 'Success';
 	}
 
 
