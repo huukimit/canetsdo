@@ -3,6 +3,7 @@
 @section('title', 'Canets - Sinh Viên Giúp Việc, Gia  Sư nhé')
 
 @section('content')
+
     <section id="video">
         <div class="my_container">
             <div class="video">
@@ -143,5 +144,56 @@
     <section id="stt_five">
         <div class="number wow bounce">5</div>
         <h2></h2>
+    </section>
+    <section id="section_four">
+        <div class="my_container">
+            <div class="section_four">
+                <div class="section_four_item">
+                    <h2>30-50K / 1 giờ</h2>
+                    <h3 class="name_service">Giúp việc một lần</h3>
+                    <div class="features-list">
+                        <ul>
+                            <li class="enabled">Giọn dẹp nhà, văn phòng</li>
+                            <li class="enabled">Nấu ăn gia đình</li>
+                            <li class="enabled">Trông trẻ</li>
+                            <li class="enabled">Tìm sinh viên trong 10 phút</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="timngay">Tìm ngay</a>
+                </div>
+            </div>
+            <div class="section_four">
+                <div class="section_four_item">
+                    <h2>22-40K / 1 giờ</h2>
+                    <h3 class="name_service">Giúp việc thường xuyên</h3>
+                    <div class="features-list">
+                        <ul>
+                            <li class="enabled">Giọn dẹp nhà</li>
+                            <li class="enabled">Nấu ăn</li>
+                            <li class="enabled">Đón, chơi với trẻ</li>
+                            <li class="enabled">Tìm sinh viên trong 30 phút</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="timngay">Tìm ngay</a>
+                </div>
+            </div>
+            <div class="section_four">
+                <div class="section_four_item">
+                    <h2>Trao đổi</h2>
+                    <h3 class="name_service">Gia sư</h3>
+                    <div class="features-list">
+                        <ul>
+                            <li class="enabled">Tất cả các môn</li>
+                            <li class="enabled">Được học thử</li>
+                            <li class="enabled">Dạy mọi lứa tuổi</li>
+                            <li class="enabled">Chất lượng cam kết</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="timngay">Tìm ngay</a>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+        </div>
     </section>
 @stop

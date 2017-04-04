@@ -43,21 +43,22 @@
         </div>
     </header>
 
-   {{--  <div id="categories">
+    <div id="categories">
         <div>
             <i class="fa fa-times closes" aria-hidden="true"></i>
         </div>
         <ul class="mobile_menu">
             <li><a href="#">Trang chủ</a></li>
-            <li class="has_sub"><a href="#">Giới thiệu</a></li>
+           {{--  <li class="has_sub"><a href="#">Giới thiệu</a></li>
+             --}}
             <li>
-                <a href="#">News</a>
+                <a href="/dang-ky-di-lam">Đăng ký đi làm</a>
             </li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="/#gioi-thieu-ve-canets">Về chúng tôi</a></li>
+            <li><a href="/tro-giup">Trợ giúp</a></li>
 
         </ul>
-    </div> --}}
+    </div>
     
 
     @yield('content')

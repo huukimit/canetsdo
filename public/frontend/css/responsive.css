@@ -25,10 +25,18 @@
 	.section_two_item {
 	    width: 50%;
 	}
+	.section_four_item {
+	    width: 50%;
+	}
+	
+	.benefit_item {
+		width: 50%;
+	}
 
 	.description {
 	    font-size: 18px;
 	}
+
 }
 @media (max-width: 900px){
 	
@@ -95,6 +103,13 @@
 	.section_two_item {
 	    width: 100%;
 	}
+	.section_four_item {
+	    width: 100%;
+	}
+	.benefit_item {
+	    width: 100%;
+	}
+	
 	.stt_one:nth-child(3) .stt_one_left, .stt_one:nth-child(5) .stt_one_left {
 	    float: left;
 	}

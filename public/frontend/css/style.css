@@ -356,7 +356,7 @@ ul.cat_furniture_1 {
     border-radius: 15px 15px 15px 15px;
     -moz-border-radius: 15px 15px 15px 15px;
     -webkit-border-radius: 15px 15px 15px 15px;
-    border: 1px solid #ffdb0f;
+    border: 1px solid #f0f0f0;
     min-height: 550px;
 }
 
@@ -665,7 +665,7 @@ select.locale-dropdown {
     border-radius: 15px 15px 15px 15px;
     -moz-border-radius: 15px 15px 15px 15px;
     -webkit-border-radius: 15px 15px 15px 15px;
-    border: 1px solid #ffdb0f;
+    border: 1px solid #f0f0f0;
     min-height: 550px;
 }
 
@@ -695,4 +695,76 @@ ol#requires {
 }
 ol#requires li{
     list-style:number;
+}
+
+#section_four{
+    padding: 40px 0;
+}
+.section_four{
+    width: 85%;
+    margin:0 auto;
+}
+.section_four_item{
+    width: 32.5%;
+    float: left;
+    margin-left: 0.5%;
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    border: 1px solid #f0f0f0;
+    min-height: 550px;
+    padding: 80px 0 53px;
+    // background: url(../img/dangkydilam.jpg);
+    // opacity:0.3;
+
+}
+
+.features-list {
+    margin-top: 15px;
+}
+.enabled {
+    font-size: 18px;
+    line-height: 50px;
+    position: relative;
+    right: 4px;
+    content: "\e116";
+    padding-right: 8px;
+    color: #3c3c3c;
+}
+.name_service{
+    background-color: #f0f0f0;
+    padding:13px;
+    font-weight: bold;
+}
+.timngay{
+    background-color:#0eb2e7;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 15px 40px 16px;
+    margin-bottom: 4px;
+    line-height: 1;
+    display: inline-block;
+    text-align: center;
+    color: #ffffff;
+    border: 1px solid #0090bc;
+    border-radius: 26px;
+    position: relative;
+    -webkit-transition: all 0.4s linear 0s;
+    transition: all 0.4s linear 0s;
+
+}
+.section_four_item:hover{
+    background-color:#05C0DE;
+    color:#FFF;
+    transform: scale(1.05);
+}
+.name_service:hover {
+    background-color:#FFF;
+    color:#05C0DE;
+}
+.timngay:hover{
+    background-color:#FFF;
+    color:#05C0DE;
 }

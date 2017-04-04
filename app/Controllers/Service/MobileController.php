@@ -876,6 +876,12 @@ class MobileController extends ServiceController {
 		$postData = Input::all();
 		$this->checkNullData(Input::get('booking_id'));
 		$this->checkNullDataInArray($postData);
+		$checkBk = Booking::getById(Input::get('booking_id'));
+		if (empty($checkBk) || $checkBk->status != 0) {
+			$this->status = 401;
+			$this->message = 'Bạn không thể nhận công việc này nữa';
+			die;
+		}
 		$bided = Bid::checkBided($postData);
 		if (empty($bided)) {
 			if (Booking::isGiupviec1lan($postData)) {
