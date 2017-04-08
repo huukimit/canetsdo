@@ -300,7 +300,7 @@ class MobileController extends ServiceController {
                 // $labor= Customer::getById($bidData->laodong_id);
                 // $push_data = ['booking_id' => $bidData->booking_id, 'laodong_id' => $bidData->laodong_id]
                 // $customers = Customer::getFullInfoCustomerByIdToNotify($booking->customer_id);
-                
+
                 // foreach($customers as $customer) {
                 //     if ($customer->type_device == 1) {
                 //         Notify::cloudMessaseAndroid($customer->device_token, $labor->fullname . '(' . $labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data);
@@ -452,10 +452,11 @@ class MobileController extends ServiceController {
             $postData['device_id'] = $deviceId;
             CustomerDevice::SaveData($postData);
             $postData['forgot_password'] = "{$id}-" . time();
+            $this->sendMail('Active account' , 'emails.active_account', $postData);
         });
+        
         if (is_null($status)) {
             $this->status = 200;
-            $this->sendMail('Active account' , 'emails.active_account', $postData);
             $this->message =  Config::get('services.notify.register_successfull');
         } else {
             $this->status = 404;
