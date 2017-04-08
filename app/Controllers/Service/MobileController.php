@@ -277,7 +277,23 @@ class MobileController extends ServiceController {
         $this->checkNullData($post['laodong_id']);
         $bid = Bid::getBidByBookAndLaodongId($post['booking_id'], $post['laodong_id']);
         if (!empty($bid)) {
-            Booking::SaveData(['id' => $post['booking_id'], 'status' => -12]);
+            $booking = Booking::SaveData(['id' => $post['booking_id'], 'status' => -12]);
+            $customer = Customer::getById($booking->customer_id);
+            $laodongs = Customer::getFullInfoCustomerByIdToNotify($post['laodong_id']);
+
+            $push_data = [
+                'booking_id' => $post['booking_id'],
+                'key' => 'KH_BAO_SV_HUY',
+            ];
+
+            foreach($laodongs as $laodong) {
+                if ($laodong->type_device == 1) {
+                    Notify::cloudMessaseAndroid($laodong->device_token, 'Khách hàng' . $customer->fullname . '(' . $customer->manv_kh . ") thông báo bạn đã hủy công việc", $push_data);
+                } else {
+                    Notify::Push2Ios($laodong->device_token, 'Khách hàng' . $customer->fullname . '(' . $customer->manv_kh . ") thông báo bạn đã hủy công việc", $push_data);
+                }
+            }
+
             $this->status = 200;
             $this->message = 'success';
         } else {
@@ -297,17 +313,21 @@ class MobileController extends ServiceController {
             } else {
                 $booking = Booking::getById($bidData->booking_id);
                 Booking::SaveData(['id' => $bidData->booking_id, 'status' => -12]);
-                // $labor= Customer::getById($bidData->laodong_id);
-                // $push_data = ['booking_id' => $bidData->booking_id, 'laodong_id' => $bidData->laodong_id]
-                // $customers = Customer::getFullInfoCustomerByIdToNotify($booking->customer_id);
+                $labor= Customer::getById($bidData->laodong_id);
+                $push_data = [
+                    'key' => 'SV_CANCEL',
+                    'booking_id' => $bidData->booking_id,
+                    'laodong_id' => $bidData->laodong_id,
+                ];
+                $customers = Customer::getFullInfoCustomerByIdToNotify($booking->customer_id);
 
-                // foreach($customers as $customer) {
-                //     if ($customer->type_device == 1) {
-                //         Notify::cloudMessaseAndroid($customer->device_token, $labor->fullname . '(' . $labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data);
-                //     } else {
-                //         Notify::Push2Ios($customer->device_token, $labor->fullname . '('.$labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data, 'customer');
-                //     }
-                // }
+                foreach($customers as $customer) {
+                    if ($customer->type_device == 1) {
+                        Notify::cloudMessaseAndroid($customer->device_token, $labor->fullname . '(' . $labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data);
+                    } else {
+                        Notify::Push2Ios($customer->device_token, $labor->fullname . '('.$labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data, 'customer');
+                    }
+                }
             }
             $this->status = 200;
             $this->message = 'success';
@@ -451,7 +471,7 @@ class MobileController extends ServiceController {
             $postData['customer_id'] = $id;
             $postData['device_id'] = $deviceId;
             CustomerDevice::SaveData($postData);
-            $postData['url_active'] = URL::to('/') . '/confirmemail/' . $id . '-'. time();
+            $postData['url_active'] = URL::to('/') . '/confirmemail/' . base64_encode($id . '-'. time());
             $this->sendMail('Active account' , 'emails.active_account', $postData);
         });
 
@@ -912,6 +932,27 @@ class MobileController extends ServiceController {
                 Booking::SaveData(['id' => $postData['booking_id'], 'status' => -11]);
                 $this->status = 200;
                 $this->message = 'Success';
+                $checkDaChon = Bid::getLaodongDaDuocChon($postData['booking_id']);
+                if (!empty($checkDaChon)) {
+                    $booking = Booking::getById($postData['booking_id']);
+                    $customer = Customer::getById($booking->customer_id);
+                    $laodongs = Customer::getFullInfoCustomerByIdToNotify($checkDaChon->laodong_id);
+
+                    $push_data = [
+                        'key' => 'KH_HUY',
+                        'booking_id' => $postData['booking_id'],
+                    ];
+
+                    foreach($laodongs as $laodong) {
+                        if ($laodong->type_device == 1) {
+                            Notify::cloudMessaseAndroid($laodong->device_token, 'Khách hàng' . $customer->fullname . '(' . $customer->manv_kh . ")  đã hủy công việc", $push_data);
+                        } else {
+                            Notify::Push2Ios($laodong->device_token, 'Khách hàng' . $customer->fullname . '(' . $customer->manv_kh . ") đã hủy công việc", $push_data);
+                        }
+                    }
+                }
+                
+
             }
         // }
     }
@@ -922,6 +963,25 @@ class MobileController extends ServiceController {
         Booking::SaveData(['id' => Input::get('booking_id'), 'status' => -13]);
         $this->status = 200;
         $this->message = 'Success';
+        $checkDaChon = Bid::getLaodongDaDuocChon(Input::get('booking_id'));
+        if (!empty($checkDaChon)) {
+            $booking = Booking::getById(Input::get('booking_id'));
+            $customer = Customer::getById($booking->customer_id);
+            $laodongs = Customer::getFullInfoCustomerByIdToNotify($checkDaChon->laodong_id);
+
+            $push_data = [
+                'key' => 'KH_HUY',
+                'booking_id' => Input::get('booking_id'),
+            ];
+
+            foreach($laodongs as $laodong) {
+                if ($laodong->type_device == 1) {
+                    Notify::cloudMessaseAndroid($laodong->device_token, 'Khách hàng' . $customer->fullname . '(' . $customer->manv_kh . ")  đã thông báo không nhận bạn", $push_data);
+                } else {
+                    Notify::Push2Ios($laodong->device_token, 'Khách hàng' . $customer->fullname . '(' . $customer->manv_kh . ") đã thông báo không nhận bạn", $push_data);
+                }
+            }
+        }
     }
 
     function getbookingfinding(){
@@ -959,14 +1019,15 @@ function nhanviec() {
         }
         $bided = Bid::checkBided($postData);
         if (empty($bided)) {
+            $this->checkMinMoney($postData['laodong_id']);
             if (Booking::isGiupviec1lan($postData)) {
                 $postData['status'] = 1;
                 $keyPushNotify = 'NVGV1L';
-            } else{
+            } else {
                 $keyPushNotify = 'NVGVTX';
                 $checkNhanviec = Booking::useChonnguoi($postData);
                 if (!empty($checkNhanviec)) {
-                    $postData['status'] = 1;
+                    $postData['status'] = 0;
                 }
             }
 
@@ -974,7 +1035,7 @@ function nhanviec() {
                 $this->status = 200;
                 $this->message = 'Success';
                 Booking::SaveData(['id' => $postData['booking_id'], 'status' => 1]);
-                $laodong = Customer::getById($postData['laodong_id']);
+                
                 $push_data = [
                     'key' => $keyPushNotify,
                     'laodong_id' => $postData['laodong_id'],
@@ -1007,11 +1068,25 @@ function nhanviec() {
         $this->message = 'Success';
     }
 
+    function checkMinMoney($customerId)
+    {
+        $config = Setting::getConfig();
+        $customer = Customer::getById($customerId);
+        $min = ($customer->type_customer == 1) ? $config->min_money_ld : $config->min_money_kh;
+        if ($customer->vi_taikhoan < $min) {
+            $this->status = 201;
+            $this->message = 'Bạn cần tối thiểu' . $min . 'Đ để tiếp tục giao dịch';
+            die;
+        }
+    }
+
     function nhanlaodong() {
         $this->checkNullData(Input::get('bid_id', null));
         $this->checkNullData(Input::get('booking_id', null));
         $checkExist = Bid::checkBidByBookingAndBid(Input::get('booking_id'), Input::get('bid_id'));
         if (!empty($checkExist)) {
+            $booking = Booking::getById(Input::get('booking_id'));
+            $this->checkMinMoney($booking->customer_id);
             Bid::SaveData(['id' => Input::get('bid_id'), 'status' => 1]);
             Booking::SaveData(['id' => Input::get('booking_id'), 'status' => 3]);
             $this->status = 200;

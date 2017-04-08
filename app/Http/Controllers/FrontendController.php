@@ -37,6 +37,7 @@ class FrontendController extends Controller {
 	}
 
 	public function confirmemail($token) {
+		$token = base64_decode($token);
 		$explode = explode('-', $token);
 		if ($explode[0]) {
 			$a = Customer::SaveData(['id' => $explode[0], 'status' => 1]);

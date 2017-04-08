@@ -71,4 +71,8 @@ class Bid extends BaseModel {
         return $historyWorked;
     }
 
+    static function getLaodongDaDuocChon($bookingId) {
+        return self::where('booking_id', $bookingId)->where('status', 1)->first();
+    }
+
 }

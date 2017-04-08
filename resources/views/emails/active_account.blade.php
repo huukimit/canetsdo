@@ -13,7 +13,7 @@
           <tr>
             <td style="padding:0 0 20px 0;border-bottom:1px solid #e9edee;">
               <a href="https://www.canets.com" style="display:block; margin:0 auto;" target="_blank">
-                <img src="http://canets.com/public/frontend/img/logo.png" width="130" height="95" alt="Xero logo" style="border: 0px;">
+                <img src="http://canets.com/public/frontend/img/logo.png" width="150" height="95" style="border: 0px;">
               </a>
             </td>
           </tr>
@@ -22,13 +22,13 @@
               <p style="color:#1d2227;line-height:28px;font-size:22px;margin:12px 10px 20px 10px;font-weight:400;">Chào mừng {{$fullname}} đã đến với Canets, mạng lưới sinh viên giúp việc, gia sư lớn nhất</p>
               <p style="margin:0 10px 10px 10px;padding:0;">Bước cuối cùng để sử dụng dịch vụ, hãy click vào link: </p>
               <p>
-                <a style="display:inline-block;text-decoration:none;padding:15px 20px;background-color:#2baaed;border:1px solid #2baaed;border-radius:3px;color:#FFF;font-weight:bold;" href="{{$url_active}}" target="_blank">Xác nhận email đăng ký</a>
+                <a style="display:inline-block;text-decoration:none;padding:15px 20px;background-color:#06c2e0;border:1px solid #06c2e0;border-radius:3px;color:#FFF;font-weight:bold;" href="{{$url_active}}" target="_blank">Xác nhận email đăng ký</a>
               </p>
             </td>
           </tr>
           <tr>
             <td colspan="2" style="padding:30px 0 0 0;border-top:1px solid #e9edee;color:#9b9fa5">
-              Nếu bạn có gặp khó khăn. Hãy liên hệ với chúng tôi <a style="color:#666d74;text-decoration:none;" href="mailto:canets2016@gmail.com" target="_blank">Canets2016@gmail.com</a>
+              Nếu bạn có gặp khó khăn. Hãy liên hệ với chúng tôi : 0981.82.84.81</a>
             </td>
           </tr>
         </tbody>
