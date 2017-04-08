@@ -22,12 +22,8 @@ class Booking extends BaseModel {
     }
     static function getHistoryBookingByCustomerId($customerId) {
         $data = self::where('bookings.customer_id', $customerId)
-        ->leftJoin('bids', 'bids.booking_id', '=', 'bookings.id')
-        ->select(
-            'bookings.id','bookings.address','bookings.status',
-            'bids.is_sv_canceled', 'bookings.type','bookings.created_at',
-            'bookings.updated_at'
-        )->get();
+        ->select('id', 'address', 'status', 'type', 'created_at', 'updated_at')
+        ->get();
         return $data;
     }
     static function checkBookingToCancel($data) {
