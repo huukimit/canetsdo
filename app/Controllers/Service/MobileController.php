@@ -927,12 +927,12 @@ class MobileController extends ServiceController {
 
 
 
-	function nhanviec() {
+function nhanviec() {
 		$postData = Input::all();
 		$this->checkNullData(Input::get('booking_id'));
 		$this->checkNullDataInArray($postData);
 		$checkBk = Booking::getById(Input::get('booking_id'));
-		if (empty($checkBk) || $checkBk->status != 0) {
+		if (empty($checkBk) || !in_array($checkBk->status, [0,1])) {
 			$this->status = 401;
 			$this->message = 'Bạn không thể nhận công việc này nữa';
 			die;
@@ -943,10 +943,10 @@ class MobileController extends ServiceController {
 				$postData['status'] = 1;
 				$keyPushNotify = 'NVGV1L';
 			} else{
+				$keyPushNotify = 'NVGVTX';
 				$checkNhanviec = Booking::useChonnguoi($postData);
 				if (empty($checkNhanviec)) {
-					$postData['status'] = 1;
-					$keyPushNotify = 'NVGVTX';
+					$postData['status'] = 0;
 				}
 			}
 
@@ -1010,7 +1010,6 @@ class MobileController extends ServiceController {
 			];
 			$this->checkTrutien($request['bid_id']);
 			foreach($customers as $customer) {
-				Notify::cloudMessaseAndroid($customer->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', []);
 				if ($customer->type_device == 1) {
 					Notify::cloudMessaseAndroid($customer->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
 				} else {
@@ -1114,7 +1113,6 @@ class MobileController extends ServiceController {
 					Log::warning($res);
 					Log::warning($customers);
 				}
-
 
 				Notify::cloudMessaseAndroid($customer->device_token, "NV " . (!empty($laodong)) ? $laodong->fullname : Input::get('laodong_id') . " bao da lam xong cong viec cua ban", $data_push);
 			}
