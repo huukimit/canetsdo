@@ -297,16 +297,17 @@ class MobileController extends ServiceController {
             } else {
                 $booking = Booking::getById($bidData->booking_id);
                 Booking::SaveData(['id' => $bidData->booking_id, 'status' => -12]);
-                // $customers = Customer::getFullInfoCustomerByIdToNotify($booking->customer_id);
-                // $labor= Customer::getById($bidData->laodong_id);
-                // $push_data = ['booking_id' => $bidData->booking_id, 'laodong_id' => $bidData->laodong_id]
-                // foreach($customers as $customer) {
-                //     if ($customer->type_device == 1) {
-                //         Notify::cloudMessaseAndroid($customer->device_token, $labor->fullname . '('.$labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data);
-                //     } else {
-                //         Notify::Push2Ios($customer->device_token, $labor->fullname . '('.$labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data, 'customer');
-                //     }
-                // }
+                $labor= Customer::getById($bidData->laodong_id);
+                $push_data = ['booking_id' => $bidData->booking_id, 'laodong_id' => $bidData->laodong_id]
+                $customers = Customer::getFullInfoCustomerByIdToNotify($booking->customer_id);
+                
+                foreach($customers as $customer) {
+                    if ($customer->type_device == 1) {
+                        Notify::cloudMessaseAndroid($customer->device_token, $labor->fullname . '(' . $labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data);
+                    } else {
+                        Notify::Push2Ios($customer->device_token, $labor->fullname . '('.$labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data, 'customer');
+                    }
+                }
             }
             $this->status = 200;
             $this->message = 'success';
