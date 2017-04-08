@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Canets - Dashboard</title>
-<meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
-<link href="<?php echo e(asset('public/css/bootstrap.min.css')); ?>" rel="stylesheet">
-<link href="<?php echo e(asset('public/css/datepicker3.css')); ?>" rel="stylesheet">
-<link href="<?php echo e(asset('public/css/styles.css')); ?>" rel="stylesheet">
-<link href="<?php echo e(asset('public/css/app.css')); ?>" rel="stylesheet">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('public/css/datepicker3.css') }}" rel="stylesheet">
+<link href="{{ asset('public/css/styles.css') }}" rel="stylesheet">
+<link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
 
 <!--Icons-->
-<script src="<?php echo e(asset('public/js/lumino.glyphs.js')); ?>"></script>
+<script src="{{ asset('public/js/lumino.glyphs.js') }}"></script>
 
 <!--[if lt IE 9]>
 <script src="js/html5shiv.js"></script>
@@ -33,10 +33,10 @@
 				<a class="navbar-brand" href="#"><span>CANETS</span>Admin</a>
 				<ul class="user-menu">
 					<li class="dropdown pull-right">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg><?php echo e(Auth::user()->fullname); ?> <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>{{ Auth::user()->fullname }} <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<?php /* <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
-							<li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Settings</a></li> */ ?>
+							{{-- <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
+							<li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Settings</a></li> --}}
 							<li><a href="/auth/logout"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
 						</ul>
 					</li>
@@ -44,13 +44,13 @@
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
-		
+
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<ul class="nav menu">
 			<li class="active"><a href="/secret"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg>Analytics</a></li>
 			<li class="parent ">
 				<a href="#">
-					<span data-toggle="collapse" href="#sub-item-0"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Bookings 
+					<span data-toggle="collapse" href="#sub-item-0"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Bookings
 				</a>
 				<ul class="children collapse" id="sub-item-0">
 					<li>
@@ -69,7 +69,7 @@
 			</li>
 			<li class="parent ">
 				<a href="#">
-					<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Users 
+					<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Users
 				</a>
 				<ul class="children collapse" id="sub-item-1">
 					<li>
@@ -97,45 +97,45 @@
 			<li><a href="forms.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Forms</a></li>
 			<li><a href="panels.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Alerts &amp; Panels</a></li>
 			<li><a href="secret/cashoutrequest"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Cashout requested</a></li>
-			
+
 			<li role="presentation" class="divider"></li>
 			<li><a href="secret/admins"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>Admin</a></li>
 		</ul>
 
 	</div><!--/.sidebar-->
-		
-	<!-- Start main -->	
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+
+	<!-- Start main -->
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-				<li class="active"><?php echo $__env->yieldContent('title'); ?></li>
+				<li class="active">@yield('title')</li>
 			</ol>
 		</div><!--/.row-->
-		
+
 		<!-- <div class="row">
 			<div class="col-lg-12">
-				<?php $__env->startSection('sidebar'); ?>
+				@section('sidebar')
 		            <h1 class="page-header">Dashboard</h1>
-		        <?php echo $__env->yieldSection(); ?>
+		        @show
 			</div>
 		</div> -->
 		<!--/.row-->
 
-		<?php echo $__env->yieldContent('content'); ?>
+		@yield('content')
 
 	</div>	<!--/.main-->
-	<?php $__env->startSection('javascript'); ?>
-	<script src="<?php echo e(asset('public/js/jquery-1.11.1.min.js')); ?>"></script>
-	<script src="<?php echo e(asset('public/js/bootstrap.min.js')); ?>"></script>
+	@section('javascript')
+	<script src="{{ asset('public/js/jquery-1.11.1.min.js') }}"></script>
+	<script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
 
-	<script src="<?php echo e(asset('public/js/bootstrap-datepicker.js')); ?>"></script>
-	<script src="<?php echo e(asset('public/js/jquery.blockUI.js')); ?>"></script>
-	<script src="<?php echo e(asset('public/js/notify.min.js')); ?>"></script>
-	<script src="<?php echo e(asset('public/js/ajax.js')); ?>"></script>
-	<script src="<?php echo e(asset('public/js/app.js')); ?>"></script>
-	
-	<?php echo $__env->yieldSection(); ?>	
+	<script src="{{ asset('public/js/bootstrap-datepicker.js') }}"></script>
+	<script src="{{ asset('public/js/jquery.blockUI.js') }}"></script>
+	<script src="{{ asset('public/js/notify.min.js') }}"></script>
+	<script src="{{ asset('public/js/ajax.js') }}"></script>
+	<script src="{{ asset('public/js/app.js') }}"></script>
+
+	@show
 </body>
 
 </html>

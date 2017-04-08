@@ -731,7 +731,6 @@ ol#requires li{
     right: 4px;
     content: "\e116";
     padding-right: 8px;
-    color: #3c3c3c;
 }
 .name_service{
     background-color: #f0f0f0;
@@ -756,8 +755,8 @@ ol#requires li{
 
 }
 .section_four_item:hover{
-    background: url(../img/dichvu-bg.jpg) ;
-    background-color:#05C0DE 0.5;
+    background-color:#05C0DE;
+    // background: url(../img/dichvu-bg.jpg) ;
     background-position: right;
     background-repeat: no-repeat;
     color:#FFF;

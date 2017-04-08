@@ -47,7 +47,7 @@
 		
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<ul class="nav menu">
-			<li class="active"><a href="/secret/dashboard"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg>Analytics</a></li>
+			<li class="active"><a href="/secret"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg>Analytics</a></li>
 			<li class="parent ">
 				<a href="#">
 					<span data-toggle="collapse" href="#sub-item-0"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Bookings 
