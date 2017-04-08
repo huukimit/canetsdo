@@ -145,7 +145,7 @@ class MobileController extends ServiceController {
 				$this->message = 'Ban da nhap sai qua so lan cho phep la ' . $config->max_transfail;
 			}
 
-			$fakeCard  = [10000, 20000,100000,200000,500000];
+			$fakeCard  = [10000, 20000, 50000, 100000, 200000, 500000];
 			if (!in_array($postData['pin'], $fakeCard)) {
 				$TxtCard = intval($postData['card_type_id']);
 				$TxtMaThe = addslashes($postData['pin']);

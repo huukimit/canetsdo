@@ -756,7 +756,10 @@ ol#requires li{
 
 }
 .section_four_item:hover{
-    background-color:#05C0DE;
+    background: url(../img/dichvu-bg.jpg) ;
+    background-color:#05C0DE 0.5;
+    background-position: right;
+    background-repeat: no-repeat;
     color:#FFF;
     transform: scale(1.05);
 }
