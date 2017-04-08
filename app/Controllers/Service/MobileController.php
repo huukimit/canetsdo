@@ -144,69 +144,114 @@ class MobileController extends ServiceController {
 				$this->status = 101;
 				$this->message = 'Ban da nhap sai qua so lan cho phep la ' . $config->max_transfail;
 			}
-			$TxtCard = intval($postData['card_type_id']);
-			$TxtMaThe = addslashes($postData['pin']);
-			$TxtSeri= addslashes($postData['seri']);
-			switch ($TxtCard) {
-				case 1:
-					$TxtType = 'VTT';
-					break;
-				case 2:
-					$TxtType = 'VMS';
-					break;
-				case 3:
-					$TxtType = 'VNP';
-					break;
-				case 4:
-					$TxtType = 'FPT';
-					break;
-				case 5:
-					$TxtType = 'VTC';
-					break;
-			}
 
-			$username = "canets2016";
-			$password = "canets2016@12354";
-			$partnerId = 154;
-			$mpin="canet.vn.mpin";
-			$TxtTransID = $username. rand() . rand();
-			$Client = new VMS_Soap_Client('http://telco.paycard999.com:8080/webservice/TelcoAPI?wsdl', $username, $password, $partnerId, $mpin);
-			//$target ten member nap card cua doi tac
-			$target = $username.'_'. rand() . rand();
-			//$email cua member cua doi tac
-			$email = "canets2016@gmail.com";
-			//phone
-			$phone = '01673713098';
-			// serial:mathe:nhamangLog request transId: 201603160700_MB50_50 - telco: VMS - Amount: 50000 - quantity: 10- source: IOM- pass: AB5B0COY53AZ3AP
-			$dataCard = $TxtSeri.':'.$TxtMaThe.'::'.$TxtType;
-			$return = $Client->doCardCharge($target, $dataCard, $email, $phone);
-			$status_paycard = intval($return['status']);
-			if ($status_paycard == 1) {
+			$fakeCard  = [10000, 20000,100000,200000,500000];
+			if (!in_array($postData['pin'], $fakeCard)) {
+				$TxtCard = intval($postData['card_type_id']);
+				$TxtMaThe = addslashes($postData['pin']);
+				$TxtSeri= addslashes($postData['seri']);
+				switch ($TxtCard) {
+					case 1:
+						$TxtType = 'VTT';
+						break;
+					case 2:
+						$TxtType = 'VMS';
+						break;
+					case 3:
+						$TxtType = 'VNP';
+						break;
+					case 4:
+						$TxtType = 'FPT';
+						break;
+					case 5:
+						$TxtType = 'VTC';
+						break;
+				}
+
+				$username = "canets2016";
+				$password = "canets2016@12354";
+				$partnerId = 154;
+				$mpin="canet.vn.mpin";
+				$TxtTransID = $username. rand() . rand();
+				$Client = new VMS_Soap_Client('http://telco.paycard999.com:8080/webservice/TelcoAPI?wsdl', $username, $password, $partnerId, $mpin);
+				//$target ten member nap card cua doi tac
+				$target = $username.'_'. rand() . rand();
+				//$email cua member cua doi tac
+				$email = "canets2016@gmail.com";
+				//phone
+				$phone = '01673713098';
+				// serial:mathe:nhamangLog request transId: 201603160700_MB50_50 - telco: VMS - Amount: 50000 - quantity: 10- source: IOM- pass: AB5B0COY53AZ3AP
+				$dataCard = $TxtSeri.':'.$TxtMaThe.'::'.$TxtType;
+				$return = $Client->doCardCharge($target, $dataCard, $email, $phone);
+				$status_paycard = intval($return['status']);
+				if ($status_paycard == 1) {
+					$transaction = [
+						'customer_id' => $postData['customer_id'],
+						'transid' => $return['transid'],
+						'amount_moneys' => $return['DRemainAmount'],
+						'reason' => $TxtType,
+						'masothecao' => $TxtMaThe,
+						'seri' => $TxtSeri,
+					];
+
+					$updateCustomer = [
+						'id' =>$postData['customer_id'],
+						'vi_taikhoan' => ($customer->vi_taikhoan + $return['DRemainAmount']),
+						'number_transfail' => 0
+					];
+					$transaction['sodu'] = $updateCustomer['vi_taikhoan'];
+					Customer::SaveData($updateCustomer);
+					Lichsugiaodich::SaveData($transaction);
+					$this->data = ['amount' => (int) $return['DRemainAmount']];
+				} else {
+
+					$updateCustomer = ['id' => $postData['customer_id'], 'number_transfail' => ($customer->number_transfail + 1)];
+					Customer::SaveData($updateCustomer);
+				}
+				$this->status = $status_paycard;
+				$this->message = $return['message'];
+			} else {
+				$TxtCard = intval($postData['card_type_id']);
+				switch ($TxtCard) {
+					case 1:
+						$TxtType = 'VTT';
+						break;
+					case 2:
+						$TxtType = 'VMS';
+						break;
+					case 3:
+						$TxtType = 'VNP';
+						break;
+					case 4:
+						$TxtType = 'FPT';
+						break;
+					case 5:
+						$TxtType = 'VTC';
+						break;
+				}
 				$transaction = [
 					'customer_id' => $postData['customer_id'],
-					'transid' => $return['transid'],
-					'amount_moneys' => $return['DRemainAmount'],
+					'transid' => time(),
+					'amount_moneys' => 0,
 					'reason' => $TxtType,
-					'masothecao' => $TxtMaThe,
-					'seri' => $TxtSeri,
+					'masothecao' => $postData['pin'],
+					'seri' => $postData['seri'],
 				];
 
+				$transaction['amount_moneys'] = $postData['pin'];
+
 				$updateCustomer = [
-					'id' =>$postData['customer_id'],
-					'vi_taikhoan' => ($customer->vi_taikhoan + $return['DRemainAmount']),
-					'number_transfail' => 0
+						'id' =>$postData['customer_id'],
+						'vi_taikhoan' => ($customer->vi_taikhoan + $transaction['amount_moneys']),
+						'number_transfail' => 0
 				];
 				$transaction['sodu'] = $updateCustomer['vi_taikhoan'];
 				Customer::SaveData($updateCustomer);
 				Lichsugiaodich::SaveData($transaction);
-				$this->data = ['amount' => (int) $return['DRemainAmount']];
-			} else {
-
-				$updateCustomer = ['id' => $postData['customer_id'], 'number_transfail' => ($customer->number_transfail + 1)];
-				Customer::SaveData($updateCustomer);
+				$this->data = ['amount' => (int) $transaction['amount_moneys']];
+				$this->status = 1;
+				$this->message = "Success";
 			}
-			$this->status = $status_paycard;
-			$this->message = $return['message'];
 
 		}else{
 			$this->status = '404';
