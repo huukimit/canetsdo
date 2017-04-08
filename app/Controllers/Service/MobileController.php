@@ -367,6 +367,7 @@ class MobileController extends ServiceController {
 			];
 			if (!empty($labor)) {
 				$response['info_laodong'] = array(
+					"id" => $labor->id,
 					"manv_kh" => $labor->manv_kh,
 					"fullname" => $labor->fullname,
 					"phone_number" => $labor->phone_number,
