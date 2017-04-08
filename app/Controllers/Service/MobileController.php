@@ -419,6 +419,7 @@ class MobileController extends ServiceController {
 		$this->checkNullDataInArray($postData);
 		$postData['type_customer'] = 2;
 		$postData['password'] = sha1($postData['password']);
+
 		$exists = Customer::checkExistByEmailPhonenumber($postData);
 		if (!empty($exists)) {
 			$this->status = 402;
@@ -431,10 +432,11 @@ class MobileController extends ServiceController {
 			$postData['customer_id'] = $id;
 			$postData['device_id'] = $deviceId;
 			CustomerDevice::SaveData($postData);
+			$post['forgot_password'] = "{$id}-" . time();
 		});
 		if (is_null($status)) {
 			$this->status = 200;
-			$this->sendMail('Active account' , 'emails.active', $postData);
+			$this->sendMail('Active account' , 'emails.active_account', $postData);
 			$this->message =  Config::get('services.notify.register_successfull');
 		} else {
 			$this->status = 404;
