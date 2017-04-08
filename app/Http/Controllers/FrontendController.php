@@ -37,11 +37,12 @@ class FrontendController extends Controller {
 	}
 
 	public function confirmemail($token) {
+		echo 23123;die;
 		$explode = explode('-', $token);
 		if ($explode[0]) {
 			Customer::SaveData('id' => $explode[0], 'status' => 1);
 		}
-		return view('frontend.confirm_success', $data);
+		return view('frontend.confirm_success');
 	}
 
 }
