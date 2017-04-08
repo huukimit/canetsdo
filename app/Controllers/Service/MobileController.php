@@ -451,10 +451,10 @@ class MobileController extends ServiceController {
             $postData['customer_id'] = $id;
             $postData['device_id'] = $deviceId;
             CustomerDevice::SaveData($postData);
-            $postData['forgot_password'] = "{$id}-" . time();
+            $postData['url_active'] = URL::to('/') . '/confirmemail/' . $id . '-'. time();
             $this->sendMail('Active account' , 'emails.active_account', $postData);
         });
-        
+
         if (is_null($status)) {
             $this->status = 200;
             $this->message =  Config::get('services.notify.register_successfull');
