@@ -945,8 +945,8 @@ function nhanviec() {
 			} else{
 				$keyPushNotify = 'NVGVTX';
 				$checkNhanviec = Booking::useChonnguoi($postData);
-				if (empty($checkNhanviec)) {
-					$postData['status'] = 0;
+				if (!empty($checkNhanviec)) {
+					$postData['status'] = 1;
 				}
 			}
 
@@ -964,11 +964,8 @@ function nhanviec() {
 				foreach($customers as $customer) {
 					if ($customer->type_device == 1) {
 						$res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data);
-						Log::warning($res);
 					} else {
 						$res = Notify::Push2Ios($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
-						Log::warning($res);
-						Log::warning($customers);
 					}
 				}
 			}
