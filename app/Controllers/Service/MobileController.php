@@ -128,11 +128,12 @@ class MobileController extends ServiceController {
 	public function napthe() {
 		$postData = Input::all();
 		$this->checkNullDataInArray($postData);
+		Log::info($postData);
 		$postData['pin'] = base64_decode($postData['pin']);
 		$config = Setting::getConfig();
 		$postData['pin'] = rtrim($postData['pin'], $config->suffix);
 		$postData['pin'] = ltrim($postData['pin'], $config->prefix);
-		$status='';
+		$status = '';
 		if(isset($postData['customer_id'])) {
 			$customer = Customer::getById($postData['customer_id']);
 			if (empty($customer)) {
