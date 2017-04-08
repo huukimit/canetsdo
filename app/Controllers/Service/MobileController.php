@@ -680,6 +680,8 @@ class MobileController extends ServiceController {
 			'solanhuytoida' => json_decode($config->solanhuytoida, true),
 			'policy_worker' => $config->policy_worker,
 			'policy_customer' => $config->policy_customer,
+			'prefix' => $config->prefix,
+			'suffix' => $config->suffix,
 			'phone_admin' => $config->phone_admin,
 			'yeucau' => Requires::getRequires(),
 			'thuonggvmotlan' => json_decode($config->thuonggvmotlan, true),
