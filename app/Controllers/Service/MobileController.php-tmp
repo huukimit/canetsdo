@@ -37,9 +37,11 @@ class MobileController extends ServiceController {
 		//     Log::info(json_encode($_FILES));
 		// }
 	}
+
 	function testSendMail() {
-		$this->sendMail('Active account', 'emails.active', ['email' => 'chithanh1012@gmail.com']);
+		$this->sendMail('Active account', 'emails.active_account', ['email' => 'chithanh1012@gmail.com']);
 	}
+
 	function testios() {
 		$this->checkNullData(Input::get('device_token', null));
 		$app = Input::get('app', null);

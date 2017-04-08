@@ -37,9 +37,11 @@ class MobileController extends ServiceController {
 		//     Log::info(json_encode($_FILES));
 		// }
 	}
+
 	function testSendMail() {
-		$this->sendMail('Active account' , 'emails.active', ['email' => 'chithanh1012@gmail.com']);
+		$this->sendMail('Active account' , 'emails.active_account', ['email' => 'chithanh1012@gmail.com']);
 	}
+
 	function testios(){
 		$this->checkNullData(Input::get('device_token', null));
 		$app = Input::get('app', null);
@@ -190,7 +192,7 @@ class MobileController extends ServiceController {
 					$transaction = [
 						'customer_id' => $postData['customer_id'],
 						'transid' => $return['transid'],
-						'amount_moneys' => $return['DRemainAmount'],
+						'amount_moneys' => '+' . $return['DRemainAmount'],
 						'reason' => $TxtType,
 						'masothecao' => $TxtMaThe,
 						'seri' => $TxtSeri,
@@ -240,7 +242,7 @@ class MobileController extends ServiceController {
 					'seri' => $postData['seri'],
 				];
 
-				$transaction['amount_moneys'] = $postData['pin'];
+				$transaction['amount_moneys'] = '+' . $postData['pin'];
 
 				$updateCustomer = [
 						'id' =>$postData['customer_id'],

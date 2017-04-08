@@ -59,7 +59,7 @@
 
         </ul>
     </div>
-    
+
 
     @yield('content')
 
@@ -71,19 +71,27 @@
             <div class="footer">
                 <div class="footer_item">
                     <ul class="menu">
-                        
-                        <li><span class="fa fa-users fa-lg"></span>&nbsp;&nbsp;<a href="#">Về chúng tôi</a></li>
+
+                        <li><span class="fa fa-users fa-lg"></span>&nbsp;
+&nbsp;
+<a href="#">Về chúng tôi</a></li>
                         <div class="mota" id="gioi-thieu-ve-canets">
                             <p>
                             Canets được coi là mô hình dẫn đầu trong việc kết nối sinh viên và gia đình. Chúng tôi đã có hơn 3 năm kinh nghiệm trong mô hình truyền thống với hơn bảy nghìn công việc được tạo.<br/>
                             </p>
-                            <p>    
+                            <p>
                             Bên cạnh đó với đội ngũ sáng lập trẻ và nhiệt huyết, chúng tôi luôn mong muốn tạo ra giá trị tốt đẹp nhất cho cộng đồng.
                             </p>
                         </div>
-                        <li><a href="#linkcanetsdo"><span class="fa fa-money fa-lg"></span>&nbsp;&nbsp;Đăng ký đi làm</a></li>
-                        <li><a href="javascript:void(0)"><span class="fa fa-phone fa-lg"></span>&nbsp;&nbsp;0943. 123. 365</a></li>
-                        <li><a href="canets2016@gmail.com" mailto><span class="fa fa-envelope fa-lg"></span>&nbsp;&nbsp;canets2016@gmail.com</a></li>
+                        <li><a href="#linkcanetsdo"><span class="fa fa-money fa-lg"></span>&nbsp;
+&nbsp;
+Đăng ký đi làm</a></li>
+                        <li><a href="javascript:void(0)"><span class="fa fa-phone fa-lg"></span>&nbsp;
+&nbsp;
+0943. 123. 365</a></li>
+                        <li><a href="canets2016@gmail.com" mailto><span class="fa fa-envelope fa-lg"></span>&nbsp;
+&nbsp;
+canets2016@gmail.com</a></li>
                     </ul>
                     <div class="columns">
                         <a href="http://r.Canets.com/iosbadge"><img alt="App-store-badge" src="https://files.handy.com/assets/miscellaneous/app-store-badge-231469be108d5b87c206dd3ad4c43028.svg"></a>
@@ -109,7 +117,9 @@
                     <script>(function(d, s, id) {
                       var js, fjs = d.getElementsByTagName(s)[0];
                       if (d.getElementById(id)) return;
-                      js = d.createElement(s); js.id = id;
+                      js = d.createElement(s);
+ js.id = id;
+
                       js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8";
                       fjs.parentNode.insertBefore(js, fjs);
                     }(document, 'script', 'facebook-jssdk'));
@@ -146,8 +156,11 @@
     window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
     d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
     _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-    $.src="https://v2.zopim.com/?4ihANvtKXEltBALPUXy5LEEpKlbbHdHk";z.t=+new Date;$.
-    type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+    $.src="https://v2.zopim.com/?4ihANvtKXEltBALPUXy5LEEpKlbbHdHk";
+z.t=+new Date;
+$.
+    type="text/javascript";
+e.parentNode.insertBefore($,e)})(document,"script");
     </script>
     <!--End of Zendesk Chat Script-->
 </body>
