@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\QuestionAnswer;
+use App\Customer;
 
 use Illuminate\Http\Request;
 
@@ -33,6 +34,14 @@ class FrontendController extends Controller {
 		$data = [
 		];
 		return view('frontend.dangkydilam', $data);
+	}
+
+	public function confirmemail($token) {
+		$explode = explode('-', $token);
+		if ($explode[0]) {
+			Customer::SaveData('id' => $explode[0], 'status' => 1);
+		}
+		return view('frontend.confirm_success', $data);
 	}
 
 }

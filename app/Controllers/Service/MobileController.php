@@ -278,7 +278,6 @@ class MobileController extends ServiceController {
         $bid = Bid::getBidByBookAndLaodongId($post['booking_id'], $post['laodong_id']);
         if (!empty($bid)) {
             Booking::SaveData(['id' => $post['booking_id'], 'status' => -12]);
-            // Bid::SaveData(['id' => $bid->id, 'is_sv_canceled' => 1]);
             $this->status = 200;
             $this->message = 'success';
         } else {
@@ -296,10 +295,22 @@ class MobileController extends ServiceController {
                 $bid = Bid::find($bidId);
                 $bid->delete();
             } else {
+                $booking = Booking::getById($bidData->booking_id);
                 Booking::SaveData(['id' => $bidData->booking_id, 'status' => -12]);
+                $customers = Customer::getFullInfoCustomerByIdToNotify($booking->customer_id);
+                $labor= Customer::getById($bidData->laodong_id);
+                $push_data = ['booking_id' => $bidData->booking_id, 'laodong_id' => $bidData->laodong_id]
+                foreach($customers as $customer) {
+                    if ($customer->type_device == 1) {
+                        Notify::cloudMessaseAndroid($customer->device_token, $labor->fullname . '('.$labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data);
+                    } else {
+                        Notify::Push2Ios($customer->device_token, $labor->fullname . '('.$labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data, 'customer');
+                    }
+                }
             }
             $this->status = 200;
             $this->message = 'success';
+
         } else {
             $this->status = 401;
             $this->message = 'Không tồn tại bid';
@@ -439,7 +450,7 @@ class MobileController extends ServiceController {
             $postData['customer_id'] = $id;
             $postData['device_id'] = $deviceId;
             CustomerDevice::SaveData($postData);
-            $post['forgot_password'] = "{$id}-" . time();
+            $postData['forgot_password'] = "{$id}-" . time();
         });
         if (is_null($status)) {
             $this->status = 200;

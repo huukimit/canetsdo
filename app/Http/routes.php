@@ -4,6 +4,9 @@
 Route::get('/', array('as' => 'Home', 'uses' => '\App\Http\Controllers\FrontendController@index'));
 Route::get('/tro-giup', array('as' => 'Trợ giúp', 'uses' => '\App\Http\Controllers\FrontendController@trogiup'));
 Route::get('/dang-ky-di-lam', array('as' => 'Đăng ký đi làm', 'uses' => '\App\Http\Controllers\FrontendController@dangkydilam'));
+Route::get('/confirmemail', array('as' => 'Xác thực tài khoản', 'uses' => '\App\Http\Controllers\FrontendController@confirmemail'));
+
+
 
 
 
