@@ -27,7 +27,7 @@ class Booking extends BaseModel {
         return $data;
     }
     static function checkBookingToCancel($data) {
-        return self::whereIn('status', [-2, 0, 1])->where('customer_id', $data['customer_id'])
+        return self::whereIn('status', [-2, 0, 1, 3])->where('customer_id', $data['customer_id'])
             ->where('id', $data['booking_id'])->first();
     }
     static function useChonnguoi($data) {

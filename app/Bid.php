@@ -35,7 +35,10 @@ class Bid extends BaseModel {
     }
 
     static function getBidByBookAndLaodongId($bookingId, $ldId) {
-        return self::where('booking_id', $bookingId)->where('laodong_id', $ldId)->first();
+        return self::join('bookings', 'bids.booking_id', '=', 'bookings.id')
+        ->where('booking_id', $bookingId)->where('laodong_id', $ldId)
+        ->select('bids.*', 'bookings.customer_id')
+        ->first();
     }
 
     static function checkBidByBookingAndBid($bookingId, $bidId) {
@@ -73,6 +76,12 @@ class Bid extends BaseModel {
 
     static function getLaodongDaDuocChon($bookingId) {
         return self::where('booking_id', $bookingId)->where('status', 1)->first();
+    }
+
+    static function getBookingByBidId($bidId) {
+        return self::join('bookings', 'bids.booking_id', '=', 'bookings.id')
+        ->where('bids.id', $bidId)
+        ->select('bookings.*', 'bids.laodong_id')->first();
     }
 
 }

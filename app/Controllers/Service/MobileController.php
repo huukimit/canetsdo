@@ -199,6 +199,7 @@ class MobileController extends ServiceController {
                         'number_transfail' => 0
                     ];
                     $transaction['sodu'] = $updateCustomer['vi_taikhoan'];
+                    
                     Customer::SaveData($updateCustomer);
                     Lichsugiaodich::SaveData($transaction);
                     $this->data = ['amount' => (int) $return['DRemainAmount']];
@@ -207,6 +208,7 @@ class MobileController extends ServiceController {
                     $updateCustomer = ['id' => $postData['customer_id'], 'number_transfail' => ($customer->number_transfail + 1)];
                     Customer::SaveData($updateCustomer);
                 }
+
                 $this->status = $status_paycard;
                 $this->message = $return['message'];
             } else {
@@ -914,44 +916,35 @@ class MobileController extends ServiceController {
     function cancelbooking() {
         $postData = Input::all();
         $this->checkNullDataInArray($postData);
-        // $allow = Customer::allowCancel($postData['customer_id']);
-        // if (!$allow) {
-        //  $this->status = 101;
-        //  $this->message = 'Khach hang da huy qua so lan cho phep';
-        //  die;
-        // }
-        // if ($allow) {
-            $exist = Booking::checkBookingToCancel($postData);
-            if (empty($exist)) {
-                $this->status = 402;
-                $this->message = 'This work not in status to cancel';
-            } else {
-                Booking::SaveData(['id' => $postData['booking_id'], 'status' => -11]);
-                $this->status = 200;
-                $this->message = 'Success';
-                $checkDaChon = Bid::getLaodongDaDuocChon($postData['booking_id']);
-                if (!empty($checkDaChon)) {
-                    $booking = Booking::getById($postData['booking_id']);
-                    $customer = Customer::getById($booking->customer_id);
-                    $laodongs = Customer::getFullInfoCustomerByIdToNotify($checkDaChon->laodong_id);
+        $exist = Booking::checkBookingToCancel($postData);
+        if (empty($exist)) {
+            $this->status = 402;
+            $this->message = 'This work not in status to cancel';
+        } else {
+            $statusBooking = ($exist->status == 3) ? -13 : -11;
+            Booking::SaveData(['id' => $postData['booking_id'], 'status' => $statusBooking]);
+            $this->status = 200;
+            $this->message = 'Success';
+            $checkDaChon = Bid::getLaodongDaDuocChon($postData['booking_id']);
+            if (!empty($checkDaChon)) {
+                $booking = Booking::getById($postData['booking_id']);
+                $customer = Customer::getById($booking->customer_id);
+                $laodongs = Customer::getFullInfoCustomerByIdToNotify($checkDaChon->laodong_id);
 
-                    $push_data = [
-                        'key' => 'KH_HUY',
-                        'booking_id' => $postData['booking_id'],
-                    ];
+                $push_data = [
+                    'key' => 'KH_HUY',
+                    'booking_id' => $postData['booking_id'],
+                ];
 
-                    foreach($laodongs as $laodong) {
-                        if ($laodong->type_device == 1) {
-                            Notify::cloudMessaseAndroid($laodong->device_token, 'Khách hàng' . $customer->fullname . '(' . $customer->manv_kh . ")  đã hủy công việc", $push_data);
-                        } else {
-                            Notify::Push2Ios($laodong->device_token, 'Khách hàng' . $customer->fullname . '(' . $customer->manv_kh . ") đã hủy công việc", $push_data);
-                        }
+                foreach($laodongs as $laodong) {
+                    if ($laodong->type_device == 1) {
+                        Notify::cloudMessaseAndroid($laodong->device_token, 'Khách hàng' . $customer->fullname . '(' . $customer->manv_kh . ")  đã hủy công việc", $push_data);
+                    } else {
+                        Notify::Push2Ios($laodong->device_token, 'Khách hàng' . $customer->fullname . '(' . $customer->manv_kh . ") đã hủy công việc", $push_data);
                     }
                 }
-                
-
             }
-        // }
+        }
     }
 
     function khachhangkhongnhan()// trong trường hợp đã đến làm vài ngày và thấy khong ok nên hủy
@@ -1125,11 +1118,48 @@ function nhanviec() {
         }
     }
 
-    private function checkTrutien($bidId, $dichvu = 'NVGV1L') {
+    public function checkTrutien($bidId, $dichvu = 'NVGV1L') {
+        $config = Setting::getConfig();
+        $booking = Bid::getBookingByBidId($bidId);
+        $laodong = Customer::getById($booking->laodong_id);
         if ($dichvu == 'NVGV1L') {
 
+            $fee = (($booking->luong + $booking->thuong) * ($config->ptram_gv1lan/100));
+            $reason = 'Phí nhận công việc 1 lần';
+            
         } else {
 
+           $fee = $config->fee_ld; 
+           $reason = 'Phí nhận công việc thường xuyên';
+
+           $customer = Customer::getById($booking->customer_id);
+           $updateCustomer = [
+                'id' => $customer->id,
+                'vi_taikhoan' => ($customer->vi_taikhoan - $config->fee_kh),
+           ];
+            $transactionCustomer = [
+                'customer_id' => $customer->id,
+                'transid' => $bidId,
+                'amount_moneys' => '-' . $config->fee_kh,
+                'reason' => 'Phí tìm người giúp việc thường xuyên',
+            ];
+            Lichsugiaodich::SaveData($transactionCustomer);
+
+        }
+
+        $updateLaodong = [
+            'id' => $laodong->id,
+            'vi_taikhoan' => ($laodong->vi_taikhoan - $fee),
+        ];
+
+        if (Customer::SaveData($updateLaodong)) {
+            $transaction = [
+                'customer_id' => $booking->laodong_id,
+                'transid' => $bidId,
+                'amount_moneys' => '-' . $fee,
+                'reason' => $reason,
+            ];
+            Lichsugiaodich::SaveData($transaction);
         }
     }
 
@@ -1203,21 +1233,20 @@ function nhanviec() {
             Booking::SaveData($doneBk);
             $this->status = 200;
             $this->message = 'Success';
-            $customers = Customer::getFullInfoCustomerByIdToNotify($bid->khachhang_id);
-            // $laodong = Customer::getById(Input::get('laodong_id'));
+            $customers = Customer::getFullInfoCustomerByIdToNotify($bid->customer_id);
+            $laodong = Customer::getById(Input::get('laodong_id'));
             foreach($customers as $customer) {
                 $data_push = [
-                    'key' => 'Báo đã làm xong việc',
+                    'key' => 'baoDaLamXong',
                     'laodong_id' => Input::get('laodong_id'),
+                    'booking_id' => Input::get('booking_id'),
                 ];
 
                 if ($customer->type_device == 1) {
-                    $res = Notify::cloudMessaseAndroid($customer->device_token, "NV " . (!empty($laodong)) ? $laodong->fullname : Input::get('laodong_id') . " Báo đã làm xong công việc của bạn", $data_push);
+                    $res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . " Báo đã làm xong công việc của bạn", $data_push);
                 } else {
-                    $res = Notify::Push2Ios($customer->device_token, "NV " . (!empty($laodong)) ? $laodong->fullname : Input::get('laodong_id') . " Báo đã làm xong công việc của bạn", $data_push, 'customer');
+                    $res = Notify::Push2Ios($customer->device_token, $laodong->fullname . " Báo đã làm xong công việc của bạn", $data_push, 'customer');
                 }
-
-                Notify::cloudMessaseAndroid($customer->device_token, "NV " . (!empty($laodong)) ? $laodong->fullname : Input::get('laodong_id') . " bao da lam xong cong viec cua ban", $data_push);
             }
         } else {
             $this->status = 401;
