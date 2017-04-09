@@ -10,6 +10,10 @@ class Device extends BaseModel {
     }
 
     static function checkTokenDevice($data) {
+    	return self::where('device_token', $data['device_token'])->first();
+    }
+
+    static function getAllDeviceByToken($data) {
     	return self::where('device_token', $data['device_token'])->get();
     }
 

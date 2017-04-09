@@ -997,7 +997,7 @@ class MobileController extends ServiceController {
         $postData = Input::all();
         $this->checkNullData(Input::get('device_token', null));
         $this->checkNullData(Input::get('customer_id', null));
-        $devices = Device::checkTokenDevice($postData);
+        $devices = Device::getAllDeviceByToken($postData);
         foreach ($devices as $device) {
            $exist = CustomerDevice::getCustomerDeviceByCustomerIdDeviceId(Input::get('customer_id'), $device->id);
            if ($exist) {
