@@ -711,20 +711,11 @@ class MobileController extends ServiceController {
     }
 
     function notifyToLaborer($lat, $long, $booking_id, $distance, $loaidichvu = 'test') {
-        // Log::info([$lat, $long, $booking_id, $distance, $loaidichvu]);
-        $customers = Customer::getLaborsArround($lat, $long, $distance);
-        $missed = [];
-        // $push_data = Booking::getById($booking_id);
-
-        // if ($push_data) {
-        //    $push_data = json_decode(json_encode($push_data), true);
-        //    $infoCustomer = Customer::getFullInfoCustomerById($push_data['customer_id']);
-        //    $push_data['customer_info'] = $infoCustomer;
-        // }
-
-        // $dataPushed = json_encode($push_data);
         $key = explode(':', $loaidichvu);
         $pushData = ['key' => $key[0], 'booking_id' => $booking_id];
+        $customers = Customer::getLaborsArround($lat, $long, $distance, $key[0]);
+        $missed = [];
+        
         Queue::later(5, new PushNotifyToDevices($customers, $loaidichvu, $pushData, $booking_id));
 
     }
