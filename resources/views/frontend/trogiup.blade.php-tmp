@@ -12,7 +12,11 @@
                 <p class="question">
                 {{( $key+1) . ' . ' . $qa->question }}</p>
                 <span class="anwser">
-                    <i class="fa fa-reply"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-reply"></i>&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
                     {{ $qa->answer }}
                 </span>
             </div>

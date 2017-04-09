@@ -1,12 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\QuestionAnswer;
 use App\Customer;
-use Input;
+use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
+use App\QuestionAnswer;
+
+use Input;
 
 class FrontendController extends Controller {
 
@@ -15,30 +14,27 @@ class FrontendController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
+	public function index() {
 		$main_data = [];
 		return view('frontend.index', ['main_data' => $main_data]);
 	}
 
-	public function trogiup()
-	{
+	public function trogiup() {
 		$qAndA = QuestionAnswer::getListQA();
-		$data = [
+		$data  = [
 			'qAndA' => $qAndA,
 		];
 		return view('frontend.trogiup', $data);
 	}
 
-	public function dangkydilam()
-	{
+	public function dangkydilam() {
 		$data = [
 		];
 		return view('frontend.dangkydilam', $data);
 	}
 
 	public function confirmemail($token) {
-		$token = base64_decode($token);
+		$token   = base64_decode($token);
 		$explode = explode('-', $token);
 		if ($explode[0]) {
 			$a = Customer::SaveData(['id' => $explode[0], 'status' => 1]);
@@ -51,7 +47,5 @@ class FrontendController extends Controller {
 		dd($get);
 		return view('frontend.changepassword');
 	}
-
-	
 
 }

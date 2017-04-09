@@ -378,7 +378,7 @@ class MobileController extends ServiceController {
                     "quequan" => $labor->quequan,
                     "school" => $labor->school,
                     "month_exp" => $labor->month_exp,
-                    'avatar' =>  ($labor->avatar != '') ? URL::to('/') . '/' . $labor->avatar : '',
+                    'avatar' =>  $labor->avatar,
                 );
             } else {
                 $response['info_laodong'] = [];
@@ -415,7 +415,7 @@ class MobileController extends ServiceController {
                     "cando" => $labor->cando,
                     "month_exp" => $labor->month_exp,
                     "thoigian_cothelam" => $bidDone->thoigian_cothelam,
-                    'avatar' =>  ($labor->avatar != '') ? URL::to('/') . '/' . $labor->avatar : '',
+                    'avatar' =>  $labor->avatar,
                 );
             } else {
                 $response['info_laodong'] = [];
@@ -583,7 +583,7 @@ class MobileController extends ServiceController {
             Customer::SaveData($update);
             $dataSend = [
                 'fullname' => $customer->fullname,
-                'link' => URL::to('/') . '/changepassword?token=' . $update['forgot_password'],
+                'link' => URL::to('/') . '/changepassword?token=' . $update['forgot_password'] . '&email=' . $customer->email,
                 'email' => $customer->email,
             ];
             $this->sendMail('Quen mat khau', 'emails.reset_password', $dataSend);
@@ -774,6 +774,10 @@ class MobileController extends ServiceController {
             'policy_customer' => $config->policy_customer,
             'prefix' => $config->prefix,
             'suffix' => $config->suffix,
+            'fee_ld' => $config->fee_ld,
+            'fee_kh' => $config->fee_kh,
+            'min_money_ld' => $config->min_money_ld,
+            'min_money_kh' => $config->min_money_kh,
             'phone_admin' => $config->phone_admin,
             'yeucau' => Requires::getRequires(),
             'thuonggvmotlan' => json_decode($config->thuonggvmotlan, true),
@@ -1072,10 +1076,16 @@ function nhanviec() {
     {
         $config = Setting::getConfig();
         $customer = Customer::getById($customerId);
-        $min = ($customer->type_customer == 1) ? $config->min_money_ld : $config->min_money_kh;
+        if($customer->type_customer == 1) {
+            $min = $config->min_money_ld;
+            $message = 'Đ để tiếp tục nhận công việc';
+        } else {
+            $min = $config->min_money_kh;
+            $message = 'Đ để liên lạc với người lao động';
+        }
         if ($customer->vi_taikhoan < $min) {
             $this->status = 201;
-            $this->message = 'Bạn cần tối thiểu' . $min . 'Đ để tiếp tục giao dịch';
+            $this->message = 'Bạn cần tối thiểu' . number_format($min) . $message;
             die;
         }
     }
