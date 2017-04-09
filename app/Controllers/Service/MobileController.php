@@ -774,8 +774,6 @@ class MobileController extends ServiceController {
             'policy_customer' => $config->policy_customer,
             'prefix' => $config->prefix,
             'suffix' => $config->suffix,
-            'fee_ld' => $config->fee_ld,
-            'fee_kh' => $config->fee_kh,
             'min_money_ld' => $config->min_money_ld,
             'min_money_kh' => $config->min_money_kh,
             'phone_admin' => $config->phone_admin,
@@ -1049,8 +1047,10 @@ function nhanviec() {
                 foreach($customers as $customer) {
                     if ($customer->type_device == 1) {
                         $res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data);
+                        Log::info($res);
                     } else {
                         $res = Notify::Push2Ios($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
+                        Log::info($res);
                     }
                 }
             }
