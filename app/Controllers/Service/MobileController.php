@@ -1257,11 +1257,13 @@ function nhanviec() {
     }
 
     function onoffservice() {
-        $request = $this->checkNullDataInArray(Input::all());
+        $request = Input::all();
+        $this->checkNullDataInArray($request);
         $update = [
             'id' => $request['laodong_id'],
             $request['dichvu'] => $request['status']
         ];
+
         if (Customer::SaveData($update)) {
             $customer = Customer::getById($request['laodong_id']);
             $this->data = [
