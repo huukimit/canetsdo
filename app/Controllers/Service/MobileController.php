@@ -32,10 +32,6 @@ class MobileController extends ServiceController {
 
     public function __construct() {
         parent::__construct();
-        // Log::info(json_encode(Input::all()));
-        // if (!empty($_FILES)) {
-        //     Log::info(json_encode($_FILES));
-        // }
     }
 
     function testSendMail() {
@@ -132,7 +128,6 @@ class MobileController extends ServiceController {
     public function napthe() {
         $postData = Input::all();
         $this->checkNullDataInArray($postData);
-        Log::info($postData);
         $postData['pin'] = base64_decode($postData['pin']);
         $config = Setting::getConfig();
         $postData['pin'] = rtrim($postData['pin'], $config->suffix);
@@ -511,9 +506,7 @@ class MobileController extends ServiceController {
     }
 
     public function dangkytaikhoanlaodong() {
-        Log::info(json_encode($_FILES));
         $data = Input::all();
-        Log::info($data);
         $this->checkNullDataInArray($data);
         $data['type_customer'] = 1;
         $data['password'] = sha1($data['password']);
@@ -679,10 +672,10 @@ class MobileController extends ServiceController {
     }
 
     function giupviecthuongxuyen() {
-        Log::info(json_encode(Input::all()));
-        if (!empty($_FILES)) {
-            Log::info(json_encode($_FILES));
-        }
+        // Log::info(json_encode(Input::all()));
+        // if (!empty($_FILES)) {
+        //     Log::info(json_encode($_FILES));
+        // }
         $data = Input::all();
         $this->checkNullDataInArray($data);
         if (isset($postData['makhuyenmai'])) {
@@ -718,7 +711,7 @@ class MobileController extends ServiceController {
     }
 
     function notifyToLaborer($lat, $long, $booking_id, $distance, $loaidichvu = 'test') {
-        Log::info([$lat, $long, $booking_id, $distance, $loaidichvu]);
+        // Log::info([$lat, $long, $booking_id, $distance, $loaidichvu]);
         $customers = Customer::getLaborsArround($lat, $long, $distance);
         $missed = [];
         // $push_data = Booking::getById($booking_id);
@@ -1052,10 +1045,10 @@ function nhanviec() {
                 foreach($customers as $customer) {
                     if ($customer->type_device == 1) {
                         $res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data);
-                        Log::info($res);
+                        // Log::info($res);
                     } else {
                         $res = Notify::Push2Ios($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
-                        Log::info($res);
+                        // Log::info($res);
                     }
                 }
             }
@@ -1107,6 +1100,7 @@ function nhanviec() {
             $this->status = 200;
             $this->message = 'Success';
             $bid = Bid::getById(Input::get('bid_id'));
+            Log::info($bid);
             $laodongs = Customer::getFullInfoCustomerByIdToNotify($bid->laodong_id);
             Log::info($laodongs);
             $push_data = [
@@ -1197,7 +1191,6 @@ function nhanviec() {
     }
 
     function baoDaLamXong() {
-        Log::info(json_encode(Input::all()));
         $this->checkNullData(Input::get('booking_id', null));
         $this->checkNullData(Input::get('laodong_id', null));
         $bid = Bid::getBidByBookAndLaodongId(Input::get('booking_id'), Input::get('laodong_id'));
@@ -1216,11 +1209,8 @@ function nhanviec() {
 
                 if ($customer->type_device == 1) {
                     $res = Notify::cloudMessaseAndroid($customer->device_token, "NV " . (!empty($laodong)) ? $laodong->fullname : Input::get('laodong_id') . " Báo đã làm xong công việc của bạn", $data_push);
-                    Log::warning($res);
                 } else {
                     $res = Notify::Push2Ios($customer->device_token, "NV " . (!empty($laodong)) ? $laodong->fullname : Input::get('laodong_id') . " Báo đã làm xong công việc của bạn", $data_push, 'customer');
-                    Log::warning($res);
-                    Log::warning($customers);
                 }
 
                 Notify::cloudMessaseAndroid($customer->device_token, "NV " . (!empty($laodong)) ? $laodong->fullname : Input::get('laodong_id') . " bao da lam xong cong viec cua ban", $data_push);
@@ -1239,13 +1229,14 @@ function nhanviec() {
         if(!empty($bid)) {
             $doneBk = ['id' => Input::get('booking_id'), 'status' => 2];
             Booking::SaveData($doneBk);
-
+            $this->checkTrutien($request['bid_id']);
+            $this->status = 200;
+            $this->message = 'Success';
             $laodongs = Customer::getFullInfoCustomerByIdToNotify(Input::get('laodong_id'));
             $push_data = [
                 'key' => 'khachhangnhanlaodong',
                 'message' => Input::get('booking_id'),
             ];
-            $this->checkTrutien($request['bid_id']);
             foreach($laodongs as $laodong) {
                 if ($laodong->type_device == 1) {
                     Notify::cloudMessaseAndroid($laodong->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
@@ -1253,9 +1244,6 @@ function nhanviec() {
                     Notify::Push2Ios($laodong->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
                 }
             }
-
-            $this->status = 200;
-            $this->message = 'Success';
         } else {
             $this->status = 401;
             $this->message = 'Not match in bids table';
