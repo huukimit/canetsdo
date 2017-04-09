@@ -377,6 +377,8 @@ class MobileController extends ServiceController {
                     "birthday" => $labor->birthday,
                     "quequan" => $labor->quequan,
                     "school" => $labor->school,
+                    "cando" => $labor->cando,
+                    "congviec_khac" => $labor->congviec_khac,
                     "month_exp" => $labor->month_exp,
                     'avatar' =>  $labor->avatar,
                 );
@@ -413,6 +415,7 @@ class MobileController extends ServiceController {
                     "quequan" => $labor->quequan,
                     "school" => $labor->school,
                     "cando" => $labor->cando,
+                    "congviec_khac" => $labor->congviec_khac,
                     "month_exp" => $labor->month_exp,
                     "thoigian_cothelam" => $bidDone->thoigian_cothelam,
                     'avatar' =>  $labor->avatar,
