@@ -453,6 +453,10 @@ class MobileController extends ServiceController {
 
     public function registerCustomer() {
         $postData = Input::all();
+        $this->checkNullData(Input::get('fullname', null));
+        $this->checkNullData(Input::get('email', null));
+        $this->checkNullData(Input::get('password', null));
+        $this->checkNullData(Input::get('phone_number', null));
         $this->checkNullDataInArray($postData);
         $postData['type_customer'] = 2;
         $postData['password'] = sha1($postData['password']);
@@ -507,6 +511,10 @@ class MobileController extends ServiceController {
 
     public function dangkytaikhoanlaodong() {
         $data = Input::all();
+        $this->checkNullData(Input::get('fullname', null));
+        $this->checkNullData(Input::get('email', null));
+        $this->checkNullData(Input::get('password', null));
+        $this->checkNullData(Input::get('phone_number', null));
         $this->checkNullDataInArray($data);
         $data['type_customer'] = 1;
         $data['password'] = sha1($data['password']);
