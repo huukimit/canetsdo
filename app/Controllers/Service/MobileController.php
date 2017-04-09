@@ -1109,9 +1109,7 @@ function nhanviec() {
             $laodongs = Customer::getFullInfoCustomerByIdToNotify($bid->laodong_id);
             $push_data = [
                 'key' => 'NHAN_SINH_VIEN',
-                'message' => 'Chúng tôi đã khấu trừ % từ tài khoản của bạn',
-                'bid_id' => Input::get('bid_id'),
-                'message' => Input::get('booking_id'),
+                'booking_id' => Input::get('booking_id'),
             ];
             $this->checkTrutien(Input::get('bid_id'), 'GVTX');
             foreach($laodongs as $laodong) {
@@ -1240,7 +1238,7 @@ function nhanviec() {
             $laodongs = Customer::getFullInfoCustomerByIdToNotify(Input::get('laodong_id'));
             $push_data = [
                 'key' => 'khachhangnhanlaodong',
-                'message' => Input::get('booking_id'),
+                'booking_id' => Input::get('booking_id'),
             ];
             foreach($laodongs as $laodong) {
                 if ($laodong->type_device == 1) {
