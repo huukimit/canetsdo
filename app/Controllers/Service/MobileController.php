@@ -1100,19 +1100,15 @@ function nhanviec() {
             $this->status = 200;
             $this->message = 'Success';
             $bid = Bid::getById(Input::get('bid_id'));
-            Log::info($bid);
             $laodongs = Customer::getFullInfoCustomerByIdToNotify($bid->laodong_id);
-            Log::info($laodongs);
             $push_data = [
                 'key' => 'NHAN_SINH_VIEN',
                 'message' => 'Chúng tôi đã khấu trừ % từ tài khoản của bạn',
                 'bid_id' => Input::get('bid_id'),
                 'message' => Input::get('booking_id'),
             ];
-            Log::info($push_data);
-            $this->checkTrutien($request['bid_id']);
+            $this->checkTrutien(Input::get('bid_id'));
             foreach($laodongs as $laodong) {
-                Log::info(1);
                 if ($laodong->type_device == 1) {
                     Notify::cloudMessaseAndroid($laodong->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
                 } else {
@@ -1126,7 +1122,7 @@ function nhanviec() {
     }
 
     private function checkTrutien($bidId) {
-
+        
     }
 
     function rate() {
@@ -1229,7 +1225,6 @@ function nhanviec() {
         if(!empty($bid)) {
             $doneBk = ['id' => Input::get('booking_id'), 'status' => 2];
             Booking::SaveData($doneBk);
-            $this->checkTrutien($request['bid_id']);
             $this->status = 200;
             $this->message = 'Success';
             $laodongs = Customer::getFullInfoCustomerByIdToNotify(Input::get('laodong_id'));
