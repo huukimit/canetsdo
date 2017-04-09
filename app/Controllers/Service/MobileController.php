@@ -1020,34 +1020,41 @@ function nhanviec() {
             if (Booking::isGiupviec1lan($postData)) {
                 $postData['status'] = 1;
                 $keyPushNotify = 'NVGV1L';
+                $statusBooking = 3;
             } else {
                 $keyPushNotify = 'NVGVTX';
                 $checkNhanviec = Booking::useChonnguoi($postData);
                 if (!empty($checkNhanviec)) {
                     $postData['status'] = 0;
+                    $statusBooking = 1;
+                } else {
+                    $postData['status'] = 1;
+                    $statusBooking = 3;
                 }
             }
-
-            if (Bid::SaveData($postData)) {
+            $bid = Bid::SaveData($postData);
+            if ($bid) {
                 $this->status = 200;
                 $this->message = 'Success';
-                Booking::SaveData(['id' => $postData['booking_id'], 'status' => 1]);
+                Booking::SaveData(['id' => $postData['booking_id'], 'status' => $statusBooking]);
                 
                 $push_data = [
                     'key' => $keyPushNotify,
                     'laodong_id' => $postData['laodong_id'],
                     'booking_id' => $postData['booking_id'],
                 ];
-
                 $customers = Customer::getFullInfoCustomerByIdToNotify($postData['customer_id']);
                 $laodong = Customer::getById($postData['laodong_id']);
+
+                if ($keyPushNotify == 'NVGV1L') {
+                    $this->checkTrutien($bid);
+                }
+
                 foreach($customers as $customer) {
                     if ($customer->type_device == 1) {
                         $res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data);
-                        // Log::info($res);
                     } else {
                         $res = Notify::Push2Ios($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
-                        // Log::info($res);
                     }
                 }
             }
@@ -1106,7 +1113,7 @@ function nhanviec() {
                 'bid_id' => Input::get('bid_id'),
                 'message' => Input::get('booking_id'),
             ];
-            $this->checkTrutien(Input::get('bid_id'));
+            $this->checkTrutien(Input::get('bid_id'), 'GVTX');
             foreach($laodongs as $laodong) {
                 if ($laodong->type_device == 1) {
                     Notify::cloudMessaseAndroid($laodong->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
@@ -1120,8 +1127,12 @@ function nhanviec() {
         }
     }
 
-    private function checkTrutien($bidId) {
-        
+    private function checkTrutien($bidId, $dichvu = 'NVGV1L') {
+        if ($dichvu == 'NVGV1L') {
+
+        } else {
+
+        }
     }
 
     function rate() {
@@ -1248,10 +1259,15 @@ function nhanviec() {
     function onoffservice() {
         $request = $this->checkNullDataInArray(Input::all());
         $update = [
-            'id' => 'laodong_id',
+            'id' => $request['laodong_id'],
             $request['dichvu'] => $request['status']
         ];
         if (Customer::SaveData($update)) {
+            $customer = Customer::getById($request['laodong_id']);
+            $this->data = [
+                'viec_1_lan' => $customer->viec_1_lan,
+                'viec_thuongxuyen' => $customer->viec_thuongxuyen,
+            ];
             $this->status = 200;
             $this->message = 'Success';
         }
