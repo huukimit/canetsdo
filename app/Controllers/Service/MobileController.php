@@ -998,14 +998,12 @@ class MobileController extends ServiceController {
         $this->checkNullData(Input::get('device_token', null));
         $this->checkNullData(Input::get('customer_id', null));
         $devices = Device::checkTokenDevice($postData);
-        foreach ($devices as  $device) {
-            if ($device) {
-               $exist = CustomerDevice::getCustomerDeviceByCustomerIdDeviceId(Input::get('customer_id'), $device->id);
-               if ($exist) {
-                    CustomerDevice::deleteBy($exist->id);
-                    Device::deleteBy($device->id);
-               }
-            }
+        foreach ($devices as $device) {
+           $exist = CustomerDevice::getCustomerDeviceByCustomerIdDeviceId(Input::get('customer_id'), $device->id);
+           if ($exist) {
+                CustomerDevice::deleteBy($exist->id);
+                Device::deleteBy($device->id);
+           }
         }
         $this->status = 200;
         $this->message = 'Logout success';
