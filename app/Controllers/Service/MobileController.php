@@ -1104,8 +1104,7 @@ function nhanviec() {
             $this->status = 200;
             $this->message = 'Success';
             $bid = Bid::getById(Input::get('bid_id'));
-            $laodong = Customer::getById($bid->laodong_id);
-            $customers = Customer::getFullInfoCustomerByIdToNotify($bid->laodong_id);
+            $laodongs = Customer::getFullInfoCustomerByIdToNotify($bid->laodong_id);
             $push_data = [
                 'key' => 'NHAN_SINH_VIEN',
                 'message' => 'Chúng tôi đã khấu trừ % từ tài khoản của bạn',
@@ -1113,11 +1112,11 @@ function nhanviec() {
                 'message' => Input::get('booking_id'),
             ];
             $this->checkTrutien($request['bid_id']);
-            foreach($customers as $customer) {
-                if ($customer->type_device == 1) {
-                    Notify::cloudMessaseAndroid($customer->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
+            foreach($laodongs as $laodong) {
+                if ($laodong->type_device == 1) {
+                    Notify::cloudMessaseAndroid($laodong->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
                 } else {
-                    Notify::Push2Ios($customer->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
+                    Notify::Push2Ios($laodong->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
                 }
             }
         } else {
@@ -1228,13 +1227,27 @@ function nhanviec() {
     }
 
     function khachhangnhanlaodong() {
-        Log::info(json_encode(Input::all()));
         $this->checkNullData(Input::get('booking_id', null));
         $this->checkNullData(Input::get('laodong_id', null));
         $bid = Bid::getBidByBookAndLaodongId(Input::get('booking_id'), Input::get('laodong_id'));
         if(!empty($bid)) {
             $doneBk = ['id' => Input::get('booking_id'), 'status' => 2];
             Booking::SaveData($doneBk);
+
+            $laodongs = Customer::getFullInfoCustomerByIdToNotify(Input::get('laodong_id'));
+            $push_data = [
+                'key' => 'khachhangnhanlaodong',
+                'message' => Input::get('booking_id'),
+            ];
+            $this->checkTrutien($request['bid_id']);
+            foreach($laodongs as $laodong) {
+                if ($laodong->type_device == 1) {
+                    Notify::cloudMessaseAndroid($laodong->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
+                } else {
+                    Notify::Push2Ios($laodong->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
+                }
+            }
+
             $this->status = 200;
             $this->message = 'Success';
         } else {
