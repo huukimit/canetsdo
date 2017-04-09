@@ -1043,7 +1043,9 @@ function nhanviec() {
                     'laodong_id' => $postData['laodong_id'],
                     'booking_id' => $postData['booking_id'],
                 ];
+
                 $customers = Customer::getFullInfoCustomerByIdToNotify($postData['customer_id']);
+                $laodong = Customer::getById($postData['laodong_id']);
                 foreach($customers as $customer) {
                     if ($customer->type_device == 1) {
                         $res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data);
