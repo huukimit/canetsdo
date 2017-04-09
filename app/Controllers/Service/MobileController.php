@@ -467,10 +467,10 @@ class MobileController extends ServiceController {
         $postData['manv_kh'] = 'KH ' . time();
         $status = DB::transaction(function () use($postData) {
             $id = Customer::SaveData($postData);
-            $deviceId = Device::SaveData($postData);
-            $postData['customer_id'] = $id;
-            $postData['device_id'] = $deviceId;
-            CustomerDevice::SaveData($postData);
+            // $deviceId = Device::SaveData($postData);
+            // $postData['customer_id'] = $id;
+            // $postData['device_id'] = $deviceId;
+            // CustomerDevice::SaveData($postData);
             $postData['url_active'] = URL::to('/') . '/confirmemail/' . base64_encode($id . '-'. time());
             $this->sendMail('Active account' , 'emails.active_account', $postData);
         });
@@ -552,11 +552,11 @@ class MobileController extends ServiceController {
             if (isset($data['birthday'])) {
                 $data['birthday'] = date('Y-m-d', strtotime($data['birthday']));
             }
-            $id = Customer::SaveData($data);
-            $deviceId = Device::SaveData($data);
-            $data['customer_id'] = $id;
-            $data['device_id'] = $deviceId;
-            CustomerDevice::SaveData($data);
+            Customer::SaveData($data);
+            // $deviceId = Device::SaveData($data);
+            // $data['customer_id'] = $id;
+            // $data['device_id'] = $deviceId;
+            // CustomerDevice::SaveData($data);
         });
         if (is_null($status)) {
             $this->status = 200;
@@ -997,13 +997,15 @@ class MobileController extends ServiceController {
         $postData = Input::all();
         $this->checkNullData(Input::get('device_token', null));
         $this->checkNullData(Input::get('customer_id', null));
-        $device = Device::checkTokenDevice($postData);
-        if ($device) {
-           $exist = CustomerDevice::getCustomerDeviceByCustomerIdDeviceId(Input::get('customer_id'), $device->id);
-           if ($exist) {
-                CustomerDevice::deleteBy($exist->id);
-                Device::deleteBy($device->id);
-           }
+        $devices = Device::checkTokenDevice($postData);
+        foreach ($devices as  $device) {
+            if ($device) {
+               $exist = CustomerDevice::getCustomerDeviceByCustomerIdDeviceId(Input::get('customer_id'), $device->id);
+               if ($exist) {
+                    CustomerDevice::deleteBy($exist->id);
+                    Device::deleteBy($device->id);
+               }
+            }
         }
         $this->status = 200;
         $this->message = 'Logout success';
