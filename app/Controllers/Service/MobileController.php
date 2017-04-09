@@ -183,6 +183,7 @@ class MobileController extends ServiceController {
                 $dataCard = $TxtSeri.':'.$TxtMaThe.'::'.$TxtType;
                 $return = $Client->doCardCharge($target, $dataCard, $email, $phone);
                 $status_paycard = intval($return['status']);
+
                 if ($status_paycard == 1) {
                     $transaction = [
                         'customer_id' => $postData['customer_id'],
@@ -199,7 +200,7 @@ class MobileController extends ServiceController {
                         'number_transfail' => 0
                     ];
                     $transaction['sodu'] = $updateCustomer['vi_taikhoan'];
-                    
+
                     Customer::SaveData($updateCustomer);
                     Lichsugiaodich::SaveData($transaction);
                     $this->data = ['amount' => (int) $return['DRemainAmount']];
@@ -209,7 +210,7 @@ class MobileController extends ServiceController {
                     Customer::SaveData($updateCustomer);
                 }
 
-                $this->status = $status_paycard;
+                $this->status = ($status_paycard == 1) ? 200 : $status_paycard;
                 $this->message = $return['message'];
             } else {
                 $TxtCard = intval($postData['card_type_id']);
