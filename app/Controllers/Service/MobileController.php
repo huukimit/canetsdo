@@ -670,7 +670,7 @@ class MobileController extends ServiceController {
         $postData = Input::all();
         $this->checkNullDataInArray($postData);
         if (isset($postData['makhuyenmai'])) {
-            $postData['khuyenmai_id'] = Khuyenmai::usedKhuyenmai($postData['makhuyenmai'], $postData['customer_id']);
+            $postData['khuyenmai_id'] = Khuyenmai::usedKhuyenmai($postData['makhuyenmai']);
         }
 
         $postData['type'] = 1;
@@ -683,14 +683,10 @@ class MobileController extends ServiceController {
     }
 
     function giupviecthuongxuyen() {
-        // Log::info(json_encode(Input::all()));
-        // if (!empty($_FILES)) {
-        //     Log::info(json_encode($_FILES));
-        // }
         $data = Input::all();
         $this->checkNullDataInArray($data);
         if (isset($postData['makhuyenmai'])) {
-            $status = Khuyenmai::usedKhuyenmai($postData['makhuyenmai'], $postData['customer_id']);
+            $status = Khuyenmai::usedKhuyenmai($postData['makhuyenmai']);
             // if (!$status) {
             //     $this->status = 300;
             //     $this->message = "Mã khuyến mại chưa tồn tại hoặc đã được sử dụng";

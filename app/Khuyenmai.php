@@ -10,14 +10,15 @@ class Khuyenmai extends BaseModel {
     }
 
     static function checkKhuyenMai($maKM, $customer_id) {
-        return self::where('makhuyenmai', $maKM)->where('customer_id', $customer_id)->first();
+        return self::where('makhuyenmai', $maKM)
+        ->where('expiry_date', '>', date('Y-m-d'))
+        ->where('status', 1)
+        ->first();
     }
 
-    static function usedKhuyenmai($makhuyenmai, $customer_id) {
-        $exist = self::where('makhuyenmai', $makhuyenmai)
-        ->where('customer_id', $customer_id)->where('status', 1)->first();
+    static function usedKhuyenmai($makhuyenmai) {
+        $exist = self::where('makhuyenmai', $makhuyenmai)->where('status', 1)->first();
         if (!empty($exist)) {
-            self::where('makhuyenmai', $makhuyenmai)->where('customer_id', $customer_id)->update(['status' => 2]);
             return $exist->id;
         }
         return 0;

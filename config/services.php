@@ -38,14 +38,10 @@ return [
     ],
     'device' => array(
         'android' => array(
-            // 'api_key' => 'AIzaSyAbHWxmY85hjfsEsVj61VnD97PMXjmTGHc',
-            // 'api_url' => 'https://gcm-http.googleapis.com/gcm/send',
             'api_key' => 'AIzaSyCUw5lhaP21rPTBGkm8xoPrjHEni-rGguc',
             'api_url' => 'https://android.googleapis.com/gcm/send',
         ),
         'android_firebase' => array(
-            // 'api_key' => 'AIzaSyAbHWxmY85hjfsEsVj61VnD97PMXjmTGHc',
-            // 'api_url' => 'https://gcm-http.googleapis.com/gcm/send',
             'api_key' => 'AIzaSyAdLPj-577PQOQyLeN7_vb4jGWB7tvHNHs',
             'api_url' => 'https://fcm.googleapis.com/fcm/send',
         ),
@@ -65,19 +61,19 @@ return [
             //'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
         ),
         'ios_laodong' => array(
-            /**
-             * Create file pem from p12 file and password
-             * openssl pkcs12 -clcerts -nokeys -out aps-dev-cert.pem -in key-ios.p12
-             * openssl pkcs12 -nocerts -out aps-dev-key.pem -in key-ios.p12
-             * openssl rsa -in aps-dev-key.pem -out aps-dev-key.unencrypted.pem
-             * cat aps-dev-cert.pem aps-dev-key.unencrypted.pem > key-ios.pem
-             *
-           */
-
             'pem_file_dir' => storage_path('notify/ios_sv.pem'),
             'pem_pass' => 'canets',
             'ios_server' => 'ssl://gateway.sandbox.push.apple.com:2195', // Developer Mode
-            //'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
+        ),
+        'ios_live' => array(
+            'pem_file_dir' => storage_path('notify/canets.pem'),
+            'pem_pass' => '123',
+            'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
+        ),
+        'ios_laodong_live' => array(
+            'pem_file_dir' => storage_path('notify/canetsdo.pem'),
+            'pem_pass' => 'canets',
+            'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
         ),
     ),
     'notify' => [
