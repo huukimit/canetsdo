@@ -69,7 +69,7 @@ class Booking extends BaseModel {
     }
 
     static function getById($id) {
-        $exist = self::leftJoin('bookings.makhuyenmai', '=', 'khuyenmais.id')
+        $exist = self::leftJoin('khuyenmais', 'bookings.makhuyenmai', '=', 'khuyenmais.id')
         ->where('bookings.id', $id)
         ->select('bookings.*', 'khuyenmais.phantram')
         ->first();
