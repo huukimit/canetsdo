@@ -69,7 +69,7 @@ class Bid extends BaseModel {
     {
         $historyWorked = self::join('bookings', 'bids.booking_id', '=', 'bookings.id')
         ->whereIn('bids.status', [1])->where('laodong_id', $ldId)->where('bookings.status', 2)
-        ->select('booking_id', 'address','bookings.type', 'time_start', 'time_end', 'bookings.created_at', 'bookings.updated_at')
+        ->select('booking_id', 'address','bookings.type', 'time_start', 'time_end', 'ngaylamtrongtuan',  'bookings.created_at', 'bookings.updated_at')
         ->get();
         return $historyWorked;
     }
