@@ -72,7 +72,7 @@ return [
         ),
         'ios_laodong_live' => array(
             'pem_file_dir' => storage_path('notify/canetsdo.pem'),
-            'pem_pass' => 'canets',
+            'pem_pass' => '123',
             'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
         ),
     ),

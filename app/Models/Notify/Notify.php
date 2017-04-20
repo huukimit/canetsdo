@@ -67,11 +67,16 @@ class Notify extends BaseModel {
         $ios_server = Config::get('services.device.ios.ios_server');
 
         if ($app == 'laodong') {
-            $filePem = Config::get('services.device.ios_laodong.pem_file_dir');
-            $passwordPem = Config::get('services.device.ios_laodong.pem_pass');
+            // $filePem = Config::get('services.device.ios_laodong.pem_file_dir');
+            // $passwordPem = Config::get('services.device.ios_laodong.pem_pass');
+            $filePem = Config::get('services.device.ios_laodong_live.pem_file_dir');
+            $passwordPem = Config::get('services.device.ios_laodong_live.pem_pass');
+            
         } else {
-            $filePem = Config::get('services.device.ios.pem_file_dir');
-            $passwordPem = Config::get('services.device.ios.pem_pass');
+            // $filePem = Config::get('services.device.ios.pem_file_dir');
+            // $passwordPem = Config::get('services.device.ios.pem_pass');
+            $filePem = Config::get('services.device.ios_live.pem_file_dir');
+            $passwordPem = Config::get('services.device.ios_live.pem_pass');
         }
 
         stream_context_set_option($ctx, 'ssl', 'local_cert', $filePem);
