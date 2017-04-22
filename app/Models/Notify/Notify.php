@@ -8,7 +8,7 @@ use Cache,
     Validator;
 use App\BaseModel;
 use URL;
-
+use Illuminate\Support\Facades\Log;
 class Notify extends BaseModel {
 
     /**
