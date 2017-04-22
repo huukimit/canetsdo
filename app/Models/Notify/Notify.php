@@ -42,7 +42,7 @@ class Notify extends BaseModel {
      * @param type $sound
      * @return Push notify for ios
      */
-    static function Push2Ios($deviceToken = "", $message = "", $push_data = array(), $app = 'laodong' , $badge = 1) {
+    static function Push2Ios($deviceToken = "", $message = "", $push_data = array(), $app = 'laodong' , $badge = 1, $sound = 'default') {
         if (!$deviceToken || !$message) {
             return array("status" => -1, "message" => "No data", "data" => array());
         }
@@ -52,6 +52,7 @@ class Notify extends BaseModel {
         $push_to_apns['content-available'] = "1";
         if ($badge >= 0) {
             $push_to_apns['badge'] = $badge;
+            $push_to_apns['sound'] = $sound;
         }
         if ($push_data) {
             $push_to_apns['data'] = $push_data;
@@ -116,12 +117,13 @@ class Notify extends BaseModel {
 
 
 
-    static function cloudMessaseAndroid($deviceToken = "", $message = "", $push_data = array(), $typeApp = 'laodong', $badge = -1) {
+    static function cloudMessaseAndroid($deviceToken = "", $message = "", $push_data = array(), $typeApp = 'laodong', $badge = -1, $sound = 'default') {
         $url = Config::get('services.device.android_firebase_laodong.api_url');
         $server_key =($typeApp == 'laodong') ? Config::get('services.device.android_firebase_laodong.api_key')
         	: Config::get('services.device.android_firebase_laodong.api_key');
         $server_key = Config::get('services.device.android_firebase_laodong.api_key');
         $msg = array(
+            'sound' => $sound,
             'message' => $message,
             'data' => $push_data
         );

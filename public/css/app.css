@@ -3,3 +3,11 @@
 #ttchuyenkhoan {
 	display: none;
 }
+.img_truoc_sau {
+    width: 200px;
+    height: 140px;
+
+}
+.img_truoc_sau:hover{
+	transform: scale(1.5)
+}

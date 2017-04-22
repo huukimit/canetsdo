@@ -23,13 +23,15 @@ class CustomersController extends Controller {
             return view('admin.laborers', ['main_data' => $laborers]);
         } else {
             $laborer = Customer::find($id);
-
+            if (Input::method() == 'POST') {
+                $post = Input::all();
+                dd($post);die;
+            }
             return view('admin.labor_edit', [
                 'data' => $laborer,
                 'requires' => Requires::where('status', 1)->orderBy('stt')->get(),
             ]);
         }
-        
         
     }
     public function customers()
