@@ -42,7 +42,7 @@ return [
             'api_url' => 'https://android.googleapis.com/gcm/send',
         ),
         'android_firebase_laodong' => array(
-            'api_key' => 'AIzaSyDyYvBuiNeofz9Dvh9m1jcr8OoKUk7yHvM',
+            'api_key' => 'AIzaSyDuBnw0NIXyyppMI7QvG-DoH4fyXrRQmOY',
             'api_url' => 'https://fcm.googleapis.com/fcm/send',
         ),
         'android_firebase_canets' => array(

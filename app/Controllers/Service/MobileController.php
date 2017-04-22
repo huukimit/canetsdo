@@ -321,7 +321,7 @@ class MobileController extends ServiceController {
 
                 foreach($customers as $customer) {
                     if ($customer->type_device == 1) {
-                        Notify::cloudMessaseAndroid($customer->device_token, $labor->fullname . '(' . $labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data);
+                        Notify::cloudMessaseAndroid($customer->device_token, $labor->fullname . '(' . $labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data, 'customer');
                     } else {
                         Notify::Push2Ios($customer->device_token, $labor->fullname . '('.$labor->manv_kh . ") đã hủy công việc đã nhận của bạn", $push_data, 'customer');
                     }
@@ -1043,7 +1043,7 @@ function nhanviec() {
 
                 foreach($customers as $customer) {
                     if ($customer->type_device == 1) {
-                        $res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data);
+                        $res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
                     } else {
                         $res = Notify::Push2Ios($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
                     }
@@ -1241,7 +1241,7 @@ function nhanviec() {
                 ];
 
                 if ($customer->type_device == 1) {
-                    $res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . " Báo đã làm xong công việc của bạn", $data_push);
+                    $res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . " Báo đã làm xong công việc của bạn", $data_push, 'customer');
                 } else {
                     $res = Notify::Push2Ios($customer->device_token, $laodong->fullname . " Báo đã làm xong công việc của bạn", $data_push, 'customer');
                 }

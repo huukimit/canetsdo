@@ -116,8 +116,10 @@ class Notify extends BaseModel {
 
 
 
-    static function cloudMessaseAndroid($deviceToken = "", $message = "", $push_data = array(), $badge = -1, $sound = 'default', $vibrate = 1) {
+    static function cloudMessaseAndroid($deviceToken = "", $message = "", $push_data = array(), $typeApp = 'laodong', $badge = -1) {
         $url = Config::get('services.device.android_firebase_laodong.api_url');
+        $server_key =($typeApp == 'laodong') ? Config::get('services.device.android_firebase_laodong.api_key')
+        	: Config::get('services.device.android_firebase_laodong.api_key');
         $server_key = Config::get('services.device.android_firebase_laodong.api_key');
         $msg = array(
             'message' => $message,
