@@ -21,6 +21,7 @@ use App\Requires;
 use App\Notify_missed_booking;
 use App\HistoryWalletMoney;
 use App\Thongbao;
+use App\QuestionAnswer;
 use DB, URL;
 use Mail;
 use Illuminate\Support\Facades\Log;
@@ -772,6 +773,10 @@ class MobileController extends ServiceController {
             'min_money_ld' => $config->min_money_ld,
             'min_money_kh' => $config->min_money_kh,
             'phone_admin' => $config->phone_admin,
+            'canets_ios' => $config->canets_ios,
+            'canets_do_ios' => $config->canets_do_ios,
+            'canets_android' => $config->canets_android,
+            'canets_do_android' => $config->canets_do_android,
             'yeucau' => Requires::getRequires(),
             'thuonggvmotlan' => json_decode($config->thuonggvmotlan, true),
             'thuonggvthuongxuyen' => json_decode($config->thuonggvthuongxuyen, true),
@@ -1463,6 +1468,12 @@ function nhanviec() {
             $this->status = 401;
             $this->message = 'Không tìm thấy thông tin của bạn';
         }
+    }
+
+    function getQAndAForLaodong() {
+        $this->data = QuestionAnswer::getQAndAForLaodong();
+        $this->status = 200;
+        $this->message = 'Success';
     }
 
 

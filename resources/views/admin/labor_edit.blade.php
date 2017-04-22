@@ -31,9 +31,13 @@
 						<input class="form-control" name="quequan" value="{{$data['quequan']}}">
 						<label>Kinh nghiệm</label>
 						<select class="form-control" name="month_exp">
-							@foreach($month_exps as $key => $monthexp)
-								<option value="{{ $key }}" @if ($data['month_exp'] == $key) {{ 'selected' }} @endif>
-									{{ $monthexp }}
+							@foreach($month_exps as $monthexp)
+								<option value="{{ $monthexp }}" @if ($data['month_exp'] == $monthexp) {{ 'selected' }} @endif>
+									@if ($monthexp == 0)
+										{{ 'Chưa có kinh nghiệm' }}
+									@else
+										{{ $monthexp . ' tháng' }}
+									@endif
 								</option>
 							@endforeach
 						</select>
