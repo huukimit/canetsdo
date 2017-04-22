@@ -64,7 +64,7 @@ class Notify extends BaseModel {
             $msg = '';
         }
         $ctx = stream_context_create();
-        $ios_server = Config::get('services.device.ios.ios_server');
+        $ios_server = Config::get('services.device.ios_live.ios_server');
 
         if ($app == 'laodong') {
             // $filePem = Config::get('services.device.ios_laodong.pem_file_dir');
@@ -90,6 +90,7 @@ class Notify extends BaseModel {
         }
 
         $result = fwrite($fp, $msg, strlen($msg));
+        print($result);die;
         if (!$result) {
             $data["success"] = -3;
             $data["message"] = "Message not delivered" . PHP_EOL;

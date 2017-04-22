@@ -26,7 +26,7 @@
                         <tr>
                             <td class="text-right">{{ $data->id }}</td>
                             <td>{{ $data->manv_kh }}</td>
-                            <td>{{ $data->fullname }}</td>
+                            <td><a href="/secret/laborers/{{$data->id}}" title="Xem thông tin chi tiết, chỉnh sửa">{{ $data->fullname }}</a></td>
                             <td class="text-center">{{ $data->phone_number }}</td>
                             <td>{{ $data->school }}</td>
                             <td class="text-right">{{ $data->vi_tien }}</td>

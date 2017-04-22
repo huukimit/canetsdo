@@ -25,7 +25,7 @@
                         <tr>
                             <td class="text-right"><?php echo e($data->id); ?></td>
                             <td><?php echo e($data->manv_kh); ?></td>
-                            <td><?php echo e($data->fullname); ?></td>
+                            <td><a href="/secret/laborers/<?php echo e($data->id); ?>"><?php echo e($data->fullname); ?></a></td>
                             <td class="text-center"><?php echo e($data->phone_number); ?></td>
                             <td><?php echo e($data->school); ?></td>
                             <td class="text-right"><?php echo e($data->vi_tien); ?></td>

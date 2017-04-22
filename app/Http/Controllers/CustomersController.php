@@ -14,13 +14,20 @@ class CustomersController extends Controller {
      *
      * @return Response
      */
-    public function laborers()
+    public function laborers($id = null)
     {
-        $laborers = Customer::where('type_customer', 1)->whereIn('status', [0, 1])
-        ->orderBy('status')->orderBy('updated_at', 'desc')
-        ->paginate(15);
+        if ($id == null) {
+            $laborers = Customer::where('type_customer', 1)->whereIn('status', [0, 1])
+            ->orderBy('status')->orderBy('updated_at', 'desc')
+            ->paginate(15);
+            return view('admin.laborers', ['main_data' => $laborers]);
+        } else {
+            $laborer_detail = Customer::find($id);
+            
+            return view('admin.labor_edit', ['main_data' => $laborer_detail]);
+        }
         
-        return view('admin.laborers', ['main_data' => $laborers]);
+        
     }
     public function customers()
     {

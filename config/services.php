@@ -71,7 +71,7 @@ return [
             'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
         ),
         'ios_laodong_live' => array(
-            'pem_file_dir' => storage_path('notify/apn_canet_do.pem'),
+            'pem_file_dir' => storage_path('notify/canets-do-apns-release-cert.pem'),
             'pem_pass' => '123',
             'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
         ),
