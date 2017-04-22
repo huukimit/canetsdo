@@ -1441,5 +1441,29 @@ function nhanviec() {
         $this->message = 'Success';
     }
 
+    function chuyenTienLenViTaiKhoan() {
+        $post = Input::all();
+        $this->checkNullDataInArray($post);
+        $customer = Customer::getById($post['customer_id']);
+        if (isset($customer->vi_tien)) {
+            if ($customer->vi_tien > $post['number_money']) {
+                $update = [
+                    'id' => $customer->id,
+                    'vi_taikhoan' => ($customer->vi_taikhoan + $post['number_money']),
+                    'vi_tien' => ($customer->vi_tien - $post['number_money']),
+                ];
+                Customer::SaveData($update);
+                $this->status = 200;
+                $this->message = 'Hệ thống đã chuyển số tiền bạn yêu cầu từ ví tiền lên ví tài khoản';
+            } else {
+                $this->status = 201;
+                $this->message = 'Số tiền bạn yêu cầu nhiều hơn số tiền trong ví của bạn'; 
+            }
+        } else {
+            $this->status = 401;
+            $this->message = 'Không tìm thấy thông tin của bạn';
+        }
+    }
+
 
 }

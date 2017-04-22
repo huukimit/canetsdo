@@ -113,5 +113,6 @@ return [
         'service/mobile/lichsuvitien',
         'service/mobile/chitietLichsucongviec',
         'service/mobile/khachhangkhongnhan',
+        'service/mobile/chuyenTienLenViTaiKhoan',
     ],
 ];
