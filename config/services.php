@@ -41,8 +41,12 @@ return [
             'api_key' => 'AIzaSyCUw5lhaP21rPTBGkm8xoPrjHEni-rGguc',
             'api_url' => 'https://android.googleapis.com/gcm/send',
         ),
-        'android_firebase' => array(
-            'api_key' => 'AIzaSyAdLPj-577PQOQyLeN7_vb4jGWB7tvHNHs',
+        'android_firebase_laodong' => array(
+            'api_key' => 'AIzaSyDyYvBuiNeofz9Dvh9m1jcr8OoKUk7yHvM',
+            'api_url' => 'https://fcm.googleapis.com/fcm/send',
+        ),
+        'android_firebase_canets' => array(
+            'api_key' => 'AIzaSyDyYvBuiNeofz9Dvh9m1jcr8OoKUk7yHvM',
             'api_url' => 'https://fcm.googleapis.com/fcm/send',
         ),
         'ios' => array(

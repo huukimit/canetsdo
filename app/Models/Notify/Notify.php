@@ -42,7 +42,7 @@ class Notify extends BaseModel {
      * @param type $sound
      * @return Push notify for ios
      */
-    static function Push2Ios($deviceToken = "", $message = "", $push_data = array(), $app = 'laodong' , $badge = -1, $sound = 'default') {
+    static function Push2Ios($deviceToken = "", $message = "", $push_data = array(), $app = 'laodong' , $badge = 1, $sound = 'default') {
         if (!$deviceToken || !$message) {
             return array("status" => -1, "message" => "No data", "data" => array());
         }
@@ -78,6 +78,7 @@ class Notify extends BaseModel {
             $filePem = Config::get('services.device.ios_live.pem_file_dir');
             $passwordPem = Config::get('services.device.ios_live.pem_pass');
         }
+        Log::info(['ios_server' => $ios_server, 'filePem' => $filePem, 'passwordPem' => $passwordPem]);
 
         stream_context_set_option($ctx, 'ssl', 'local_cert', $filePem);
         stream_context_set_option($ctx, 'ssl', 'passphrase', $passwordPem);
@@ -113,75 +114,13 @@ class Notify extends BaseModel {
      * @param string $sound
      * @return content from CURL
      */
-    static function Push2Android($deviceToken = "", $message = "", $push_data = array(), $badge = -1, $sound = 'default', $vibrate = 1) {
-        $registrationIds = array($deviceToken); // push to list device
-        $msg = array(
-            'message' => $message,
-            'data' => $push_data,
-            'vibrate' => $vibrate,
-            'sound' => $sound,
-        );
-        if ($badge >= 0) {
-            $msg['badge'] = $badge;
-        }
 
-        $fields = array(
-            'registration_ids' => $registrationIds,
-            'data' => $msg,
-        );
-        $headers = array(
-            'Authorization: key=' . Config::get('services.device.android.api_key'),
-            'Content-Type: application/json'
-        );
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, Config::get('services.device.android.api_url'));
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-        $result = curl_exec($ch);
-        curl_close($ch);
-        return $result;
-    }
 
-    static function pushAndroidFireBase($deviceToken = "", $message = "", $push_data = array(), $badge = -1, $sound = 'default', $vibrate = 1) {
-        $registrationIds = array($deviceToken); // push to list device
-        $msg = array(
-            'message' => $message,
-            'data' => $push_data,
-            'vibrate' => $vibrate,
-            'sound' => $sound,
-        );
-        if ($badge >= 0) {
-            $msg['badge'] = $badge;
-        }
-
-        $fields = array(
-            'registration_ids' => $registrationIds,
-            'data' => $msg,
-        );
-        $headers = array(
-            'Authorization: key=AIzaSyAsbWZHBZGzXOt-7-aNm0BZ_GntEvTenq8',
-            'Content-Type: application/json'
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-        $result = curl_exec($ch);
-        curl_close($ch);
-        return $result;
-    }
 
     static function cloudMessaseAndroid($deviceToken = "", $message = "", $push_data = array(), $badge = -1, $sound = 'default', $vibrate = 1) {
-        $url = Config::get('services.device.android_firebase.api_url');
-        $server_key = Config::get('services.device.android_firebase.api_key');
+        $url = Config::get('services.device.android_firebase_laodong.api_url');
+        $server_key = Config::get('services.device.android_firebase_laodong.api_key');
         $msg = array(
             'message' => $message,
             'data' => $push_data
