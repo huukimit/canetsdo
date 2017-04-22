@@ -78,7 +78,7 @@ class Notify extends BaseModel {
             $filePem = Config::get('services.device.ios.pem_file_dir');
             $passwordPem = Config::get('services.device.ios.pem_pass');
         }
-
+        Log::info([$ios_server, $filePem, $passwordPem]);
         stream_context_set_option($ctx, 'ssl', 'local_cert', $filePem);
         stream_context_set_option($ctx, 'ssl', 'passphrase', $passwordPem);
         $err = "";

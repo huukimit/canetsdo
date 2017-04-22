@@ -29,10 +29,10 @@
 							<option value="6">Nhiều hơn 6 tháng</option>
 						</select>
 						<label>Công việc có thể làm</label>
-						@foreach()
+						@foreach($requires as $require)
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" value="">Checkbox 1
+									<input type="checkbox" value="" @if(in_array($require->id, $data['cando'])) {{ 'checked' }} @endif>{{$require->name}}
 								</label>
 							</div>
 						@endforeach

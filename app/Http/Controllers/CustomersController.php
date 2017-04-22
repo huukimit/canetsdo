@@ -6,7 +6,7 @@ use Input;
 use Response;
 use Illuminate\Http\Request;
 use App\Customer;
-use App\Require;
+use App\Requires;
 class CustomersController extends Controller {
 
     /**
@@ -26,7 +26,7 @@ class CustomersController extends Controller {
 
             return view('admin.labor_edit', [
                 'data' => $laborer,
-                'requires' => Require::get();
+                'requires' => Requires::where('status', 1)->orderBy('stt')->get(),
             ]);
         }
         
