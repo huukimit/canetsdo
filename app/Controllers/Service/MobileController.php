@@ -1018,9 +1018,11 @@ function nhanviec() {
                 if (!empty($checkNhanviec)) {
                     $postData['status'] = 0;
                     $statusBooking = 1;
+                    $chonnguoi = 1;
                 } else {
                     $postData['status'] = 1;
                     $statusBooking = 3;
+                    $chonnguoi = 0;
                 }
             }
             $bid = Bid::SaveData($postData);
@@ -1033,6 +1035,7 @@ function nhanviec() {
                     'key' => $keyPushNotify,
                     'laodong_id' => $postData['laodong_id'],
                     'booking_id' => $postData['booking_id'],
+                    'chonnguoi' => $chonnguoi,
                 ];
                 $customers = Customer::getFullInfoCustomerByIdToNotify($postData['customer_id']);
                 $laodong = Customer::getById($postData['laodong_id']);
