@@ -6,7 +6,7 @@ use Input;
 use Response;
 use Illuminate\Http\Request;
 use App\Customer;
-
+use App\Require;
 class CustomersController extends Controller {
 
     /**
@@ -22,9 +22,12 @@ class CustomersController extends Controller {
             ->paginate(15);
             return view('admin.laborers', ['main_data' => $laborers]);
         } else {
-            $laborer_detail = Customer::find($id);
-            
-            return view('admin.labor_edit', ['main_data' => $laborer_detail]);
+            $laborer = Customer::find($id);
+
+            return view('admin.labor_edit', [
+                'data' => $laborer,
+                'requires' => Require::get();
+            ]);
         }
         
         

@@ -74,6 +74,7 @@ class Notify extends BaseModel {
         } else {
             // $filePem = Config::get('services.device.ios.pem_file_dir');
             // $passwordPem = Config::get('services.device.ios.pem_pass');
+            $ios_server = Config::get('services.device.ios.ios_server');
             $filePem = Config::get('services.device.ios.pem_file_dir');
             $passwordPem = Config::get('services.device.ios.pem_pass');
         }
