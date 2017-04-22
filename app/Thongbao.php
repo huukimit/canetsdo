@@ -10,8 +10,11 @@ class Thongbao extends BaseModel {
     }
 
    
-    static function getnewsbyCustomerId($customerId) {
-        return self::where('customer_id', $customerId)
+    static function getnewsbyCustomerId($except, $type_customer) {
+    	$type = [0, $type_customer];
+        return self::whereNotIn('id', $except)
+        	->whereIn('type', $type)
+        	->where('status', 1)
             ->orderBy('updated_at', 'DESC')->get();
     }
 }

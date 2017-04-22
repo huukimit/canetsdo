@@ -92,37 +92,65 @@ class MobileController extends ServiceController {
     public function getNotify() {
         $customerId = Input::get('customer_id', null);
         $this->checkNullData($customerId);
-        $notifies = Thongbao::getnewsbyCustomerId($customerId);
-        $this->data = $notifies;
-        $this->status = 200;
-        $this->message = 'Success';
+        $customer = Customer::find($customerId);
+        if(isset($customer->id)) {
+            $excepted = explode(',', $customer->thongbao_deleted);
+            $notifies = Thongbao::getnewsbyCustomerId($excepted, $customer->type_customer);
+            $readed = explode(',', $customer->thongbao_readed);
+            $result = [];
+            foreach($notifies as $key => $notify) {
+                $is_readed = (in_array($notify->id, $readed)) ? 1 : 0 ;
+                $result [$key] = [
+                    'id' => $notify->id,
+                    'title' => $notify->title,
+                    'content' => $notify->content,
+                    'is_readed' => $is_readed,
+                ];
+            }
+            $this->data = $result;
+            $this->status = 200;
+            $this->message = 'Success';
+
+        } else {
+            $this->status = 401;
+            $this->message = 'Không tìm thấy thông tin user';
+        }
     }
 
     public function readNotify() {
         $notifyId = Input::get('notify_id', null);
-        $notify = Thongbao::getById($notifyId);
-        if ($notify) {
-            Thongbao::SaveData(['id' => $notifyId, 'is_read' => 1]);
+        $customerId = Input::get('customer_id', null);
+        $customer = Customer::find($customerId);
+        if (isset($customer->id)) {
+            $updateCustomer = [
+                'id' => $customerId,
+                'thongbao_readed' => $customer->thongbao_readed . ",{$notifyId}",
+            ];
+            Customer::SaveData($updateCustomer);
             $this->status = 200;
             $this->message = 'Success';
         } else {
             $this->status = 401;
-            $this->message = 'Update status success';
+            $this->message = 'Can not found user';
         }
     }
 
 
     public function deleteNotify() {
         $notifyId = Input::get('notify_id', null);
-        $this->checkNullData($notifyId);
-        $notify = Thongbao::find($notifyId);
-        if ($notify) {
-            $notify->delete();
+        $customerId = Input::get('customer_id', null);
+        $customer = Customer::find($customerId);
+        if (isset($customer->id)) {
+            $updateCustomer = [
+                'id' => $customerId,
+                'thongbao_deleted' => $customer->thongbao_deleted . ",{$notifyId}",
+            ];
+            Customer::SaveData($updateCustomer);
             $this->status = 200;
             $this->message = 'Success';
         } else {
             $this->status = 401;
-            $this->message = 'Can not found notify by notify_id';
+            $this->message = 'Can not found user';
         }
     }
 
@@ -1470,10 +1498,19 @@ function nhanviec() {
         }
     }
 
-    function getQAndAForLaodong() {
-        $this->data = QuestionAnswer::getListQA(2);
+    function getQAndA() {
+        $this->checkNullData(Input::get('customer_id', null));
+        $customer = Customer::find(Input::get('customer_id'));
+        if(isset($customer->id)) {
+            $this->data = QuestionAnswer::getListQA($customer->type_customer);
         $this->status = 200;
         $this->message = 'Success';
+
+        } else {
+            $this->status = 401;
+            $this->message = 'Không tìm thấy thông tin user';
+        }
+        
     }
 
 
