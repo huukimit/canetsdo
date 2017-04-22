@@ -7,8 +7,9 @@
         <div class="panel panel-default">
             <div class="panel-heading">Detail laborer</div>
             <div class="panel-body">
-            	<form action="" method="post"  role="form">
+            	<form action="" method="post"  role="form" enctype="multipart/form-data">
             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+            	<input type="hidden" name="id" value="{{ $data['id'] }}">
 				<div class="col-md-6">
 					<div class="form-group text-center">
 						<label>Avatar</label>
@@ -21,22 +22,20 @@
 						<label>Ngày sinh</label>
 						<input class="form-control" name="birthday"  value="{{date('d/m/Y',strtotime($data['birthday']))}}">
 						<label>Email</label>
-						<input class="form-control" name="birthday" type="email" required  value="{{$data['email']}}">
+						<input class="form-control" name="email" type="email" required  value="{{$data['email']}}">
 						<label>Số điện thoại</label>
-						<input class="form-control" name="birthday"  value="{{$data['phone_number']}}">
+						<input class="form-control" name="phone_number"  value="{{$data['phone_number']}}">
 						<label>Trường học</label>
 						<input class="form-control" name="school" value="{{$data['school']}}">
 						<label>Quên quán</label>
 						<input class="form-control" name="quequan" value="{{$data['quequan']}}">
 						<label>Kinh nghiệm</label>
 						<select class="form-control" name="month_exp">
-							<option value="0">Chưa có kinh nghiệm</option>
-							<option value="1">1 tháng</option>
-							<option value="2">2 tháng</option>
-							<option value="3">3 tháng</option>
-							<option value="4">4 tháng</option>
-							<option value="5">4 tháng</option>
-							<option value="6">Nhiều hơn 6 tháng</option>
+							@foreach($month_exps as $key => $monthexp)
+								<option value="{{ $key }}" @if ($data['month_exp'] == $key) {{ 'selected' }} @endif>
+									{{ $monthexp }}
+								</option>
+							@endforeach
 						</select>
 						<label>Công việc có thể làm</label>
 						@foreach($requires as $require)
@@ -49,6 +48,8 @@
 						@endforeach
 						<label>Công việc khác</label>
 						<input class="form-control" name="congviec_khac" value="{{$data['congviec_khac']}}">
+						<label>Giới thiệu bản thân</label>
+						<textarea name="gioithieubanthan" class="form-control" placeholder="Giới thiệu đôi nét về bản thân...">{{$data['gioithieubanthan']}}</textarea>
 					</div>
 				</div>
 				<div class="col-md-6">

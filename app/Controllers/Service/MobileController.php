@@ -779,6 +779,7 @@ class MobileController extends ServiceController {
             'luonggiupviecthuongxuyen' => json_decode($config->luonggiupviecthuongxuyen, true),
             'luong1h_thuongxuyen' => json_decode($config->luong1h_thuongxuyen, true),
             'thongtinchuyenkhoan' => json_decode($config->thongtinchuyenkhoan, true),
+            'options_kinhnghiem' => json_decode($config->options_kinhnghiem, true),
         ];
         $this->data = [$result];
     }

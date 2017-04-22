@@ -7,6 +7,9 @@ use Response;
 use Illuminate\Http\Request;
 use App\Customer;
 use App\Requires;
+use App\Setting;
+use App\Models\Media\Media;
+
 class CustomersController extends Controller {
 
     /**
@@ -16,6 +19,51 @@ class CustomersController extends Controller {
      */
     public function laborers($id = null)
     {
+        if (Input::method() == 'POST') {
+            $data = Input::all();
+            $data['cando'] = json_encode($data['cando']);
+            if ($data['birthday'] != '') {
+                $data['birthday'] = date('Y-m-d', strtotime($data['birthday']));
+            }
+            unset($data['avatar']);
+            unset($data['anhsv_truoc']);
+            unset($data['anhsv_sau']);
+            unset($data['anhcmtnd_truoc']);
+            unset($data['anhcmtnd_sau']);
+
+            if ($_FILES['avatar']['size']) {
+                $_FILES['file'] = $_FILES ['avatar'];
+                $upImage = Media::uploadImage($_FILES, 'avatar');
+                $data['avatar'] = $upImage['url'];
+            }
+
+            if ($_FILES['anhsv_truoc']['size']) {
+                $_FILES['file'] = $_FILES ['anhsv_truoc'];
+                $upImage = Media::uploadImage($_FILES, 'anhsv');
+                $data['anhsv_truoc'] = $upImage['url'];
+            }
+
+            if ($_FILES['anhsv_sau']['size']) {
+                $_FILES['file'] = $_FILES ['anhsv_sau'];
+                $upImage = Media::uploadImage($_FILES, 'anhsv');
+                $data['anhsv_sau'] = $upImage['url'];
+            }
+
+            if ($_FILES['anhcmtnd_truoc']['size']) {
+                $_FILES['file'] = $_FILES ['anhcmtnd_truoc'];
+                $upImage = Media::uploadImage($_FILES, 'cmtnd');
+                $data['anhcmtnd_truoc'] = $upImage['url'];
+            }
+
+            if ($_FILES['anhcmtnd_sau']['size']) {
+                $_FILES['file'] = $_FILES ['anhcmtnd_sau'];
+                $upImage = Media::uploadImage($_FILES, 'cmtnd');
+                $data['anhcmtnd_sau'] = $upImage['url'];
+            }
+
+            $updateStatus = Customer::SaveData($data);
+        }
+
         if ($id == null) {
             $laborers = Customer::where('type_customer', 1)->whereIn('status', [0, 1])
             ->orderBy('status')->orderBy('updated_at', 'desc')
@@ -23,17 +71,17 @@ class CustomersController extends Controller {
             return view('admin.laborers', ['main_data' => $laborers]);
         } else {
             $laborer = Customer::find($id);
-            if (Input::method() == 'POST') {
-                $post = Input::all();
-                dd($post);die;
-            }
+            $settingKn = Setting::select('options_kinhnghiem')->first();
             return view('admin.labor_edit', [
+                'month_exps' => json_decode($settingKn->options_kinhnghiem, true),
                 'data' => $laborer,
                 'requires' => Requires::where('status', 1)->orderBy('stt')->get(),
             ]);
         }
         
     }
+
+    
     public function customers()
     {
         $customers = Customer::where('type_customer', 2)->whereIn('status', [0, 1])->orderBy('updated_at', 'desc')->paginate(15);
