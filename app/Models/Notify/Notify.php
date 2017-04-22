@@ -42,14 +42,13 @@ class Notify extends BaseModel {
      * @param type $sound
      * @return Push notify for ios
      */
-    static function Push2Ios($deviceToken = "", $message = "", $push_data = array(), $app = 'laodong' , $badge = 1, $sound = 'default') {
+    static function Push2Ios($deviceToken = "", $message = "", $push_data = array(), $app = 'laodong' , $badge = 1) {
         if (!$deviceToken || !$message) {
             return array("status" => -1, "message" => "No data", "data" => array());
         }
         // Create Data send to service
         $push_to_apns = array();
         $push_to_apns['alert'] = $message;
-        $push_to_apns['sound'] = $sound;
         $push_to_apns['content-available'] = "1";
         if ($badge >= 0) {
             $push_to_apns['badge'] = $badge;
@@ -91,7 +90,6 @@ class Notify extends BaseModel {
         }
 
         $result = fwrite($fp, $msg, strlen($msg));
-        print($result);die;
         if (!$result) {
             $data["success"] = -3;
             $data["message"] = "Message not delivered" . PHP_EOL;
