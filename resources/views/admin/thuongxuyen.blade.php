@@ -6,6 +6,29 @@
         <div class="panel panel-default">
             <div class="panel-heading">Giup viec thuong xuyen</div>
             <div class="panel-body">
+                <form action="">
+                    <div class="col-md-3">
+                        <div class="form-group has-success">
+                            <input placeholder="Nhập tiêu chí tìm kiếm..." type="text" class="form-control" value="{{ app('request')->input('search') }}" name="search">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group has-success">
+                            <select name="status" id="" class="form-control">
+                            @foreach($statuses as $status => $nameStatus)
+                                <option value="{{ $status }}" @if((int) app('request')->input('status') == $status) {{ 'selected' }} @endif>
+                                {{$nameStatus}}
+                                </option>
+                            @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Tìm kiếm">
+                        </div>
+                    </div>
+                </form>
                 <table class="table  table-striped table-bordered">
                     <thead>
                         <tr>

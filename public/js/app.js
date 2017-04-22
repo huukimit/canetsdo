@@ -1,6 +1,6 @@
-var URL = document.location.origin;http://canets.dev/js/img/ripple.gif
+var URL = document.location.origin;//http://canets.dev/js/img/ripple.gif
 $(document).ready(function(){
-
+    $('#use_select2').select2();
     $('.hide_show_chuyenkhoan').click(function(){
         $('#ttchuyenkhoan').toggle(1000);
     });
@@ -44,7 +44,7 @@ $(document).ready(function(){
         });
     });
     /* Active */
-    $('.active').click(function(){
+    $('.active_user').click(function(){
         var active = $(this).data('id');
         processBlock();
         $.ajax({
@@ -52,7 +52,7 @@ $(document).ready(function(){
             url: URL + '/secret/active',
             data: {'active': active},
             success: function(data) {
-                $('#row_' + active).removeClass('active').removeClass('label-warning').addClass('label-success').text('Active');
+                $('#row_' + active).removeClass('active_user').removeClass('label-warning').addClass('label-success').text('Active');
                 $.unblockUI();
                 if (data['status']) {
                     $.notify('Good job, Active success', 'success');

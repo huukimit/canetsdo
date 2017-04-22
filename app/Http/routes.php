@@ -31,6 +31,8 @@ Route::group(['prefix' => 'secret', 'middleware' => 'auth'], function()
 {
     Route::get('/', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@index'));
     Route::get('bookings/motlan', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\BookingsController@giupviecmotlan'));
+    Route::any('createnotify', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@createThongbao'));
+    
     Route::get('bookings/thuongxuyen', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\BookingsController@giupviecthuongxuyen'));
     Route::get('customers', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\CustomersController@customers'));
     Route::any('laborers/{id?}', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\CustomersController@laborers'));
@@ -41,7 +43,9 @@ Route::group(['prefix' => 'secret', 'middleware' => 'auth'], function()
     Route::post('updateluonggvthuongxuyen', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\SystemController@updateluonggvthuongxuyen'));
     Route::post('updatethongtinchuyenkhoan', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\SystemController@updatethongtinchuyenkhoan'));
     Route::get('configs', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@systemConfig'));
-    Route::get('cashoutrequest', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@index'));
+    Route::any('congtrutien', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@congTruTien'));
+    Route::any('bookings/creategvml', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\BookingsController@createGvMotlan'));
+    Route::any('bookings/creategvtx', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\BookingsController@createGvThuongXuyen'));
 });
 
 

@@ -5,6 +5,30 @@
         <div class="panel panel-default">
             <div class="panel-heading">Giup viec mot lan</div>
             <div class="panel-body">
+                <form action="">
+                    <div class="col-md-3">
+                        <div class="form-group has-success">
+                            <input placeholder="Nhập tiêu chí tìm kiếm..." type="text" class="form-control" value="<?php echo e(app('request')->input('search')); ?>" name="search">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group has-success">
+                            <select name="status" id="" class="form-control">
+                            <?php foreach($statuses as $status => $nameStatus): ?>
+                                <option value="<?php echo e($status); ?>" <?php if((int) app('request')->input('status') == $status): ?> <?php echo e('selected'); ?> <?php endif; ?>>
+                                <?php echo e($nameStatus); ?>
+
+                                </option>
+                            <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Tìm kiếm">
+                        </div>
+                    </div>
+                </form>
                 <table class="table  table-striped table-bordered">
                     <thead>
                         <tr>

@@ -6,6 +6,18 @@
         <div class="panel panel-default">
             <div class="panel-heading">List customer</div>
             <div class="panel-body">
+                <form action="">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="search" value="{{ app('request')->input('search') }}">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Tìm kiếm">
+                        </div>
+                    </div>
+                </form>
                 <table class="table  table-striped table-bordered">
                     <thead>
                         <tr>

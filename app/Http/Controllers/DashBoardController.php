@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use App\Booking;
 use App\Customer;
 use App\Setting;
+use App\Thongbao;
+use App\Lichsugiaodich;
+use Input;
+use App\Commands\PushNotifyToDevices;
+use Illuminate\Support\Facades\Queue;
 
 class DashBoardController extends Controller {
 
@@ -40,5 +45,54 @@ class DashBoardController extends Controller {
        
         return view('admin.systemConfig', ['mainData' => $setting]);
     }
+
+    public function createThongbao()
+    {
+        if (Input::method() == 'POST') {
+            $data = Input::all();
+            if (Thongbao::SaveData($data)) {
+                $pushData = ['key' => 'Thongbao', 'content' => $data['content']];
+                $customers = Customer::getTokenAllUserToPushNotify($data['type']);
+                $missed = [];
+                Queue::later(5, new PushNotifyToDevices($customers, $data['title'], $pushData, 'Admin create notify'));
+                    }
+        }
+        return view('admin.createnotify',[
+            'thongbaos' => Thongbao::orderBy('created_at', 'DESC')->paginate(10),
+        ]);
+    }
+
+    public function congTruTien()
+    {
+        if (Input::method() == 'POST') {
+            $post = Input::all();
+            $customer = Customer::find($post['id']);
+            if (isset($customer->id)) {
+                ($post['sotien'] < 0) ? $post['sotien'] = ((int)$post['sotien'] * -1) : '';
+                $upDownmoney = ($post['type'] * $post['sotien']);
+                $updateCustomer = [
+                    'id' => $customer->id,
+                    $post['vi'] => $customer->$post['vi'] + $upDownmoney,
+                ];
+                $transaction = [
+                    'customer_id' => $customer->id,
+                    'amount_moneys' => $upDownmoney,
+                    'reason' => $post['reason'],
+                ];
+                
+                if (Customer::SaveData($updateCustomer)) {
+                    Lichsugiaodich::SaveData($transaction);
+                }
+
+            } else {
+                echo 'Có lỗi sảy ra, vui lòng liên hệ Admin';die;
+            }
+        }
+        return view('admin.congtrutien',[
+            'customers' => Customer::where('status', '1')->where('manv_kh', '!=', '')
+                ->select('id','fullname', 'manv_kh')->get(),
+        ]);
+    }
+    
 
 }

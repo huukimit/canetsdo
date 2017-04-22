@@ -13,7 +13,9 @@
 				<div class="col-md-6">
 					<div class="form-group text-center">
 						<label>Avatar</label>
-						<img src="/{{($data['avatar']) ? $data['avatar'] : 'public/uploads/media/avatar/default.png'}}" alt="Avatar" class="img-circle" width="140px" height="140px">
+						<a id="example1" href="/{{$data['avatar']}}">
+							<img alt="example1" src="/{{($data['avatar']) ? $data['avatar'] : 'public/uploads/media/avatar/default.png'}}" alt="Avatar" class="img-circle" width="140px" height="140px">
+						</a>
 						<input type="file" name="avatar" accept="image/*" class="form-control" title="Thay đổi avatar">
 					</div>
 					<div class="form-group">
@@ -59,22 +61,30 @@
 				<div class="col-md-6">
 					<div class="form-group">
 						<label>Ảnh sinh viên(mặt trước)</label>
-						<img src="/{{($data['anhsv_truoc']) ? $data['anhsv_truoc'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh sinh viên(mặt trước)" class="img-thumbnail img_truoc_sau">
+						<a id="example1" href="/{{$data['avatar']}}">
+							<img src="/{{($data['anhsv_truoc']) ? $data['anhsv_truoc'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh sinh viên(mặt trước)" class="img-thumbnail img_truoc_sau">
+						</a>
 						<input type="file" name="anhsv_truoc" accept="image/*" class="form-control" placeholder="Thay đổi Ảnh sinh viên(mặt trước)" title="Ảnh sinh viên(mặt trước)">
 					</div>
 					<div class="form-group">
 						<label>Ảnh sinh viên(mặt sau)</label>
-						<img src="/{{($data['anhsv_sau']) ? $data['anhsv_sau'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh sinh viên(mặt sau)" class="img-thumbnail img_truoc_sau">
+						<a id="example1" href="/{{$data['avatar']}}">
+							<img src="/{{($data['anhsv_sau']) ? $data['anhsv_sau'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh sinh viên(mặt sau)" class="img-thumbnail img_truoc_sau">
+						</a>
 						<input type="file" name="anhsv_sau" accept="image/*" class="form-control" title="Thay đổi Ảnh sinh viên(mặt sau)">
 					</div>
 					<div class="form-group">
 						<label>Ảnh CMTND (mặt trước)</label>
-						<img src="/{{($data['anhcmtnd_truoc']) ? $data['anhcmtnd_truoc'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh CMTND (mặt trước)" class="img-thumbnail img_truoc_sau">
+						<a id="example1" href="/{{$data['avatar']}}">
+							<img src="/{{($data['anhcmtnd_truoc']) ? $data['anhcmtnd_truoc'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh CMTND (mặt trước)" class="img-thumbnail img_truoc_sau">
+						</a>
 						<input type="file" name="anhcmtnd_truoc" accept="image/*" class="form-control" placeholder="Thay đổi Ảnh CMTND (mặt trước)">
 					</div>
 					<div class="form-group">
 						<label>Ảnh CMTND (mặt sau)</label>
-						<img src="/{{($data['anhcmtnd_sau']) ? $data['anhcmtnd_sau'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh CMTND (mặt sau)" class="img-thumbnail img_truoc_sau">
+						<a id="example1" href="/{{$data['avatar']}}">
+							<img src="/{{($data['anhcmtnd_sau']) ? $data['anhcmtnd_sau'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh CMTND (mặt sau)" class="img-thumbnail img_truoc_sau">
+						</a>
 					<input type="file" name="anhcmtnd_sau" accept="image/*" class="form-control" placeholder="Thay đổi Ảnh CMTND (mặt sau)">
 					</div>
 				</div>

@@ -65,8 +65,18 @@ class CustomersController extends Controller {
         }
 
         if ($id == null) {
-            $laborers = Customer::where('type_customer', 1)->whereIn('status', [0, 1])
-            ->orderBy('status')->orderBy('updated_at', 'desc')
+            $search = Input::query('search');
+            $laborers = Customer::where('type_customer', 1)->whereIn('status', [0, 1]);
+            if ($search) {
+                $laborers = $laborers->where(function($orConditions) use ($search) {
+                    $orConditions->where('email', 'like', "%$search%")
+                    ->orWhere('fullname', 'like', "%$search%")
+                    ->orWhere('phone_number', 'like', "%$search%")
+                    ->orWhere('manv_kh', 'like', "%$search%");
+
+                });
+            };
+            $laborers = $laborers->orderBy('status')->orderBy('created_at', 'desc')
             ->paginate(15);
             return view('admin.laborers', ['main_data' => $laborers]);
         } else {
@@ -84,12 +94,22 @@ class CustomersController extends Controller {
     
     public function customers()
     {
-        $customers = Customer::where('type_customer', 2)->whereIn('status', [0, 1])->orderBy('updated_at', 'desc')->paginate(15);
+        $search = Input::query('search');
+        $customers = Customer::where('type_customer', 2)->whereIn('status', [0, 1]);
+            if ($search) {
+                $customers = $customers->where(function($orConditions) use ($search) {
+                    $orConditions->where('email', 'like', "%$search%")
+                    ->orWhere('fullname', 'like', "%$search%")
+                    ->orWhere('phone_number', 'like', "%$search%")
+                    ->orWhere('manv_kh', 'like', "%$search%");
+                });
+            };
+        $customers = $customers->orderBy('created_at', 'desc')->paginate(15);
         return view('admin.customers', ['main_data' => $customers]);
     }
     public function usersblocked()
     {
-        $blocked = Customer::whereIn('status', [-1])->orderBy('updated_at', 'desc')->paginate(15);
+        $blocked = Customer::whereIn('status', [-1])->orderBy('created_at', 'desc')->paginate(15);
         return view('admin.usersblocked', ['main_data' => $blocked]);
     }
     public function activeUser()

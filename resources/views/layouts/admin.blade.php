@@ -9,6 +9,8 @@
 <link href="{{ asset('public/css/datepicker3.css') }}" rel="stylesheet">
 <link href="{{ asset('public/css/styles.css') }}" rel="stylesheet">
 <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
 
 <!--Icons-->
 <script src="{{ asset('public/js/lumino.glyphs.js') }}"></script>
@@ -93,13 +95,13 @@
 				</ul>
 			</li>
 			<li><a href="/secret/configs"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg>System config</a></li>
-			<li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Recharge</a></li>
-			<li><a href="forms.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Forms</a></li>
-			<li><a href="panels.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Alerts &amp; Panels</a></li>
-			<li><a href="secret/cashoutrequest"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Cashout requested</a></li>
+			{{-- <li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Recharge</a></li> --}}
+			<li><a href="/secret/createnotify"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Thông báo</a></li>
+			{{-- <li><a href="panels.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Alerts &amp; Panels</a></li> --}}
+			<li><a href="/secret/congtrutien"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Cộng trừ tiền</a></li>
 			
 			<li role="presentation" class="divider"></li>
-			<li><a href="secret/admins"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>Admin</a></li>
+			{{-- <li><a href="secret/admins"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>Admin</a></li> --}}
 		</ul>
 
 	</div><!--/.sidebar-->
@@ -132,9 +134,10 @@
 	<script src="{{ asset('public/js/bootstrap-datepicker.js') }}"></script>
 	<script src="{{ asset('public/js/jquery.blockUI.js') }}"></script>
 	<script src="{{ asset('public/js/notify.min.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 	<script src="{{ asset('public/js/ajax.js') }}"></script>
 	<script src="{{ asset('public/js/app.js') }}"></script>
-	
+
 	@show	
 </body>
 

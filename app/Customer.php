@@ -130,4 +130,15 @@ class Customer extends BaseModel {
         return $data;
     }
 
+    static function getTokenAllUserToPushNotify($typeCustomer = 0)
+    {
+        $sql = "SELECT customers.id, type_customer, device_token
+            FROM customers JOIN customer_devices
+            ON customers.id = customer_devices.customer_id JOIN devices
+            ON customer_devices.device_id = devices.id";
+        ($typeCustomer != 0) ? $sql .= " WHERE type_customer = $typeCustomer" : '';
+        $data = DB::select($sql);
+        return $data;
+    }
+
 }
