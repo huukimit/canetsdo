@@ -10,16 +10,9 @@ class QuestionAnswer extends BaseModel {
         $this->table = 'question_anwsers';
     }
 
-    static function getListQAForCustomer() {
+    static function getListQA($type = 2) {
     	return self::where('status', 1)
-    	->where('type', 2)
-    	->orderBy('order')
-    	->get();
-    }
-
-    static function getListQAForLaodong() {
-    	return self::where('status', 1)
-    	->where('type', 1)
+    	->where('type', $type)
     	->orderBy('order')
     	->get();
     }

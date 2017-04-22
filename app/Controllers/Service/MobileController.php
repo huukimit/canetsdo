@@ -1471,7 +1471,7 @@ function nhanviec() {
     }
 
     function getQAndAForLaodong() {
-        $this->data = QuestionAnswer::getQAndAForLaodong();
+        $this->data = QuestionAnswer::getListQA(2);
         $this->status = 200;
         $this->message = 'Success';
     }
