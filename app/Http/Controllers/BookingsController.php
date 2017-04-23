@@ -1,7 +1,11 @@
 <?php namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Booking;
+use App\Setting;
+use App\Customer;
 use Input;
+use App\Commands\PushNotifyToDevices;
+use Illuminate\Support\Facades\Queue;
 
 class BookingsController extends Controller {
 
@@ -11,11 +15,26 @@ class BookingsController extends Controller {
 	 * @return Response
 	 */
 	function createGvMotlan() {
-
+		if (Input::method() == 'POST') {
+            $post = Input::all();
+            $post['type'] = 1;
+            $booking_id = Booking::SaveData($post);
+            $pushData = ['key' => 'GV1L', 'booking_id' => $booking_id];
+	        $customers = Customer::getLaborsArround($post['lat'], $post['long'], 50, 'GV1L');
+	        Queue::later(5, new PushNotifyToDevices($customers, 'GV1L' . $post['address'], $pushData, $booking_id));
+	        return redirect('secret/bookings/motlan');
+        }
+		$setting = Setting::getConfig();
+		return view('admin.create_motlan', [
+			'mucthuongs' => json_decode($setting->thuonggvmotlan, true),
+		]);
 	}
 
 	function createGvThuongXuyen() {
-
+		return view('admin.create_thuongxuyen', [
+			'bookings' => $bookings,
+			'statuses' => $statuses,
+		]);
 	}
 
 	public function giupviecmotlan()

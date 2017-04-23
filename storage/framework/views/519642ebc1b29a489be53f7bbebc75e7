@@ -23,12 +23,16 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" value="Tìm kiếm">
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <a href="/secret/bookings/creategvml" class="btn btn-info">Tạo công việc</a>
+                    </div>
                 </form>
+                    
                 <table class="table  table-striped table-bordered">
                     <thead>
                         <tr>
