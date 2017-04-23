@@ -1,4 +1,14 @@
 var URL = document.location.origin;//http://canets.dev/js/img/ripple.gif
+function validateCreateTX() {
+    var ngaylamtrongtuan = $('.ngaylamtrongtuan:checked').size();
+    var viecphailam = $('.viecphailam:checked').size();
+    var lat = $('#lat').val();
+    var long = $('#long').val();
+    if (!ngaylamtrongtuan || !viecphailam || !lat || !long) {
+        alert('vui lòng kiểm tra lại thông tin: ngày làm trong tuần, việc phải làm, latitude, longtitude');
+        return false;
+    }
+}
 $(document).ready(function(){
     $('#use_select2').select2();
     $('.hide_show_chuyenkhoan').click(function(){

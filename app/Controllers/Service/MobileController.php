@@ -751,10 +751,8 @@ class MobileController extends ServiceController {
         $key = explode(':', $loaidichvu);
         $pushData = ['key' => $key[0], 'booking_id' => $booking_id];
         $customers = Customer::getLaborsArround($lat, $long, $distance, $key[0]);
-        $missed = [];
         
         Queue::later(5, new PushNotifyToDevices($customers, $loaidichvu, $pushData, $booking_id));
-
     }
 
     function updateLatLong() {

@@ -87,6 +87,14 @@
 						</a>
 					<input type="file" name="anhcmtnd_sau" accept="image/*" class="form-control" placeholder="Thay đổi Ảnh CMTND (mặt sau)">
 					</div>
+					<div class="form-group">
+						<label for="">Khóa tài khoản</label>
+						<div class="checkbox">
+							<label>
+								<input name="status" value="-1" type="checkbox" onclick="return confirm('Bạn có chắc chắn muốn ngừng hoạt động của tài khoản này không?')" > Block user
+							</label>
+						</div>
+					</div>
 				</div>
 					
 	            <div class="col-md-12">

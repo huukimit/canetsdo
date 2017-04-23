@@ -24,17 +24,17 @@
 				<div class="col-md-5">
 					<div class="form-group">
 						<label>Địa điểm</label>
-						<input class="form-control" name="address" value="">
+						<input class="form-control" name="address" value="" required="">
 						<label>Thời gian bắt đầu</label>
-						<input class="form-control" name="time_start" value="">
+						<input class="form-control" name="time_start" value="" required="">
 						<label>Thời gian kết thúc</label>
-						<input class="form-control" name="time_end"  required  value="">
+						<input class="form-control" name="time_end"  required  value="" required="">
 						<label>Ghi chú</label>
 						<textarea class="form-control" name="note" placeholder="Nhập ghi chú" required=""></textarea> 
 						<label>Lương</label>
-						<input class="form-control" name="luong" value="" id="luong">
+						<input class="form-control" name="luong" value="" id="luong" type="number" required="">
 						<label>Thưởng</label>
-						<select class="form-control" name="thuong" id="thuong">
+						<select class="form-control" name="thuong" id="thuong" required="">
 							@foreach($mucthuongs as $mucthuong)
 								<option value="{{ $mucthuong['key'] }}">{{ $mucthuong['value']}}</option>
 							@endforeach
@@ -42,9 +42,9 @@
 						<label>Tổng thu nhập</label>
 						<input class="form-control" name="tongchiphi" id="tongchiphi" value="" readonly="">
 						<label>Latitude</label>
-						<input class="form-control" name="lat" id="lat" value="" readonly="">
+						<input class="form-control" name="lat" id="lat" value="" readonly="" required="">
 						<label>Longtitude</label>
-						<input class="form-control" name="long" id="long" value="" readonly="">
+						<input class="form-control" name="long" id="long" value="" readonly="" required="">
 					</div>
 				</div>
 				

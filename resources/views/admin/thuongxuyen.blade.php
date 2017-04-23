@@ -23,10 +23,13 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" value="Tìm kiếm">
                         </div>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="/secret/bookings/creategvtx" class="btn btn-info">Tạo công việc</a>
                     </div>
                 </form>
                 <table class="table  table-striped table-bordered">
@@ -61,17 +64,34 @@
                             <td>{{ $booking->address }}</td>
                             <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->updated_at)) }}</td>
                             <td class="text-center">
-                            @if ($booking->status == -2)
-                                <label class="label label-warning">Expiry</label>
-                            @elseif ($booking->status == -1)
-                                <label class="label label-danger">Cancel</label>
-                            @elseif ($booking->status == 0)
-                                <label class="label label-info">Waiting</label>
-                            @elseif ($booking->status == 1)
-                                <label class="label label-success">Doing</label>
-                            @elseif ($booking->status == 2)
-                                <label class="label label-default">Done</label>
-                            @endif
+                            <?php
+                                switch($booking->status) {
+                                    case -13:
+                                        $label = '<label class="label label-warning">Khách hàng không nhận</label>';
+                                        break;
+                                    case -12:
+                                        $label = '<label class="label label-danger">SV hủy</label>';
+                                        break;
+                                    case -11:
+                                        $label = '<label class="label label-danger">KH hủy</label>';
+                                    case -2:
+                                        $label = '<label class="label label-danger">Hết hạn</label>';
+                                        break;
+                                    case 1:
+                                        $label = '<label class="label label-info">Đã có sv nhận việc</label>';
+                                        break;
+                                    case 3:
+                                        $label = '<label class="label label-info">KH đã chọn SV</label>';
+                                        break;
+                                    case 2:
+                                        $label = '<label class="label label-success">Giao dịch thành công</label>';
+                                        break;
+                                    default:
+                                        $label = '<label class="label label-info">Waiting</label>';
+                                        break;
+                                }
+                                echo $label;
+                            ?>
                             </td>
                         </tr>
                         @endforeach
