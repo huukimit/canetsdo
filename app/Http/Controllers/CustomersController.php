@@ -60,7 +60,6 @@ class CustomersController extends Controller {
                 $upImage = Media::uploadImage($_FILES, 'cmtnd');
                 $data['anhcmtnd_sau'] = $upImage['url'];
             }
-
             $updateStatus = Customer::SaveData($data);
         }
 
