@@ -132,7 +132,7 @@ class Customer extends BaseModel {
 
     static function getTokenAllUserToPushNotify($typeCustomer = 0)
     {
-        $sql = "SELECT customers.id, type_customer, device_token
+        $sql = "SELECT customers.id, type_customer, device_token, type_device
             FROM customers JOIN customer_devices
             ON customers.id = customer_devices.customer_id JOIN devices
             ON customer_devices.device_id = devices.id";
