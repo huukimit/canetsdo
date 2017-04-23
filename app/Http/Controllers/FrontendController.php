@@ -48,8 +48,24 @@ class FrontendController extends Controller {
 
 	public function changepassword() {
 		$get = Input::all();
-		dd($get);
-		return view('frontend.changepassword');
+		$message = '';
+		if (Input::method() == 'POST') {
+			$post = Input::all();
+			$check = Customer::where('forgot_password', $post['token'])->where('email', $post['email'])->first();
+			if (isset($check->id)) {
+				$update = [
+					'id' => $check->id,
+					'password' => sha1($post['password']),
+					'forgot_password' => '',
+				];
+				Customer::SaveData($update);
+				$message = 'Thay đổi password thành công!';
+			} else {
+				echo '<h3 align="center" style="color:red">Có lỗi sảy ra, vui lòng liên hệ admin</h3>';die;
+			}
+
+		}
+		return view('frontend.changepassword', ['data' => $get, 'message' => $message]);
 	}
 
 	
