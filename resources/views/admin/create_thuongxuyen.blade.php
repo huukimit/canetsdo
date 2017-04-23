@@ -68,6 +68,12 @@
 								Ăn cơm cùng gia đình
 							</label>
 						</div>
+						<div class="checkbox">
+							<label>
+								<input name="chonguoi" value="1" type="checkbox">
+								Chọn người
+							</label>
+						</div>
 					</div>
 				</div>
 						
