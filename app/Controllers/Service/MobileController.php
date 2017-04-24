@@ -587,7 +587,7 @@ class MobileController extends ServiceController {
         }
         $status = DB::transaction(function () use($data) {
             if (isset($data['birthday'])) {
-                $data['birthday'] = date('Y-m-d', strtotime($data['birthday']));
+                $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
             }
             Customer::SaveData($data);
             // $deviceId = Device::SaveData($data);

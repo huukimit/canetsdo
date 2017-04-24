@@ -23,7 +23,7 @@ class CustomersController extends Controller {
             $data = Input::all();
             $data['cando'] = json_encode($data['cando']);
             if ($data['birthday'] != '') {
-                $data['birthday'] = date('Y-m-d', strtotime($data['birthday']));
+                $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
             }
             unset($data['avatar']);
             unset($data['anhsv_truoc']);
@@ -60,6 +60,7 @@ class CustomersController extends Controller {
                 $upImage = Media::uploadImage($_FILES, 'cmtnd');
                 $data['anhcmtnd_sau'] = $upImage['url'];
             }
+            dd($data);die;
             $updateStatus = Customer::SaveData($data);
         }
 
