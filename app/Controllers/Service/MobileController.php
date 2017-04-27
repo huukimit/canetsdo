@@ -459,6 +459,7 @@ class MobileController extends ServiceController {
     public function login()
     {
        $postData = Input::all();
+       Log::info($postData);
        $this->checkNullDataInArray($postData);
        $existUser = Customer::DoLogin($postData);
        if ($existUser) {
