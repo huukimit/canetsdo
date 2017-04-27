@@ -464,7 +464,6 @@ class MobileController extends ServiceController {
        $existUser = Customer::DoLogin($postData);
        if ($existUser) {
            $checkDevice = Device::checkTokenDevice($postData);
-           Log::info(['device_token' => $postData['device_token']]);
            if (empty($checkDevice)) {
                 $deviceId = Device::SaveData($postData);
                 CustomerDevice::SaveData(['customer_id' => $existUser->id, 'device_id' => $deviceId]);
