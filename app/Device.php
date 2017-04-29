@@ -9,8 +9,10 @@ class Device extends BaseModel {
         $this->table = 'devices';
     }
 
-    static function checkTokenDevice($data) {
-    	return self::where('device_token', $data['device_token'])->first();
+    static function checkTokenDevice($data, $customerId) {
+    	return self::join('customer_devices', 'customer_devices.device_id', '=', 'devices.id')
+        ->where('customer_devices.customer_id', $customerId)
+        ->where('device_token', $data['device_token'])->first();
     }
 
     static function getAllDeviceByToken($data) {
