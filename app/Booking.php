@@ -57,13 +57,12 @@ class Booking extends BaseModel {
         return $result;
     }
 
-    static function getJobsWaitingReceivedFromNotify($typeJob, $customerId, $status = [0, 1]) {
+    static function getJobsWaitingReceivedFromNotify($except, $typeJob, $customerId, $status = [0, 1]) {
         return self::join('notify_missed_bookings', 'bookings.id', '=', 'notify_missed_bookings.booking_id')
-        ->leftJoin('bids', 'notify_missed_bookings.customer_id', '=', 'bids.laodong_id')
+        ->whereNotIn('bookings.id', $except)
         ->whereIn('bookings.status', $status)
         ->where('bookings.type', $typeJob)
         ->where('notify_missed_bookings.customer_id', $customerId)
-        ->whereNull('bids.laodong_id')
         ->select('bookings.id', 'address', 'bookings.created_at')
         ->groupBy('bookings.id')
         ->orderBy('bookings.created_at', 'DESC')

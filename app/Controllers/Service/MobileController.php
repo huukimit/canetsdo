@@ -924,8 +924,13 @@ class MobileController extends ServiceController {
     function getJobsByLaodongId() { // use in top screen
         $customerId = Input::get('laodong_id', null);
         $this->checkNullData($customerId);
-        $result['list_gvmotlan'] = Booking::getJobsWaitingReceivedFromNotify(1, $customerId); 
-        $result['list_gvthuongxuyen'] = Booking::getJobsWaitingReceivedFromNotify(2, $customerId); 
+        $dangnhan = Bid::congviecdangnhan($customerId);
+        $except = [];
+        foreach($dangnhan as $nhan) {
+            $except[] = $nhan->booking_id;
+        }
+        $result['list_gvthuongxuyen'] = Booking::getJobsWaitingReceivedFromNotify($except, 2, $customerId); 
+        $result['list_gvmotlan'] = Booking::getJobsWaitingReceivedFromNotify($except, 1, $customerId); 
         $this->status = 200;
         $this->message = "Success";
         $this->data = $result;
