@@ -8,6 +8,16 @@
     height: 140px;
 
 }
+.img_mini {
+	width: 50px;
+    height: 30px;
+    padding: 1px;
+    float: left;
+    clear: both;
+}
+.img_mini:hover{
+	transform: scale(4.5)
+}
 .img_truoc_sau:hover{
 	transform: scale(2.5)
 }

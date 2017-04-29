@@ -40,6 +40,7 @@
                             <th>Customer</th>
                             <th>Phone number</th>
                             <th>Address work</th>
+                            <th>Hình ảnh căn hộ</th>
                             <th class="text-center">Updated time </th>
                             <th class="text-center">Status</th>
                         </tr>
@@ -66,6 +67,27 @@
                                 @if($booking->note != '')
                                 <p class="text-red">Ghi chú: {{ $booking->note }}</p>
                                 @endif
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a href="/{{ $booking->anh1 }}">
+                                                <img src="/{{($booking->anh1) ? $booking->anh1 : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh ăn hộ" class="img_mini">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/{{ $booking->anh2 }}">
+                                                <img src="/{{($booking->anh2) ? $booking->anh2 : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh ăn hộ" class="img_mini">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/{{ $booking->anh3 }}">
+                                                <img src="/{{($booking->anh3) ? $booking->anh3 : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh ăn hộ" class="img_mini">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                             <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->updated_at)) }}</td>
                             <td class="text-center">
