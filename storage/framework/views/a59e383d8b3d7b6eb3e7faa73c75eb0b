@@ -127,7 +127,7 @@
 
 		<?php echo $__env->yieldContent('content'); ?>
 
-	</div>	<!--/.main-->
+	</div>	/.main
 	<?php $__env->startSection('javascript'); ?>
 	<script src="<?php echo e(asset('public/js/jquery-1.11.1.min.js')); ?>"></script>
 	<script src="<?php echo e(asset('public/js/bootstrap.min.js')); ?>"></script>
@@ -139,8 +139,9 @@
 	<script src="<?php echo e(asset('public/js/ajax.js')); ?>"></script>
 	<script src="<?php echo e(asset('public/js/app.js')); ?>"></script>
 	<script src="<?php echo e(asset('public/js/mymap.js')); ?>"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd3THpkAfWy7moq57cIMP7MJ0drjXpKKg&libraries=places&callback=initMap"
-        async defer></script>
+	
+	<?php /*Comment map <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd3THpkAfWy7moq57cIMP7MJ0drjXpKKg&libraries=places&callback=initMap"
+        async defer></script> */ ?>
 
 
 	<?php echo $__env->yieldSection(); ?>	
