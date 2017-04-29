@@ -862,20 +862,8 @@ class MobileController extends ServiceController {
                 'note_status' => '-2. het han, -11. KH hủy, -12. SV hủy, -13. Khách hàng ko nhận đi đã đi làm, 0. khoi tao, 1 Da co lao dong nhan viec, 2 Done, 3 Da chon lao dong',
             ];
         }
-        // if (empty($result)) {
-            // if ($lat != null && $long != null) {
-                // $this->status = 200;
-        $near5Km = Customer::getSinhvienNearly($lat, $long, 5);
+        $near5Km = Customer::getSinhvienNearly($lat, $long, 1000);
         $numberNear = (int) count($near5Km);
-                // $this->data = ['svxungquanh' => $near5Km, 'numbersvien5km' => $numberNear, 'bookings' => []];
-                // $this->message = "Hiện có $numberNear sinh viên nào xung quanh bạn";
-                // die;
-            // } else {
-                // $this->status = 300;
-                // $this->message = "Vui long truyen them lat long de xac dinh so sinh vien xung quanh";
-                // die;
-            // }
-        // }
         $this->status = 200;
         $this->message = "Success";
         $this->data = [
