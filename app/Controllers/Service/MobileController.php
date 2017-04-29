@@ -502,7 +502,7 @@ class MobileController extends ServiceController {
             $this->status = 402;
             $this->message = Config::get('services.notify.user_exist');exit;
         }
-        $postData['manv_kh'] = 'KH ' . time();
+        $postData['manv_kh'] = 'KH' . time();
         $status = DB::transaction(function () use($postData) {
             $id = Customer::SaveData($postData);
             // $deviceId = Device::SaveData($postData);
@@ -559,7 +559,7 @@ class MobileController extends ServiceController {
             $this->status = 402;
             $this->message = Config::get('services.notify.user_exist');exit;
         }
-        $data['manv_kh'] = 'NV ' . time();
+        $data['manv_kh'] = 'NV' . time();
         if (isset($data['cando'])) {
             $data['cando'] = json_encode(explode(',', $data['cando']));
         }

@@ -72,6 +72,8 @@ class CustomersController extends Controller {
                 $laborers = $laborers->where(function($orConditions) use ($search) {
                     $orConditions->where('email', 'like', "%$search%")
                     ->orWhere('fullname', 'like', "%$search%")
+                    ->orWhere('id',$search)
+                    ->orWhere('manv_kh',$search)
                     ->orWhere('phone_number', 'like', "%$search%")
                     ->orWhere('manv_kh', 'like', "%$search%");
 
@@ -104,6 +106,8 @@ class CustomersController extends Controller {
                     $orConditions->where('email', 'like', "%$search%")
                     ->orWhere('fullname', 'like', "%$search%")
                     ->orWhere('phone_number', 'like', "%$search%")
+                    ->orWhere('id',$search)
+                    ->orWhere('manv_kh',$search)
                     ->orWhere('manv_kh', 'like', "%$search%");
                 });
             };
