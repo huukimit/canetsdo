@@ -49,7 +49,7 @@
                         @foreach ($bookings as $booking)
                         <tr>
                             <td>{{ $booking->id }}</td>
-                            <td><b class="text-success">{{ date('H:i', strtotime($booking->time_start)) . ' - ' . date('H:i', strtotime($booking->time_end)) }}</b></td>
+                            <td><b class="text-success">{{ $booking->time_start . ' - ' . $booking->time_end }}</b></td>
                             <td>
                                 @if (isset($booking->customer->fullname))
                                     {{ $booking->customer->fullname }}
