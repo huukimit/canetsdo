@@ -9,6 +9,8 @@ use App\Customer;
 use App\Requires;
 use App\Setting;
 use App\Models\Media\Media;
+use App\CustomerRate;
+
 
 class CustomersController extends Controller {
 
@@ -84,6 +86,8 @@ class CustomersController extends Controller {
             return view('admin.labor_edit', [
                 'month_exps' => json_decode($settingKn->options_kinhnghiem, true),
                 'data' => $laborer,
+                'stars' => CustomerRate::getNumAvg($id),
+                'rates' => CustomerRate::listRateBy($id, 10), 
                 'requires' => Requires::where('status', 1)->orderBy('stt')->get(),
             ]);
         }

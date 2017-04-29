@@ -38,3 +38,11 @@
 #pac-input:focus {
 	border-color: #4d90fe;
 }
+#votes {
+	height: 200px;
+	overflow: scroll;
+	padding: 10px;
+}
+.yellow {
+	color: #FFD700;
+}
