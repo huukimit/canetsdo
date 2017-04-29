@@ -62,7 +62,12 @@
                                     {{ $booking->customer->phone_number }}
                                 @endif
                             </td>
-                            <td>{{ $booking->address }}</td>
+                            <td>
+                                {{ $booking->address }}<br/>
+                                @if($booking->note != '')
+                                <p class="text-red">Ghi chú: {{ $booking->note }}</p>
+                                @endif
+                            </td>
                             <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->updated_at)) }}</td>
                             <td class="text-center">
                             <?php

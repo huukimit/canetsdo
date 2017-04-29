@@ -7,9 +7,9 @@
         <div class="panel panel-default">
             <div class="panel-heading">Thông báo</div>
             <div class="panel-body">
+            	<div class="col-md-4">
             	<form action="" method="post"  role="form" enctype="multipart/form-data">
 	            	<input type="hidden" name="_token" value="{{ csrf_token() }}">
-					<div class="col-md-4">
 						<div class="form-group">
 							<label>Chọn Customer hoặc Lao động</label>
 							<select class="form-control" name="id" id="use_select2">
@@ -45,8 +45,40 @@
 						<div class="form-group">
 		            		<input type="submit" class="btn btn-primary" value="Thực hiện giao dịch">
 						</div>
-					</div>
         		</form>
+        		</div>
+        		<div class="col-md-7 col-md-push-1">
+        			<table class="table  table-striped table-bordered">
+	                    <thead>
+	                        <tr>
+	                            <th class="text-center">Time</th>
+	                            <th>Customer ID</th>
+	                            <th>Số tiền</th>
+	                            <th>Lý do</th>
+	                        </tr>
+	                    </thead>
+
+	                    <tbody>
+		                     @foreach ($lichsucongtrus as $lichsucongtru)
+	                        <tr>
+	                        	<td class="text-center">
+	                        		{{ date('d/m/Y H:i:s', strtotime($lichsucongtru->created_at))}}
+	                        	</td>
+	                        	<td>{{ $lichsucongtru->customer_id }}</td>
+	                        	<td>
+	                        		@if ($lichsucongtru->amount_moneys > 0)
+	                        			<label class="label label-success">+{{ $lichsucongtru->amount_moneys }}</label>
+	                        		@else
+										<label class="label label-warning">{{ $lichsucongtru->amount_moneys }}</label>
+	                        		@endif
+	                        	</td>
+	                        	<td>{{ $lichsucongtru->reason }}</td>
+	                        </tr>
+	                        @endforeach
+	                    </tbody>
+                    </table>
+					{!! $lichsucongtrus->render() !!}
+        		</div>
         	</div>
         </div>
     </div>

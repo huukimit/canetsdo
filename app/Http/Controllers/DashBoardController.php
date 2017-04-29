@@ -62,6 +62,22 @@ class DashBoardController extends Controller {
         ]);
     }
 
+    public function votes()
+    {
+        if (Input::method() == 'POST') {
+            $data = Input::all();
+            if (Thongbao::SaveData($data)) {
+                $pushData = ['key' => 'Thongbao', 'content' => $data['content']];
+                $customers = Customer::getTokenAllUserToPushNotify($data['type']);
+                $missed = [];
+                Queue::later(5, new PushNotifyToDevices($customers, $data['title'], $pushData, 'Admin create notify'));
+                    }
+        }
+        return view('admin.createnotify',[
+            'thongbaos' => Thongbao::orderBy('created_at', 'DESC')->paginate(10),
+        ]);
+    }
+
     public function congTruTien()
     {
         if (Input::method() == 'POST') {
@@ -78,6 +94,7 @@ class DashBoardController extends Controller {
                     'customer_id' => $customer->id,
                     'amount_moneys' => $upDownmoney,
                     'reason' => $post['reason'],
+                    'type' => 4,
                 ];
                 
                 if (Customer::SaveData($updateCustomer)) {
@@ -91,6 +108,7 @@ class DashBoardController extends Controller {
         return view('admin.congtrutien',[
             'customers' => Customer::where('status', '1')->where('manv_kh', '!=', '')
                 ->select('id','fullname', 'manv_kh')->get(),
+            'lichsucongtrus' => Lichsugiaodich::where('type', 4)->orderBy('created_at', 'DESC')->paginate(10),
         ]);
     }
     

@@ -702,8 +702,16 @@ class MobileController extends ServiceController {
     {
         $postData = Input::all();
         $this->checkNullDataInArray($postData);
+
         if (isset($postData['makhuyenmai'])) {
             $postData['khuyenmai_id'] = Khuyenmai::usedKhuyenmai($postData['makhuyenmai']);
+        }
+
+        if (isset($postData['time_start']) && isset($postData['time_end'])) {
+            $explode = explode(':', $postData['time_start']);
+            $postData['time_start'] = trim($explode[0]) . ':' . trim($explode[1]);
+            $explode = explode(':', $postData['time_end']);
+            $postData['time_end'] = trim($explode[0]) . ':' . trim($explode[1]);
         }
 
         $postData['type'] = 1;
