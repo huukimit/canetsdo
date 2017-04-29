@@ -463,7 +463,7 @@ class MobileController extends ServiceController {
        $this->checkNullDataInArray($postData);
        $existUser = Customer::DoLogin($postData);
        if ($existUser) {
-           if (isset($data['device_token'])) {
+           if (isset($postData['device_token'])) {
                $checkDevice = Device::checkTokenDevice($postData, $existUser->id);
                Log::info($checkDevice);
                if (!isset($checkDevice->device_token)) {
