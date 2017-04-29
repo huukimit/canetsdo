@@ -64,7 +64,12 @@
 
                                 <?php endif; ?>
                             </td>
-                            <td><?php echo e($booking->address); ?></td>
+                            <td>
+                                <?php echo e($booking->address); ?><br/>
+                                <?php if($booking->note != ''): ?>
+                                <p class="text-red">Ghi chú: <?php echo e($booking->note); ?></p>
+                                <?php endif; ?>
+                            </td>
                             <td class="text-center"><?php echo e(date('H:i d/m/Y', strtotime($booking->updated_at))); ?></td>
                             <td class="text-center">
                             <?php

@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <a href="/secret/bookings/creategvml" class="btn btn-info">Tạo công việc</a>
+                        {{-- <a href="/secret/bookings/creategvml" class="btn btn-info">Tạo công việc</a> --}}
                     </div>
                 </form>
                     

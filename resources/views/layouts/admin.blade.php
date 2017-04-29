@@ -127,7 +127,7 @@
 
 		@yield('content')
 
-	</div>	<!--/.main-->
+	</div>	/.main
 	@section('javascript')
 	<script src="{{ asset('public/js/jquery-1.11.1.min.js') }}"></script>
 	<script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
@@ -139,8 +139,9 @@
 	<script src="{{ asset('public/js/ajax.js') }}"></script>
 	<script src="{{ asset('public/js/app.js') }}"></script>
 	<script src="{{ asset('public/js/mymap.js') }}"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd3THpkAfWy7moq57cIMP7MJ0drjXpKKg&libraries=places&callback=initMap"
-        async defer></script>
+	
+	{{--Comment map <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd3THpkAfWy7moq57cIMP7MJ0drjXpKKg&libraries=places&callback=initMap"
+        async defer></script> --}}
 
 
 	@show	
