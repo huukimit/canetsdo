@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('title', 'Canets - Sinh Viên Giúp Việc, Gia  Sư nhé')
+@section('title', 'Canets - Sinh Viên Giúp Việc, Gia  Sư')
 
 @section('content')
 
