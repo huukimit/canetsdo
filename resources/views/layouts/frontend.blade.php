@@ -99,8 +99,7 @@
 
                 <div class="footer_item">
                     <h4>Video giới thiệu</h4>
-                    <iframe width="98%" height="300px" src="https://www.youtube.com/embed/wf3BDt5X7FM" frameborder="0" allowfullscreen>
-                    </iframe>
+                    <iframe width="98%" height="300px" src="https://www.youtube.com/embed/UD6jO6WOcqU" frameborder="0" allowfullscreen></iframe>
                 </div>
 
                 <div class="footer_item">
