@@ -8,4 +8,9 @@ class Feedback extends BaseModel {
         parent::__construct();
         $this->table = 'feedbacks';
     }
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Customer');
+    }
 }

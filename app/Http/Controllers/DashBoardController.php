@@ -50,6 +50,7 @@ class DashBoardController extends Controller {
     {
         if (Input::method() == 'POST') {
             $data = Input::all();
+            $data['status'] = 1;
             if (Thongbao::SaveData($data)) {
                 $pushData = ['key' => 'Thongbao', 'content' => $data['content']];
                 $customers = Customer::getTokenAllUserToPushNotify($data['type']);
@@ -110,6 +111,10 @@ class DashBoardController extends Controller {
                 ->select('id','fullname', 'manv_kh')->get(),
             'lichsucongtrus' => Lichsugiaodich::where('type', 4)->orderBy('created_at', 'DESC')->paginate(10),
         ]);
+    }
+
+    public function feedbacks() {
+        
     }
     
 
