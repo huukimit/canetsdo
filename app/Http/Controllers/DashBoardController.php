@@ -8,6 +8,7 @@ use App\Booking;
 use App\Customer;
 use App\Setting;
 use App\Thongbao;
+use App\Feedback;
 use App\Lichsugiaodich;
 use Input;
 use App\Commands\PushNotifyToDevices;
@@ -114,7 +115,11 @@ class DashBoardController extends Controller {
     }
 
     public function feedbacks() {
-        
+        // $fb = Feedback::orderBy('created_at', 'DESC')->paginate(10);
+        // dd($fb);
+        return view('admin.feedbacks',[
+            'feedbacks' => Feedback::orderBy('created_at', 'DESC')->paginate(10),
+        ]);
     }
     
 

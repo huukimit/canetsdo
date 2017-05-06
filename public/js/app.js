@@ -53,6 +53,27 @@ $(document).ready(function(){
             }
         });
     });
+
+    $('.mark_supported').click(function(){
+        var id = $(this).data('id');
+        processBlock();
+        $.ajax({
+            type: 'POST',
+            url: URL + '/secret/mark_supported',
+            data: {'id': id},
+            success: function(data) {
+                $.unblockUI();
+                if (data['status']) {
+                    $.notify('Good job, Re-active success', 'success');
+                }
+                location.reload();
+            },
+            error: function() {
+                console.log('Ajax Fail');
+            }
+        });
+    });
+    
     /* Active */
     $('.active_user').click(function(){
         var active = $(this).data('id');

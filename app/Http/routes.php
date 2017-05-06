@@ -22,12 +22,14 @@ Route::group(['prefix' => 'secret', 'middleware' => 'auth'], function()
     Route::get('/', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@index'));
     Route::get('bookings/motlan', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\BookingsController@giupviecmotlan'));
     Route::any('createnotify', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@createThongbao'));
+    Route::get('feedbacks', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@feedbacks'));
     
     Route::get('bookings/thuongxuyen', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\BookingsController@giupviecthuongxuyen'));
     Route::get('customers', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\CustomersController@customers'));
     Route::any('laborers/{id?}', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\CustomersController@laborers'));
     Route::get('usersblocked', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\CustomersController@usersblocked'));
     Route::post('active', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\CustomersController@activeUser'));
+    Route::post('mark_supported', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\CustomersController@markSupported'));
     Route::post('onoffgvthuongxuyen', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\CustomersController@onOffGvThuongxuyen'));
     Route::post('updateluonggv1lan', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\SystemController@updateLuonggv1lan'));
     Route::post('updateluonggvthuongxuyen', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\SystemController@updateluonggvthuongxuyen'));

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Customer;
 use App\Requires;
 use App\Setting;
+use App\Feedback;
 use App\Models\Media\Media;
 use App\CustomerRate;
 
@@ -114,11 +115,13 @@ class CustomersController extends Controller {
         $customers = $customers->orderBy('created_at', 'desc')->paginate(15);
         return view('admin.customers', ['main_data' => $customers]);
     }
+
     public function usersblocked()
     {
         $blocked = Customer::whereIn('status', [-1])->orderBy('created_at', 'desc')->paginate(15);
         return view('admin.usersblocked', ['main_data' => $blocked]);
     }
+
     public function activeUser()
     {
         $customer = Customer::find(Input::get('active'));
@@ -129,6 +132,17 @@ class CustomersController extends Controller {
         return Response::json(['status' => false]);
     }
 
+    public function markSupported()
+    {
+        $feedback = Feedback::find(Input::get('id'));
+        $feedback->replied = 1;
+        if ($feedback->save()) {
+            return Response::json(['status' => true]);
+        }
+
+        return Response::json(['status' => false]);
+    }
+    
     
     public function onOffGvThuongxuyen()
     {
