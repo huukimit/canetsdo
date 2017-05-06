@@ -37,7 +37,7 @@
 		                        	<td>{{ $feedback->customer->phone_number }}</td>
 		                        	<td>{{ $feedback->customer->fullname }}</td>
 		                        	<td>{{ $feedback->feedback }}</td>
-		                        	<td>
+		                        	<td class="text-center">
 		                        		@if ($feedback->replied == 0)
 		                        			<input type="checkbox" class="mark_supported" data-id ="{{ $feedback->id }}">
 		                        		@else
