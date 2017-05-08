@@ -1524,5 +1524,10 @@ function nhanviec() {
         
     }
 
+    function testqueue() {
+        Queue::later(5, new PushNotifyToDevices(1, 2, [1,2], 4));
+        echo 'Success';
+    }
+
 
 }
