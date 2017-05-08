@@ -4,6 +4,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\BaseModel;
 use DB, URL;
+use Illuminate\Support\Facades\Log;
 
 class Customer extends BaseModel {
     function __construct() {
@@ -102,6 +103,7 @@ class Customer extends BaseModel {
             ORDER BY distance ASC";
             //HAVING distance < $distance
         $data = DB::select($sql);
+        Log::info(['sql' => $sql]);
         return $data;
     }
 
