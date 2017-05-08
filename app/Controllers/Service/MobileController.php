@@ -459,13 +459,11 @@ class MobileController extends ServiceController {
     public function login()
     {
        $postData = Input::all();
-       Log::info($postData);
        $this->checkNullDataInArray($postData);
        $existUser = Customer::DoLogin($postData);
        if ($existUser) {
            if (isset($postData['device_token'])) {
                $checkDevice = Device::checkTokenDevice($postData, $existUser->id);
-               Log::info($checkDevice);
                if (!isset($checkDevice->device_token)) {
                     $deviceId = Device::SaveData($postData);
                     CustomerDevice::SaveData(['customer_id' => $existUser->id, 'device_id' => $deviceId]);
@@ -762,7 +760,6 @@ class MobileController extends ServiceController {
         $key = explode(':', $loaidichvu);
         $pushData = ['key' => $key[0], 'booking_id' => $booking_id];
         $customers = Customer::getLaborsArround($lat, $long, $distance, $key[0]);
-        
         Queue::later(5, new PushNotifyToDevices($customers, $loaidichvu, $pushData, $booking_id));
     }
 
