@@ -29,7 +29,7 @@ class PushNotifyToDevices extends Command implements SelfHandling {
 	 */
 	public function handle()
 	{
-		Log::info(['queue' => 'run']);
+		Log::info(['queue' => 'running']);
 		$customers = $this->devices;
 		$message = $this->message;
 		$pushData = $this->pushData;
