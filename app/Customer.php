@@ -90,7 +90,6 @@ class Customer extends BaseModel {
 
     static function getLaborsArround($lat, $long, $distance, $dichvu)
     {
-        Log::info(['lat' => $lat, 'long' => $long]);
         $fielDichvu = ($dichvu == 'GV1L') ? 'viec_1_lan' : 'viec_thuongxuyen';
         $sql = "SELECT shp.id, fullname, type_customer, quequan, lat, shp.long,type_device, device_token, (3956 * 2 * ASIN(SQRT(POWER(SIN(($lat -abs(shp.lat)) * pi()/180 / 2),2)
             + COS($lat * pi()/180 ) * COS(abs(shp.long) *  pi()/180) * POWER(SIN(($long - abs(shp.long))
@@ -104,7 +103,6 @@ class Customer extends BaseModel {
             ORDER BY distance ASC";
             //HAVING distance < $distance
         $data = DB::select($sql);
-        Log::info(['sql' => $sql]);
         return $data;
     }
 
