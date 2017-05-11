@@ -487,6 +487,7 @@ class MobileController extends ServiceController {
 
     public function registerCustomer() {
         $postData = Input::all();
+        Log::info(['customer' => $postData]);
         $this->checkNullData(Input::get('fullname', null));
         $this->checkNullData(Input::get('email', null));
         $this->checkNullData(Input::get('password', null));
@@ -545,6 +546,7 @@ class MobileController extends ServiceController {
 
     public function dangkytaikhoanlaodong() {
         $data = Input::all();
+        Log::info(['laodong' => $data]);
         $this->checkNullData(Input::get('fullname', null));
         $this->checkNullData(Input::get('email', null));
         $this->checkNullData(Input::get('password', null));
