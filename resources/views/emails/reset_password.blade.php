@@ -30,8 +30,8 @@
         <tr>
             <td>
                 <span>
-                    <b>Xin chao {{$fullname}}</b><br/>
-                    Click link to change password : {{$link}}
+                    <b>Xin chào {{$fullname}}</b><br/>
+                    Hãy click vào link này để đổi mật khẩu : {{$link}}
                 </span>
             </td>
         </tr>
