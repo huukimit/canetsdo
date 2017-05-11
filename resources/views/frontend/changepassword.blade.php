@@ -28,8 +28,8 @@
             <input type="hidden" name="token" value="{{ $data['token'] }}">
             <label for="">Nhập mật khẩu mới</label>
             <input type="password" placeholder="*************" name="password">
-            <label for="">Nhập lại mật khẩu</label>
-            <input type="password" placeholder="*************" name="confirm_password">
+            {{-- <label for="">Nhập lại mật khẩu</label>
+            <input type="password" placeholder="*************" name="confirm_password"> --}}
             <input type="submit" value="Xác nhận">
         </form>
     </div>
