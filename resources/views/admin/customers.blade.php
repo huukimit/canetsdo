@@ -39,7 +39,7 @@
                             <td>{{ $data->fullname }}</td>
                             <td>{{ $data->phone_number }}</td>
                             <td>{{ $data->school }}</td>
-                            <td class="text-right">{{ $data->vi_taikhoan }}</td>
+                            <td class="text-right">{{ number_format($data->vi_taikhoan) }}</td>
                             <td class="text-center">{{ date('H:i d/m/Y', strtotime($data->updated_at)) }}</td>
                             <td class="text-center">
                             @if ($data->status == 0)

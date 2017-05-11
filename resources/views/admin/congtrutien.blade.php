@@ -67,9 +67,9 @@
 	                        	<td>{{ $lichsucongtru->customer_id }}</td>
 	                        	<td>
 	                        		@if ($lichsucongtru->amount_moneys > 0)
-	                        			<label class="label label-success">+{{ $lichsucongtru->amount_moneys }}</label>
+	                        			<label class="label label-success">+{{ number_format($lichsucongtru->amount_moneys) }}</label>
 	                        		@else
-										<label class="label label-warning">{{ $lichsucongtru->amount_moneys }}</label>
+										<label class="label label-warning">{{ number_format($lichsucongtru->amount_moneys) }}</label>
 	                        		@endif
 	                        	</td>
 	                        	<td>{{ $lichsucongtru->reason }}</td>

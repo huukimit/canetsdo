@@ -44,8 +44,8 @@
                             <td><a href="/secret/laborers/{{$data->id}}" title="Xem thông tin chi tiết, chỉnh sửa">{{ $data->fullname }}</a></td>
                             <td class="text-center">{{ $data->phone_number }}</td>
                             <td>{{ $data->school }}</td>
-                            <td class="text-right">{{ $data->vi_tien }}</td>
-                            <td class="text-right">{{ $data->vi_taikhoan }}</td>
+                            <td class="text-right">{{ number_format($data->vi_tien) }}</td>
+                            <td class="text-right">{{ number_format($data->vi_taikhoan) }}</td>
                             <td title="Cho phép giúp việc thường xuyên" class="text-center"><input class="onoffgvthuongxuyen" type="checkbox" @if($data->allow_gv1lan == 1) checked="" @endif value="{{$data->id}}">
                             </td>
                             <td class="text-center">{{ date('d/m/Y', strtotime($data->updated_at)) }}
