@@ -27,4 +27,10 @@ class Notify_missed_booking extends BaseModel {
         return self::where('notify_missed_bookings.customer_id', $customerId)
         ->where('notify_missed_bookings.booking_id', $bookingId)->delete();
     }
+
+    static function cleanNotify($customerId, $bookingId)
+    {
+        self::where('notify_missed_bookings.customer_id', '!=', $customerId)
+        ->where('notify_missed_bookings.booking_id', $bookingId)->delete();
+    }
 }

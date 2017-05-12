@@ -1166,8 +1166,7 @@ function nhanviec() {
                     Notify::Push2Ios($laodong->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
                 }
             }
-            Notify_missed_booking::where('booking_id', Input::get('booking_id'))
-            ->where('customer_id', '!=', $checkExist->customer_id)->delete();
+            Notify_missed_booking::cleanNotify($checkExist->laodong_id, Input::get('booking_id'));
         } else {
             $this->status = 300;
             $this->message = 'Can not find data by bid and booking_id requested';
