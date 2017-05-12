@@ -24,7 +24,24 @@ class BookingsController extends Controller {
             $booking_id = Booking::SaveData($post);
             $pushData = ['key' => 'GV1L', 'booking_id' => $booking_id];
 	        $customers = Customer::getLaborsArround($post['lat'], $post['long'], 50, 'GV1L');
-	        Queue::later(5, new PushNotifyToDevices($customers, 'GV1L' . $post['address'], $pushData, $booking_id));
+
+	        $eachGroup = [];
+	        $i = 0;
+	        foreach ($customers as  $customer) {
+	            $i++;
+	            $eachGroup[] = [
+	                'id' => $customer->id,
+	                'type_customer' => $customer->type_customer,
+	                'type_device' => $customer->type_device,
+	                'device_token' => $customer->device_token,
+	            ];
+	            if ($i == 10) {
+	                Log::info(['count' => $eachGroup]);
+	                Queue::later(5, new PushNotifyToDevices($eachGroup, 'GV1L' . $post['address'], $pushData, $booking_id));
+	                $i = 0;
+	                $eachGroup = [];
+	            }
+	        }
 	        return redirect('secret/bookings/motlan');
         }
 		$setting = Setting::getConfig();
