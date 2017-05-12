@@ -764,7 +764,7 @@ class MobileController extends ServiceController {
         $customers = Customer::getLaborsArround($lat, $long, $distance, $key[0]);
         $eachGroup = [];
         $i = 0;
-        foreach ($customers as $key => $customer) {
+        foreach ($customers as  $customer) {
             $i++;
             $eachGroup[] = [
                 'id' => $customer->id,
@@ -773,6 +773,7 @@ class MobileController extends ServiceController {
                 'device_token' => $customer->device_token,
             ];
             if ($i == 10) {
+                Log::info(['count' => $eachGroup]);
                 Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
                 $i = 0;
                 $eachGroup = [];

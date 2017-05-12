@@ -32,8 +32,7 @@ class PushNotifyToDevices extends Command implements SelfHandling {
 		$customers = $this->devices;
 		$message = $this->message;
 		$pushData = $this->pushData;
-		Log::info(['count' => $customers]);
-
+		
         $missed['push_data'] = json_encode($pushData);
         $missed ['booking_id'] = $this->bookingId;
 		foreach($customers as $customer)
