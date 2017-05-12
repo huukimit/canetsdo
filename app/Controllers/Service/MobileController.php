@@ -1547,7 +1547,6 @@ function nhanviec() {
     }
 
     function testqueue() {
-        Queue::later(5, new PushNotifyToDevices(1, 2, [1,2], 4));
         Notify_missed_booking::where('booking_id', 1)
             ->where('customer_id', '!=', 3)->delete();
         echo 'Success';
