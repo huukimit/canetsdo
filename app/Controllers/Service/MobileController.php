@@ -774,7 +774,7 @@ class MobileController extends ServiceController {
             ];
             if ($i == 10) {
                 Log::info(['count' => $eachGroup]);
-                Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
+                // Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
                 $i = 0;
                 $eachGroup = [];
             }
