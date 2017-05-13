@@ -53,7 +53,9 @@
                             <td>
                                 @if (isset($booking->customer->fullname))
                                     {{ $booking->customer->fullname }}<br/>
-                                    <label>0{{ number_format($booking->customer->phone_number, 0, ",", ".") }}</label>
+                                    @if($booking->customer->phone_number != '')
+                                    <label>0{{ number_format((int) $booking->customer->phone_number, 0, ",", ".") }}</label>
+                                    @endif
                                 @else
                                     <label class="label label-danger">Error by app</label>
                                 @endif

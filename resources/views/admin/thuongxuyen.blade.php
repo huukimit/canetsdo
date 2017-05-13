@@ -36,9 +36,9 @@
                     <thead>
                         <tr>
                             <th>Time</th>
-                            <th class="col-md-3">Customer</th>
+                            <th>Customer</th>
                             <th>Address work</th>
-                            <th class="col-md-4">SV nhận việc</th>
+                            <th>SV nhận việc</th>
                             <th class="text-center">Status</th>
                             <th>Hình ảnh căn hộ</th>
                             <th class="text-center">Updated time </th>
@@ -52,7 +52,7 @@
                                 @if (isset($booking->customer->fullname))
                                     {{ $booking->customer->fullname }}<br/>
                                     @if($booking->customer->phone_number != '')
-                                        <label>0{{ number_format($booking->customer->phone_number, 0, ",", ".") }}</label>
+                                        <label>0{{ number_format((int) $booking->customer->phone_number, 0, ",", ".") }}</label>
                                     @endif
                                 @else
                                     <label class="label label-danger">Error by app</label>
