@@ -9,6 +9,18 @@ class Bid extends BaseModel {
         $this->table = 'bids';
     }
 
+    public function booking()
+    {
+        // $instance->getQuery()->where('available','=', 1);
+        // return $instance
+        return $this->belongsTo('App\Booking');
+
+    }
+
+    public function laodong() {
+        return $this->belongsTo('App\Customer', 'laodong_id');
+    }
+
     static function countBidBuBookingId($bookingId) {
         $count = self::where('booking_id', $bookingId)->count();
         return $count;

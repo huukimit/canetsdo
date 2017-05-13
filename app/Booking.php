@@ -15,6 +15,11 @@ class Booking extends BaseModel {
         return $this->belongsTo('App\Customer');
     }
 
+    public function bids()
+    {
+        return $this->hasMany('App\Bid');
+    }
+
     static function getBookingByCustomerId($customerId) {
         $data = self::whereIn('status', [0, 1, -2, 3])->where('customer_id', $customerId)
         ->select('id','address','status','type','created_at', 'updated_at', 'chonnguoi')->get();

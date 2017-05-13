@@ -59,3 +59,7 @@
 .text-red{
 	color:red;
 }
+.panel-body{
+	overflow: auto;
+	width:auto;
+}

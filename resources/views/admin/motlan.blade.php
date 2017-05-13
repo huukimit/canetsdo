@@ -39,9 +39,9 @@
                             <th>No.</th>
                             <th>Time</th>
                             <th>Customer</th>
-                            <th>Phone number</th>
                             <th>Address work</th>
-                            <th class="text-center">Updated time </th>
+                            <th>Lao động</th>
+                            <th class="text-center">Ngày tạo </th>
                             <th class="text-center">Status</th>
                         </tr>
                     </thead>
@@ -52,14 +52,10 @@
                             <td><b class="text-success">{{ $booking->time_start . ' - ' . $booking->time_end }}</b></td>
                             <td>
                                 @if (isset($booking->customer->fullname))
-                                    {{ $booking->customer->fullname }}
+                                    {{ $booking->customer->fullname }}<br/>
+                                    <label>0{{ number_format($booking->customer->phone_number,0, ",", ".") }}</label>
                                 @else
                                     <label class="label label-danger">Error by app</label>
-                                @endif
-                            </td>
-                            <td>
-                                @if (isset($booking->customer->phone_number))
-                                    {{ $booking->customer->phone_number }}
                                 @endif
                             </td>
                             <td>
@@ -68,7 +64,12 @@
                                 <p class="text-red">Ghi chú: {{ $booking->note }}</p>
                                 @endif
                             </td>
-                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->updated_at)) }}</td>
+                            <td>
+                                @foreach($booking->bids as $bid)
+                                    <a class=" {{ ($bid->status == 0) ? 'text-muted' : '' }}" href="/secret/laborers/{{ $bid->laodong_id }}">{{ $bid->laodong->fullname }}</a><br/>
+                                @endforeach
+                            </td>
+                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->created_at)) }}</td>
                             <td class="text-center">
                             <?php
                                 switch($booking->status) {

@@ -35,61 +35,40 @@
                 <table class="table  table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>No.</th>
                             <th>Time</th>
-                            <th>Customer</th>
-                            <th>Phone number</th>
+                            <th class="col-md-3">Customer</th>
                             <th>Address work</th>
+                            <th class="col-md-4">SV nhận việc</th>
+                            <th class="text-center">Status</th>
                             <th>Hình ảnh căn hộ</th>
                             <th class="text-center">Updated time </th>
-                            <th class="text-center">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($bookings as $booking)
                         <tr>
-                            <td>{{ $booking->id }}</td>
                             <td><b class="text-success">{{ $booking->time_start . ' - ' . $booking->time_end }}</b></td>
                             <td>
                                 @if (isset($booking->customer->fullname))
-                                    {{ $booking->customer->fullname }}
+                                    {{ $booking->customer->fullname }}<br/>
+                                    <label>0{{ number_format($booking->customer->phone_number,0, ",", ".") }}</label>
                                 @else
                                     <label class="label label-danger">Error by app</label>
                                 @endif
                             </td>
-                            <td>
-                                @if (isset($booking->customer->phone_number))
-                                    {{ $booking->customer->phone_number }}
-                                @endif
-                            </td>
+                            
                             <td>
                                 {{ $booking->address }}
                                 @if($booking->note != '')
-                                <p class="text-red">Ghi chú: {{ $booking->note }}</p>
+                                    <p class="text-red">Ghi chú: {{ $booking->note }}</p>
                                 @endif
                             </td>
                             <td>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <a href="/{{ $booking->anh1 }}">
-                                                <img src="/{{($booking->anh1) ? $booking->anh1 : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh ăn hộ" class="img_mini">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="/{{ $booking->anh2 }}">
-                                                <img src="/{{($booking->anh2) ? $booking->anh2 : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh ăn hộ" class="img_mini">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="/{{ $booking->anh3 }}">
-                                                <img src="/{{($booking->anh3) ? $booking->anh3 : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh ăn hộ" class="img_mini">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
+                                @foreach($booking->bids as $bid)
+                                    <a class=" {{ ($bid->status == 0) ? 'text-muted' : '' }}" href="/secret/laborers/{{ $bid->laodong_id }}">{{ $bid->laodong->fullname }}</a><br/>
+                                @endforeach
                             </td>
-                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->updated_at)) }}</td>
+                            
                             <td class="text-center">
                             <?php
                                 switch($booking->status) {
@@ -120,6 +99,28 @@
                                 echo $label;
                             ?>
                             </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a href="/{{ $booking->anh1 }}">
+                                                <img src="/{{($booking->anh1) ? $booking->anh1 : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh ăn hộ" class="img_mini">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/{{ $booking->anh2 }}">
+                                                <img src="/{{($booking->anh2) ? $booking->anh2 : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh ăn hộ" class="img_mini">
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/{{ $booking->anh3 }}">
+                                                <img src="/{{($booking->anh3) ? $booking->anh3 : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh ăn hộ" class="img_mini">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->updated_at)) }}</td>
                         </tr>
                         @endforeach
                     </tbody>
