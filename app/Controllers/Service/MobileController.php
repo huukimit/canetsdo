@@ -1545,6 +1545,13 @@ function nhanviec() {
         
     }
 
+    function report() {
+        $this->checkNullData(Input::get('customer_id', null));
+        $this->checkNullData(Input::get('booking_id', null));
+        $this->status = 200;
+        $this->message = 'Success';
+    }
+
     function testqueue() {
         Notify_missed_booking::where('booking_id', 1)
             ->where('customer_id', '!=', 3)->delete();

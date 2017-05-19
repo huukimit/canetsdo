@@ -115,5 +115,6 @@ return [
         'service/mobile/khachhangkhongnhan',
         'service/mobile/chuyenTienLenViTaiKhoan',
         'service/mobile/getQAndA',
+        'service/mobile/report',
     ],
 ];
