@@ -69,10 +69,8 @@ class MobileController extends ServiceController {
         ];
         $push_data = json_encode($push_data);
         $res = Notify::cloudMessaseAndroid(Input::get('device_token'), "Test push notify for Android" , $push_data, $app);
-        if ($res['success'] == 1) {
-            $this->status = 200;
-            $this->message = 'Push to IOS success!';
-        }
+        $this->data = json_decode($res, true);
+        $this->status = 200;
     }
 
     public function getContract(){
