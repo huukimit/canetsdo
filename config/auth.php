@@ -116,5 +116,6 @@ return [
         'service/mobile/chuyenTienLenViTaiKhoan',
         'service/mobile/getQAndA',
         'service/mobile/report',
+        'service/mobile/pushAndroid',
     ],
 ];

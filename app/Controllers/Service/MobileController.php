@@ -57,6 +57,24 @@ class MobileController extends ServiceController {
         }
     }
 
+    function pushAndroid(){
+        $this->checkNullData(Input::get('device_token', null));
+        $app = Input::get('app', null);
+        if ($app == null) {
+            $app = 'laodong';
+        }
+        $push_data = [
+            'laodong_id' => 1,
+            'booking_id' => 1,
+        ];
+        $push_data = json_encode($push_data);
+        $res = Notify::cloudMessaseAndroid(Input::get('device_token'), "Test push notify for Android" , $push_data, $app);
+        if ($res['success'] == 1) {
+            $this->status = 200;
+            $this->message = 'Push to IOS success!';
+        }
+    }
+
     public function getContract(){
         $this->checkNullData(Input::get('email', null));
         $this->checkNullData(Input::get('customer_id', null));
@@ -1546,8 +1564,8 @@ function nhanviec() {
     }
 
     function report() {
-        $this->checkNullData(Input::get('customer_id', null));
-        $this->checkNullData(Input::get('booking_id', null));
+        // $this->checkNullData(Input::get('customer_id', null));
+        // $this->checkNullData(Input::get('booking_id', null));
         $this->status = 200;
         $this->message = 'Success';
     }
