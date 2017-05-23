@@ -34,7 +34,6 @@ class PushNotifyToDevices extends Command implements SelfHandling {
 		$pushData = $this->pushData;
         $missed['push_data'] = json_encode($pushData);
         $missed ['booking_id'] = $this->bookingId;
-        Log::info($customers);
 		foreach($customers as $customer)
 		{
 			if ($customer['type_device'] == 2) { /* Push IOS */
