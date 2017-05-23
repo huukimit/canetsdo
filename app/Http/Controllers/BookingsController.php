@@ -8,6 +8,7 @@ use Input;
 use App\Commands\PushNotifyToDevices;
 use Illuminate\Support\Facades\Queue;
 use App\Models\Media\Media;
+use Illuminate\Support\Facades\Log;
 
 class BookingsController extends Controller {
 
