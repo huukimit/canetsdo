@@ -36,7 +36,7 @@ class BookingsController extends Controller {
 	                'device_token' => $customer->device_token,
 	            ];
 	            if ($i == 10) {
-	                // Log::info(['count' => $eachGroup]);
+	                Log::info(['count' => $eachGroup]);
 	                Queue::later(5, new PushNotifyToDevices($eachGroup, 'GV1L' . $post['address'], $pushData, $booking_id));
 	                $i = 0;
 	                $eachGroup = [];
