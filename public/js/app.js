@@ -163,9 +163,9 @@ $(document).ready(function(){
     $(document).on('click', '#updateversionapp', function() {
         processBlock();
         var canets_android = $('#canets_android').val();
-        var canets_do_android = $('#canets_android').val();
-        var canets_ios = $('#canets_android').val();
-        var canets_do_ios = $('#canets_android').val();
+        var canets_do_android = $('#canets_do_android').val();
+        var canets_ios = $('#canets_ios').val();
+        var canets_do_ios = $('#canets_do_ios').val();
        
         $.ajax({
             type : 'POST',
