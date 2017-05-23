@@ -160,6 +160,64 @@ $(document).ready(function(){
         });
     });
 
+    $(document).on('click', '#updateversionapp', function() {
+        processBlock();
+        var canets_android = $('#canets_android').val();
+        var canets_do_android = $('#canets_android').val();
+        var canets_ios = $('#canets_android').val();
+        var canets_do_ios = $('#canets_android').val();
+       
+        $.ajax({
+            type : 'POST',
+            url : URL + '/secret/updateversionapp',
+            data: {
+                canets_android : canets_android,
+                canets_do_android: canets_do_android,
+                canets_ios: canets_ios,
+                canets_do_ios:canets_do_ios
+            },
+            success: function(data){
+                console.log(data['status']);
+                if (data['status']) {
+                    $.notify('Good job, Update version success', 'success');
+                    $.unblockUI();
+                } else {
+                    $.notify('Error on server', 'error');
+                }
+            },
+            error: function() {
+                $.unblockUI();
+                $.notify('Ajax error', 'error');
+            }
+        });
+    });
+
+    $(document).on('click', '#updatepolicy', function() {
+        processBlock();
+        $.ajax({
+            type : 'POST',
+            url : URL + '/secret/updatepolicy',
+            data: {
+                policy_customer : $('#policy_customer').val(),
+                policy_worker: $('#policy_customer').val()
+            },
+            success: function(data){
+                console.log(data['status']);
+                if (data['status']) {
+                    $.notify('Good job, Update version success', 'success');
+                    $.unblockUI();
+                } else {
+                    $.notify('Error on server', 'error');
+                }
+            },
+            error: function() {
+                $.unblockUI();
+                $.notify('Ajax error', 'error');
+            }
+        });
+    });
+
+
     /*End */
     /*Start*/
     

@@ -3,6 +3,8 @@
 @section('content')
 <div class="panel panel-default">
     <div class="panel-body">
+        
+        
         <div class="row">
             <div class="col-md-12">
                 <b>Lương giúp việc một lần</b> <label class="label label-info "></label>
@@ -86,6 +88,66 @@
                 </table>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <b>App Version</b> <label class="label label-info "></label>
+                <hr/>
+                <table class="table table-bordered" id="">
+                    <tr>
+                        <th class="text-center">Android - Canets</th>
+                        <th class="text-center">Android - CanetsDo</th>
+                        <th class="text-center">IOS - Canets</th>
+                        <th class="text-center">IOS - CanetsDo</th>
+                        
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="" name="canets_android" id="canets_android" class="form-control" value="{{$mainData->canets_android}}">
+                        </td>
+                        <td>
+                            <input type="" name="canets_do_android" id="canets_do_android" class="form-control" value="{{$mainData->canets_do_android}}">
+                        </td>
+                        <td>
+                            <input type="" name="canets_ios" id="canets_ios" class="form-control" value="{{$mainData->canets_ios}}">
+                        </td>
+                        <td>
+                            <input type="" name="canets_do_ios" id="canets_do_ios" class="form-control" value="{{$mainData->canets_do_ios}}">
+                        </td>
+                       
+                        <td id="versions"><button class="btn btn-info btn-sm" id="updateversionapp">Update</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div><!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <b>Điều khoản sử dụng</b> <label class="label label-info "></label>
+                <hr/>
+                <table class="table table-bordered" id="">
+                    <tr>
+                        <th class="text-center">Dành cho Khách hàng</th>
+                        <th class="text-center">Dành cho Lao động</th>
+                        
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="form-control" rows="10" id="policy_customer">{{$mainData->policy_customer}}</textarea>
+                        </td>
+                        <td>
+                            <textarea class="form-control" rows="10" id="policy_worker">{{$mainData->policy_worker}}</textarea>
+                        </td>
+                        
+                       
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="versions"><button class="btn btn-info btn-sm" id="updatepolicy">Update</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div><!-- /.row -->
     </div>
 </div>
 @stop

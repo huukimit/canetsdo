@@ -42,6 +42,34 @@ class SystemController extends Controller {
             return Response::json(['status' => false]);
         }
     }
+    
+    public function updateversionapp()
+    {
+        $setting = Setting::find(1);
+        if ($setting) {
+            $setting->canets_android= Input::get('canets_android');
+            $setting->canets_do_android= Input::get('canets_do_android');
+            $setting->canets_ios= Input::get('canets_ios');
+            $setting->canets_do_ios= Input::get('canets_do_ios');
+            if ($setting->save()) {
+                return Response::json(['status' => true]);
+            }
+        }
+        return Response::json(['status' => false]);
+    }
+
+    public function updatepolicy()
+    {
+        $setting = Setting::find(1);
+        if ($setting) {
+            $setting->policy_customer= Input::get('policy_customer');
+            $setting->policy_worker= Input::get('policy_worker');
+            if ($setting->save()) {
+                return Response::json(['status' => true]);
+            }
+        }
+        return Response::json(['status' => false]);
+    }
         
     
     public function updatethongtinchuyenkhoan()
