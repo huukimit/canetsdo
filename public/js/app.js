@@ -199,12 +199,12 @@ $(document).ready(function(){
             url : URL + '/secret/updatepolicy',
             data: {
                 policy_customer : $('#policy_customer').val(),
-                policy_worker: $('#policy_customer').val()
+                policy_worker: $('#policy_worker').val()
             },
             success: function(data){
                 console.log(data['status']);
                 if (data['status']) {
-                    $.notify('Good job, Update version success', 'success');
+                    $.notify('Good job, Update policy success', 'success');
                     $.unblockUI();
                 } else {
                     $.notify('Error on server', 'error');
