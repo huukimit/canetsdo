@@ -59,10 +59,10 @@ return [
              *
              * Save file to folder notify in storage path of laravel
              */
-            'pem_file_dir' => storage_path('notify/ios.pem'),
+            'pem_file_dir' => storage_path('notify/canets.pem'),
             'pem_pass' => '123',
-            'ios_server' => 'ssl://gateway.sandbox.push.apple.com:2195', // Developer Mode
-            //'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
+            // 'ios_server' => 'ssl://gateway.sandbox.push.apple.com:2195', // Developer Mode
+            'ios_server' => 'ssl://gateway.push.apple.com:2195', // Go Live
         ),
         'ios_laodong' => array(
             'pem_file_dir' => storage_path('notify/ios_sv.pem'),
