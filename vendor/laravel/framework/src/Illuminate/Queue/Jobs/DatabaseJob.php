@@ -46,8 +46,12 @@ class DatabaseJob extends Job implements JobContract {
 	 */
 	public function fire()
 	{
-		Log::warning(['payload' => $this->job->payload]);
-		$this->resolveAndFire(json_decode($this->job->payload, true));
+		$checkArray = json_decode($this->job->payload, true); 
+		if (is_array($checkArray)) {
+			$this->resolveAndFire(json_decode($this->job->payload, true));
+		} else {
+			Log::warning(['payload' => $this->job->payload]);
+		}
 	}
 
 	/**
