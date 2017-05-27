@@ -53,7 +53,7 @@ class MobileController extends ServiceController {
         $res = Notify::Push2Ios(Input::get('device_token'), "Test push notify" , $push_data, $app);
         if ($res['success'] == 1) {
             $this->status = 200;
-            $this->message = 'Push to IOS success!';
+            $this->message = 'Push to IOS success!@';
         }
     }
 
@@ -877,6 +877,13 @@ class MobileController extends ServiceController {
         $this->status = 200;
         $this->message = "Success";
         $this->data = $bookings;
+    }
+
+    function svAround(){
+        $sinhviens = Customer::getSinhvienNearly(20.983249, 105.831277, 1000);
+        $this->data = $sinhviens;
+        $this->status = 200;
+        $this->message = 'Success';
     }
 
     function screentopcustomer() {

@@ -3,6 +3,7 @@
 use Illuminate\Queue\DatabaseQueue;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Queue\Job as JobContract;
+use Illuminate\Support\Facades\Log;
 
 class DatabaseJob extends Job implements JobContract {
 
@@ -45,6 +46,7 @@ class DatabaseJob extends Job implements JobContract {
 	 */
 	public function fire()
 	{
+		Log::warning(['payload' => $this->job->payload]);
 		$this->resolveAndFire(json_decode($this->job->payload, true));
 	}
 
