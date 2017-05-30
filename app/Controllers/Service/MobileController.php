@@ -788,7 +788,6 @@ class MobileController extends ServiceController {
                 'type_device' => $customer->type_device,
                 'device_token' => $customer->device_token,
             ];
-            Log::info(['group' => $eachGroup]);
             if ($i == 10) {
                 Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
                 $i = 0;
