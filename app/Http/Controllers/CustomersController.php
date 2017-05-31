@@ -80,7 +80,7 @@ class CustomersController extends Controller {
 
                 });
             };
-            $laborers = $laborers->orderBy('status')->orderBy('created_at', 'desc')
+            $laborers = $laborers->orderBy('created_at', 'desc')
             ->paginate(15);
             return view('admin.laborers', ['main_data' => $laborers]);
         } else {

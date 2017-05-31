@@ -604,17 +604,17 @@ class MobileController extends ServiceController {
             $upImage = Media::uploadImage($_FILES, 'cmtnd');
             $data['anhcmtnd_sau'] = $upImage['url'];
         }
-        $status = DB::transaction(function () use($data) {
-            if (isset($data['birthday'])) {
-                $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
-            }
-            Customer::SaveData($data);
+        // $status = DB::transaction(function () use($data) {
+        if (isset($data['birthday'])) {
+            $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
+        }
+        $status = Customer::SaveData($data);
             // $deviceId = Device::SaveData($data);
             // $data['customer_id'] = $id;
             // $data['device_id'] = $deviceId;
             // CustomerDevice::SaveData($data);
-        });
-        if (is_null($status)) {
+        // });
+        if ($status) {
             $this->status = 200;
             //$this->sendMail('Active account' , 'emails.active', $data);
             $this->message =  Config::get('services.notify.register_successfull');
@@ -735,7 +735,7 @@ class MobileController extends ServiceController {
         $this->data = ['booking_id' => $booking_id];
         $this->status = 200;
         $this->message = "Success";
-        $this->notifyToLaborer($postData['lat'], $postData['long'], $booking_id, 1000, 'GV1L: ' . $postData['address']);
+        $this->notifyToLaborer($postData['lat'], $postData['long'], $booking_id, 10, 'GV1L: ' . $postData['address']);
 
     }
 
@@ -771,7 +771,7 @@ class MobileController extends ServiceController {
         $this->status = 200;
         $this->data = ['booking_id' => $booking_id];
         $this->message = "Success";
-        $this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 1000, 'GVTX: ' . $data['address']);
+        $this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 10, 'GVTX: ' . $data['address']);
     }
 
     function notifyToLaborer($lat, $long, $booking_id, $distance, $loaidichvu = 'test') {
