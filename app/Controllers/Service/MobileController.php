@@ -774,6 +774,14 @@ class MobileController extends ServiceController {
         $this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 10, 'GVTX: ' . $data['address']);
     }
 
+    function getLaodongByLatLong(){
+        $post = Input::all();
+        $customers = Customer::getLaborsArround($post['lat'], $post['long'], $post['distance'], 'viec_1_lan');
+        $this->status = 200;
+        $this->data = $customers;
+        $this->message = "Success";
+    }
+
     function notifyToLaborer($lat, $long, $booking_id, $distance, $loaidichvu = 'test') {
         $key = explode(':', $loaidichvu);
         $pushData = ['key' => $key[0], 'booking_id' => $booking_id];

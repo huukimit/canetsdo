@@ -117,5 +117,6 @@ return [
         'service/mobile/getQAndA',
         'service/mobile/report',
         'service/mobile/pushAndroid',
+        'service/mobile/getLaodongByLatLong',
     ],
 ];
