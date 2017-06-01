@@ -133,8 +133,8 @@ class Customer extends BaseModel {
             ON shp.id = cs_dv.customer_id JOIN devices
             ON cs_dv.device_id = devices.id
             WHERE type_customer = 1 AND $fielDichvu = 1
-            HAVING distance < $distance
             ORDER BY distance ASC";
+            // HAVING distance = null 
         $data = DB::select($sql);
         Log::error(['sql' => $sql]);
         return $data;
