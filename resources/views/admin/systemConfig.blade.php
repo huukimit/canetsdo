@@ -5,12 +5,12 @@
     <div class="panel-body">
                 <div class="row">
             <div class="col-md-12">
-                <b>Config ID tài khoản Test Khách hàng và Lao động(ID cách nhau bới dấu phẩy) *** <p class="text-success">Khải đừng chỉnh cái này nhé</p></b> <label class="label label-info "></label>
+                <b>Config theo số điện thoại tài khoản Test Khách hàng và Lao động(ID cách nhau bới dấu phẩy) *** <p class="text-success">Khải đừng chỉnh cái này nhé</p></b> <label class="label label-info "></label>
                 <hr/>
                 <table class="table table-bordered" id="">
                     <tr>
-                        <th class="text-center">ID Fake KH</th>
-                        <th class="text-center">ID Fake Lao động</th>
+                        <th class="text-center">Danh sách điện thoại KH</th>
+                        <th class="text-center">Danh sách điện thoại LĐ</th>
                     </tr>
                     <tr>
                         <td>
