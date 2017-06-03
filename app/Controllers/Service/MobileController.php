@@ -742,7 +742,7 @@ class MobileController extends ServiceController {
         Log::info(['info' => $customerFake]);
         if (in_array($cs['phone_number'], $customerFake)) {
 
-            $this->notifyForLaodongFake($config->fake_kh, $booking_id, 'GV1L: ' . $postData['address']);
+            $this->notifyForLaodongFake($config->fake_ld, $booking_id, 'GV1L: ' . $postData['address']);
         } else {
             $this->notifyToLaborer($postData['lat'], $postData['long'], $booking_id, 10, 'GV1L: ' . $postData['address']);
         }
@@ -786,7 +786,7 @@ class MobileController extends ServiceController {
         $cs = Customer::getById($data['customer_id']);
         $customerFake = explode(',', $config->fake_kh);
         if (in_array($cs['phone_number'], $customerFake)) {
-            $this->notifyForLaodongFake($config->fake_kh, $booking_id, 'GVTX: ' . $data['address']);
+            $this->notifyForLaodongFake($config->fake_ld, $booking_id, 'GVTX: ' . $data['address']);
         } else {
             
             $this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 10, 'GVTX: ' . $data['address']);
