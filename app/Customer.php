@@ -124,15 +124,11 @@ class Customer extends BaseModel {
     static function getInfoPushNotiInArrayCustomers($phoneNumber, $dichvu)
     {
         $fielDichvu = ($dichvu == 'GV1L') ? 'viec_1_lan' : 'viec_thuongxuyen';
-        $sql = "SELECT shp.id, type_customer,type_device, device_token, (3956 * 2 * ASIN(SQRT(POWER(SIN(($lat -abs(shp.lat)) * pi()/180 / 2),2)
-            + COS($lat * pi()/180 ) * COS(abs(shp.long) *  pi()/180) * POWER(SIN(($long - abs(shp.long))
-            *  pi()/180 / 2), 2)))) *1.6 as distance
+        $sql = "SELECT shp.id, type_customer,type_device, device_token
             FROM customers as shp JOIN customer_devices as cs_dv
             ON shp.id = cs_dv.customer_id JOIN devices
             ON cs_dv.device_id = devices.id
-            WHERE type_customer = 1 AND $fielDichvu = 1 AND shp.phone_number IN($phoneNumber)
-            ORDER BY distance ASC";
-            // HAVING distance = null 
+            WHERE type_customer = 1 AND $fielDichvu = 1 AND shp.phone_number IN($phoneNumber)";
         $data = DB::select($sql);
         Log::error(['sql' => $sql]);
         return $data;
