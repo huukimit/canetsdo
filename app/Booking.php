@@ -74,6 +74,16 @@ class Booking extends BaseModel {
         ->get();
     }
 
+    static function getJobsWaitings($except, $typeJob, $status = [0, 1]) {
+        return self::whereNotIn('bookings.id', $except)
+            ->whereIn('bookings.status', $status)
+            ->where('bookings.type', $typeJob)
+            ->select('bookings.id', 'address', 'bookings.created_at')
+            ->groupBy('bookings.id')
+            ->orderBy('bookings.created_at', 'DESC')
+            ->get();
+    }
+
     static function getById($id) {
         $exist = self::leftJoin('khuyenmais', 'bookings.makhuyenmai', '=', 'khuyenmais.id')
         ->where('bookings.id', $id)

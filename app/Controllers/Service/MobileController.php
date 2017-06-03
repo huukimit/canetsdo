@@ -995,10 +995,10 @@ class MobileController extends ServiceController {
             $customer['congvieccothelam'] = ($customer['cando'] != '') ? explode(',', $customer['cando']) : [];
             $customer['thoigian_cothelam'] = (!empty($bid)) ? $bid->thoigian_cothelam : 0;
             $customer['avatar'] = ($customer['avatar'] != '') ? URL::to('/') . '/' . $customer['avatar'] : '';
-            $customer['cv1lan_da_nhan'] = Booking::getNumberNhanByTypeAndStatus($customer['id'], 1, [0,1]);
             $customer['cv1lan_duoc_nhan'] = Booking::getNumberNhanByTypeAndStatus($customer['id'], 1, [1]);
-            $customer['cvthuongxuyen_da_nhan'] = Booking::getNumberNhanByTypeAndStatus($customer['id'], 2, [0,1]);
+            $customer['cv1lan_da_nhan'] = Booking::getNumberNhanByTypeAndStatus($customer['id'], 1, [0,1]);
             $customer['cvthuongxuyen_duoc_nhan'] = Booking::getNumberNhanByTypeAndStatus($customer['id'], 2, [1]);
+            $customer['cvthuongxuyen_da_nhan'] = Booking::getNumberNhanByTypeAndStatus($customer['id'], 2, [0,1]);
             $dangnhan = Bid::congviecdangnhan($customerId);
             $customer['dangnhan'] = $dangnhan;
         }
@@ -1015,8 +1015,16 @@ class MobileController extends ServiceController {
         foreach($dangnhan as $nhan) {
             $except[] = $nhan->booking_id;
         }
-        $result['list_gvthuongxuyen'] = Booking::getJobsWaitingReceivedFromNotify($except, 2, $customerId); 
-        $result['list_gvmotlan'] = Booking::getJobsWaitingReceivedFromNotify($except, 1, $customerId); 
+        $listGvTx = Booking::getJobsWaitingReceivedFromNotify($except, 2, $customerId);
+        if(count($listGvTx) == 0) {
+            $listGvTx = Booking::getJobsWaitings($except, 2);
+        }
+        $listGvMl = Booking::getJobsWaitingReceivedFromNotify($except, 1, $customerId); 
+        if(count($listGvMl) == 0) {
+            $listGvTx = Booking::getJobsWaitings($except, 1);
+        }
+        $result['list_gvthuongxuyen'] =  $listGvTx;
+        $result['list_gvmotlan'] = $listGvMl; 
         $this->status = 200;
         $this->message = "Success";
         $this->data = $result;
