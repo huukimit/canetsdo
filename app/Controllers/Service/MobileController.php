@@ -737,8 +737,9 @@ class MobileController extends ServiceController {
         $this->message = "Success";
 
         $config = Setting::getConfig();
+        $cs = Customer::getById($data['customer_id']);
         $customerFake = explode(',', $config->fake_kh);
-        if (in_array($data['customer_id'], $customerFake)) {
+        if (in_array($cs['phone_number'], $customerFake)) {
             $this->notifyForLaodongFake($config->fake_kh, $booking_id, 'GV1L: ' . $postData['address']);
         } else {
             $this->notifyToLaborer($postData['lat'], $postData['long'], $booking_id, 10, 'GV1L: ' . $postData['address']);
