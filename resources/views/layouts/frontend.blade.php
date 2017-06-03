@@ -86,8 +86,8 @@
                         <li><a href="canets2016@gmail.com" mailto><span class="fa fa-envelope fa-lg"></span>&nbsp;&nbsp;canets2016@gmail.com</a></li>
                     </ul>
                     <div class="columns">
-                        <a href="http://r.Canets.com/iosbadge"><img alt="App-store-badge" src="https://files.handy.com/assets/miscellaneous/app-store-badge-231469be108d5b87c206dd3ad4c43028.svg"></a>
-                        <a href="http://r.Canets.com/androidbadge"><img alt="Play-store-badge" src="https://files.handy.com/assets/miscellaneous/play-store-badge-ef8e50389113795ce26d0ad4d3b3f131.svg"></a>
+                        <a href="https://itunes.apple.com/us/app/canets/id1222817722?l=vi&ls=1&mt=8"><img alt="App-store-badge" src="https://files.handy.com/assets/miscellaneous/app-store-badge-231469be108d5b87c206dd3ad4c43028.svg"></a>
+                        <a href="https://play.google.com/store/apps/details?id=com.canets.canetsapp"><img alt="Play-store-badge" src="https://files.handy.com/assets/miscellaneous/play-store-badge-ef8e50389113795ce26d0ad4d3b3f131.svg"></a>
                     </div>
                     <ul class="link_icon">
                         <li><a href="#" class="icon-link" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
