@@ -729,7 +729,7 @@ class MobileController extends ServiceController {
             $explode = explode(':', $postData['time_end']);
             $postData['time_end'] = trim($explode[0]) . ':' . trim($explode[1]);
         }
-
+        Log::info(['info' => $data['customer_id']]);
         $postData['type'] = 1;
         $booking_id = Booking::SaveData($postData);
         $this->data = ['booking_id' => $booking_id];
