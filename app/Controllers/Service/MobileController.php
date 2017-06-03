@@ -729,7 +729,6 @@ class MobileController extends ServiceController {
             $explode = explode(':', $postData['time_end']);
             $postData['time_end'] = trim($explode[0]) . ':' . trim($explode[1]);
         }
-        Log::info(['info' => $data['customer_id']]);
         $postData['type'] = 1;
         $booking_id = Booking::SaveData($postData);
         $this->data = ['booking_id' => $booking_id];
@@ -737,7 +736,7 @@ class MobileController extends ServiceController {
         $this->message = "Success";
 
         $config = Setting::getConfig();
-        $cs = Customer::getById($data['customer_id']);
+        $cs = Customer::getById($postData['customer_id']);
         Log::info(['info' => $cs]);
         $customerFake = explode(',', $config->fake_kh);
         Log::info(['info' => $customerFake]);
