@@ -737,11 +737,8 @@ class MobileController extends ServiceController {
 
         $config = Setting::getConfig();
         $cs = Customer::getById($postData['customer_id']);
-        Log::info(['info' => $cs]);
         $customerFake = explode(',', $config->fake_kh);
-        Log::info(['info' => $customerFake]);
         if (in_array($cs['phone_number'], $customerFake)) {
-
             $this->notifyForLaodongFake($config->fake_ld, $booking_id, 'GV1L: ' . $postData['address']);
         } else {
             $this->notifyToLaborer($postData['lat'], $postData['long'], $booking_id, 10, 'GV1L: ' . $postData['address']);
@@ -788,7 +785,6 @@ class MobileController extends ServiceController {
         if (in_array($cs['phone_number'], $customerFake)) {
             $this->notifyForLaodongFake($config->fake_ld, $booking_id, 'GVTX: ' . $data['address']);
         } else {
-            
             $this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 10, 'GVTX: ' . $data['address']);
         }
 
@@ -806,9 +802,13 @@ class MobileController extends ServiceController {
         $key = explode(':', $loaidichvu);
         $pushData = ['key' => $key[0], 'booking_id' => $booking_id];
         $customers = Customer::getInfoPushNotiInArrayCustomers($fakeLd, $key[0]);
+        Log::info(['customers' => $customers]);
         $eachGroup = [];
         $i = 0;
+        $total = count($customers);
+        $sl = 0;
         foreach ($customers as  $customer) {
+            $sl++;
             $i++;
             $eachGroup[] = [
                 'id' => $customer->id,
@@ -820,6 +820,8 @@ class MobileController extends ServiceController {
                 Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
                 $i = 0;
                 $eachGroup = [];
+            } elseif($sl = $total){
+                 Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
             }
         }
     }
