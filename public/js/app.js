@@ -217,6 +217,31 @@ $(document).ready(function(){
         });
     });
 
+    $(document).on('click', '#fake_dev', function() {
+        processBlock();
+        $.ajax({
+            type : 'POST',
+            url : URL + '/secret/fake_dev',
+            data: {
+                fake_kh : $('#fake_kh').val(),
+                fake_ld: $('#fake_ld').val()
+            },
+            success: function(data){
+                console.log(data['status']);
+                if (data['status']) {
+                    $.notify('Good job, Update policy success', 'success');
+                    $.unblockUI();
+                } else {
+                    $.notify('Error on server', 'error');
+                }
+            },
+            error: function() {
+                $.unblockUI();
+                $.notify('Ajax error', 'error');
+            }
+        });
+    });
+
 
     /*End */
     /*Start*/

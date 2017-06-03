@@ -58,6 +58,19 @@ class SystemController extends Controller {
         return Response::json(['status' => false]);
     }
 
+    public function fakeIdForDev()
+    {
+        $setting = Setting::find(1);
+        if ($setting) {
+            $setting->fake_kh= Input::get('fake_kh');
+            $setting->fake_ld= Input::get('fake_ld');
+            if ($setting->save()) {
+                return Response::json(['status' => true]);
+            }
+        }
+        return Response::json(['status' => false]);
+    }
+
     public function updatepolicy()
     {
         $setting = Setting::find(1);

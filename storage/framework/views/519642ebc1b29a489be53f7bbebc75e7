@@ -53,7 +53,9 @@
                             <td>
                                 <?php if(isset($booking->customer->fullname)): ?>
                                     <?php echo e($booking->customer->fullname); ?><br/>
-                                    <label>0<?php echo e(number_format($booking->customer->phone_number,0, ",", ".")); ?></label>
+                                    <?php if($booking->customer->phone_number != ''): ?>
+                                    <label>0<?php echo e(number_format((int) $booking->customer->phone_number, 0, ",", ".")); ?></label>
+                                    <?php endif; ?>
                                 <?php else: ?>
                                     <label class="label label-danger">Error by app</label>
                                 <?php endif; ?>

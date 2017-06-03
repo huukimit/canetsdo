@@ -7,6 +7,23 @@
         <div class="panel panel-default">
             <div class="panel-heading">Thông báo</div>
             <div class="panel-body">
+            	<div class="row">
+	            	<form action="">
+	            		<div class="col-md-6"></div>
+	                    <div class="col-md-3">
+	                        <div class="form-group has-success">
+	                            <input placeholder="Nhập tiêu chí tìm kiếm..." type="text" class="form-control" value="{{ app('request')->input('search') }}" name="search">
+	                        </div>
+	                    </div>
+
+	                    <div class="col-md-3">
+	                        <div class="form-group">
+	                            <input type="submit" class="btn btn-primary" value="Tìm kiếm">
+	                        </div>
+	                    </div>
+	                    
+	                </form>
+                </div>
             	<div class="col-md-4">
             	<form action="" method="post"  role="form" enctype="multipart/form-data">
 	            	<input type="hidden" name="_token" value="{{ csrf_token() }}">

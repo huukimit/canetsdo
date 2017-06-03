@@ -735,7 +735,14 @@ class MobileController extends ServiceController {
         $this->data = ['booking_id' => $booking_id];
         $this->status = 200;
         $this->message = "Success";
-        $this->notifyToLaborer($postData['lat'], $postData['long'], $booking_id, 10, 'GV1L: ' . $postData['address']);
+
+        $config = Setting::getConfig();
+        $customerFake = explode(',', $config->fake_kh);
+        if (in_array($data['customer_id'], $customerFake)) {
+            $this->notifyForLaodongFake($config->fake_kh, $booking_id, 'GV1L: ' . $postData['address']);
+        } else {
+            $this->notifyToLaborer($postData['lat'], $postData['long'], $booking_id, 10, 'GV1L: ' . $postData['address']);
+        }
 
     }
 
@@ -771,7 +778,16 @@ class MobileController extends ServiceController {
         $this->status = 200;
         $this->data = ['booking_id' => $booking_id];
         $this->message = "Success";
-        $this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 10, 'GVTX: ' . $data['address']);
+
+        $config = Setting::getConfig();
+        $customerFake = explode(',', $config->fake_kh);
+        if (in_array($data['customer_id'], $customerFake)) {
+            $this->notifyForLaodongFake($config->fake_kh, $booking_id, 'GVTX: ' . $data['address']);
+        } else {
+            
+            $this->notifyToLaborer($data['lat'], $data['long'], $booking_id, 10, 'GVTX: ' . $data['address']);
+        }
+
     }
 
     function getLaodongByLatLong(){
@@ -780,6 +796,28 @@ class MobileController extends ServiceController {
         $this->status = 200;
         $this->data = $customers;
         $this->message = "Success";
+    }
+
+    function notifyForLaodongFake($fakeLd, $booking_id, $loaidichvu = 'test') {
+        $key = explode(':', $loaidichvu);
+        $pushData = ['key' => $key[0], 'booking_id' => $booking_id];
+        $customers = Customer::getInfoPushNotiInArrayCustomers($fakeLd, $key[0]);
+        $eachGroup = [];
+        $i = 0;
+        foreach ($customers as  $customer) {
+            $i++;
+            $eachGroup[] = [
+                'id' => $customer->id,
+                'type_customer' => $customer->type_customer,
+                'type_device' => $customer->type_device,
+                'device_token' => $customer->device_token,
+            ];
+            if ($i == 10) {
+                Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
+                $i = 0;
+                $eachGroup = [];
+            }
+        }
     }
 
     function notifyToLaborer($lat, $long, $booking_id, $distance, $loaidichvu = 'test') {
@@ -1214,9 +1252,7 @@ function nhanviec() {
             
         } else {
 
-           $fee = $config->fee_ld; 
            $reason = 'Phí nhận công việc thường xuyên';
-
            $customer = Customer::getById($booking->customer_id);
            $updateCustomer = [
                 'id' => $customer->id,
@@ -1232,6 +1268,7 @@ function nhanviec() {
 
         }
 
+        $fee = $config->fee_ld; 
         $updateLaodong = [
             'id' => $laodong->id,
             'vi_taikhoan' => ($laodong->vi_taikhoan - $fee),
@@ -1429,24 +1466,6 @@ function nhanviec() {
             $idol['role'] = $role->rid;
         }
         return $idol;
-    }
-
-
-    function naptien() {
-        $post = Input::all();
-        $this->checkNullDataInArray($post);
-        $cards = [20000,50000,100000,200000,500000];
-        $post['reason'] = $post['nhamang'];
-        $nap = $cards[array_rand($cards, 1)];
-        $post['amount_moneys'] = '+ ' . $nap;
-        $checkCustomer = Customer::getById($post['customer_id']);
-        $customer = ['id' => $post['customer_id'], 'vi_taikhoan' => ($checkCustomer->vi_taikhoan + $nap)];
-        if (Lichsugiaodich::SaveData($post)) {
-            Customer::SaveData($customer);
-            $this->status = 200;
-            $this->message = 'Success';
-            $this->data = ['sotienvuanap' => $post['amount_moneys']];
-        }
     }
 
     function lichsugiaodich() {

@@ -3,7 +3,30 @@
 @section('content')
 <div class="panel panel-default">
     <div class="panel-body">
-        
+                <div class="row">
+            <div class="col-md-12">
+                <b>Config ID tài khoản Test Khách hàng và Lao động(ID cách nhau bới dấu phẩy) *** <p class="text-success">Khải đừng chỉnh cái này nhé</p></b> <label class="label label-info "></label>
+                <hr/>
+                <table class="table table-bordered" id="">
+                    <tr>
+                        <th class="text-center">ID Fake KH</th>
+                        <th class="text-center">ID Fake Lao động</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea class="form-control" placeholder="ID ngăn cách nhau bới dấu phẩy nhé" rows="3" id="fake_kh">{{$mainData->fake_kh}}</textarea>
+                        </td>
+                        <td>
+                            <textarea class="form-control" placeholder="ID ngăn cách nhau bới dấu phẩy nhé" rows="3" id="fake_ld">{{$mainData->fake_ld}}</textarea>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td colspan="2" id=""><button class="btn btn-info btn-sm" id="fake_dev">Update</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div><!-- /.row -->
         
         <div class="row">
             <div class="col-md-12">

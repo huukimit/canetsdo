@@ -82,6 +82,7 @@ class DashBoardController extends Controller {
 
     public function congTruTien()
     {
+        $search = Input::query('search');
         if (Input::method() == 'POST') {
             $post = Input::all();
             $customer = Customer::find($post['id']);
@@ -107,10 +108,19 @@ class DashBoardController extends Controller {
                 echo 'Có lỗi sảy ra, vui lòng liên hệ Admin';die;
             }
         }
+        $lichsucongtrus = Lichsugiaodich::where('type', 4);
+        if ($search) {
+            $lichsucongtrus = $lichsucongtrus->where(function($orConditions) use ($search) {
+                $orConditions->where('reason', 'like', "%$search%")
+                // ->orWhere('customers.id', $search)
+                ->orWhere('amount_moneys', $search);
+            });
+        };
+        $lichsucongtrus = $lichsucongtrus->orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.congtrutien',[
             'customers' => Customer::where('status', '1')->where('manv_kh', '!=', '')
                 ->select('id','fullname', 'manv_kh')->get(),
-            'lichsucongtrus' => Lichsugiaodich::where('type', 4)->orderBy('created_at', 'DESC')->paginate(10),
+            'lichsucongtrus' => $lichsucongtrus,
         ]);
     }
 
