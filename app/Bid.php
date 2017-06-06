@@ -96,7 +96,7 @@ class Bid extends BaseModel {
         ->select('bookings.*', 'bids.laodong_id')->first();
     }
 
-    static cleanByBookingAndBidId($bidId, $bookingId) {
+    static function cleanByBookingAndBidId($bidId, $bookingId) {
         self::where('id', '!=', $bidId)->where('booking_id', $bookingId)->delete();
     }
 
