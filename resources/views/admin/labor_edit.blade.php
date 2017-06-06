@@ -111,7 +111,8 @@
 				</div>
 					
 	            <div class="col-md-12">
-	            	<input type="submit" class="btn btn-primary" value="Lưu thông tin">
+	            	<input type="submit" class="btn btn-primary" name="update" value="Lưu thông tin">
+	            	<input type="submit" class="btn btn-danger" name="delete" value="Xóa khỏi hệ thống">
 	            </div>
             	</form>
             </div>

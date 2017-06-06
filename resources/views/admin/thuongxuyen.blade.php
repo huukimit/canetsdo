@@ -32,7 +32,7 @@
                         {{-- <a href="/secret/bookings/creategvtx" class="btn btn-info">Tạo công việc</a> --}}
                     </div>
                 </form>
-                <table class="table  table-striped table-bordered">
+                <table class="table  table-striped table-bordered" style="width: 1300px">
                     <thead>
                         <tr>
                             <th>Time</th>
@@ -42,6 +42,8 @@
                             <th class="text-center">Status</th>
                             <th>Hình ảnh căn hộ</th>
                             <th class="text-center">Updated time </th>
+                            <th>Note</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -123,6 +125,9 @@
                                 </table>
                             </td>
                             <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->updated_at)) }}</td>
+                            <td>
+                                <textarea class="note_booking form-control" data-id={{$booking->id}} name="note_byadmin"cols="30" rows="2" placeholder="Nhập chú thích">{{$booking->note_byadmin}}</textarea>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

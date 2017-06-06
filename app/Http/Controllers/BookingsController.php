@@ -9,6 +9,7 @@ use App\Commands\PushNotifyToDevices;
 use Illuminate\Support\Facades\Queue;
 use App\Models\Media\Media;
 use Illuminate\Support\Facades\Log;
+use Response;
 
 class BookingsController extends Controller {
 
@@ -145,7 +146,7 @@ class BookingsController extends Controller {
                 $orConditions->where('address', 'like', "%$search%");
             });
         };
-        $bookings = $bookings->orderBy('bookings.updated_at', 'desc')->paginate(15);
+        $bookings = $bookings->orderBy('bookings.id', 'desc')->paginate(15);
 		$statuses = [
 			0 => 'Trạng thái công việc',
 			100 => 'Mới tạo',
@@ -162,4 +163,16 @@ class BookingsController extends Controller {
 			'statuses' => $statuses,
 		]);
 	}
+
+	public function updateNoteBooking()
+    {
+        $booking = Booking::find(Input::get('id'));
+        if ($booking) {
+            $booking->note_byadmin= Input::get('note');
+            if ($booking->save()) {
+                return Response::json(['status' => true]);
+            }
+        }
+        return Response::json(['status' => false]);
+    }
 }

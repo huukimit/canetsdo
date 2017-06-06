@@ -242,6 +242,33 @@ $(document).ready(function(){
         });
     });
 
+    $(document).on('change', '.note_booking', function() {
+        var note = $(this).val();
+        var id = $(this).data('id');
+        processBlock();
+        $.ajax({
+            type : 'POST',
+            url : URL + '/secret/note_booking',
+            data: {
+                id : id,
+                note: note
+            },
+            success: function(data){
+                console.log(data['status']);
+                if (data['status']) {
+                    $.notify('Good job, Update note for booking success', 'success');
+                    $.unblockUI();
+                } else {
+                    $.notify('Error on server', 'error');
+                }
+            },
+            error: function() {
+                $.unblockUI();
+                $.notify('Ajax error', 'error');
+            }
+        });
+    });
+
 
     /*End */
     /*Start*/

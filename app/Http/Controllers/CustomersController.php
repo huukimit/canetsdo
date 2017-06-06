@@ -22,8 +22,13 @@ class CustomersController extends Controller {
      */
     public function laborers($id = null)
     {
+
         if (Input::method() == 'POST') {
             $data = Input::all();
+            if (isset($data['delete'])) {
+                $status = Customer::where('id', $data['id'])->delete();
+                return redirect('/secret/laborers');
+            }
             $data['cando'] = json_encode($data['cando']);
             if ($data['birthday'] != '') {
                 $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
@@ -96,7 +101,6 @@ class CustomersController extends Controller {
         }
         
     }
-
     
     public function customers()
     {

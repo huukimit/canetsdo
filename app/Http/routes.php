@@ -36,6 +36,7 @@ Route::group(['prefix' => 'secret', 'middleware' => 'auth'], function()
     Route::post('updateversionapp', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\SystemController@updateversionapp'));
     Route::post('updatepolicy', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\SystemController@updatepolicy'));
     Route::post('fake_dev', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\SystemController@fakeIdForDev'));
+    Route::post('note_booking', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\BookingsController@updateNoteBooking'));
     Route::post('updatethongtinchuyenkhoan', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\SystemController@updatethongtinchuyenkhoan'));
     Route::get('configs', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@systemConfig'));
     Route::any('congtrutien', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@congTruTien'));

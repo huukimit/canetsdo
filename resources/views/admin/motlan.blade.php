@@ -33,7 +33,7 @@
                     </div>
                 </form>
                     
-                <table class="table  table-striped table-bordered">
+                <table class="table  table-striped table-bordered" style="width: 1300px">
                     <thead>
                         <tr>
                             <th>No.</th>
@@ -43,6 +43,7 @@
                             <th>Lao động</th>
                             <th class="text-center">Ngày tạo </th>
                             <th class="text-center">Status</th>
+                            <th>Note</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,6 +102,9 @@
                                 }
                                 echo $label;
                             ?>
+                            </td>
+                            <td>
+                                <textarea class="note_booking form-control" data-id={{$booking->id}} name="note_byadmin"cols="30" rows="2" placeholder="Nhập chú thích">{{$booking->note_byadmin}}</textarea>
                             </td>
                         </tr>
                         @endforeach

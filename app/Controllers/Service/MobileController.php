@@ -503,7 +503,6 @@ class MobileController extends ServiceController {
 
     public function registerCustomer() {
         $postData = Input::all();
-        Log::info(['customer' => $postData]);
         $this->checkNullData(Input::get('fullname', null));
         $this->checkNullData(Input::get('email', null));
         $this->checkNullData(Input::get('password', null));
@@ -562,7 +561,6 @@ class MobileController extends ServiceController {
 
     public function dangkytaikhoanlaodong() {
         $data = Input::all();
-        Log::info(['laodong' => $data]);
         $this->checkNullData(Input::get('fullname', null));
         $this->checkNullData(Input::get('email', null));
         $this->checkNullData(Input::get('password', null));
@@ -802,7 +800,6 @@ class MobileController extends ServiceController {
         $key = explode(':', $loaidichvu);
         $pushData = ['key' => $key[0], 'booking_id' => $booking_id];
         $customers = Customer::getInfoPushNotiInArrayCustomers($fakeLd, $key[0]);
-        Log::info(['customers' => $customers]);
         $eachGroup = [];
         $i = 0;
         $total = count($customers);
@@ -1248,7 +1245,11 @@ function nhanviec() {
                     Notify::Push2Ios($laodong->device_token, 'Bạn đã được khách hàng lựa chọn để đi làm', $push_data);
                 }
             }
+            /* Xóa lịch sử notify và các bid đc  tạo ra bởi sinh viên mà khách hàng không chọn*/
             Notify_missed_booking::cleanNotify($checkExist->laodong_id, Input::get('booking_id'));
+            Bid::cleanByBookingAndBidId(Input::get('bid_id'), Input::get('booking_id'));
+
+            /* End */
         } else {
             $this->status = 300;
             $this->message = 'Can not find data by bid and booking_id requested';
