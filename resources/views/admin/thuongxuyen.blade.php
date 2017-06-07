@@ -69,7 +69,9 @@
                             </td>
                             <td>
                                 @foreach($booking->bids as $bid)
-                                    <a class=" {{ ($bid->status == 0) ? 'text-muted' : '' }}" href="/secret/laborers/{{ $bid->laodong_id }}">{{ $bid->laodong->fullname }}</a><br/>
+                                    @if(isset($bid->laodong->id))
+                                        <a class=" {{ ($bid->status == 0) ? 'text-muted' : '' }}" href="/secret/laborers/{{ $bid->laodong_id }}">{{ $bid->laodong->fullname }}</a><br/>
+                                    @endif
                                 @endforeach
                             </td>
                             
