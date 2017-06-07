@@ -95,20 +95,6 @@ class BookingsController extends Controller {
 
 	public function giupviecmotlan()
 	{
-		// $bks = Booking::get();
-		// foreach ($bks as $value) {
-		// 	$update = ['id' => $value->id, 'time_start' => '', 'time_end' => ''];
-		// 	$explode = explode(':', $value->time_start);
-		// 	if($explode) {
-		// 		$update['time_start'] =  trim($explode[0]) .':'.$explode[1];
-		// 	}
-		// 	$explode = explode(':', $value->time_end);
-		// 	if($explode) {
-		// 		$update['time_end'] =  trim($explode[0]) .':'.$explode[1];
-		// 	}
-		// 	Booking::SaveData($update);
-
-		// }
 		$search = Input::query('search');
 		$status = Input::query('status');
 		$bookings = Booking::where('type', 1);

@@ -1,11 +1,11 @@
 @extends('layouts.admin')
-@section('title', 'Detail laborer')
+@section('title', 'Detail')
 @section('content')
 
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">Detail laborer</div>
+            <div class="panel-heading">Detail</div>
             <div class="panel-body">
             	<form action="" method="post"  role="form" enctype="multipart/form-data">
             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -43,19 +43,21 @@
 								</option>
 							@endforeach
 						</select>
-						<label>Công việc có thể làm</label>
-						@foreach($requires as $require)
-							<div class="checkbox">
-								<label>
-									<input name="cando[]" value={{$require->id}} type="checkbox" value="" @if(in_array($require->id, json_decode($data['cando'], true))) {{ 'checked' }} @endif>
-									{{$require->name}}
-								</label>
-							</div>
-						@endforeach
-						<label>Công việc khác</label>
-						<input class="form-control" name="congviec_khac" value="{{$data['congviec_khac']}}">
-						<label>Giới thiệu bản thân</label>
-						<textarea name="gioithieubanthan" class="form-control" placeholder="Giới thiệu đôi nét về bản thân...">{{$data['gioithieubanthan']}}</textarea>
+						@if ($data['type_customer'] == 1 )
+							<label>Công việc có thể làm</label>
+							@foreach($requires as $require)
+								<div class="checkbox">
+									<label>
+										<input name="cando[]" value={{$require->id}} type="checkbox" value="" @if(in_array($require->id, json_decode($data['cando'], true))) {{ 'checked' }} @endif>
+										{{$require->name}}
+									</label>
+								</div>
+							@endforeach
+							<label>Công việc khác</label>
+							<input class="form-control" name="congviec_khac" value="{{$data['congviec_khac']}}">
+							<label>Giới thiệu bản thân</label>
+							<textarea name="gioithieubanthan" class="form-control" placeholder="Giới thiệu đôi nét về bản thân...">{{$data['gioithieubanthan']}}</textarea>
+						@endif
 						<label for="">Khóa tài khoản</label>
 						<div class="checkbox">
 							<label>
@@ -65,50 +67,52 @@
 					</div>
 					
 				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label>Ảnh sinh viên(mặt trước)</label>
-						<a id="example1" href="/{{$data['anhsv_truoc']}}">
-							<img src="/{{($data['anhsv_truoc']) ? $data['anhsv_truoc'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh sinh viên(mặt trước)" class="img-thumbnail img_truoc_sau">
-						</a>
-						<input type="file" name="anhsv_truoc" accept="image/*" class="form-control" placeholder="Thay đổi Ảnh sinh viên(mặt trước)" title="Ảnh sinh viên(mặt trước)">
-					</div>
-					<div class="form-group">
-						<label>Ảnh sinh viên(mặt sau)</label>
-						<a id="example1" href="/{{$data['anhsv_sau']}}">
-							<img src="/{{($data['anhsv_sau']) ? $data['anhsv_sau'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh sinh viên(mặt sau)" class="img-thumbnail img_truoc_sau">
-						</a>
-						<input type="file" name="anhsv_sau" accept="image/*" class="form-control" title="Thay đổi Ảnh sinh viên(mặt sau)">
-					</div>
-					<div class="form-group">
-						<label>Ảnh CMTND (mặt trước)</label>
-						<a id="example1" href="/{{$data['anhcmtnd_truoc']}}">
-							<img src="/{{($data['anhcmtnd_truoc']) ? $data['anhcmtnd_truoc'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh CMTND (mặt trước)" class="img-thumbnail img_truoc_sau">
-						</a>
-						<input type="file" name="anhcmtnd_truoc" accept="image/*" class="form-control" placeholder="Thay đổi Ảnh CMTND (mặt trước)">
-					</div>
-					<div class="form-group">
-						<label>Ảnh CMTND (mặt sau)</label>
-						<a id="example1" href="/{{$data['anhcmtnd_sau']}}">
-							<img src="/{{($data['anhcmtnd_sau']) ? $data['anhcmtnd_sau'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh CMTND (mặt sau)" class="img-thumbnail img_truoc_sau">
-						</a>
-					<input type="file" name="anhcmtnd_sau" accept="image/*" class="form-control" placeholder="Thay đổi Ảnh CMTND (mặt sau)">
-					</div>
-					<div class="form-group">
-						<label for="">Đánh giá (
-						<?php for($i = 1; $i< $stars[0]->stars; $i++) { ?>
-							<i class="yellow fa fa-star" aria-hidden="true"></i>
-						<?php } ?>
-						)</label>
-						<div id="votes">
-							<ul>
-							@foreach($rates as $rate)
-								<li>{{'(' . $rate->fullname . ' voted ' . $rate->stars. ' sao) ' . $rate->noidung}}</li>
-							@endforeach
-							</ul>
+				@if ($data['type_customer'] == 1 )
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Ảnh sinh viên(mặt trước)</label>
+							<a id="example1" href="/{{$data['anhsv_truoc']}}">
+								<img src="/{{($data['anhsv_truoc']) ? $data['anhsv_truoc'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh sinh viên(mặt trước)" class="img-thumbnail img_truoc_sau">
+							</a>
+							<input type="file" name="anhsv_truoc" accept="image/*" class="form-control" placeholder="Thay đổi Ảnh sinh viên(mặt trước)" title="Ảnh sinh viên(mặt trước)">
+						</div>
+						<div class="form-group">
+							<label>Ảnh sinh viên(mặt sau)</label>
+							<a id="example1" href="/{{$data['anhsv_sau']}}">
+								<img src="/{{($data['anhsv_sau']) ? $data['anhsv_sau'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh sinh viên(mặt sau)" class="img-thumbnail img_truoc_sau">
+							</a>
+							<input type="file" name="anhsv_sau" accept="image/*" class="form-control" title="Thay đổi Ảnh sinh viên(mặt sau)">
+						</div>
+						<div class="form-group">
+							<label>Ảnh CMTND (mặt trước)</label>
+							<a id="example1" href="/{{$data['anhcmtnd_truoc']}}">
+								<img src="/{{($data['anhcmtnd_truoc']) ? $data['anhcmtnd_truoc'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh CMTND (mặt trước)" class="img-thumbnail img_truoc_sau">
+							</a>
+							<input type="file" name="anhcmtnd_truoc" accept="image/*" class="form-control" placeholder="Thay đổi Ảnh CMTND (mặt trước)">
+						</div>
+						<div class="form-group">
+							<label>Ảnh CMTND (mặt sau)</label>
+							<a id="example1" href="/{{$data['anhcmtnd_sau']}}">
+								<img src="/{{($data['anhcmtnd_sau']) ? $data['anhcmtnd_sau'] : 'public/uploads/media/avatar/default.png'}}" alt="Ảnh CMTND (mặt sau)" class="img-thumbnail img_truoc_sau">
+							</a>
+						<input type="file" name="anhcmtnd_sau" accept="image/*" class="form-control" placeholder="Thay đổi Ảnh CMTND (mặt sau)">
+						</div>
+						<div class="form-group">
+							<label for="">Đánh giá (
+							<?php for($i = 1; $i< $stars[0]->stars; $i++) { ?>
+								<i class="yellow fa fa-star" aria-hidden="true"></i>
+							<?php } ?>
+							)</label>
+							<div id="votes">
+								<ul>
+								@foreach($rates as $rate)
+									<li>{{'(' . $rate->fullname . ' voted ' . $rate->stars. ' sao) ' . $rate->noidung}}</li>
+								@endforeach
+								</ul>
+							</div>
 						</div>
 					</div>
-				</div>
+				@endif
 					
 	            <div class="col-md-12">
 	            	<input type="submit" class="btn btn-primary" name="update" value="Lưu thông tin">

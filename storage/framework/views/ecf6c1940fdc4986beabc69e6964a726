@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'List laborer'); ?>
+<?php $__env->startSection('title', 'List customer'); ?>
 <?php $__env->startSection('content'); ?>
 <div class="row">
     <div class="col-lg-12">
@@ -35,10 +35,14 @@
                         <tr>
                             <td class="text-right"><?php echo e($data->id); ?></td>
                             <td><?php echo e($data->manv_kh); ?></td>
-                            <td><?php echo e($data->fullname); ?></td>
+                            <td>
+                                <a href="/secret/laborers/<?php echo e($data->id); ?>" title="Xem thông tin chi tiết, chỉnh sửa"><?php echo e($data->fullname); ?>
+
+                                </a>
+                            </td>
                             <td><?php echo e($data->phone_number); ?></td>
                             <td><?php echo e($data->school); ?></td>
-                            <td class="text-right"><?php echo e($data->vi_taikhoan); ?></td>
+                            <td class="text-right"><?php echo e(number_format($data->vi_taikhoan)); ?></td>
                             <td class="text-center"><?php echo e(date('H:i d/m/Y', strtotime($data->updated_at))); ?></td>
                             <td class="text-center">
                             <?php if($data->status == 0): ?>

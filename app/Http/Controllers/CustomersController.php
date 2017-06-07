@@ -26,8 +26,12 @@ class CustomersController extends Controller {
         if (Input::method() == 'POST') {
             $data = Input::all();
             if (isset($data['delete'])) {
-                $status = Customer::where('id', $data['id'])->delete();
-                return redirect('/secret/laborers');
+                $exist = Customer::find($data['id']);
+                if (isset($exist->id)) {
+                    $status = Customer::where('id', $data['id'])->delete();
+                    $location = ($exist->type_customer == 1 ) ? 'laborers' : 'customers';
+                    return redirect("/secret/$location");
+                }
             }
             $data['cando'] = json_encode($data['cando']);
             if ($data['birthday'] != '') {
@@ -90,6 +94,7 @@ class CustomersController extends Controller {
             return view('admin.laborers', ['main_data' => $laborers]);
         } else {
             $laborer = Customer::find($id);
+            // dd(CustomerRate::listRateBy($id, 10));
             $settingKn = Setting::select('options_kinhnghiem')->first();
             return view('admin.labor_edit', [
                 'month_exps' => json_decode($settingKn->options_kinhnghiem, true),

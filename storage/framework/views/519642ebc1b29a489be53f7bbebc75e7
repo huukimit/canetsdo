@@ -69,7 +69,9 @@
                             </td>
                             <td>
                                 <?php foreach($booking->bids as $bid): ?>
-                                    <a class=" <?php echo e(($bid->status == 0) ? 'text-muted' : ''); ?>" href="/secret/laborers/<?php echo e($bid->laodong_id); ?>"><?php echo e($bid->laodong->fullname); ?></a><br/>
+                                    <?php if(isset($bid->laodong->id)): ?>
+                                        <a class=" <?php echo e(($bid->status == 0) ? 'text-muted' : ''); ?>" href="/secret/laborers/<?php echo e($bid->laodong_id); ?>"><?php echo e($bid->laodong->fullname); ?></a><br/>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             </td>
                             <td class="text-center"><?php echo e(date('H:i d/m/Y', strtotime($booking->created_at))); ?></td>
@@ -104,7 +106,7 @@
                             ?>
                             </td>
                             <td>
-                                <textarea class="note_booking" data-id=<?php echo e($booking->id); ?> name="note_byadmin"cols="30" rows="2" placeholder="Nhập chú thích"><?php echo e($booking->note_byadmin); ?></textarea>
+                                <textarea class="note_booking form-control" data-id=<?php echo e($booking->id); ?> name="note_byadmin"cols="30" rows="2" placeholder="Nhập chú thích"><?php echo e($booking->note_byadmin); ?></textarea>
                             </td>
                         </tr>
                         <?php endforeach; ?>
