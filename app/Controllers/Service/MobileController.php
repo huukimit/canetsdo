@@ -1237,7 +1237,6 @@ class MobileController extends ServiceController {
                 'key' => 'NHAN_SINH_VIEN',
                 'booking_id' => Input::get('booking_id'),
             ];
-            Log::warning(['thuongxuyen' => 'Vao tru tien']);
             $this->checkTrutien(Input::get('bid_id'), 'GVTX');
             foreach($laodongs as $laodong) {
                 if ($laodong->type_device == 1) {
@@ -1277,6 +1276,8 @@ class MobileController extends ServiceController {
                 'id' => $customer->id,
                 'vi_taikhoan' => ($customer->vi_taikhoan - $config->fee_kh),
            ];
+           Log::warning($customer);
+           Customer::SaveData($updateCustomer);
             $transactionCustomer = [
                 'customer_id' => $customer->id,
                 'transid' => $bidId,
@@ -1290,7 +1291,7 @@ class MobileController extends ServiceController {
             'id' => $laodong->id,
             'vi_taikhoan' => ($laodong->vi_taikhoan - $feeLd),
         ];
-
+        Log::warning($updateLaodong);
         if (Customer::SaveData($updateLaodong)) {
 
             $transaction = [
@@ -1302,8 +1303,6 @@ class MobileController extends ServiceController {
             Lichsugiaodich::SaveData($transaction);
 
         }
-
-        Log::warning(['trutien' => 'Thanh Cong']);
     }
 
     function rate() {
