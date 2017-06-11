@@ -778,7 +778,7 @@ class MobileController extends ServiceController {
         $this->message = "Success";
         $config = Setting::getConfig();
         $cs = Customer::getById($data['customer_id']);
-        Log::info(['cs' => 111111]);
+        Log::info([1,456,879]);
         $customerFake = explode(',', $config->fake_kh);
         Log::info(['fk' => $customerFake]);die;
         if (in_array($cs['phone_number'], $customerFake)) {

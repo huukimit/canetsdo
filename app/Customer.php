@@ -112,6 +112,7 @@ class Customer extends BaseModel {
     }
 
     static function getById($id) {
+        Log::info([1111111111111111]);
         $exist = self::where('id', $id)->first();
         $exist->avatar =  (($exist->avatar != '') ? URL::to('/') . '/' . $exist->avatar : '');
         $exist->anhsv_truoc =  (($exist->anhsv_truoc != '') ? URL::to('/') . '/' . $exist->anhsv_truoc : '');
