@@ -777,6 +777,8 @@ class MobileController extends ServiceController {
         $this->data = ['booking_id' => $booking_id];
         $this->message = "Success";
         $config = Setting::getConfig();
+        Log::info([1,2,3]);
+        Log::info(['data' => $data]);
         $cs = Customer::getById($data['customer_id']);
         Log::info(['cs' => $cs]);
         $customerFake = explode(',', $config->fake_kh);
