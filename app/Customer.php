@@ -119,6 +119,7 @@ class Customer extends BaseModel {
         $exist->anhsv_sau =  (($exist->anhsv_sau != '') ? URL::to('/') . '/' . $exist->anhsv_sau : '');
         $exist->anhcmtnd_truoc =  (($exist->anhcmtnd_truoc != '') ? URL::to('/') . '/' . $exist->anhcmtnd_truoc : '');
         $exist->anhcmtnd_sau =  (($exist->anhcmtnd_sau != '') ? URL::to('/') . '/' . $exist->anhcmtnd_sau : '');
+        Log::info(['ex' => $exist]);
         return $exist;
     }
 
