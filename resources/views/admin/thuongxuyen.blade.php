@@ -32,7 +32,7 @@
                         {{-- <a href="/secret/bookings/creategvtx" class="btn btn-info">Tạo công việc</a> --}}
                     </div>
                 </form>
-                <table class="table  table-striped table-bordered" style="width: 1300px">
+                <table class="table  table-striped table-bordered" style="width: 1500px">
                     <thead>
                         <tr>
                             <th>Time</th>

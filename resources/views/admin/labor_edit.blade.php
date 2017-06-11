@@ -45,10 +45,16 @@
 						</select>
 						@if ($data['type_customer'] == 1 )
 							<label>Công việc có thể làm</label>
+							<?php
+								$cando = json_decode($data['cando']);
+								if (!is_array($cando)) {
+									$cando = [1];
+								}
+							?>
 							@foreach($requires as $require)
 								<div class="checkbox">
 									<label>
-										<input name="cando[]" value={{$require->id}} type="checkbox" value="" @if(in_array($require->id, json_decode($data['cando'], true))) {{ 'checked' }} @endif>
+										<input name="cando[]" value={{$require->id}} type="checkbox" value="" @if(in_array($require->id, $cando)) {{ 'checked' }} @endif>
 										{{$require->name}}
 									</label>
 								</div>

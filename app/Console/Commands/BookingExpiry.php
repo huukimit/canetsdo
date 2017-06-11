@@ -4,6 +4,8 @@ use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Log;
 use App\Booking;
+use App\Notify_missed_booking;
+
 
 class BookingExpiry extends Command {
 
@@ -34,6 +36,7 @@ class BookingExpiry extends Command {
 		foreach ($expiries as $expiry) {
 			$update['id'] = $expiry->id;
 			Booking::SaveData($update);
+			Notify_missed_booking::deleteBy($expiry->id, 'booking_id');
 		}
 	}
 

@@ -1127,7 +1127,7 @@ class MobileController extends ServiceController {
         $this->message = 'Logout success';
     }
 
-function nhanviec() {
+    function nhanviec() {
         $postData = Input::all();
         $this->checkNullData(Input::get('booking_id'));
         $this->checkNullDataInArray($postData);
@@ -1173,6 +1173,7 @@ function nhanviec() {
                 $laodong = Customer::getById($postData['laodong_id']);
 
                 if ($keyPushNotify == 'NVGV1L') {
+                    Log::warning(['motlan' => 'Vao tru tien']);
                     $this->checkTrutien($bid);
                 }
 
@@ -1237,6 +1238,7 @@ function nhanviec() {
                 'key' => 'NHAN_SINH_VIEN',
                 'booking_id' => Input::get('booking_id'),
             ];
+            Log::warning(['thuongxuyen' => 'Vao tru tien']);
             $this->checkTrutien(Input::get('bid_id'), 'GVTX');
             foreach($laodongs as $laodong) {
                 if ($laodong->type_device == 1) {
@@ -1262,12 +1264,15 @@ function nhanviec() {
         $laodong = Customer::getById($booking->laodong_id);
         if ($dichvu == 'NVGV1L') {
 
-            $fee = (($booking->luong + $booking->thuong) * ($config->ptram_gv1lan/100));
+            $feeLd = (($booking->luong + $booking->thuong) * ($config->ptram_gv1lan/100));
             $reason = 'Phí nhận công việc 1 lần';
             
         } else {
 
+           $feeLd = $config->fee_ld; 
            $reason = 'Phí nhận công việc thường xuyên';
+
+
            $customer = Customer::getById($booking->customer_id);
            $updateCustomer = [
                 'id' => $customer->id,
@@ -1280,24 +1285,26 @@ function nhanviec() {
                 'reason' => 'Phí tìm người giúp việc thường xuyên',
             ];
             Lichsugiaodich::SaveData($transactionCustomer);
-
         }
-
-        $fee = $config->fee_ld; 
+        /* Trư tien lao dong */
         $updateLaodong = [
             'id' => $laodong->id,
-            'vi_taikhoan' => ($laodong->vi_taikhoan - $fee),
+            'vi_taikhoan' => ($laodong->vi_taikhoan - $feeLd),
         ];
 
         if (Customer::SaveData($updateLaodong)) {
+
             $transaction = [
                 'customer_id' => $booking->laodong_id,
                 'transid' => $bidId,
-                'amount_moneys' => '-' . $fee,
+                'amount_moneys' => '-' . $feeLd,
                 'reason' => $reason,
             ];
             Lichsugiaodich::SaveData($transaction);
+
         }
+
+        Log::warning(['trutien' => 'Thanh Cong']);
     }
 
     function rate() {
