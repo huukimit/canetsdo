@@ -1268,11 +1268,8 @@ class MobileController extends ServiceController {
         $booking = Bid::getBookingByBidId($bidId);
         $laodong = Customer::getById($booking->laodong_id);
         if ($dichvu == 'NVGV1L') {
-            Log::info(['phi' => 1111111111111111111111]);
-            $feeLd = (($booking->luong + $booking->thuong) * ($config->ptram_gv1lan/100));
+            $feeLd = round((($booking->luong + $booking->thuong) * ($config->ptram_gv1lan/100)));
             $reason = 'Phí nhận công việc 1 lần';
-            Log::info(['phi' => $feeLd]);
-            
         } else {
 
            $feeLd = $config->fee_ld; 
@@ -1284,7 +1281,6 @@ class MobileController extends ServiceController {
                 'id' => $customer->id,
                 'vi_taikhoan' => ($customer->vi_taikhoan - $config->fee_kh),
            ];
-           Log::warning($updateCustomer);
            Customer::SaveData($updateCustomer);
             $transactionCustomer = [
                 'customer_id' => $customer->id,
@@ -1295,21 +1291,19 @@ class MobileController extends ServiceController {
             Lichsugiaodich::SaveData($transactionCustomer);
         }
         /* Trư tien lao dong */
+        Log::warning(['phi' => $feeLd]);
         $updateLaodong = [
             'id' => $laodong->id,
             'vi_taikhoan' => ($laodong->vi_taikhoan - $feeLd),
         ];
         Log::warning($updateLaodong);
-
         if (Customer::SaveData($updateLaodong)) {
-            Log::warning([1, 12, 33]);
             $transaction = [
                 'customer_id' => $booking->laodong_id,
                 'transid' => $bidId,
                 'amount_moneys' => '-' . $feeLd,
                 'reason' => $reason,
             ];
-
             Lichsugiaodich::SaveData($transaction);
         }
     }
