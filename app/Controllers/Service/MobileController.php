@@ -1137,6 +1137,7 @@ class MobileController extends ServiceController {
             die;
         }
         $bided = Bid::checkBided($postData);
+        $chonnguoi = 0;
         if (empty($bided)) {
             $this->checkMinMoney($postData['laodong_id']);
             $checkGvMotlan = Booking::isGiupviec1lan($postData);
@@ -1158,20 +1159,16 @@ class MobileController extends ServiceController {
                 } else {
                     $postData['status'] = 1;
                     $statusBooking = 3;
-                    $chonnguoi = 0;
+                    
                 }
 
             }
 
             $bid = Bid::SaveData($postData);
-            Log::info(['test' => $bid]);
-            Log::info(['post' => $postData]);
-            Log::info(['test1' => $keyPushNotify]);
-            if ($bid) {
+            if ($bid > 0) {
                 $this->status = 200;
                 $this->message = 'Success';
                 Booking::SaveData(['id' => $postData['booking_id'], 'status' => $statusBooking]);
-                
                 $push_data = [
                     'key' => $keyPushNotify,
                     'laodong_id' => $postData['laodong_id'],
