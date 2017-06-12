@@ -1127,7 +1127,6 @@ class MobileController extends ServiceController {
     }
 
     function nhanviec() {
-        Log::info(['nhanvien' => 1]);
         $postData = Input::all();
         $this->checkNullData(Input::get('booking_id'));
         $this->checkNullDataInArray($postData);
@@ -1140,13 +1139,20 @@ class MobileController extends ServiceController {
         $bided = Bid::checkBided($postData);
         if (empty($bided)) {
             $this->checkMinMoney($postData['laodong_id']);
-            if (Booking::isGiupviec1lan($postData)) {
+            $checkGvMotlan = Booking::isGiupviec1lan($postData);
+            Log::warning(['1lan' => $checkGvMotlan]);
+
+            if ($checkGvMotlan) {
+
                 $postData['status'] = 1;
                 $keyPushNotify = 'NVGV1L';
                 $statusBooking = 3;
+
             } else {
+
                 $keyPushNotify = 'NVGVTX';
                 $checkNhanviec = Booking::useChonnguoi($postData);
+
                 if (!empty($checkNhanviec)) {
                     $postData['status'] = 0;
                     $statusBooking = 1;
@@ -1156,6 +1162,7 @@ class MobileController extends ServiceController {
                     $statusBooking = 3;
                     $chonnguoi = 0;
                 }
+                
             }
             $bid = Bid::SaveData($postData);
             if ($bid) {
