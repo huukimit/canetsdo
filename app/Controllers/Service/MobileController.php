@@ -1140,8 +1140,6 @@ class MobileController extends ServiceController {
         if (empty($bided)) {
             $this->checkMinMoney($postData['laodong_id']);
             $checkGvMotlan = Booking::isGiupviec1lan($postData);
-            Log::warning(['1lan' => $checkGvMotlan]);
-
             if ($checkGvMotlan) {
 
                 $postData['status'] = 1;
@@ -1162,9 +1160,12 @@ class MobileController extends ServiceController {
                     $statusBooking = 3;
                     $chonnguoi = 0;
                 }
-                
+
             }
+
             $bid = Bid::SaveData($postData);
+            Log::info(['test' => 'bid']);
+            Log::info(['test1' => $keyPushNotify]);
             if ($bid) {
                 $this->status = 200;
                 $this->message = 'Success';
@@ -1179,17 +1180,17 @@ class MobileController extends ServiceController {
                 $customers = Customer::getFullInfoCustomerByIdToNotify($postData['customer_id']);
                 $laodong = Customer::getById($postData['laodong_id']);
 
-                if ($keyPushNotify == 'NVGV1L') {
-                    Log::info(['1lan' => 'start tru tien']);
-                    $this->checkTrutien($bid);
-                }
-
                 foreach($customers as $customer) {
                     if ($customer->type_device == 1) {
                         $res = Notify::cloudMessaseAndroid($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
                     } else {
                         $res = Notify::Push2Ios($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
                     }
+                }
+                
+                if ($keyPushNotify == 'NVGV1L') {
+                    Log::info(['1lan' => 'start tru tien']);
+                    $this->checkTrutien($bid);
                 }
             }
         } else {
