@@ -1127,6 +1127,7 @@ class MobileController extends ServiceController {
     }
 
     function nhanviec() {
+        Log::info(['nhanvien' => 1]);
         $postData = Input::all();
         $this->checkNullData(Input::get('booking_id'));
         $this->checkNullDataInArray($postData);
