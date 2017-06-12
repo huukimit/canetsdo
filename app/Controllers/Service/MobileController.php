@@ -1276,7 +1276,7 @@ class MobileController extends ServiceController {
                 'id' => $customer->id,
                 'vi_taikhoan' => ($customer->vi_taikhoan - $config->fee_kh),
            ];
-           Log::warning($customer);
+           Log::warning($updateCustomer);
            Customer::SaveData($updateCustomer);
             $transactionCustomer = [
                 'customer_id' => $customer->id,
@@ -1292,8 +1292,9 @@ class MobileController extends ServiceController {
             'vi_taikhoan' => ($laodong->vi_taikhoan - $feeLd),
         ];
         Log::warning($updateLaodong);
-        if (Customer::SaveData($updateLaodong)) {
 
+        if (Customer::SaveData($updateLaodong)) {
+            Log::warning([1, 12, 33]);
             $transaction = [
                 'customer_id' => $booking->laodong_id,
                 'transid' => $bidId,
