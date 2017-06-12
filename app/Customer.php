@@ -146,7 +146,7 @@ class Customer extends BaseModel {
             ORDER BY distance ASC";
             // HAVING distance = null 
         $data = DB::select($sql);
-        Log::error(['sql' => $sql]);
+        // Log::error(['sql' => $sql]);
         return $data;
     }
     // static function getLaborsArround($lat, $long, $distance, $dichvu)

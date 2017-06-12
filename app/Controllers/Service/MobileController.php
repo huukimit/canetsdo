@@ -1172,7 +1172,7 @@ class MobileController extends ServiceController {
                 $laodong = Customer::getById($postData['laodong_id']);
 
                 if ($keyPushNotify == 'NVGV1L') {
-                    Log::warning(['motlan' => 'Vao tru tien']);
+                    Log::info(['1lan' => 'start tru tien']);
                     $this->checkTrutien($bid);
                 }
 
@@ -1261,9 +1261,10 @@ class MobileController extends ServiceController {
         $booking = Bid::getBookingByBidId($bidId);
         $laodong = Customer::getById($booking->laodong_id);
         if ($dichvu == 'NVGV1L') {
-
+            Log::info(['phi' => 1111111111111111111111]);
             $feeLd = (($booking->luong + $booking->thuong) * ($config->ptram_gv1lan/100));
             $reason = 'Phí nhận công việc 1 lần';
+            Log::info(['phi' => $feeLd]);
             
         } else {
 
@@ -1301,8 +1302,8 @@ class MobileController extends ServiceController {
                 'amount_moneys' => '-' . $feeLd,
                 'reason' => $reason,
             ];
-            Lichsugiaodich::SaveData($transaction);
 
+            Lichsugiaodich::SaveData($transaction);
         }
     }
 
