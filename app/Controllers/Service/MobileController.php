@@ -1164,7 +1164,8 @@ class MobileController extends ServiceController {
             }
 
             $bid = Bid::SaveData($postData);
-            Log::info(['test' => 'bid']);
+            Log::info(['test' => $bid]);
+            Log::info(['post' => $postData]);
             Log::info(['test1' => $keyPushNotify]);
             if ($bid) {
                 $this->status = 200;
@@ -1187,7 +1188,7 @@ class MobileController extends ServiceController {
                         $res = Notify::Push2Ios($customer->device_token, $laodong->fullname . ' đã nhận việc, mở để xem chi tiết', $push_data, 'customer');
                     }
                 }
-                
+
                 if ($keyPushNotify == 'NVGV1L') {
                     Log::info(['1lan' => 'start tru tien']);
                     $this->checkTrutien($bid);
