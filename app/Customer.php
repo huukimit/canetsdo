@@ -142,8 +142,11 @@ class Customer extends BaseModel {
             FROM customers as shp JOIN customer_devices as cs_dv
             ON shp.id = cs_dv.customer_id JOIN devices
             ON cs_dv.device_id = devices.id
-            WHERE type_customer = 1 AND $fielDichvu = 1
-            ORDER BY distance ASC";
+            WHERE type_customer = 1 AND $fielDichvu = 1";
+        if ($dichvu == 'GV1L') {
+            $sql .= " AND allow_gv1lan =1";
+        }
+        $sql .=" ORDER BY distance ASC";
             // HAVING distance = null 
         $data = DB::select($sql);
         // Log::error(['sql' => $sql]);
