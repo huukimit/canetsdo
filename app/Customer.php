@@ -135,6 +135,7 @@ class Customer extends BaseModel {
 
     static function getLaborsArround($lat, $long, $distance, $dichvu)
     {
+        Log::warning(['dichvu' => $dichvu]);
         $fielDichvu = ($dichvu == 'GV1L') ? 'viec_1_lan' : 'viec_thuongxuyen';
         $sql = "SELECT shp.id, type_customer,type_device, device_token, (3956 * 2 * ASIN(SQRT(POWER(SIN(($lat -abs(shp.lat)) * pi()/180 / 2),2)
             + COS($lat * pi()/180 ) * COS(abs(shp.long) *  pi()/180) * POWER(SIN(($long - abs(shp.long))
@@ -144,12 +145,12 @@ class Customer extends BaseModel {
             ON cs_dv.device_id = devices.id
             WHERE type_customer = 1 AND $fielDichvu = 1";
         if ($dichvu == 'GV1L') {
-            $sql .= " AND allow_gv1lan =1";
+            $sql .= " AND allow_gv1lan = 1";
         }
         $sql .=" ORDER BY distance ASC";
             // HAVING distance = null 
         $data = DB::select($sql);
-        // Log::error(['sql' => $sql]);
+        Log::error(['sql' => $sql]);
         return $data;
     }
     // static function getLaborsArround($lat, $long, $distance, $dichvu)
