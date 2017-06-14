@@ -999,9 +999,14 @@ class MobileController extends ServiceController {
             $listGvTx = Booking::getJobsWaitings($except, 2);
         }
         $listGvMl = Booking::getJobsWaitingReceivedFromNotify($except, 1, $customerId); 
-        if(count($listGvMl) == 0) {
-            $listGvMl = Booking::getJobsWaitings($except, 1);
+        $laodong = Customer::getById($customerId);
+        
+        if ($laodong->allow_gv1lan == 1) {
+            if(count($listGvMl) == 0) {
+                $listGvMl = Booking::getJobsWaitings($except, 1);
+            }
         }
+        
         $result['list_gvthuongxuyen'] =  $listGvTx;
         $result['list_gvmotlan'] = $listGvMl; 
         $this->status = 200;
