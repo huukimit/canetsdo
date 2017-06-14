@@ -130,6 +130,7 @@ class Customer extends BaseModel {
             ON cs_dv.device_id = devices.id
             WHERE type_customer = 1 AND $fielDichvu = 1 AND shp.phone_number IN($phoneNumber)";
         $data = DB::select($sql);
+        Log::info(['sql' => $sql]);
         return $data;
     }
 
