@@ -304,6 +304,8 @@ class MobileController extends ServiceController {
         $bid = Bid::getBidByBookAndLaodongId($post['booking_id'], $post['laodong_id']);
         if (!empty($bid)) {
             $booking = Booking::SaveData(['id' => $post['booking_id'], 'status' => -12]);
+            $this->status = 200;
+            $this->message = 'success';
             $customer = Customer::getById($booking->customer_id);
             $laodongs = Customer::getFullInfoCustomerByIdToNotify($post['laodong_id']);
 
@@ -319,9 +321,7 @@ class MobileController extends ServiceController {
                     Notify::Push2Ios($laodong->device_token, 'Khách hàng' . $customer->fullname . '(' . $customer->manv_kh . ") thông báo bạn đã hủy công việc", $push_data);
                 }
             }
-
-            $this->status = 200;
-            $this->message = 'success';
+            
         } else {
             $this->status = 401;
             $this->message = 'Fail';
@@ -500,6 +500,7 @@ class MobileController extends ServiceController {
             $this->message = Config::get('services.notify.user_exist');exit;
         }
         $postData['manv_kh'] = 'KH' . time();
+        $postData['status'] = 1;
         $status = DB::transaction(function () use($postData) {
             $id = Customer::SaveData($postData);
             // $deviceId = Device::SaveData($postData);
@@ -507,7 +508,7 @@ class MobileController extends ServiceController {
             // $postData['device_id'] = $deviceId;
             // CustomerDevice::SaveData($postData);
             $postData['url_active'] = URL::to('/') . '/confirmemail/' . base64_encode($id . '-'. time());
-            $this->sendMail('Active account' , 'emails.active_account', $postData);
+            // $this->sendMail('Active account' , 'emails.active_account', $postData);
         });
 
         if (is_null($status)) {
@@ -589,6 +590,7 @@ class MobileController extends ServiceController {
         if (isset($data['birthday'])) {
             $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
         }
+        $data['status'] = 1;
         $status = Customer::SaveData($data);
             // $deviceId = Device::SaveData($data);
             // $data['customer_id'] = $id;
@@ -695,6 +697,7 @@ class MobileController extends ServiceController {
 
     }
 
+    
     function giupviecmotlan()
     {
         $postData = Input::all();
@@ -1000,7 +1003,7 @@ class MobileController extends ServiceController {
         }
         $listGvMl = Booking::getJobsWaitingReceivedFromNotify($except, 1, $customerId); 
         $laodong = Customer::getById($customerId);
-        
+
         if ($laodong->allow_gv1lan == 1) {
             if(count($listGvMl) == 0) {
                 $listGvMl = Booking::getJobsWaitings($except, 1);
@@ -1175,7 +1178,7 @@ class MobileController extends ServiceController {
                 }
 
                 if ($keyPushNotify == 'NVGV1L') {
-                    Log::info(['1lan' => 'start tru tien']);
+                    // Log::info(['1lan' => 'start tru tien']);
                     $this->checkTrutien($bid);
                 }
             }
@@ -1258,6 +1261,7 @@ class MobileController extends ServiceController {
         if ($dichvu == 'NVGV1L') {
             $feeLd = round((($booking->luong + $booking->thuong) * ($config->ptram_gv1lan/100)));
             $reason = 'Phí nhận công việc 1 lần';
+            Log::warning(['phi_1lan' => $feeLd]);
         } else {
 
            $feeLd = $config->fee_ld; 
@@ -1279,12 +1283,12 @@ class MobileController extends ServiceController {
             Lichsugiaodich::SaveData($transactionCustomer);
         }
         /* Trư tien lao dong */
-        Log::warning(['phi' => $feeLd]);
+        // Log::warning(['phi' => $feeLd]);
         $updateLaodong = [
             'id' => $laodong->id,
             'vi_taikhoan' => ($laodong->vi_taikhoan - $feeLd),
         ];
-        Log::warning($updateLaodong);
+        // Log::warning($updateLaodong);
         if (Customer::SaveData($updateLaodong)) {
             $transaction = [
                 'customer_id' => $booking->laodong_id,
