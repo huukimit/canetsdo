@@ -29,8 +29,8 @@ class BaseModel extends Model {
         return $getConfig;
     }
 
-    static function getById($id, $field = 'id') {
-        return self::where($field, $id)->first();
+    static function getById($id) {
+        return self::where('id', $id)->first();
     }
 
     static function deleteBy($id, $field = 'id')
