@@ -24,7 +24,7 @@ class Device extends BaseModel {
         $exist = self::where('device_token', $tokenDevice)->first();
         if (isset($exist->id)) {
             self::deleteBy($exist->id);
-            // CustomerDevice::deleteBy($exist->id, 'device_id');
+            CustomerDevice::deleteBy($exist->id, 'device_id');// tam comment
         }
     }
 

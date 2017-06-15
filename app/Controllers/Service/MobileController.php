@@ -997,17 +997,19 @@ class MobileController extends ServiceController {
         foreach($dangnhan as $nhan) {
             $except[] = $nhan->booking_id;
         }
-        $listGvTx = Booking::getJobsWaitingReceivedFromNotify($except, 2, $customerId);
-        if(count($listGvTx) == 0) {
+        // $listGvTx = Booking::getJobsWaitingReceivedFromNotify($except, 2, $customerId);
+        // if(count($listGvTx) == 0) {
             $listGvTx = Booking::getJobsWaitings($except, 2);
-        }
-        $listGvMl = Booking::getJobsWaitingReceivedFromNotify($except, 1, $customerId); 
+        // }
+        // $listGvMl = Booking::getJobsWaitingReceivedFromNotify($except, 1, $customerId); 
         $laodong = Customer::getById($customerId);
 
         if ($laodong->allow_gv1lan == 1) {
-            if(count($listGvMl) == 0) {
+            // if(count($listGvMl) == 0) {
                 $listGvMl = Booking::getJobsWaitings($except, 1);
-            }
+            // }
+        }  else {
+            $listGvMl = [];
         }
         
         $result['list_gvthuongxuyen'] =  $listGvTx;
