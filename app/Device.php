@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use App\BaseModel;
+use App\CustomerDevice;
 
 class Device extends BaseModel {
     function __construct() {
@@ -17,6 +18,14 @@ class Device extends BaseModel {
 
     static function getAllDeviceByToken($data) {
     	return self::where('device_token', $data['device_token'])->get();
+    }
+
+    static function deleteDeviceByToken($tokenDevice) {
+        $exist = self::getById($tokenDevice, 'device_token');
+        if (isset($exist->id)) {
+            self::deleteBy($exist->id);
+            Customer::deleteBy($exist->id, 'device_id');
+        }
     }
 
 }

@@ -258,7 +258,7 @@ class MobileController extends ServiceController {
                 $this->status = ($status_paycard == 1) ? 200 : $status_paycard;
                 $this->message = $return['message'];
             } else {
-                $TxtCard = 'CARD FAKE';
+                $TxtType = 'CARD FAKE';
                 $transaction = [
                     'customer_id' => $postData['customer_id'],
                     'transid' => time(),

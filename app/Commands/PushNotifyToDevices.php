@@ -6,6 +6,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Support\Facades\Log;
 use App\Models\Notify\Notify;
 use App\Notify_missed_booking;
+use App\Device;
 
 class PushNotifyToDevices extends Command implements SelfHandling {
 
@@ -52,6 +53,7 @@ class PushNotifyToDevices extends Command implements SelfHandling {
 
 	            if ($result['success'] != 1) {
 	                $missed ['status'] = 0;
+	                Device::deleteDeviceByToken($customer['device_token']);
 	                Notify_missed_booking::SaveData($missed);
 	            } else {
 	                $missed ['status'] = 1;
