@@ -501,6 +501,7 @@ class MobileController extends ServiceController {
         }
         $postData['manv_kh'] = 'KH' . time();
         $postData['status'] = 1;
+        $postData['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
         $status = DB::transaction(function () use($postData) {
             $id = Customer::SaveData($postData);
             // $deviceId = Device::SaveData($postData);
@@ -591,6 +592,7 @@ class MobileController extends ServiceController {
             $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
         }
         $data['status'] = 1;
+        $data['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
         $status = Customer::SaveData($data);
             // $deviceId = Device::SaveData($data);
             // $data['customer_id'] = $id;
