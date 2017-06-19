@@ -26,8 +26,10 @@
                             <td class="text-center"><b class="text-success">{{ $napthe->created_at }}</b></td>
                             <td>
                                 @if (isset($napthe->customer->fullname))
+                                    <a href="/secret/laborers/{{$napthe->customer->id}}">
                                     {{ ($napthe->customer->type_customer == 1) ? 'KH: ' : 'LĐ: ' }}
                                     {{ $napthe->customer->fullname }}<br/>
+                                    </a>
                                     @if($napthe->customer->phone_number != '')
                                     <label>0{{ number_format((int) $napthe->customer->phone_number, 0, ",", ".") }}</label>
                                     @endif
