@@ -816,8 +816,11 @@ class MobileController extends ServiceController {
         $customers = Customer::getLaborsArround($lat, $long, $distance, $key[0]);
         $eachGroup = [];
         $i = 0;
+        $sl = 0;
+        $total = count($customers);
         foreach ($customers as  $customer) {
             $i++;
+            $sl++;
             $eachGroup[] = [
                 'id' => $customer->id,
                 'type_customer' => $customer->type_customer,
@@ -828,6 +831,8 @@ class MobileController extends ServiceController {
                 Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
                 $i = 0;
                 $eachGroup = [];
+            } elseif ($sl = $total) {
+                 Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
             }
         }
 

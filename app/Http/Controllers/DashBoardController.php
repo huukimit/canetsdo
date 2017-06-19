@@ -55,9 +55,28 @@ class DashBoardController extends Controller {
             if (Thongbao::SaveData($data)) {
                 $pushData = ['key' => 'Thongbao', 'content' => $data['content']];
                 $customers = Customer::getTokenAllUserToPushNotify($data['type']);
-                $missed = [];
-                Queue::later(5, new PushNotifyToDevices($customers, $data['title'], $pushData, 'Admin create notify'));
+                $eachGroup = [];
+                $i = 0;
+                $sl = 0;
+                $total = count($customers);
+                foreach ($customers as  $customer) {
+                    $i++;
+                    $sl++;
+                    $eachGroup[] = [
+                        'id' => $customer->id,
+                        'type_customer' => $customer->type_customer,
+                        'type_device' => $customer->type_device,
+                        'device_token' => $customer->device_token,
+                    ];
+                    if ($i == 10) {
+                        Queue::later(5, new PushNotifyToDevices($customers, $data['title'], $pushData, 'Admin create notify'));
+                        $i = 0;
+                        $eachGroup = [];
+                    } elseif ($sl = $total) {
+                         Queue::later(5, new PushNotifyToDevices($customers, $data['title'], $pushData, 'Admin create notify'));
                     }
+                }
+            }
         }
         return view('admin.createnotify',[
             'thongbaos' => Thongbao::orderBy('created_at', 'DESC')->paginate(10),
