@@ -150,6 +150,13 @@ class DashBoardController extends Controller {
             'feedbacks' => Feedback::orderBy('created_at', 'DESC')->paginate(10),
         ]);
     }
+
+    public function trackingnapthe() {
+        $ddnapthe = Lichsugiaodich::whereIN('reason', ['VTT','VMS','VNP','FPT','VTC'])->orderBy('created_at', 'DESC')->paginate(10);
+        return view('admin.trackingnapthe',[
+            'napthes' => $ddnapthe,
+        ]);
+    }
     
 
 }
