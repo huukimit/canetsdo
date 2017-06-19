@@ -60,7 +60,7 @@ class PushNotifyToDevices extends Command implements SelfHandling {
 	                Notify_missed_booking::SaveData($missed);
 	            }
 	        } else {
-	        	Log::error(['customer' => $customer]);
+	        	// Log::error(['customer' => $customer]);
 	        }
 
         }
