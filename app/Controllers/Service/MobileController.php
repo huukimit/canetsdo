@@ -1462,7 +1462,7 @@ class MobileController extends ServiceController {
         $laodongId = Input::get('laodong_id');
         $bookingId = Input::get('booking_id');
         $this->checkNullData($laodongId);
-        $this->checkNullData($bidId);
+        $this->checkNullData($bookingId);
         Bid::deleteByLaodongAndBooking($laodongId, $bookingId);
         $this->status = 200;
         $this->message = 'Success';
