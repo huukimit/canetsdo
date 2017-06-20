@@ -1458,7 +1458,7 @@ class MobileController extends ServiceController {
         $this->message = 'Success';
     }
 
-    function sinhvienCancelBooking() {
+    function sinhvienCancelBid() {
         $laodongId = Input::get('laodong_id');
         $bookingId = Input::get('booking_id');
         $this->checkNullData($laodongId);
