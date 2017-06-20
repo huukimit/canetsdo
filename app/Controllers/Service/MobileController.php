@@ -804,7 +804,7 @@ class MobileController extends ServiceController {
                 Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
                 $i = 0;
                 $eachGroup = [];
-            } elseif($sl = $total){
+            } elseif($sl == $total){
                  Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
             }
         }
@@ -831,7 +831,7 @@ class MobileController extends ServiceController {
                 Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
                 $i = 0;
                 $eachGroup = [];
-            } elseif ($sl = $total) {
+            } elseif ($sl == $total) {
                  Queue::later(5, new PushNotifyToDevices($eachGroup, $loaidichvu, $pushData, $booking_id));
             }
         }

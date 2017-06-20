@@ -27,7 +27,7 @@
                             <td>
                                 @if (isset($napthe->customer->fullname))
                                     <a href="/secret/laborers/{{$napthe->customer->id}}">
-                                    {{ ($napthe->customer->type_customer == 1) ? 'KH: ' : 'LĐ: ' }}
+                                    {{ ($napthe->customer->type_customer == 2) ? 'KH: ' : 'LĐ: ' }}
                                     {{ $napthe->customer->fullname }}<br/>
                                     </a>
                                     @if($napthe->customer->phone_number != '')

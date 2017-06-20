@@ -72,7 +72,7 @@ class DashBoardController extends Controller {
                         Queue::later(5, new PushNotifyToDevices($customers, $data['title'], $pushData, 'Admin create notify'));
                         $i = 0;
                         $eachGroup = [];
-                    } elseif ($sl = $total) {
+                    } elseif ($sl == $total) {
                          Queue::later(5, new PushNotifyToDevices($customers, $data['title'], $pushData, 'Admin create notify'));
                     }
                 }
