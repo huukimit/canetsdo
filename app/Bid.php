@@ -100,4 +100,8 @@ class Bid extends BaseModel {
         self::where('id', '!=', $bidId)->where('booking_id', $bookingId)->delete();
     }
 
+    static function deleteByLaodongAndBooking($laodongId, $bookingId) {
+        self::where('laodong_id', $laodongId)->where('booking_id', $bookingId)->delete();
+    }
+
 }

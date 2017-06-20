@@ -1458,6 +1458,16 @@ class MobileController extends ServiceController {
         $this->message = 'Success';
     }
 
+    function sinhvienCancelBooking() {
+        $laodongId = Input::get('laodong_id');
+        $bookingId = Input::get('booking_id');
+        $this->checkNullData($laodongId);
+        $this->checkNullData($bidId);
+        Bid::deleteByLaodongAndBooking($laodongId, $bookingId);
+        $this->status = 200;
+        $this->message = 'Success';
+    }
+
     function checkParamsRequested() {
         echo '<pre>';
         print_r(Input::all());die;

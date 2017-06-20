@@ -118,5 +118,6 @@ return [
         'service/mobile/report',
         'service/mobile/pushAndroid',
         'service/mobile/getLaodongByLatLong',
+        'service/mobile/sinhvienCancelBooking',
     ],
 ];
