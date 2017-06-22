@@ -97,14 +97,20 @@ class BookingsController extends Controller {
 	{
 		$search = Input::query('search');
 		$status = Input::query('status');
-		$bookings = Booking::where('type', 1);
+		$createDate = Input::query('create_date');
+		$bookings = Booking::where('type', 1)
+			->join('customers', 'bookings.customer_id', '=', 'customers.id');
 		($status) ? $bookings = $bookings->where('bookings.status', (int) $status) : '';
+		($createDate != '') ? $bookings = $bookings->whereDate('bookings.created_at', '=', $createDate) : '';
 		if ($search) {
             $bookings = $bookings->where(function($orConditions) use ($search) {
-                $orConditions->where('address', 'like', "%$search%");
+                $orConditions->where('address', 'like', "%$search%")
+                    ->orWhere('fullname', 'like', "%$search%")
+                    ->orWhere('phone_number', 'like', "%$search%");
             });
         };
-		$bookings = $bookings->orderBy('bookings.id', 'desc')->paginate(15);
+		$bookings = $bookings->select('bookings.*')
+		->orderBy('bookings.id', 'desc')->paginate(15);
 		$statuses = [
 			0 => 'Trạng thái công việc',
 			100 => 'Mới tạo',
@@ -125,14 +131,19 @@ class BookingsController extends Controller {
 	{
 		$search = Input::query('search');
 		$status = Input::query('status');
-		$bookings = Booking::where('type', 2);
+		$createDate = Input::query('create_date');
+		$bookings = Booking::where('type', 2)
+			->join('customers', 'bookings.customer_id', '=', 'customers.id');;
 		($status) ? $bookings = $bookings->where('bookings.status', (int) $status) : '';
+		($createDate != '') ? $bookings = $bookings->whereDate('bookings.created_at', '=', $createDate) : '';
 		if ($search) {
             $bookings = $bookings->where(function($orConditions) use ($search) {
-                $orConditions->where('address', 'like', "%$search%");
+                $orConditions->where('address', 'like', "%$search%")
+                	->orWhere('fullname', 'like', "%$search%")
+                	->orWhere('phone_number', 'like', "%$search%");
             });
         };
-        $bookings = $bookings->orderBy('bookings.id', 'desc')->paginate(15);
+        $bookings = $bookings->select('bookings.*')->orderBy('bookings.id', 'desc')->paginate(15);
 		$statuses = [
 			0 => 'Trạng thái công việc',
 			100 => 'Mới tạo',

@@ -9,10 +9,15 @@
                 <form action="">
                     <div class="col-md-3">
                         <div class="form-group has-success">
-                            <input placeholder="Nhập tiêu chí tìm kiếm..." type="text" class="form-control" value="{{ app('request')->input('search') }}" name="search">
+                            <input placeholder="Nhập từ khóa  tìm kiếm..." type="text" class="form-control" value="{{ app('request')->input('search') }}" name="search">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <div class="form-group has-success">
+                            <input type="date" class="form-control" value="{{ app('request')->input('create_date') }}" name="create_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group has-success">
                             <select name="status" id="" class="form-control">
                             @foreach($statuses as $status => $nameStatus)
@@ -32,18 +37,17 @@
                         {{-- <a href="/secret/bookings/creategvtx" class="btn btn-info">Tạo công việc</a> --}}
                     </div>
                 </form>
-                <table class="table  table-striped table-bordered" style="width: 1500px">
+                <table class="table  table-striped table-bordered" style="width: 1300px">
                     <thead>
                         <tr>
-                            <th>Time</th>
-                            <th>Customer</th>
-                            <th>Address work</th>
-                            <th>SV nhận việc</th>
-                            <th class="text-center">Status</th>
-                            <th>Hình ảnh căn hộ</th>
-                            <th class="text-center">Updated time </th>
-                            <th>Note</th>
-
+                            <th class="col-md-1">Time</th>
+                            <th class="col-md-1">Customer</th>
+                            <th class="col-md-2">Address work</th>
+                            <th class="col-md-1">Lao động</th>
+                            <th class="text-center col-md-1">Status</th>
+                            <th class="text-center col-md-1">Hình ảnh căn hộ</th>
+                            <th class="text-center col-md-1">Ngày tạo</th>
+                            <th class="text-center col-md-2">Note</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -126,7 +130,7 @@
                                     </tr>
                                 </table>
                             </td>
-                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->updated_at)) }}</td>
+                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->created_at)) }}</td>
                             <td>
                                 <textarea class="note_booking form-control" data-id={{$booking->id}} name="note_byadmin"cols="30" rows="2" placeholder="Nhập chú thích">{{$booking->note_byadmin}}</textarea>
                             </td>

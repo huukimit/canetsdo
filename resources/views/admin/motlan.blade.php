@@ -12,7 +12,12 @@
                             <input placeholder="Nhập tiêu chí tìm kiếm..." type="text" class="form-control" value="{{ app('request')->input('search') }}" name="search">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <div class="form-group has-success">
+                            <input type="date" class="form-control" value="" name="create_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group has-success">
                             <select name="status" id="" class="form-control">
                             @foreach($statuses as $status => $nameStatus)
@@ -36,20 +41,18 @@
                 <table class="table  table-striped table-bordered" style="width: 1500px">
                     <thead>
                         <tr>
-                            <th>No.</th>
-                            <th>Time</th>
-                            <th>Customer</th>
-                            <th>Address work</th>
-                            <th>Lao động</th>
-                            <th class="text-center">Ngày tạo </th>
-                            <th class="text-center">Status</th>
+                            <th class="col-md-1">Time</th>
+                            <th class="col-md-1">Customer</th>
+                            <th class="col-md-2">Address work</th>
+                            <th class="col-md-1">Lao động</th>
+                            <th class="text-center col-md-1">Ngày tạo </th>
+                            <th class="text-center col-md-1">Status</th>
                             <th>Note</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($bookings as $booking)
                         <tr>
-                            <td>{{ $booking->id }}</td>
                             <td><b class="text-success">{{ $booking->time_start . ' - ' . $booking->time_end }}</b></td>
                             <td>
                                 @if (isset($booking->customer->fullname))
