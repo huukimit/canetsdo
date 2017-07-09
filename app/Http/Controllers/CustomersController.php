@@ -39,37 +39,37 @@ class CustomersController extends Controller {
             if ($data['birthday'] != '') {
                 $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
             }
-            unset($data['avatar']);
-            unset($data['anhsv_truoc']);
-            unset($data['anhsv_sau']);
-            unset($data['anhcmtnd_truoc']);
-            unset($data['anhcmtnd_sau']);
+            // unset($data['avatar']);
+            // unset($data['anhsv_truoc']);
+            // unset($data['anhsv_sau']);
+            // unset($data['anhcmtnd_truoc']);
+            // unset($data['anhcmtnd_sau']);
 
-            if ($_FILES['avatar']['size']) {
+            if (isset($_FILES['avatar']['size'])) {
                 $_FILES['file'] = $_FILES ['avatar'];
                 $upImage = Media::uploadImage($_FILES, 'avatar');
                 $data['avatar'] = $upImage['url'];
             }
 
-            if ($_FILES['anhsv_truoc']['size']) {
+            if (isset($_FILES['anhsv_truoc']['size'])) {
                 $_FILES['file'] = $_FILES ['anhsv_truoc'];
                 $upImage = Media::uploadImage($_FILES, 'anhsv');
                 $data['anhsv_truoc'] = $upImage['url'];
             }
 
-            if ($_FILES['anhsv_sau']['size']) {
+            if (isset($_FILES['anhsv_sau']['size'])) {
                 $_FILES['file'] = $_FILES ['anhsv_sau'];
                 $upImage = Media::uploadImage($_FILES, 'anhsv');
                 $data['anhsv_sau'] = $upImage['url'];
             }
 
-            if ($_FILES['anhcmtnd_truoc']['size']) {
+            if (isset($_FILES['anhcmtnd_truoc']['size'])) {
                 $_FILES['file'] = $_FILES ['anhcmtnd_truoc'];
                 $upImage = Media::uploadImage($_FILES, 'cmtnd');
                 $data['anhcmtnd_truoc'] = $upImage['url'];
             }
 
-            if ($_FILES['anhcmtnd_sau']['size']) {
+            if (isset($_FILES['anhcmtnd_sau']['size'])) {
                 $_FILES['file'] = $_FILES ['anhcmtnd_sau'];
                 $upImage = Media::uploadImage($_FILES, 'cmtnd');
                 $data['anhcmtnd_sau'] = $upImage['url'];
