@@ -33,7 +33,9 @@ class CustomersController extends Controller {
                     return redirect("/secret/$location");
                 }
             }
-            $data['cando'] = json_encode($data['cando']);
+            if(isset($data['cando'])) {
+                $data['cando'] = json_encode($data['cando']);
+            }
             if ($data['birthday'] != '') {
                 $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
             }
