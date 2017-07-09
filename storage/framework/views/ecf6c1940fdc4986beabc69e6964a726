@@ -55,7 +55,7 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <?php echo $main_data->render(); ?>
+                <?php echo $main_data->appends(Input::except('page'))->render(); ?>
 
             </div>
         </div>

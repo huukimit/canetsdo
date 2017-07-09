@@ -94,7 +94,7 @@
 	                        @endforeach
 	                    </tbody>
                     </table>
-					{!! $lichsucongtrus->render() !!}
+					{!! $lichsucongtrus->appends(Input::except('page'))->render() !!}
         		</div>
         	</div>
         </div>

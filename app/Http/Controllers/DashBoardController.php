@@ -152,9 +152,28 @@ class DashBoardController extends Controller {
     }
 
     public function trackingnapthe() {
-        $ddnapthe = Lichsugiaodich::whereIN('reason', ['VTT','VMS','VNP','FPT','VTC'])->orderBy('created_at', 'DESC')->paginate(10);
+
+        $fromdate  = Input::query('fromdate');
+        $todate  = Input::query('todate');
+
+        $ddnapthe = Lichsugiaodich::whereIN('reason', ['VTT','VMS','VNP','FPT','VTC']);
+        $sumMoneys = Lichsugiaodich::whereIN('reason', ['VTT','VMS','VNP','FPT','VTC']);
+
+        if($fromdate != ''){
+            $ddnapthe = $ddnapthe->whereDate('created_at', '>=', $fromdate);
+            $sumMoneys = $sumMoneys->whereDate('created_at', '>=', $fromdate);
+        }
+
+        if($todate != ''){
+            $ddnapthe = $ddnapthe->whereDate('created_at', '<=', $todate);
+            $sumMoneys = $sumMoneys->whereDate('created_at', '<=', $todate);
+        }
+        $ddnapthe = $ddnapthe->orderBy('created_at', 'DESC')->paginate(15);
+        $sumMoneys = $sumMoneys->selectRaw('sum(amount_moneys) as sumMoneys')->first();
+
         return view('admin.trackingnapthe',[
             'napthes' => $ddnapthe,
+            'sumMoneys' => $sumMoneys,
         ]);
     }
     
