@@ -138,7 +138,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {!! $bookings->render() !!}
+                {!! $bookings->appends(Input::except('page'))->render() !!}
             </div>
         </div>
     </div>

@@ -115,7 +115,7 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <?php echo $bookings->render(); ?>
+                <?php echo $bookings->appends(Input::except('page'))->render(); ?>
 
             </div>
         </div>
