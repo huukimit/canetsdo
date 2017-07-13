@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Booking;
+use App\Feedback;
 use App\Setting;
 use App\Customer;
 use App\Requires;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Queue;
 use App\Models\Media\Media;
 use Illuminate\Support\Facades\Log;
 use Response;
+
 
 class BookingsController extends Controller {
 
@@ -167,6 +169,18 @@ class BookingsController extends Controller {
         if ($booking) {
             $booking->note_byadmin= Input::get('note');
             if ($booking->save()) {
+                return Response::json(['status' => true]);
+            }
+        }
+        return Response::json(['status' => false]);
+    }
+
+    public function updateNoteFeedback()
+    {
+        $fb = Feedback::find(Input::get('id'));
+        if ($fb) {
+            $fb->note_byadmin= Input::get('note');
+            if ($fb->save()) {
                 return Response::json(['status' => true]);
             }
         }

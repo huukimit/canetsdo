@@ -16,6 +16,7 @@
 	                            <th>Số điện thoại</th>
 	                            <th>Name</th>
 	                            <th class="col-md-5">Lời góp ý, hỗ trợ</th>
+	                            <th>Note</th>
 	                            <th class="col-md-1">Đánh dấu supported</th>
 	                        </tr>
 	                    </thead>
@@ -37,6 +38,9 @@
 		                        	<td>{{ $feedback->customer->phone_number }}</td>
 		                        	<td>{{ $feedback->customer->fullname }}</td>
 		                        	<td>{{ $feedback->feedback }}</td>
+		                        	<td>
+		                                <textarea class="note_feekback form-control" data-id={{$feedback->id}} name="note_byadmin"cols="30" rows="2" placeholder="Nhập chú thích">{{$feedback->note_byadmin}}</textarea>
+		                            </td>
 		                        	<td class="text-center">
 		                        		@if ($feedback->replied == 0)
 		                        			<input type="checkbox" class="mark_supported" data-id ="{{ $feedback->id }}">

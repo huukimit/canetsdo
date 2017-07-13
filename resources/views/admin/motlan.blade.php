@@ -38,13 +38,14 @@
                     </div>
                 </form>
                     
-                <table class="table  table-striped table-bordered" style="width: 1500px">
+                <table class="table  table-striped table-bordered" style="width: 1300px">
                     <thead>
                         <tr>
                             <th class="col-md-1">Time</th>
                             <th class="col-md-1">Customer</th>
                             <th class="col-md-2">Address work</th>
                             <th class="col-md-1">Lao động</th>
+                            <th class="text-center col-md-1">Ngày update </th>
                             <th class="text-center col-md-1">Ngày tạo </th>
                             <th class="text-center col-md-1">Status</th>
                             <th>Note</th>
@@ -77,6 +78,7 @@
                                     @endif
                                 @endforeach
                             </td>
+                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->updated_at)) }}</td>
                             <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->created_at)) }}</td>
                             <td class="text-center">
                             <?php

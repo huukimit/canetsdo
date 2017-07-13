@@ -37,7 +37,7 @@
                         {{-- <a href="/secret/bookings/creategvtx" class="btn btn-info">Tạo công việc</a> --}}
                     </div>
                 </form>
-                <table class="table  table-striped table-bordered" style="width: 1300px">
+                <table class="table  table-striped table-bordered" style="width: 1500px">
                     <thead>
                         <tr>
                             <th class="col-md-1">Time</th>
@@ -45,9 +45,10 @@
                             <th class="col-md-2">Address work</th>
                             <th class="col-md-1">Lao động</th>
                             <th class="text-center col-md-1">Status</th>
-                            <th class="text-center col-md-1">Hình ảnh căn hộ</th>
-                            <th class="text-center col-md-1">Ngày tạo</th>
                             <th class="text-center col-md-2">Note</th>
+                            <th class="text-center col-md-1">Ngày update</th>
+                            <th class="text-center col-md-1">Ngày tạo</th>
+                            <th class="text-center col-md-1">Hình ảnh căn hộ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,6 +111,12 @@
                             ?>
                             </td>
                             <td>
+                                <textarea class="note_booking form-control" data-id={{$booking->id}} name="note_byadmin"cols="30" rows="2" placeholder="Nhập chú thích">{{$booking->note_byadmin}}</textarea>
+                            </td>
+                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->created_at)) }}</td>
+                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->updated_at)) }}</td>
+                            
+                            <td>
                                 <table>
                                     <tr>
                                         <td>
@@ -129,10 +136,6 @@
                                         </td>
                                     </tr>
                                 </table>
-                            </td>
-                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($booking->created_at)) }}</td>
-                            <td>
-                                <textarea class="note_booking form-control" data-id={{$booking->id}} name="note_byadmin"cols="30" rows="2" placeholder="Nhập chú thích">{{$booking->note_byadmin}}</textarea>
                             </td>
                         </tr>
                         @endforeach

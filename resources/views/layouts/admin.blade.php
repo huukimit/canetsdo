@@ -51,49 +51,35 @@
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<ul class="nav menu">
 			<li class="active"><a href="/secret"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg>Analytics</a></li>
-			<li class="parent ">
-				<a href="#">
-					<span data-toggle="collapse" href="#sub-item-0"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Bookings 
+			<li>
+				<a class="" href="/secret/bookings/motlan">
+					<svg class="glyph stroked table"><use xlink:href="#stroked-table"/></svg>
+					Giup viec mot lan
 				</a>
-				<ul class="children collapse" id="sub-item-0">
-					<li>
-						<a class="" href="/secret/bookings/motlan">
-							<svg class="glyph stroked female user"><use xlink:href="#stroked-female-user"/></svg>
-							Giup viec mot lan
-						</a>
-					</li>
-					<li>
-						<a class="" href="/secret/bookings/thuongxuyen">
-							<svg class="glyph stroked female user"><use xlink:href="#stroked-female-user"/></svg>
-							Giup viec thuong xuyen
-						</a>
-					</li>
-				</ul>
 			</li>
-			<li class="parent ">
-				<a href="#">
-					<span data-toggle="collapse" href="#sub-item-1"><svg class="glyph stroked chevron-down"><use xlink:href="#stroked-chevron-down"></use></svg></span> Users 
+			<li>
+				<a class="" href="/secret/bookings/thuongxuyen">
+					<svg class="glyph stroked table"><use xlink:href="#stroked-table"/></svg>
+					Giup viec thuong xuyen
 				</a>
-				<ul class="children collapse" id="sub-item-1">
-					<li>
-						<a class="" href="/secret/laborers">
-							<svg class="glyph stroked female user"><use xlink:href="#stroked-female-user"/></svg>
-							Laborers
-						</a>
-					</li>
-					<li>
-						<a class="" href="/secret/customers">
-							<svg class="glyph stroked female user"><use xlink:href="#stroked-female-user"/></svg>
-							Customers
-						</a>
-					</li>
-					<li>
-						<a class="" href="/secret/usersblocked">
-							<svg class="glyph stroked flag"><use xlink:href="#stroked-flag"/></svg>
- 							Users blocked
-						</a>
-					</li>
-				</ul>
+			</li>
+			<li>
+				<a class="" href="/secret/laborers">
+					<svg class="glyph stroked female user"><use xlink:href="#stroked-female-user"/></svg>
+					Laborers
+				</a>
+			</li>
+			<li>
+				<a class="" href="/secret/customers">
+					<svg class="glyph stroked female user"><use xlink:href="#stroked-female-user"/></svg>
+					Customers
+				</a>
+			</li>
+			<li>
+				<a class="" href="/secret/usersblocked">
+					<svg class="glyph stroked flag"><use xlink:href="#stroked-flag"/></svg>
+						Users blocked
+				</a>
 			</li>
 			<li><a href="/secret/configs"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg>System config</a></li>
 			<li><a href="/secret/trackingnapthe"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Theo dõi nạp thẻ</a></li>

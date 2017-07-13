@@ -502,17 +502,8 @@ class MobileController extends ServiceController {
         $postData['manv_kh'] = 'KH' . time();
         $postData['status'] = 1;
         $postData['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
-        $status = DB::transaction(function () use($postData) {
-            $id = Customer::SaveData($postData);
-            // $deviceId = Device::SaveData($postData);
-            // $postData['customer_id'] = $id;
-            // $postData['device_id'] = $deviceId;
-            // CustomerDevice::SaveData($postData);
-            $postData['url_active'] = URL::to('/') . '/confirmemail/' . base64_encode($id . '-'. time());
-            // $this->sendMail('Active account' , 'emails.active_account', $postData);
-        });
-
-        if (is_null($status)) {
+        $status = Customer::SaveData($postData);
+        if ($status) {
             $this->status = 200;
             $this->message =  Config::get('services.notify.register_successfull');
         } else {
