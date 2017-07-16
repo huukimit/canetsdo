@@ -894,7 +894,7 @@ class MobileController extends ServiceController {
     private function sendContract($subject, $template, $data){
         $status = Mail::send($template, $data, function($message) use ($subject, $data) {
             $message->to($data['email'], 'CANETS')->subject($subject);
-            $message->attach(public_path() . '/files/samplecontract.pdf');
+            $message->attach(public_path() . '/files/Hợp-đồng-giúp-việc.docx');
         });
     }
 
