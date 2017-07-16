@@ -585,11 +585,7 @@ class MobileController extends ServiceController {
         $data['status'] = 1;
         $data['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
         $status = Customer::SaveData($data);
-            // $deviceId = Device::SaveData($data);
-            // $data['customer_id'] = $id;
-            // $data['device_id'] = $deviceId;
-            // CustomerDevice::SaveData($data);
-        // });
+        
         if ($status) {
             $this->status = 200;
             //$this->sendMail('Active account' , 'emails.active', $data);

@@ -40,6 +40,7 @@
                 <table class="table  table-striped table-bordered" style="width: 1500px">
                     <thead>
                         <tr>
+                            <th class="col-md-1">ID</th>
                             <th class="col-md-1">Time</th>
                             <th class="col-md-1">Customer</th>
                             <th class="col-md-2">Address work</th>
@@ -54,6 +55,7 @@
                     <tbody>
                         @foreach ($bookings as $booking)
                         <tr>
+                            <td>{{ $booking->id }}</td>
                             <td><b class="text-success">{{ $booking->time_start . ' - ' . $booking->time_end }}</b></td>
                             <td>
                                 @if (isset($booking->customer->fullname))
