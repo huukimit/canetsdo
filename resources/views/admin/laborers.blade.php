@@ -15,7 +15,12 @@
                             <input type="text" class="form-control" value="{{ app('request')->input('search') }}" name="search">
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-3">
+                        <div class="form-group has-success">
+                            <input type="date" class="form-control" value="{{ app('request')->input('create_date') }}" name="create_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" value="Tìm kiếm">
                         </div>
@@ -29,10 +34,11 @@
                             <th>Họ Tên</th>
                             <th>Điện thoại</th>
                             <th>Trường</th>
+                            <th class="text-center col-md-2">Note</th>
                             <th>Ví tiền</th>
                             <th>Ví TK</th>
                             <th>CV 1 lần</th>
-                            <th class="text-center">Updated at </th>
+                            <th class="text-center">Created at </th>
                             <th class="text-center">Status</th>
                         </tr>
                     </thead>
@@ -44,11 +50,14 @@
                             <td><a href="/secret/laborers/{{$data->id}}" title="Xem thông tin chi tiết, chỉnh sửa">{{ $data->fullname }}</a></td>
                             <td class="text-center">{{ $data->phone_number }}</td>
                             <td>{{ $data->school }}</td>
+                            <td>
+                                <textarea class="note_labors form-control" data-id={{$data->id}} name="note_byadmin"cols="30" rows="2" placeholder="Nhập chú thích">{{$data->note_byadmin}}</textarea>
+                            </td>
                             <td class="text-right">{{ number_format($data->vi_tien) }}</td>
                             <td class="text-right">{{ number_format($data->vi_taikhoan) }}</td>
                             <td title="Cho phép giúp việc thường xuyên" class="text-center"><input class="onoffgvthuongxuyen" type="checkbox" @if($data->allow_gv1lan == 1) checked="" @endif value="{{$data->id}}">
                             </td>
-                            <td class="text-center">{{ date('d/m/Y', strtotime($data->updated_at)) }}
+                            <td class="text-center">{{ date('d/m/Y', strtotime($data->created_at)) }}
                             </td>
 
                             <td class="text-center">

@@ -269,6 +269,33 @@ $(document).ready(function(){
         });
     });
 
+    $(document).on('change', '.note_labors', function() {
+        var note = $(this).val();
+        var id = $(this).data('id');
+        processBlock();
+        $.ajax({
+            type : 'POST',
+            url : URL + '/secret/note_labor',
+            data: {
+                id : id,
+                note: note
+            },
+            success: function(data){
+                console.log(data['status']);
+                if (data['status']) {
+                    $.notify('Good job, Update note for labor success', 'success');
+                    $.unblockUI();
+                } else {
+                    $.notify('Error on server', 'error');
+                }
+            },
+            error: function() {
+                $.unblockUI();
+                $.notify('Ajax error', 'error');
+            }
+        });
+    });
+
     $(document).on('change', '.note_feekback', function() {
         var note = $(this).val();
         var id = $(this).data('id');

@@ -79,7 +79,9 @@ class CustomersController extends Controller {
 
         if ($id == null) {
             $search = Input::query('search');
+            $create_date = Input::query('create_date');
             $laborers = Customer::where('type_customer', 1)->whereIn('status', [0, 1]);
+            ($create_date) ? $laborers = $laborers->whereDate('created_at', '=', $create_date) : '';
             if ($search) {
                 $laborers = $laborers->where(function($orConditions) use ($search) {
                     $orConditions->where('email', 'like', "%$search%")
@@ -112,7 +114,9 @@ class CustomersController extends Controller {
     public function customers()
     {
         $search = Input::query('search');
+        $create_date = Input::query('create_date');
         $customers = Customer::where('type_customer', 2)->whereIn('status', [0, 1]);
+        ($create_date) ? $customers = $customers->whereDate('created_at', '=', $create_date) : '';
             if ($search) {
                 $customers = $customers->where(function($orConditions) use ($search) {
                     $orConditions->where('email', 'like', "%$search%")
@@ -170,6 +174,18 @@ class CustomersController extends Controller {
             return Response::json(['status' => true, 'message' => $message]);
         }
 
+        return Response::json(['status' => false]);
+    }
+
+    public function updateNoteLabor()
+    {
+        $labor = Customer::find(Input::get('id'));
+        if ($labor) {
+            $labor->note_byadmin= Input::get('note');
+            if ($labor->save()) {
+                return Response::json(['status' => true]);
+            }
+        }
         return Response::json(['status' => false]);
     }
 

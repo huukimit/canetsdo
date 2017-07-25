@@ -501,7 +501,7 @@ class MobileController extends ServiceController {
         }
         $postData['manv_kh'] = 'KH' . time();
         $postData['status'] = 1;
-        $postData['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
+        // $postData['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
         $status = Customer::SaveData($postData);
         if ($status) {
             $this->status = 200;
@@ -583,7 +583,7 @@ class MobileController extends ServiceController {
             $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
         }
         $data['status'] = 1;
-        $data['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
+        // $data['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
         $status = Customer::SaveData($data);
         
         if ($status) {

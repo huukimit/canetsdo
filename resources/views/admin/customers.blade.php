@@ -7,12 +7,18 @@
             <div class="panel-heading">List customer</div>
             <div class="panel-body">
                 <form action="">
+
                     <div class="col-md-4">
                         <div class="form-group">
                             <input type="text" class="form-control" name="search" value="{{ app('request')->input('search') }}">
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-3">
+                        <div class="form-group has-success">
+                            <input type="date" class="form-control" value="{{ app('request')->input('create_date') }}" name="create_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" value="Tìm kiếm">
                         </div>
@@ -27,7 +33,7 @@
                             <th>Phone number</th>
                             <th>School</th>
                             <th>Vi tai khoan</th>
-                            <th class="text-center">Updated at </th>
+                            <th class="text-center">Created at </th>
                             <th class="text-center">Status</th>
                         </tr>
                     </thead>
@@ -43,7 +49,7 @@
                             <td>{{ $data->phone_number }}</td>
                             <td>{{ $data->school }}</td>
                             <td class="text-right">{{ number_format($data->vi_taikhoan) }}</td>
-                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($data->updated_at)) }}</td>
+                            <td class="text-center">{{ date('H:i d/m/Y', strtotime($data->created_at)) }}</td>
                             <td class="text-center">
                             @if ($data->status == 0)
                                 <label class="label label-warning">Registered</label>
