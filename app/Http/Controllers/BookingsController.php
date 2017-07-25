@@ -5,6 +5,7 @@ use App\Feedback;
 use App\Setting;
 use App\Customer;
 use App\Requires;
+use App\Bid;
 use Input;
 use App\Commands\PushNotifyToDevices;
 use Illuminate\Support\Facades\Queue;
@@ -132,12 +133,34 @@ class BookingsController extends Controller {
 	public function giupviecthuongxuyen()
 	{
 		$search = Input::query('search');
+		$infoLaodong = Input::query('info_laodong');
+		if ($infoLaodong) {
+			$laodongs = Customer::where(function($orConditionsLd) use ($infoLaodong) {
+                $orConditionsLd->where('phone_number', 'like', "%$infoLaodong%")
+                	->orWhere('fullname', 'like', "%$infoLaodong%")
+                	->orWhere('manv_kh', 'like', "%$infoLaodong%");
+            });
+            $laodongs = $laodongs->select('id')->get();
+            $lds = [];
+            foreach ($laodongs as $laodong) {
+            	$lds[] = $laodong->id;
+            }
+            $bids = Bid::whereIn('laodong_id', $lds)->select('booking_id')->get();
+            $bkHistory = [];
+            foreach ($bids as $bidOne) {
+            	$bkHistory[] = $bidOne->booking_id;
+            }
+		}
 		$status = Input::query('status');
 		$createDate = Input::query('create_date');
 		$bookings = Booking::where('type', 2)
 			->join('customers', 'bookings.customer_id', '=', 'customers.id');;
 		($status) ? $bookings = $bookings->where('bookings.status', (int) $status) : '';
 		($createDate != '') ? $bookings = $bookings->whereDate('bookings.created_at', '=', $createDate) : '';
+		if(isset($bkHistory) && !empty($bkHistory)) {
+			$bookings = $bookings->whereIn('bookings.id', $bkHistory);
+		}
+
 		if ($search) {
             $bookings = $bookings->where(function($orConditions) use ($search) {
                 $orConditions->where('address', 'like', "%$search%")
@@ -174,6 +197,9 @@ class BookingsController extends Controller {
         }
         return Response::json(['status' => false]);
     }
+
+
+    
 
     public function updateNoteFeedback()
     {

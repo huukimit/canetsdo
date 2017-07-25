@@ -5,7 +5,9 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">Detail</div>
+            <div class="panel-heading">
+            	Detail
+            </div>
             <div class="panel-body">
             	<form action="" method="post"  role="form" enctype="multipart/form-data">
             	<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -19,6 +21,11 @@
 						<input type="file" name="avatar" accept="image/*" class="form-control" title="Thay đổi avatar">
 					</div>
 					<div class="form-group">
+						<label>Mã KH/ LĐ: <b class="label label-success">{{$data['manv_kh']}}</b></label>
+						<label> Ví Tài Khoản: <b class="label label-success">{{number_format($data['vi_taikhoan'])}} VND</b></label><br>
+					</div>
+					<div class="form-group">
+
 						<label>Họ tên</label>
 						<input class="form-control" name="fullname" value="{{$data['fullname']}}">
 						<label>Ngày sinh</label>

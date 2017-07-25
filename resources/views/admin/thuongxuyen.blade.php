@@ -7,9 +7,14 @@
             <div class="panel-heading">Giup viec thuong xuyen</div>
             <div class="panel-body">
                 <form action="">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group has-success">
-                            <input placeholder="Nhập từ khóa  tìm kiếm..." type="text" class="form-control" value="{{ app('request')->input('search') }}" name="search">
+                            <input placeholder="Tìm lao động" type="text" class="form-control" value="{{ app('request')->input('info_laodong') }}" name="info_laodong">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group has-success">
+                            <input placeholder="Từ khóa..." type="text" class="form-control" value="{{ app('request')->input('search') }}" name="search">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -28,7 +33,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-1">
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary" value="Tìm kiếm">
                         </div>
