@@ -111,7 +111,7 @@ class MobileController extends ServiceController {
         $customer = Customer::find($customerId);
         if(isset($customer->id)) {
             $excepted = explode(',', $customer->thongbao_deleted);
-            $notifies = Thongbao::getnewsbyCustomerId($excepted, $customer->type_customer);
+            $notifies = Thongbao::getnewsbyCustomerId($excepted, $customer->type_customer, $customer->created_at);
             $readed = explode(',', $customer->thongbao_readed);
             $result = [];
             foreach($notifies as $key => $notify) {
@@ -583,7 +583,7 @@ class MobileController extends ServiceController {
             $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
         }
         $data['status'] = 1;
-        // $data['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
+        $data['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
         $status = Customer::SaveData($data);
         
         if ($status) {
