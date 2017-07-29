@@ -107,7 +107,7 @@ class Customer extends BaseModel {
                 'distance' => 2,
             ];
         }
-        // $data = array_merge($data, $fakeSv);
+        $data = array_merge($data, $fakeSv);
         return $data;
     }
 
@@ -148,7 +148,7 @@ class Customer extends BaseModel {
         if ($dichvu == 'GV1L') {
             $sql .= " AND allow_gv1lan = 1";
         }
-        $sql .=" ORDER BY distance ASC";
+        $sql .=" HAVING distance < $distance ORDER BY distance ASC";
             // HAVING distance = null 
         $data = DB::select($sql);
         Log::error(['sql' => $sql]);
