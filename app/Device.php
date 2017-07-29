@@ -16,8 +16,8 @@ class Device extends BaseModel {
         ->where('device_token', $data['device_token'])->first();
     }
 
-    static function getAllDeviceByToken($data) {
-    	return self::where('device_token', $data['device_token'])->get();
+    static function getAllDeviceByUdId($data) {
+    	return self::where('ui_id', $data['ui_id'])->get();
     }
 
     static function deleteDeviceByToken($tokenDevice) {

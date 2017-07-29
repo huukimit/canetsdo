@@ -908,7 +908,7 @@ class MobileController extends ServiceController {
     }
 
     function svAround(){
-        $sinhviens = Customer::getSinhvienNearly(20.983249, 105.831277, 1000);
+        $sinhviens = Customer::getSinhvienNearly(20.950103206552,106.32870476692, 1000);
         $this->data = $sinhviens;
         $this->status = 200;
         $this->message = 'Success';
@@ -1098,15 +1098,12 @@ class MobileController extends ServiceController {
 
     function logout() {
         $postData = Input::all();
-        if (isset($postData['device_token'])) {
+        if (isset($postData['ui_id'])) {
             $this->checkNullData(Input::get('customer_id', null));
-            $devices = Device::getAllDeviceByToken($postData);
+            $devices = Device::getAllDeviceByUdId($postData);
             foreach ($devices as $device) {
-               $exist = CustomerDevice::getCustomerDeviceByCustomerIdDeviceId(Input::get('customer_id'), $device->id);
-               if ($exist) {
-                    CustomerDevice::deleteBy($exist->id);
-                    Device::deleteBy($device->id);
-               }
+                CustomerDevice::deleteBy($device->id, 'device_id');
+                Device::deleteBy($device->id);
             }
         }
         $this->status = 200;
@@ -1458,35 +1455,6 @@ class MobileController extends ServiceController {
     function checkParamsRequested() {
         echo '<pre>';
         print_r(Input::all());die;
-    }
-
-    // /**
-    //  *
-    //  * @param type $info
-    //  * @return user infomation
-    //  */
-    private function resultIdolInfo($info) {
-        $listMember = Members::getListMemberOfTeamByUserID($info->id);
-        $idol = array(
-            'id' => $info->id,
-            'email' => $info->email,
-            'nickname' => $info->nickname,
-            'members' => count($listMember),
-            'about' => $info->about,
-            'avatar' => $info->avatar != '' ? URL::to('/') . '/' . $info->avatar : '',
-            'size_avatar' => Media::getSize($info->size_avatar),
-            'banner' => $info->banner != '' ? URL::to('/') . '/' . $info->banner : '',
-            'size_banner' => Media::getSize($info->size_banner),
-            'sns_twitter' => $info->sns_twitter,
-            'sns_facebook' => $info->sns_facebook,
-            'sns_instagram' => $info->sns_instagram,
-            'list_member' => $listMember
-        );
-        $role = Users::getInfoUserByUserId($info->id);
-        if (!empty($role)) {
-            $idol['role'] = $role->rid;
-        }
-        return $idol;
     }
 
     function lichsugiaodich() {

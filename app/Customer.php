@@ -107,7 +107,7 @@ class Customer extends BaseModel {
                 'distance' => 2,
             ];
         }
-        $data = array_merge($data, $fakeSv);
+        // $data = array_merge($data, $fakeSv);
         return $data;
     }
 
