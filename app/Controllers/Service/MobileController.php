@@ -583,7 +583,7 @@ class MobileController extends ServiceController {
             $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
         }
         $data['status'] = 1;
-        $data['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
+        $data['vi_taikhoan'] = 80000;// cong tien khi lan dau dang ky
         $status = Customer::SaveData($data);
         
         if ($status) {
