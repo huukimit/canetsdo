@@ -484,6 +484,36 @@ class MobileController extends ServiceController {
         }
     }
 
+    function loginAccountKit() {
+        $postData = Input::all();
+        $postData['status'] = 0;
+        $postData['is_account_kit'] = 1;
+        $checkCustomer = Customer::getByField('phone_number', $postData['phone_number']);
+        if (isset($checkCustomer->id)) {
+            if ($checkCustomer->is_account_kit == 1) {
+                $this->status = 200;
+                $this->message = 'Login Account Kit success';
+                $this->data = $checkCustomer;
+            } else {
+                $this->status = 402;
+                $this->message = 'SĐT đã tồn tại trong tài khoản thường, vui lòng kiểm tra lại';
+                exit;
+            }
+        } else {
+
+            $customerId = Customer::SaveData($postData);
+            $deviceId = Device::SaveData($postData);
+            $status = CustomerDevice::SaveData(['customer_id' => $customerId, 'device_id' => $deviceId]);
+            if ($status) {
+                $this->status = 200;
+                $this->message = 'Login Account Kit success, please update you profile';
+                $this->data = Customer::getById($customerId);
+            }
+
+        }
+        
+    }
+
     public function registerCustomer() {
         $postData = Input::all();
         $this->checkNullData(Input::get('fullname', null));
@@ -583,7 +613,7 @@ class MobileController extends ServiceController {
             $data['birthday'] = date('Y-m-d', strtotime(str_replace('/', '-', $data['birthday'])));
         }
         $data['status'] = 1;
-        $data['vi_taikhoan'] = 80000;// cong tien khi lan dau dang ky
+        $data['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
         $status = Customer::SaveData($data);
         
         if ($status) {

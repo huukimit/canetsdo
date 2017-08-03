@@ -119,5 +119,6 @@ return [
         'service/mobile/pushAndroid',
         'service/mobile/getLaodongByLatLong',
         'service/mobile/sinhvienCancelBid',
+        'service/mobile/loginAccountKit',
     ],
 ];
