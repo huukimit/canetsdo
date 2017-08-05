@@ -33,7 +33,7 @@ class BaseModel extends Model {
         return self::where('id', $id)->first();
     }
 
-    static function getByField($value, $field) {
+    static function getByField($value, $field = 'id') {
         return self::where($field, $value)->first();
     }
 

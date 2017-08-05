@@ -20,6 +20,10 @@ class Device extends BaseModel {
     	return self::where('ui_id', $data['ui_id'])->get();
     }
 
+    static function checkExistTokenByUiIdAndToken($params) {
+        return self::where('ui_id', $params['ui_id'])->where('device_token', $params['device_token'])->first();
+    }
+
     static function deleteDeviceByToken($tokenDevice) {
         $exist = self::where('device_token', $tokenDevice)->first();
         if (isset($exist->id)) {

@@ -486,30 +486,20 @@ class MobileController extends ServiceController {
 
     function loginAccountKit() {
         $postData = Input::all();
-        $postData['status'] = 0;
-        $postData['is_account_kit'] = 1;
-        $checkCustomer = Customer::getByField('phone_number', $postData['phone_number']);
-        if (isset($checkCustomer->id)) {
-            if ($checkCustomer->is_account_kit == 1) {
-                $this->status = 200;
-                $this->message = 'Login Account Kit success';
-                $this->data = $checkCustomer;
-            } else {
-                $this->status = 402;
-                $this->message = 'SĐT đã tồn tại trong tài khoản thường, vui lòng kiểm tra lại';
-                exit;
+        Log::warning(['AcountKit' => $postData]);
+        $existUser = Customer::getByField($postData['phone_number'], 'phone_number');
+        if (isset($existUser->id)) {
+            $checkToken = Device::checkExistTokenByUiIdAndToken($postData);
+            if (!isset($checkToken->id)) {
+                $deviceId = Device::SaveData($postData);
+                CustomerDevice::SaveData(['customer_id' => $existUser->id, 'device_id' => $deviceId]);
             }
+            $this->status = 200;
+            $this->message = 'Login success';
+            $this->data = $existUser;
         } else {
-
-            $customerId = Customer::SaveData($postData);
-            $deviceId = Device::SaveData($postData);
-            $status = CustomerDevice::SaveData(['customer_id' => $customerId, 'device_id' => $deviceId]);
-            if ($status) {
-                $this->status = 200;
-                $this->message = 'Login Account Kit success, please update you profile';
-                $this->data = Customer::getById($customerId);
-            }
-
+            $this->status = 300;
+            $this->message = Config::get('services.notify.login_fail');
         }
         
     }
@@ -1284,7 +1274,6 @@ class MobileController extends ServiceController {
         if ($dichvu == 'NVGV1L') {
             $feeLd = round((($booking->luong + $booking->thuong) * ($config->ptram_gv1lan/100)));
             $reason = 'Phí nhận công việc 1 lần';
-            Log::warning(['phi_1lan' => $feeLd]);
         } else {
 
            $feeLd = $config->fee_ld; 
