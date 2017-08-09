@@ -496,6 +496,11 @@ class MobileController extends ServiceController {
             }
             $this->status = 200;
             $this->message = 'Login success';
+            $existUser->avatar =  (($exist->avatar != '') ? URL::to('/') . '/' . $exist->avatar : '');
+            $existUser->anhsv_truoc =  (($exist->anhsv_truoc != '') ? URL::to('/') . '/' . $exist->anhsv_truoc : '');
+            $existUser->anhsv_sau =  (($exist->anhsv_sau != '') ? URL::to('/') . '/' . $exist->anhsv_sau : '');
+            $existUser->anhcmtnd_truoc =  (($exist->anhcmtnd_truoc != '') ? URL::to('/') . '/' . $exist->anhcmtnd_truoc : '');
+            $existUser->anhcmtnd_sau =  (($exist->anhcmtnd_sau != '') ? URL::to('/') . '/' . $exist->anhcmtnd_sau : '');
             $this->data = $existUser;
         } else {
             $this->status = 300;
