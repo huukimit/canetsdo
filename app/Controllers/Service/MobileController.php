@@ -494,13 +494,14 @@ class MobileController extends ServiceController {
                 $deviceId = Device::SaveData($postData);
                 CustomerDevice::SaveData(['customer_id' => $existUser->id, 'device_id' => $deviceId]);
             }
-            $this->status = 200;
+            
             $this->message = 'Login success';
-            $existUser->avatar =  (($exist->avatar != '') ? URL::to('/') . '/' . $exist->avatar : '');
-            $existUser->anhsv_truoc =  (($exist->anhsv_truoc != '') ? URL::to('/') . '/' . $exist->anhsv_truoc : '');
-            $existUser->anhsv_sau =  (($exist->anhsv_sau != '') ? URL::to('/') . '/' . $exist->anhsv_sau : '');
-            $existUser->anhcmtnd_truoc =  (($exist->anhcmtnd_truoc != '') ? URL::to('/') . '/' . $exist->anhcmtnd_truoc : '');
-            $existUser->anhcmtnd_sau =  (($exist->anhcmtnd_sau != '') ? URL::to('/') . '/' . $exist->anhcmtnd_sau : '');
+            $existUser->avatar =  (($existUser->avatar != '') ? URL::to('/') . '/' . $existUser->avatar : '');
+            $existUser->anhsv_truoc =  (($existUser->anhsv_truoc != '') ? URL::to('/') . '/' . $existUser->anhsv_truoc : '');
+            $existUser->anhsv_sau =  (($existUser->anhsv_sau != '') ? URL::to('/') . '/' . $existUser->anhsv_sau : '');
+            $existUser->anhcmtnd_truoc =  (($existUser->anhcmtnd_truoc != '') ? URL::to('/') . '/' . $existUser->anhcmtnd_truoc : '');
+            $existUser->anhcmtnd_sau =  (($existUser->anhcmtnd_sau != '') ? URL::to('/') . '/' . $existUser->anhcmtnd_sau : '');
+            $this->status = 200;
             $this->data = $existUser;
         } else {
             $this->status = 300;
