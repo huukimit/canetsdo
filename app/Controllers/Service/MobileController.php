@@ -489,12 +489,17 @@ class MobileController extends ServiceController {
         Log::warning(['AcountKit' => $postData]);
         $existUser = Customer::getByField($postData['phone_number'], 'phone_number');
         if (isset($existUser->id)) {
-            $checkToken = Device::checkExistTokenByUiIdAndToken($postData);
-            if (!isset($checkToken->id)) {
-                $deviceId = Device::SaveData($postData);
-                CustomerDevice::SaveData(['customer_id' => $existUser->id, 'device_id' => $deviceId]);
+            if (isset($postData['device_token'])) {
+
+                $checkToken = Device::checkExistTokenByUiIdAndToken($postData);
+
+                if (!isset($checkToken->id)) {
+                    $deviceId = Device::SaveData($postData);
+                    CustomerDevice::SaveData(['customer_id' => $existUser->id, 'device_id' => $deviceId]);
+                }
+                
             }
-            
+
             $this->message = 'Login success';
             $existUser->avatar =  (($existUser->avatar != '') ? URL::to('/') . '/' . $existUser->avatar : '');
             $existUser->anhsv_truoc =  (($existUser->anhsv_truoc != '') ? URL::to('/') . '/' . $existUser->anhsv_truoc : '');
