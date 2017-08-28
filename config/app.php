@@ -135,10 +135,10 @@ return [
          */
         'Barryvdh\Debugbar\ServiceProvider',
         'Jenssegers\Agent\AgentServiceProvider',
-        'Maatwebsite\Excel\ExcelServiceProvider',
+        // 'Maatwebsite\Excel\ExcelServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'Elibyy\TCPDF\ServiceProvider'
-        // 'Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider'
+        'Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider'
     ],
     /*
       |--------------------------------------------------------------------------
