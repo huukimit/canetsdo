@@ -137,7 +137,7 @@ return [
         'Jenssegers\Agent\AgentServiceProvider',
         // 'Maatwebsite\Excel\ExcelServiceProvider',
         'Intervention\Image\ImageServiceProvider',
-        'Elibyy\TCPDF\ServiceProvider'
+        'Elibyy\TCPDF\ServiceProvider',
         'Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider'
     ],
     /*
