@@ -532,7 +532,7 @@ class MobileController extends ServiceController {
         }
         $postData['manv_kh'] = 'KH' . time();
         $postData['status'] = 1;
-        // $postData['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
+        $postData['vi_taikhoan'] = 100000;// cong tien khi lan dau dang ky
         $status = Customer::SaveData($postData);
         if ($status) {
             $this->status = 200;
@@ -1268,8 +1268,8 @@ class MobileController extends ServiceController {
                 }
             }
             /* Xóa lịch sử notify và các bid đc  tạo ra bởi sinh viên mà khách hàng không chọn*/
-            Notify_missed_booking::cleanNotify($checkExist->laodong_id, Input::get('booking_id'));
-            Bid::cleanByBookingAndBidId(Input::get('bid_id'), Input::get('booking_id'));
+            // Notify_missed_booking::cleanNotify($checkExist->laodong_id, Input::get('booking_id'));
+            // Bid::cleanByBookingAndBidId(Input::get('bid_id'), Input::get('booking_id'));
 
             /* End */
         } else {
@@ -1407,6 +1407,7 @@ class MobileController extends ServiceController {
                 } else {
                     $res = Notify::Push2Ios($customer->device_token, $laodong->fullname . " Báo đã làm xong công việc của bạn", $data_push, 'customer');
                 }
+                Notify_missed_booking::deleteBy(Input::get('booking_id'), 'booking_id');
             }
         } else {
             $this->status = 401;
@@ -1625,6 +1626,5 @@ class MobileController extends ServiceController {
             ->where('customer_id', '!=', 3)->delete();
         echo 'Success';
     }
-
 
 }

@@ -119,7 +119,7 @@ return [
         'Illuminate\Session\SessionServiceProvider',
         'Illuminate\Translation\TranslationServiceProvider',
         'Illuminate\Validation\ValidationServiceProvider',
-        'Illuminate\View\ViewServiceProvider',
+        // 'Illuminate\View\ViewServiceProvider',
         /*
          * Application Service Providers...
          */
@@ -137,8 +137,8 @@ return [
         'Jenssegers\Agent\AgentServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
         'Intervention\Image\ImageServiceProvider',
-        'Elibyy\TCPDF\ServiceProvider',
-        'Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider'
+        'Elibyy\TCPDF\ServiceProvider'
+        // 'Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider'
     ],
     /*
       |--------------------------------------------------------------------------

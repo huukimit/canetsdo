@@ -21,7 +21,6 @@
         "Illuminate\\Session\\SessionServiceProvider",
         "Illuminate\\Translation\\TranslationServiceProvider",
         "Illuminate\\Validation\\ValidationServiceProvider",
-        "Illuminate\\View\\ViewServiceProvider",
         "App\\Providers\\AppServiceProvider",
         "App\\Providers\\BusServiceProvider",
         "App\\Providers\\ConfigServiceProvider",
@@ -33,8 +32,7 @@
         "Jenssegers\\Agent\\AgentServiceProvider",
         "Maatwebsite\\Excel\\ExcelServiceProvider",
         "Intervention\\Image\\ImageServiceProvider",
-        "Elibyy\\TCPDF\\ServiceProvider",
-        "Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider"
+        "Elibyy\\TCPDF\\ServiceProvider"
     ],
     "eager": [
         "Illuminate\\Auth\\AuthServiceProvider",
@@ -47,7 +45,6 @@
         "Illuminate\\Pagination\\PaginationServiceProvider",
         "Illuminate\\Session\\SessionServiceProvider",
         "Illuminate\\Validation\\ValidationServiceProvider",
-        "Illuminate\\View\\ViewServiceProvider",
         "App\\Providers\\AppServiceProvider",
         "App\\Providers\\BusServiceProvider",
         "App\\Providers\\ConfigServiceProvider",
@@ -58,8 +55,7 @@
         "Jenssegers\\Agent\\AgentServiceProvider",
         "Maatwebsite\\Excel\\ExcelServiceProvider",
         "Intervention\\Image\\ImageServiceProvider",
-        "Elibyy\\TCPDF\\ServiceProvider",
-        "Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider"
+        "Elibyy\\TCPDF\\ServiceProvider"
     ],
     "deferred": {
         "command.app.name": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
@@ -142,41 +138,17 @@
         "form": "Illuminate\\Html\\HtmlServiceProvider"
     },
     "when": {
-        "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider": [
-
-        ],
-        "Illuminate\\Bus\\BusServiceProvider": [
-
-        ],
-        "Illuminate\\Cache\\CacheServiceProvider": [
-
-        ],
-        "Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider": [
-
-        ],
-        "Illuminate\\Hashing\\HashServiceProvider": [
-
-        ],
-        "Illuminate\\Mail\\MailServiceProvider": [
-
-        ],
-        "Illuminate\\Pipeline\\PipelineServiceProvider": [
-
-        ],
-        "Illuminate\\Queue\\QueueServiceProvider": [
-
-        ],
-        "Illuminate\\Redis\\RedisServiceProvider": [
-
-        ],
-        "Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider": [
-
-        ],
-        "Illuminate\\Translation\\TranslationServiceProvider": [
-
-        ],
-        "Illuminate\\Html\\HtmlServiceProvider": [
-
-        ]
+        "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider": [],
+        "Illuminate\\Bus\\BusServiceProvider": [],
+        "Illuminate\\Cache\\CacheServiceProvider": [],
+        "Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider": [],
+        "Illuminate\\Hashing\\HashServiceProvider": [],
+        "Illuminate\\Mail\\MailServiceProvider": [],
+        "Illuminate\\Pipeline\\PipelineServiceProvider": [],
+        "Illuminate\\Queue\\QueueServiceProvider": [],
+        "Illuminate\\Redis\\RedisServiceProvider": [],
+        "Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider": [],
+        "Illuminate\\Translation\\TranslationServiceProvider": [],
+        "Illuminate\\Html\\HtmlServiceProvider": []
     }
 }

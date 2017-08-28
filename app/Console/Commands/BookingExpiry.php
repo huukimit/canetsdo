@@ -39,5 +39,4 @@ class BookingExpiry extends Command {
 			Notify_missed_booking::deleteBy($expiry->id, 'booking_id');
 		}
 	}
-
 }
