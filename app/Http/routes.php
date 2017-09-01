@@ -22,6 +22,7 @@ Route::group(['prefix' => 'secret', 'middleware' => 'auth'], function()
     Route::get('/', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@index'));
     Route::get('bookings/motlan', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\BookingsController@giupviecmotlan'));
     Route::get('trackingnapthe', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@trackingnapthe'));
+    Route::any('changepassword', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\AuthController@changepassword'));
     Route::any('createnotify', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@createThongbao'));
     Route::get('feedbacks', array('as' => 'Administrator', 'uses' => '\App\Http\Controllers\DashBoardController@feedbacks'));
     

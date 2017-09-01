@@ -6,6 +6,7 @@ use Hash;
 use Input;
 use Session;
 use App\Http\Controllers\Controller;
+use App\User;
 //use Illuminate\Routing\Controller;
 
 class AuthController extends Controller {
@@ -45,4 +46,17 @@ class AuthController extends Controller {
         Auth::logout();
         return redirect()->intended('auth/login');
     }   
+
+    public function changepassword()
+    {
+        $user = Auth::user();
+        if (Input::method() == 'POST') {
+            $post = Input::all();
+            $post['id'] = $user->id;
+            $post['password'] = Hash::make($post['password']);
+            User::SaveData($post);
+        }
+        return view('auth.changepassword', ['auth' => $user]);
+    }   
+
 }

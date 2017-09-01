@@ -41,6 +41,7 @@
 							{{-- <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
 							<li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Settings</a></li> --}}
 							<li><a href="/auth/logout"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+							<li><a href="/secret/changepassword"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Change login infomation</a></li>
 						</ul>
 					</li>
 				</ul>

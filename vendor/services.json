@@ -30,9 +30,9 @@
         "Illuminate\\Html\\HtmlServiceProvider",
         "Barryvdh\\Debugbar\\ServiceProvider",
         "Jenssegers\\Agent\\AgentServiceProvider",
-        "Maatwebsite\\Excel\\ExcelServiceProvider",
         "Intervention\\Image\\ImageServiceProvider",
-        "Elibyy\\TCPDF\\ServiceProvider"
+        "Elibyy\\TCPDF\\ServiceProvider",
+        "Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider"
     ],
     "eager": [
         "Illuminate\\Auth\\AuthServiceProvider",
@@ -53,9 +53,9 @@
         "Illuminate\\View\\ViewServiceProvider",
         "Barryvdh\\Debugbar\\ServiceProvider",
         "Jenssegers\\Agent\\AgentServiceProvider",
-        "Maatwebsite\\Excel\\ExcelServiceProvider",
         "Intervention\\Image\\ImageServiceProvider",
-        "Elibyy\\TCPDF\\ServiceProvider"
+        "Elibyy\\TCPDF\\ServiceProvider",
+        "Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider"
     ],
     "deferred": {
         "command.app.name": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
