@@ -92,6 +92,7 @@ class Notify extends BaseModel {
 
         $result = fwrite($fp, $msg, strlen($msg));
         if (!$result) {
+            Log::error(['error_push' => $result]);
             $data["success"] = -3;
             $data["message"] = "Message not delivered" . PHP_EOL;
         } else {

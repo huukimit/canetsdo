@@ -54,6 +54,8 @@ class MobileController extends ServiceController {
         if ($res['success'] == 1) {
             $this->status = 200;
             $this->message = 'Push to IOS success!@';
+        } else {
+            print_r($res);die;
         }
     }
 
